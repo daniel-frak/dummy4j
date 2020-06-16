@@ -106,12 +106,12 @@ definitions for multiple locales.
 `path.to.key` is the key which will be resolvable within Dummy4j and its list are the values from which the library
 will pick out a random element.
 
-In the above example, `#{path.to.key}` would resolve to either `value1`, `value2` or `value3` (assuming the Dummy4j
+In the above example, `#{path.to.key}` would resolve to either `value1`, `value2` or `value3` (assuming the Dummy4j instance
 would be configured for the specific locale).
 
 Dummy4j internally merges all of the `.yml` files into one big map and then splits it into collections of localized
 definitions. This means, among other things, that the name of the file is irrelevant. Keep in mind, however, that two
-files of the same name may override each other.
+files of the same name within the same path may override each other.
 
 If you choose to, you can place all of your definitions in one file. You can also spread them out over several files.
 
