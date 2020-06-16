@@ -1,49 +1,51 @@
 package dev.codesoapbox.dummy4j;
 
-import dev.codesoapbox.dummy4j.definitions.DefinitionProvider;
 import dev.codesoapbox.dummy4j.definitions.FileBasedDefinitionProvider;
+import dev.codesoapbox.dummy4j.dummies.AddressDummy;
 import dev.codesoapbox.dummy4j.dummies.Dummies;
 import dev.codesoapbox.dummy4j.dummies.NameDummy;
-import dev.codesoapbox.dummy4j.dummies.SpaceshipDummy;
-import org.reflections.Reflections;
-import org.reflections.scanners.ResourcesScanner;
-import org.reflections.util.ClasspathHelper;
-import org.reflections.util.ConfigurationBuilder;
-import org.yaml.snakeyaml.Yaml;
+import dev.codesoapbox.dummy4j.dummies.ScifiDummy;
 
 import java.util.List;
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
-
-import static java.util.Collections.singletonList;
+import java.util.function.Function;
 
 public class Dummy4j {
 
-    protected final List<String> locales;
     protected final ExpressionResolver expressionResolver;
+    protected final RandomService randomService;
     protected final Dummies dummies;
-    private final long seed;
 
     public Dummy4j() {
-        seed = ThreadLocalRandom.current().nextInt();
-        locales = singletonList("en");
-
-        Reflections reflections = new Reflections(new ConfigurationBuilder().setScanners(new ResourcesScanner())
-                .setUrls(ClasspathHelper.forJavaClassPath()));
-        DefinitionProvider definitionProvider =
-                new FileBasedDefinitionProvider(new Yaml(), reflections, singletonList("dummy4j"));
-
-        expressionResolver = new ExpressionResolver(new Random(seed), locales, definitionProvider);
-
-        dummies = new Dummies(this);
+        this(null, null);
     }
 
-    public long getSeed() {
-        return seed;
+    public Dummy4j(Long seed, List<String> locales) {
+        this.randomService = seed != null ? new RandomService(seed) : new RandomService(null);
+
+        if (locales != null) {
+            this.expressionResolver = new ExpressionResolver(locales, this.randomService,
+                    FileBasedDefinitionProvider.standard());
+        } else {
+            this.expressionResolver = new ExpressionResolver(null, this.randomService,
+                    FileBasedDefinitionProvider.standard());
+        }
+
+        this.dummies = new Dummies(this);
     }
 
-    public List<String> getLocales() {
-        return locales;
+    public Dummy4j(Long seed) {
+        this(seed, null);
+    }
+
+    public Dummy4j(List<String> locales) {
+        this(null, locales);
+    }
+
+    public Dummy4j(ExpressionResolver expressionResolver, RandomService randomService,
+                   Function<? super Dummy4j, Dummies> dummiesFactory) {
+        this.randomService = randomService;
+        this.expressionResolver = expressionResolver;
+        this.dummies = dummiesFactory.apply(this);
     }
 
     public ExpressionResolver getExpressionResolver() {
@@ -54,7 +56,11 @@ public class Dummy4j {
         return dummies.name();
     }
 
-    public SpaceshipDummy spaceship() {
-        return dummies.spaceship();
+    public AddressDummy address() {
+        return dummies.address();
+    }
+
+    public ScifiDummy scifi() {
+        return dummies.scifi();
     }
 }

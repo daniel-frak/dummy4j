@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SpaceshipDummyTest {
+class ScifiDummyTest {
 
     private Dummy4j dummy4j;
 
@@ -17,7 +17,7 @@ class SpaceshipDummyTest {
 
     @Test
     void name() {
-        assertNotNull(dummy4j.spaceship().name());
+        assertNotNull(dummy4j.scifi().spaceship());
     }
 
 }

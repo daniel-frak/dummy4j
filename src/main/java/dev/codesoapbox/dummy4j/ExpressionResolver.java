@@ -7,25 +7,32 @@ import dev.codesoapbox.dummy4j.exceptions.MissingLocaleException;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
+import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static java.util.Collections.singletonList;
 
 public class ExpressionResolver {
 
     private static final Pattern VARIABLE_PATTERN = Pattern.compile("#\\{(.*?)\\}");
+    private static final Pattern DIGIT_PATTERN = Pattern.compile("#(?!\\{)");
 
-    protected final Random random;
+    protected final RandomService randomService;
     protected final List<String> locales;
     protected final Map<String, LocalizedDummyDefinitions> localizedDefinitions;
 
-    public ExpressionResolver(Random random, List<String> locales, DefinitionProvider definitionProvider) {
-        this.random = random;
+    public ExpressionResolver(List<String> locales, RandomService randomService,
+                              DefinitionProvider definitionProvider) {
+        if(locales == null || locales.isEmpty()) {
+            locales = singletonList("en");
+        }
         this.locales = locales;
+        this.randomService = randomService;
         this.localizedDefinitions = Maps.uniqueIndex(definitionProvider.get(), LocalizedDummyDefinitions::getLocale);
 
         locales.forEach(locale -> {
-            if(!localizedDefinitions.containsKey(locale)) {
+            if (!localizedDefinitions.containsKey(locale)) {
                 throw new MissingLocaleException(locale);
             }
         });
@@ -35,15 +42,19 @@ public class ExpressionResolver {
      * Resolves an expression like:
      * {@code #{name.male_first_name} #{name.last_name} }
      * <p>
+     * Definition keys are defined as {@code #{definition.path}}.
+     * <p>
+     * Digits are defined simply as {@code #}.
+     * <p>
      * Placeholders which have no definitions will be removed.
-     * The method first looks into the locale which waswere passed as first in the list and then goes to the next
+     * The method first looks into the locale which was passed as first in the list and then goes to the next
      * ones in order if a key could not be resolved.
      *
      * @param expression the expression to evaluate
      * @return a resolved random expression
      */
     public String resolve(String expression) {
-        final String result = resolveAllKeys(expression);
+        final String result = resolveAllKeysAndDigits(expression);
 
         if (!VARIABLE_PATTERN.matcher(result).find()) {
             return result;
@@ -51,13 +62,29 @@ public class ExpressionResolver {
         return resolve(result);
     }
 
-    private String resolveAllKeys(String expression) {
+    private String resolveAllKeysAndDigits(String expression) {
+        final String expressionWithResolvedKeys = replaceKeyPlaceholders(expression);
+        return replaceDigitPlaceholders(expressionWithResolvedKeys);
+    }
+
+    private String replaceDigitPlaceholders(String expressionWithResolvedKeys) {
+        final Matcher digitMatcher = DIGIT_PATTERN.matcher(expressionWithResolvedKeys);
+
+        return replace(expressionWithResolvedKeys, digitMatcher,
+                () -> String.valueOf(randomService.nextInt(10)));
+    }
+
+    private String replaceKeyPlaceholders(String expression) {
         final Matcher expressionMatcher = VARIABLE_PATTERN.matcher(expression);
 
+        return replace(expression, expressionMatcher,
+                () -> resolveKey(expressionMatcher.group(1)));
+    }
+
+    private String replace(String expression, Matcher expressionMatcher, Supplier<String> replacementSupplier) {
         final StringBuffer b = new StringBuffer(expression.length());
         while (expressionMatcher.find()) {
-            String replacement = resolveKey(expressionMatcher.group(1));
-            expressionMatcher.appendReplacement(b, replacement);
+            expressionMatcher.appendReplacement(b, replacementSupplier.get());
         }
         expressionMatcher.appendTail(b);
 
@@ -75,7 +102,7 @@ public class ExpressionResolver {
     }
 
     private String getRandom(List<String> result) {
-        int i = random.nextInt(result.size());
+        int i = randomService.nextInt(result.size());
         return result.get(i);
     }
 }

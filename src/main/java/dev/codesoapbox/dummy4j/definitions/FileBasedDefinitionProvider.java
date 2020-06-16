@@ -1,6 +1,9 @@
 package dev.codesoapbox.dummy4j.definitions;
 
 import org.reflections.Reflections;
+import org.reflections.scanners.ResourcesScanner;
+import org.reflections.util.ClasspathHelper;
+import org.reflections.util.ConfigurationBuilder;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.InputStream;
@@ -10,6 +13,8 @@ import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static java.util.Collections.singletonList;
 
 public class FileBasedDefinitionProvider implements DefinitionProvider {
 
@@ -24,14 +29,30 @@ public class FileBasedDefinitionProvider implements DefinitionProvider {
 
     private final List<String> paths;
 
+    private List<LocalizedDummyDefinitions> definitions;
+
     public FileBasedDefinitionProvider(Yaml yaml, Reflections reflections, List<String> paths) {
         this.yaml = yaml;
         this.reflections = reflections;
         this.paths = paths;
     }
 
+    public static FileBasedDefinitionProvider withPaths(List<String> paths) {
+        Reflections reflections = new Reflections(new ConfigurationBuilder().setScanners(new ResourcesScanner())
+                .setUrls(ClasspathHelper.forJavaClassPath()));
+        return new FileBasedDefinitionProvider(new Yaml(), reflections, paths);
+    }
+
+    public static FileBasedDefinitionProvider standard() {
+        return withPaths(singletonList("dummy4j"));
+    }
+
     @Override
     public List<LocalizedDummyDefinitions> get() {
+        if(definitions != null) {
+            return definitions;
+        }
+
         final Set<String> resources = reflections.getResources(Pattern.compile(".*\\.yml"));
         log.log(Level.FINE, "Loading definitions from: {0}", resources);
 
@@ -52,7 +73,8 @@ public class FileBasedDefinitionProvider implements DefinitionProvider {
         mergedDefinitionMap.forEach((key, value) ->
                 localizedDummyDefinitions.add(toLocalizedDummyDefinitions(key, value)));
 
-        return localizedDummyDefinitions;
+        definitions = localizedDummyDefinitions;
+        return definitions;
     }
 
     private boolean isInAllowedPath(String resource, List<String> paths) {
