@@ -11,7 +11,7 @@ public class RandomService {
     public RandomService(Long seed) {
         this.seed = seed != null ? seed : ThreadLocalRandom.current().nextInt();
 
-        this.random = new Random(seed);
+        this.random = new Random(this.seed);
     }
 
     public long getSeed() {

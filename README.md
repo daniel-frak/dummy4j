@@ -139,7 +139,7 @@ en:
   my_definitions:
     thing1: [ "abc", "def", "ghijk" ]
     thing2: [ "###-###" ]
-    any_thing: [ "#{thing1}: #{thing2}" ]
+    any_thing: [ "#{my_definitions.thing1}: #{my_definitions.thing2}" ]
 ``` 
 
 To make dummy4j recognize these definitions, you must put them in the `resources/dummy4j` directory. Afterwards, you can
@@ -149,15 +149,66 @@ Dummy4j dummy = new Dummy4j();
 System.out.println(dummy.getExpressionResolver().resolve("#{my_definitions.any_thing}"));
 ```
 
-The above code might print a value like `def: 45-827`.
+The above code might print a value like `def: 455-827`.
 
-### Custom classes
+It will, however, be easier to use these new definitions if an appropriate interface is provided in a Dummy4j
+instance - you can achieve this by extending the `Dummy4j` class itself.
 
-Custom dependencies can be injected into Dummy4j as presented in the "Getting started" section.
+### Extending the Dummy4j class
+
+Going further with the `my_definitions` example, it's easy to create methods for the new definitions in a custom
+class extending
+`Dummy4j`. Below is one (but not the only) way to do this:
+
+```java
+public class CustomDummy4j extends Dummy4j {
+
+    private final MyDefinitionsDummy myDefinitions;
+
+    public CustomDummy4j() {
+        myDefinitions = new MyDefinitionsDummy(this);
+    }
+
+    public MyDefinitionsDummy myDefinitions() {
+        return myDefinitions;
+    }
+
+    public static class MyDefinitionsDummy {
+
+        private final CustomDummy4j dummy4j;
+
+        public MyDefinitionsDummy(CustomDummy4j dummy4j) {
+            this.dummy4j = dummy4j;
+        }
+
+        public String thing1() {
+            return dummy4j.expressionResolver.resolveKey("my_definitions.thing1");
+        }
+
+        public String thing2() {
+            return dummy4j.expressionResolver.resolveKey("my_definitions.thing1");
+        }
+
+        public String anyThing() {
+            return dummy4j.expressionResolver.resolve("#{my_definitions.any_thing}");
+        }
+    }
+}
+```
+
+You can now use the new API:
+```java
+CustomDummy4j dummy = new CustomDummy4j();
+System.out.println(dummy.myDefinitions().anyThing());
+```
+
+### The core classes
+
+The core classes can be configured or swapped out entirely as presented in the "Getting started" section.
 
 #### DefinitionProvider
 
-The `DefinitionProvider` interface represents a source of dummy data definitions. The default implementation is
+The `DefinitionProvider` interface represents the source of dummy data definitions. The default implementation is
 `FileBasedDefinitionProvider` which loads `.yml` files and converts them to `LocalizedDummyDefinitions` instances.
 
 #### ExpressionResolver
@@ -166,7 +217,13 @@ The `DefinitionProvider` interface represents a source of dummy data definitions
 
 #### RandomService
 
-`RandomService` encapsulates Java's `Random` and provides additional functionality, such as accessing the seed. 
+`RandomService` encapsulates Java's `Random` and provides additional functionality, such as accessing the seed.
+
+#### LocalizedDummyDefinitions
+
+The `LocalizedDummyDefinitions` interface is an abstraction over a collection of dummy data definitions for a given
+locale. The default implementation is `LocalizedDummyDefinitionsMap` which stores the definitions in-memory as a Java
+Map. 
 
 ## Goals and contributing
 

@@ -1,17 +1,18 @@
 package dev.codesoapbox.dummy4j.definitions;
 
-import dev.codesoapbox.dummy4j.exceptions.DefinitionNotFoundException;
+import dev.codesoapbox.dummy4j.definitions.files.yaml.LocalizedDummyDefinitionsMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class LocalizedDummyDefinitionsTest {
+class LocalizedDummyDefinitionsMapTest {
 
-    private LocalizedDummyDefinitions dummyDefinitions;
+    private LocalizedDummyDefinitionsMap dummyDefinitions;
 
     @BeforeEach
     void setUp() {
@@ -21,12 +22,12 @@ class LocalizedDummyDefinitionsTest {
         final Map<String, Object> map = new HashMap<>();
         map.put("something", nestedMap);
 
-        dummyDefinitions = new LocalizedDummyDefinitions("en", map);
+        dummyDefinitions = new LocalizedDummyDefinitionsMap("en", map);
     }
 
     @Test
     void shouldResolveNestedKey() {
-        assertEquals("actualValue", dummyDefinitions.resolve("something.deeper"));
+        assertEquals(Collections.singletonList("actualValue"), dummyDefinitions.resolve("something.deeper"));
     }
 
     @Test

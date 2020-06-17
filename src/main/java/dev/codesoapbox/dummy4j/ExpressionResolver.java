@@ -91,10 +91,18 @@ public class ExpressionResolver {
         return b.toString();
     }
 
+    /**
+     * Resolves a single key to a random value.
+     * Note that this method does not perform any parsing and thus will not resolve values which themselves are
+     * expressions.
+     *
+     * @param key the key to resolved
+     * @return a random value based on the key
+     */
     public String resolveKey(String key) {
         for (String locale : locales) {
             List<String> result = localizedDefinitions.get(locale).resolve(key);
-            if (result != null) {
+            if (result != null && !result.isEmpty()) {
                 return getRandom(result);
             }
         }

@@ -1,6 +1,6 @@
 package dev.codesoapbox.dummy4j;
 
-import dev.codesoapbox.dummy4j.definitions.FileBasedDefinitionProvider;
+import dev.codesoapbox.dummy4j.definitions.files.yaml.FileBasedDefinitionProvider;
 import dev.codesoapbox.dummy4j.dummies.AddressDummy;
 import dev.codesoapbox.dummy4j.dummies.Dummies;
 import dev.codesoapbox.dummy4j.dummies.NameDummy;
