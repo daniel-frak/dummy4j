@@ -1,5 +1,6 @@
-package dev.codesoapbox.dummy4j.definitions.files.yaml;
+package dev.codesoapbox.dummy4j.definitions.providers.files.yaml;
 
+import dev.codesoapbox.dummy4j.definitions.providers.files.ResourceStreamProvider;
 import org.reflections.Reflections;
 import org.reflections.scanners.ResourcesScanner;
 import org.reflections.util.ClasspathHelper;
@@ -17,7 +18,7 @@ import java.util.regex.Pattern;
 import static java.util.stream.Collectors.toList;
 
 /**
- * Loads .yml files
+ * Loads .yml files from resources
  */
 public class YamlFileLoader {
 
@@ -29,16 +30,18 @@ public class YamlFileLoader {
      */
     private final Yaml yaml;
     private final Reflections reflections;
+    private final ResourceStreamProvider resourceStreamProvider;
 
-    public YamlFileLoader(Yaml yaml, Reflections reflections) {
+    public YamlFileLoader(Yaml yaml, Reflections reflections, ResourceStreamProvider resourceStreamProvider) {
         this.yaml = yaml;
         this.reflections = reflections;
+        this.resourceStreamProvider = resourceStreamProvider;
     }
 
     public static YamlFileLoader standard() {
         Reflections reflections = new Reflections(new ConfigurationBuilder().setScanners(new ResourcesScanner())
                 .setUrls(ClasspathHelper.forJavaClassPath()));
-        return new YamlFileLoader(new Yaml(), reflections);
+        return new YamlFileLoader(new Yaml(), reflections, new ResourceStreamProvider());
     }
 
     /**
@@ -59,14 +62,8 @@ public class YamlFileLoader {
     }
 
     private Map<String, Object> loadResourceAsMap(String r) {
-        InputStream inputStream = getResourceAsStream(r);
+        InputStream inputStream = resourceStreamProvider.get(r);
         return yaml.load(inputStream);
-    }
-
-    private InputStream getResourceAsStream(String resource) {
-        return this.getClass()
-                .getClassLoader()
-                .getResourceAsStream(resource);
     }
 
     private boolean isInAllowedPath(String resource, List<String> paths) {
@@ -77,6 +74,7 @@ public class YamlFileLoader {
                 break;
             }
         }
+
         return isInAllowedPath;
     }
 }

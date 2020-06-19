@@ -1,7 +1,7 @@
 package dev.codesoapbox.dummy4j;
 
 import com.google.common.collect.Maps;
-import dev.codesoapbox.dummy4j.definitions.DefinitionProvider;
+import dev.codesoapbox.dummy4j.definitions.providers.DefinitionProvider;
 import dev.codesoapbox.dummy4j.definitions.LocalizedDummyDefinitions;
 import dev.codesoapbox.dummy4j.exceptions.MissingLocaleException;
 

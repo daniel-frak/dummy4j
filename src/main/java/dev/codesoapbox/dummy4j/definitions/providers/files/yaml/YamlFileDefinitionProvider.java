@@ -1,7 +1,9 @@
-package dev.codesoapbox.dummy4j.definitions.files.yaml;
+package dev.codesoapbox.dummy4j.definitions.providers.files.yaml;
 
-import dev.codesoapbox.dummy4j.definitions.DefinitionProvider;
+import dev.codesoapbox.dummy4j.definitions.providers.DefinitionProvider;
 import dev.codesoapbox.dummy4j.definitions.LocalizedDummyDefinitions;
+import dev.codesoapbox.dummy4j.definitions.LocalizedDummyDefinitionsMap;
+import dev.codesoapbox.dummy4j.definitions.providers.MapMerger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +15,7 @@ import static java.util.Collections.singletonList;
  * Provides definitions by loading all files as Maps, merging them into one big Map and then splitting them by locale
  * as {@code LocalizedDummyDefinitionsMap} instances
  */
-public class FileBasedDefinitionProvider implements DefinitionProvider {
+public class YamlFileDefinitionProvider implements DefinitionProvider {
 
     private static final String DEFAULT_PATH = "dummy4j";
 
@@ -23,18 +25,18 @@ public class FileBasedDefinitionProvider implements DefinitionProvider {
 
     private List<LocalizedDummyDefinitions> definitions;
 
-    public FileBasedDefinitionProvider(YamlFileLoader yamlFileLoader, MapMerger mapMerger, List<String> paths) {
+    public YamlFileDefinitionProvider(YamlFileLoader yamlFileLoader, MapMerger mapMerger, List<String> paths) {
         this.mapMerger = mapMerger;
         this.yamlFileLoader = yamlFileLoader;
         this.paths = paths;
     }
 
-    public static FileBasedDefinitionProvider standard() {
+    public static YamlFileDefinitionProvider standard() {
         return withPaths(singletonList(DEFAULT_PATH));
     }
 
-    public static FileBasedDefinitionProvider withPaths(List<String> paths) {
-        return new FileBasedDefinitionProvider(YamlFileLoader.standard(), new MapMerger(), paths);
+    public static YamlFileDefinitionProvider withPaths(List<String> paths) {
+        return new YamlFileDefinitionProvider(YamlFileLoader.standard(), new MapMerger(), paths);
     }
 
     @Override

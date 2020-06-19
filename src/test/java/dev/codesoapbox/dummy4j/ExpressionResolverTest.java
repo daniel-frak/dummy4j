@@ -1,8 +1,8 @@
 package dev.codesoapbox.dummy4j;
 
-import dev.codesoapbox.dummy4j.definitions.DefinitionProvider;
+import dev.codesoapbox.dummy4j.definitions.providers.DefinitionProvider;
 import dev.codesoapbox.dummy4j.definitions.LocalizedDummyDefinitions;
-import dev.codesoapbox.dummy4j.definitions.files.yaml.LocalizedDummyDefinitionsMap;
+import dev.codesoapbox.dummy4j.definitions.LocalizedDummyDefinitionsMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,6 +14,8 @@ import java.util.Map;
 
 import static java.util.Collections.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -42,6 +44,7 @@ class ExpressionResolverTest {
         Map<String, Object> nestedMap = new HashMap<>();
         nestedMap.put("deep", "value");
         nestedMap.put("advanced", "#{something.deep}123");
+        nestedMap.put("empty", emptyList());
 
         Map<String, Object> rootMap = new HashMap<>();
         rootMap.put("something", nestedMap);
@@ -53,6 +56,26 @@ class ExpressionResolverTest {
     void shouldResolveKey() {
         String result = expressionResolver.resolveKey("something.deep");
         assertEquals("value", result);
+    }
+
+    @Test
+    void shouldReturnEmptyStringWhenUnableToResolveKey() {
+        LocalizedDummyDefinitions dummyDefinitions = mock(LocalizedDummyDefinitions.class);
+        when(definitionProvider.get())
+                .thenReturn(singletonList(dummyDefinitions));
+        when(dummyDefinitions.resolve(any()))
+                .thenReturn(null);
+        when(dummyDefinitions.getLocale())
+                .thenReturn("en");
+        expressionResolver = new ExpressionResolver(singletonList("en"), randomService, definitionProvider);
+        String result = expressionResolver.resolveKey("something.notexisting");
+        assertEquals("", result);
+    }
+
+    @Test
+    void shouldReturnEmptyStringWhenKeyIsEmpty() {
+        String result = expressionResolver.resolveKey("something.empty");
+        assertEquals("", result);
     }
 
     @Test

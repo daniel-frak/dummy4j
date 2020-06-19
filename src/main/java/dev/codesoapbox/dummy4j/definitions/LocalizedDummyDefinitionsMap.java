@@ -1,6 +1,4 @@
-package dev.codesoapbox.dummy4j.definitions.files.yaml;
-
-import dev.codesoapbox.dummy4j.definitions.LocalizedDummyDefinitions;
+package dev.codesoapbox.dummy4j.definitions;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,6 +8,9 @@ import java.util.Objects;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 
+/**
+ * Stores localized dummy data definitions as a Java Map
+ */
 public class LocalizedDummyDefinitionsMap implements LocalizedDummyDefinitions {
 
     private final String locale;

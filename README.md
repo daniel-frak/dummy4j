@@ -76,7 +76,7 @@ be loaded.
 ```java
 final RandomService randomService = new RandomService(123456L);
 
-final FileBasedDefinitionProvider definitionProvider = FileBasedDefinitionProvider.withPaths(
+final YamlFileDefinitionProvider definitionProvider = YamlFileDefinitionProvider.withPaths(
         Arrays.asList("dummy4j", "customPath"));
 final ExpressionResolver expressionResolver = new ExpressionResolver(Collections.singletonList("en"),
         randomService, definitionProvider);
@@ -209,7 +209,7 @@ The core classes can be configured or swapped out entirely as presented in the "
 #### DefinitionProvider
 
 The `DefinitionProvider` interface represents the source of dummy data definitions. The default implementation is
-`FileBasedDefinitionProvider` which loads `.yml` files and converts them to `LocalizedDummyDefinitions` instances.
+`YamlFileDefinitionProvider` which loads `.yml` files and converts them to `LocalizedDummyDefinitions` instances.
 
 #### ExpressionResolver
 

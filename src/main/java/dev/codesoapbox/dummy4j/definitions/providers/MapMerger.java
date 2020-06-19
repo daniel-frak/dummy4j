@@ -1,4 +1,4 @@
-package dev.codesoapbox.dummy4j.definitions.files.yaml;
+package dev.codesoapbox.dummy4j.definitions.providers;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -33,14 +33,45 @@ public class MapMerger {
             mergedMap.put(key, value);
             return;
         }
-        if (mergedMap.get(key) instanceof Map) {
+
+        if (mergedMap.get(key) instanceof String) {
+            if (otherMap.get(key) instanceof String) {
+                mergedMap.put(key, Arrays.asList(mergedMap.get(key), otherMap.get(key)));
+            } else { // Assuming OtherMap key is a Collection
+                @SuppressWarnings("unchecked")
+                List<String> mergedList = mergeCollectionWithElement(
+                        (String) mergedMap.get(key),
+                        (Collection<String>) otherMap.get(key));
+                mergedMap.put(key, mergedList);
+            }
+        } else if (mergedMap.get(key) instanceof Map) {
             Map<String, Object> mergedValue = mergeMapKeyAsMap(mergedMap, otherMap, key);
             mergedMap.put(key, mergedValue);
+        } else { // Assuming MergedMap key is a Collection
+            if (otherMap.get(key) instanceof String) {
+                @SuppressWarnings("unchecked")
+                List<String> mergedList = mergeElementWithCollection(
+                        (String) otherMap.get(key),
+                        (Collection<String>) mergedMap.get(key));
+                mergedMap.put(key, mergedList);
+            } else { // Assuming OtherMap key is a Collection
+                Object mergedValue = mergeMapKeyAsList(mergedMap, otherMap, key);
+                mergedMap.put(key, mergedValue);
+            }
         }
-        if (mergedMap.get(key) instanceof Collection) {
-            Object mergedValue = mergeMapKeyAsList(mergedMap, otherMap, key);
-            mergedMap.put(key, mergedValue);
-        }
+    }
+
+    private List<String> mergeCollectionWithElement(String string, Collection<String> collection) {
+        List<String> mergedList = new ArrayList<>();
+        mergedList.add(string);
+        mergedList.addAll(collection);
+        return mergedList;
+    }
+
+    private List<String> mergeElementWithCollection(String string, Collection<String> collection) {
+        List<String> mergedList = new ArrayList<>(collection);
+        mergedList.add(string);
+        return mergedList;
     }
 
     @SuppressWarnings("unchecked")

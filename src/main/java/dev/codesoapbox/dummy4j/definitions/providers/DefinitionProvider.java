@@ -1,4 +1,6 @@
-package dev.codesoapbox.dummy4j.definitions;
+package dev.codesoapbox.dummy4j.definitions.providers;
+
+import dev.codesoapbox.dummy4j.definitions.LocalizedDummyDefinitions;
 
 import java.util.List;
 

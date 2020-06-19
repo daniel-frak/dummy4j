@@ -39,6 +39,11 @@ class Dummy4jTest {
     }
 
     @Test
+    void shouldGetRandomService() {
+        assertEquals(randomService, dummy4j.random());
+    }
+
+    @Test
     void shouldGetNameDummy() {
         NameDummy nameDummy = mock(NameDummy.class);
         when(dummies.name())

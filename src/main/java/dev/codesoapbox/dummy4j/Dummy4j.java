@@ -1,6 +1,6 @@
 package dev.codesoapbox.dummy4j;
 
-import dev.codesoapbox.dummy4j.definitions.files.yaml.FileBasedDefinitionProvider;
+import dev.codesoapbox.dummy4j.definitions.providers.files.yaml.YamlFileDefinitionProvider;
 import dev.codesoapbox.dummy4j.dummies.AddressDummy;
 import dev.codesoapbox.dummy4j.dummies.Dummies;
 import dev.codesoapbox.dummy4j.dummies.NameDummy;
@@ -24,10 +24,10 @@ public class Dummy4j {
 
         if (locales != null) {
             this.expressionResolver = new ExpressionResolver(locales, this.randomService,
-                    FileBasedDefinitionProvider.standard());
+                    YamlFileDefinitionProvider.standard());
         } else {
             this.expressionResolver = new ExpressionResolver(null, this.randomService,
-                    FileBasedDefinitionProvider.standard());
+                    YamlFileDefinitionProvider.standard());
         }
 
         this.dummies = new Dummies(this);
@@ -50,6 +50,10 @@ public class Dummy4j {
 
     public ExpressionResolver getExpressionResolver() {
         return expressionResolver;
+    }
+
+    public RandomService random() {
+        return randomService;
     }
 
     public NameDummy name() {
