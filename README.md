@@ -2,6 +2,9 @@
 
 ![Code Soapbox logo](readme-images/logo.png)
 
+![Java CI with Maven](https://github.com/daniel-frak/dummy4j/workflows/Build/badge.svg)
+[![codecov](https://codecov.io/gh/daniel-frak/dummy4j/branch/master/graph/badge.svg)](https://codecov.io/gh/daniel-frak/dummy4j)
+
 Dummy4j is an easy to use dummy data generator library for Java, designed for extensibility.
 
 Dummy4j can be used in all projects using Java 8+.
