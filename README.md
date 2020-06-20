@@ -3,12 +3,12 @@
 ![Code Soapbox logo](readme-images/logo.png)
 
 ![Build](https://github.com/daniel-frak/dummy4j/workflows/Build/badge.svg)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=daniel-frak_dummy4j&metric=alert_status)](https://sonarcloud.io/dashboard?id=daniel-frak_dummy4j)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=daniel-frak_dummy4j&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=daniel-frak_dummy4j)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=daniel-frak_dummy4j&metric=coverage)](https://sonarcloud.io/dashboard?id=daniel-frak_dummy4j)
-[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=daniel-frak_dummy4j&metric=sqale_index)](https://sonarcloud.io/dashboard?id=daniel-frak_dummy4j)
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=daniel-frak_dummy4j&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=daniel-frak_dummy4j)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=daniel-frak_dummy4j&metric=bugs)](https://sonarcloud.io/dashboard?id=daniel-frak_dummy4j)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dummy4j&metric=alert_status)](https://sonarcloud.io/dashboard?id=dummy4j)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=dummy4j&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=dummy4j)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=dummy4j&metric=coverage)](https://sonarcloud.io/dashboard?id=dummy4j)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=dummy4j&metric=sqale_index)](https://sonarcloud.io/dashboard?id=dummy4j)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=dummy4j&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=dummy4j)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=dummy4j&metric=bugs)](https://sonarcloud.io/dashboard?id=dummy4j)
 
 
 Dummy4j is an easy to use dummy data generator library for Java, designed for extensibility.
