@@ -9,7 +9,8 @@
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=dummy4j&metric=sqale_index)](https://sonarcloud.io/dashboard?id=dummy4j)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=dummy4j&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=dummy4j)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=dummy4j&metric=bugs)](https://sonarcloud.io/dashboard?id=dummy4j)
-
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/daniel-frak/dummy4j)
+![GitHub](https://img.shields.io/github/license/daniel-frak/dummy4j)
 
 Dummy4j is an easy to use dummy data generator library for Java, designed for extensibility.
 
