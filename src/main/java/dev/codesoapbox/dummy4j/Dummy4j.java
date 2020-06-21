@@ -1,10 +1,7 @@
 package dev.codesoapbox.dummy4j;
 
 import dev.codesoapbox.dummy4j.definitions.providers.files.yaml.YamlFileDefinitionProvider;
-import dev.codesoapbox.dummy4j.dummies.AddressDummy;
-import dev.codesoapbox.dummy4j.dummies.Dummies;
-import dev.codesoapbox.dummy4j.dummies.NameDummy;
-import dev.codesoapbox.dummy4j.dummies.ScifiDummy;
+import dev.codesoapbox.dummy4j.dummies.*;
 
 import java.util.List;
 import java.util.function.Function;
@@ -62,6 +59,10 @@ public class Dummy4j {
 
     public AddressDummy address() {
         return dummies.address();
+    }
+
+    public LoremDummy lorem() {
+        return dummies.lorem();
     }
 
     public ScifiDummy scifi() {

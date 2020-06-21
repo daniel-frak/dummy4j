@@ -1,9 +1,6 @@
 package dev.codesoapbox.dummy4j;
 
-import dev.codesoapbox.dummy4j.dummies.AddressDummy;
-import dev.codesoapbox.dummy4j.dummies.Dummies;
-import dev.codesoapbox.dummy4j.dummies.NameDummy;
-import dev.codesoapbox.dummy4j.dummies.ScifiDummy;
+import dev.codesoapbox.dummy4j.dummies.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -60,7 +57,15 @@ class Dummy4jTest {
     }
 
     @Test
-    void scifi() {
+    void shouldGetLoremDummy() {
+        LoremDummy loremDummy = mock(LoremDummy.class);
+        when(dummies.lorem())
+                .thenReturn(loremDummy);
+        assertEquals(loremDummy, dummy4j.lorem());
+    }
+
+    @Test
+    void shouldGetScifiDummy() {
         ScifiDummy scifiDummy = mock(ScifiDummy.class);
         when(dummies.scifi())
                 .thenReturn(scifiDummy);

@@ -71,7 +71,7 @@ public class ExpressionResolver {
         final Matcher digitMatcher = DIGIT_PATTERN.matcher(expressionWithResolvedKeys);
 
         return replace(expressionWithResolvedKeys, digitMatcher,
-                () -> String.valueOf(randomService.nextInt(10)));
+                () -> String.valueOf(randomService.nextInt(9)));
     }
 
     private String replaceKeyPlaceholders(String expression) {
@@ -110,7 +110,7 @@ public class ExpressionResolver {
     }
 
     private String getRandom(List<String> result) {
-        int i = randomService.nextInt(result.size());
+        int i = randomService.nextInt(result.size() - 1);
         return result.get(i);
     }
 }

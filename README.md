@@ -44,11 +44,10 @@ While you can easily add your own dummy data definitions, the following are avai
 
 * Name
 * Address
+* Lorem
 * Sci-fi
 
 ## Getting started
-
-### Using default configuration
 
 To start using the library right away, just create a new instance of `Dummy4j`:
 ```java
@@ -58,6 +57,10 @@ System.out.println(dummy.name().fullName())
 
 The default configuration of Dummy4j uses a file-based definition provider which reads data definitions from `.yml`
 files inside the `resources/dummy4j` folder. Additionally, the default locale is `en`.
+
+## Advanced usage
+
+This section covers more advanced usage of Dummy4j, such as configuration and helpful methods.
 
 ### Simple configuration
 
@@ -93,6 +96,17 @@ final ExpressionResolver expressionResolver = new ExpressionResolver(Collections
 
 Dummy4j dummy = new Dummy4j(expressionResolver, randomService, Dummies::new);
 ```
+
+### Chance method
+
+You might want to randomize which fields should be filled and which should be left empty in an object.
+You can do this using the `chance(...)` method:
+```java
+String thisValueMightBeNull = dummy4j.random().chance(1, 3, () -> "hello");
+```    
+
+In the above code, there is a one-in-three chance that the value will contain `"hello"` and a two-in-three chance that
+it will be `null`. 
 
 ## Extending Dummy4j
 
@@ -238,8 +252,8 @@ Map.
 ## Goals and contributing
 
 The goal of Dummy4j is to become the most versatile, extensible and easy to use dummy data generation library.
-To that end, all contributions are welcome - whether it's Pull Requests or architectural proposals, feel free to
-share them as only a continued conversation around the use of this tool can lead to innovation.
+To that end, all contributions are welcome - whether it's Pull Requests, architectural proposals or simply issues, feel
+free to share them as only a continued conversation around the use of this tool can lead to innovation.
 
 While care will always be taken to keep Dummy4j backwards compatible, some breaking changes might prove beneficial
 enough to the project to include them in new releases. However, even in those cases the decision will not be taken
@@ -249,6 +263,6 @@ lightly and all possible measures will be taken to ensure a smooth transition to
 
 Below are given notable sources from which data was gathered for dummy4j.
 
-* https://github.com/Marak/faker.js
+* https://github.com/stympy/faker
 * https://www.census.gov/topics/population/genealogy/data/2000_surnames.html
 * https://www.ssa.gov/cgi-bin/popularnames.cgi

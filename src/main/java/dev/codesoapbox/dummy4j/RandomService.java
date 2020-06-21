@@ -2,14 +2,15 @@ package dev.codesoapbox.dummy4j;
 
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Supplier;
 
 /**
  * Provides random values which are generated based on a seed
  */
 public class RandomService {
 
-    private static final String UPPER_BOUND_MUST_BE_POSITIVE = "Upper bound must be positive";
-    private static final String LOWER_BOUND_MUST_BE_POSITIVE = "Lower bound must be positive";
+    private static final String UPPER_BOUND_MUST_BE_POSITIVE = "Upper bound must be positive or zero";
+    private static final String LOWER_BOUND_MUST_BE_POSITIVE = "Lower bound must be positive or zero";
 
     private final long seed;
     private final Random random;
@@ -22,6 +23,22 @@ public class RandomService {
 
     public long getSeed() {
         return seed;
+    }
+
+    /**
+     * Has a {@code howMany} in {@code in} chance to supply a value. Otherwise, returns null.
+     * <p>
+     * E.g. {@code chance(1, 2, () -> "hello")} has a 1-in-2 chance to supply "hello", that is it will be supplied
+     * 50% of the time when the method is invoked.
+     *
+     * @return supplied {@code T} or null
+     */
+    public <T> T chance(int howMany, int in, Supplier<T> supplier) {
+        if(nextInt(1, in) > howMany) {
+            return null;
+        }
+
+        return supplier.get();
     }
 
     /**
@@ -39,18 +56,18 @@ public class RandomService {
     }
 
     /**
-     * Generates a random int between 1 (inclusive) and {@code upperBound} (exclusive)
+     * Generates a random int between 0 and {@code upperBound} (inclusive)
      */
     public int nextInt(int upperBound) {
-        return random.nextInt(upperBound);
+        return nextInt(0, upperBound);
     }
 
 
     /**
-     * Generates a random int between {@code lowerBound} (inclusive) and {@code upperBound} (exclusive)
+     * Generates a random int between {@code lowerBound} and {@code upperBound} (inclusive)
      */
     public int nextInt(int lowerBound, int upperBound) {
-        return lowerBound + random.nextInt(upperBound - lowerBound);
+        return lowerBound + random.nextInt(upperBound - lowerBound + 1);
     }
 
     /**
@@ -61,21 +78,22 @@ public class RandomService {
     }
 
     /**
-     * Generates a random long between 1 (inclusive) and {@code upperBound} (exclusive)
+     * Generates a random long between @{code lowerBound} and {@code upperBound} (inclusive)
      */
     public long nextLong(long lowerBound, long upperBound) {
         return lowerBound + nextLong(upperBound - lowerBound);
     }
 
     /**
-     * Generates a random long between {@code lowerBound} (inclusive) and {@code upperBound} (exclusive)
+     * Generates a random long between 0 and {@code upperBound} inclusive
      */
     public long nextLong(long upperBound) {
         /*
         Based on:
         https://stackoverflow.com/a/2546186
+        Modified to make upperBound inclusive.
          */
-        if (upperBound <= 0) {
+        if (upperBound < 0) {
             throw new IllegalArgumentException(UPPER_BOUND_MUST_BE_POSITIVE);
         }
 
@@ -83,8 +101,8 @@ public class RandomService {
         long val;
         do {
             bits = (random.nextLong() << 1) >>> 1;
-            val = bits % upperBound;
-        } while (bits - val + (upperBound - 1) < 0L);
+            val = bits % upperBound + 1;
+        } while (bits - val + upperBound < 0L);
         return val;
     }
 
@@ -96,20 +114,20 @@ public class RandomService {
     }
 
     /**
-     * Generates a random double between 1 (inclusive) and {@code upperBound} (exclusive)
+     * Generates a random double between 0 and {@code upperBound} (inclusive)
      */
     public double nextDouble(double bound) {
-        return nextDouble(1, bound);
+        return nextDouble(0, bound);
     }
 
     /**
-     * Generates a random double between {@code lowerBound} (inclusive) and {@code upperBound} (exclusive)
+     * Generates a random double between {@code lowerBound} and {@code upperBound} (inclusive)
      */
     public double nextDouble(double lowerBound, double upperBound) {
-        if (lowerBound <= 0) {
+        if (lowerBound < 0) {
             throw new IllegalArgumentException(LOWER_BOUND_MUST_BE_POSITIVE);
         }
-        if (upperBound <= 0) {
+        if (upperBound < 0) {
             throw new IllegalArgumentException(UPPER_BOUND_MUST_BE_POSITIVE);
         }
 
@@ -124,23 +142,23 @@ public class RandomService {
     }
 
     /**
-     * Generates a random double between 1 (inclusive) and {@code upperBound} (exclusive)
+     * Generates a random double between 0 and {@code upperBound} (inclusive)
      */
     public float nextFloat(float upperBound) {
-        return nextFloat(1, upperBound);
+        return nextFloat(0, upperBound);
     }
 
     /**
      * Generates a random float between {@code lowerBound} (inclusive) and {@code upperBound} (exclusive)
      */
     public float nextFloat(float lowerBound, float upperBound) {
-        if (lowerBound <= 0) {
+        if (lowerBound < 0) {
             throw new IllegalArgumentException(LOWER_BOUND_MUST_BE_POSITIVE);
         }
-        if (upperBound <= 0) {
+        if (upperBound < 0) {
             throw new IllegalArgumentException(UPPER_BOUND_MUST_BE_POSITIVE);
         }
 
-        return (new Random().nextFloat() * (upperBound - lowerBound)) + lowerBound;
+        return (random.nextFloat() * (upperBound - lowerBound)) + lowerBound;
     }
 }

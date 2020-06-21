@@ -1,5 +1,0 @@
-en:
-  my_definitions:
-    thing1: [ "abc", "def", "ghijk" ]
-    thing2: [ "###-###" ]
-    any_thing: [ "#{my_definitions.thing1}: #{my_definitions.thing2}" ]

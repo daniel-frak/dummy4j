@@ -86,7 +86,7 @@ class ExpressionResolverTest {
 
     @Test
     void shouldResolveExpressionWithDigits() {
-        when(randomService.nextInt(10))
+        when(randomService.nextInt(9))
                 .thenReturn(9, 1, 2, 3, 4, 5);
         String result = expressionResolver.resolve("#-##-###");
         assertEquals("9-12-345", result);
