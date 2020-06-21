@@ -24,12 +24,6 @@ jobs:
         run: |
           git add pom.xml
           git commit -m "Set version to $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)"
-      - name: Import GPG key
-        id: import_gpg
-        uses: crazy-max/ghaction-import-gpg@v2
-        env:
-          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-          PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
       - name: Publish package
         run: mvn -B deploy -P release-sign-artifacts
         env:
