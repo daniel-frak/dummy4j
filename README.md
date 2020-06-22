@@ -113,7 +113,7 @@ it will be `null`.
 
 ### Unique values *(experimental) (since 0.1.2)*
 
-It is possible to generate unique values by wrapping a call wth the `dummy.unique().value(...)` method:
+It is possible to generate unique values by wrapping a call with the `dummy.unique().value(...)` method:
 
 ```java
 for (int i = 0; i < 10; i++) {
