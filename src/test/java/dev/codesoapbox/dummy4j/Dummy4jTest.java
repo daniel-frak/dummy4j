@@ -1,5 +1,6 @@
 package dev.codesoapbox.dummy4j;
 
+import dev.codesoapbox.dummy4j.definitions.UniqueValues;
 import dev.codesoapbox.dummy4j.dummies.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,14 +26,22 @@ class Dummy4jTest {
     @Mock
     private Dummies dummies;
 
+    @Mock
+    private UniqueValues uniqueValues;
+
     @BeforeEach
     void setUp() {
-        dummy4j = new Dummy4j(expressionResolver, randomService, d -> dummies);
+        dummy4j = new Dummy4j(expressionResolver, randomService, d -> dummies, uniqueValues);
     }
 
     @Test
     void shouldGetExpressionResolver() {
         assertEquals(expressionResolver, dummy4j.getExpressionResolver());
+    }
+
+    @Test
+    void shouldGetUnique() {
+        assertEquals(uniqueValues, dummy4j.unique());
     }
 
     @Test

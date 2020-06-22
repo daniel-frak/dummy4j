@@ -3,6 +3,8 @@ package dev.codesoapbox.dummy4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.regex.Pattern;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -33,6 +35,19 @@ class RandomServiceTest {
 
         int finalSupplied = supplied;
         assertTrue(supplied >= 45, () -> "Number of supplied values is too low (" + finalSupplied + ")");
+    }
+
+    @Test
+    void shouldGetRandomEnumValue() {
+        assertEquals(TestEnum.class, randomService.enumValue(TestEnum.class).getClass());
+    }
+
+    @Test
+    void shoulGetRandomUuid() {
+        assertTrue(
+                Pattern.compile("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+                        .matcher(randomService.uuid()).find()
+        );
     }
 
     @Test
@@ -136,5 +151,9 @@ class RandomServiceTest {
             assertTrue(result >= 10);
             assertTrue(result <= 15);
         }
+    }
+
+    private enum TestEnum {
+        ONE, TWO, THREE
     }
 }

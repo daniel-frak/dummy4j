@@ -87,15 +87,18 @@ implementations of its dependencies. This allows, for example, to define custom 
 be loaded. 
 
 ```java
-final RandomService randomService = new RandomService(123456L);
+RandomService randomService = new RandomService(123456L);
 
-final YamlFileDefinitionProvider definitionProvider = YamlFileDefinitionProvider.withPaths(
+YamlFileDefinitionProvider definitionProvider = YamlFileDefinitionProvider.withPaths(
         Arrays.asList("dummy4j", "customPath"));
-final ExpressionResolver expressionResolver = new ExpressionResolver(Collections.singletonList("en"),
+ExpressionResolver expressionResolver = new ExpressionResolver(Collections.singletonList("en"),
         randomService, definitionProvider);
+UniqueValues uniqueValues = new UniqueValues();
 
-Dummy4j dummy = new Dummy4j(expressionResolver, randomService, Dummies::new);
+Dummy4j dummy = new Dummy4j(expressionResolver, randomService, Dummies::new, uniqueValues);
 ```
+
+Keep in mind that this constructor directly exposes Dummy4j's internals, which might be altered in the future! 
 
 ### Chance method
 
@@ -107,6 +110,20 @@ String thisValueMightBeNull = dummy4j.random().chance(1, 3, () -> "hello");
 
 In the above code, there is a one-in-three chance that the value will contain `"hello"` and a two-in-three chance that
 it will be `null`. 
+
+### Unique values *(experimental) (since 0.1.2)*
+
+It is possible to generate unique values by wrapping a call wth the `dummy.unique().value(...)` method:
+
+```java
+for (int i = 0; i < 10; i++) {
+    System.out.println(dummy.unique().value("fullNameGroup", () -> dummy.name()).fullName());
+}
+```
+
+The above will print 10 names, all of which will be unique within the `fullNameGroup` uniqueness group.
+
+Note that this is an experimental feature and its API may be subject to change if it proves to not be useful enough.
 
 ## Extending Dummy4j
 
@@ -258,6 +275,8 @@ free to share them as only a continued conversation around the use of this tool 
 While care will always be taken to keep Dummy4j backwards compatible, some breaking changes might prove beneficial
 enough to the project to include them in new releases. However, even in those cases the decision will not be taken
 lightly and all possible measures will be taken to ensure a smooth transition to a new version of the library.
+
+Finally, if you disagree with any details of how this project is maintained, feel free to create an issue! 
 
 ## Data sources
 

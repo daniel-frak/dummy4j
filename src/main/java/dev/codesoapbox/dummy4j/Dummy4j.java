@@ -1,21 +1,32 @@
 package dev.codesoapbox.dummy4j;
 
+import dev.codesoapbox.dummy4j.definitions.UniqueValues;
 import dev.codesoapbox.dummy4j.definitions.providers.files.yaml.YamlFileDefinitionProvider;
 import dev.codesoapbox.dummy4j.dummies.*;
 
 import java.util.List;
 import java.util.function.Function;
 
+/**
+ * Provides methods for generating dummy data.
+ * <p>
+ * For best performance, a single instance of this class should be created and reused throughout the code.
+ */
 public class Dummy4j {
 
     protected final ExpressionResolver expressionResolver;
     protected final RandomService randomService;
     protected final Dummies dummies;
+    protected final UniqueValues uniqueValues;
 
     public Dummy4j() {
         this(null, null);
     }
 
+    /**
+     * @param seed used for generating random values
+     * @param locales a list of locales, ordered by priority of resolution
+     */
     public Dummy4j(Long seed, List<String> locales) {
         this.randomService = seed != null ? new RandomService(seed) : new RandomService(null);
 
@@ -28,43 +39,78 @@ public class Dummy4j {
         }
 
         this.dummies = new Dummies(this);
+        this.uniqueValues = new UniqueValues();
     }
 
+    /**
+     * @param seed used for generating random values
+     */
     public Dummy4j(Long seed) {
         this(seed, null);
     }
 
+    /**
+     * @param locales a list of locales, ordered by priority of resolution
+     */
     public Dummy4j(List<String> locales) {
         this(null, locales);
     }
 
     public Dummy4j(ExpressionResolver expressionResolver, RandomService randomService,
-                   Function<? super Dummy4j, Dummies> dummiesFactory) {
+                   Function<? super Dummy4j, Dummies> dummiesFactory, UniqueValues uniqueValues) {
         this.randomService = randomService;
         this.expressionResolver = expressionResolver;
         this.dummies = dummiesFactory.apply(this);
+        this.uniqueValues = uniqueValues;
     }
 
+    /**
+     * @return the resolver used for resolving expressions
+     */
     public ExpressionResolver getExpressionResolver() {
         return expressionResolver;
     }
 
+    /**
+     * Provides methods for generating unique values
+     *
+     * @since 0.1.2
+     */
+    public UniqueValues unique() {
+        return uniqueValues;
+    }
+
+    /**
+     * Provides methods for generating random values
+     */
     public RandomService random() {
         return randomService;
     }
 
+    /**
+     * Provides methods for generating random names
+     */
     public NameDummy name() {
         return dummies.name();
     }
 
+    /**
+     * Provides methods for generating random addresses
+     */
     public AddressDummy address() {
         return dummies.address();
     }
 
+    /**
+     * Provides methods for generating random text
+     */
     public LoremDummy lorem() {
         return dummies.lorem();
     }
 
+    /**
+     * Provides methods for generating random science fiction themed values
+     */
     public ScifiDummy scifi() {
         return dummies.scifi();
     }

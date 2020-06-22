@@ -1,5 +1,6 @@
 package dev.codesoapbox.dummy4j;
 
+import dev.codesoapbox.dummy4j.definitions.UniqueValues;
 import dev.codesoapbox.dummy4j.dummies.Dummies;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -53,8 +54,9 @@ class Dummy4jConstructionTest {
         ExpressionResolver expressionResolver = mock(ExpressionResolver.class);
         RandomService randomService = mock(RandomService.class);
         Dummies dummies = mock(Dummies.class);
+        UniqueValues uniqueValues = mock(UniqueValues.class);
 
-        Dummy4j dummy = new Dummy4j(expressionResolver, randomService, d -> dummies);
+        Dummy4j dummy = new Dummy4j(expressionResolver, randomService, d -> dummies, uniqueValues);
 
         assertEquals(expressionResolver, dummy.expressionResolver);
         assertEquals(randomService, dummy.randomService);

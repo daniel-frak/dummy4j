@@ -38,8 +38,6 @@
 
         <sonar.projectKey>dummy4j</sonar.projectKey>
         <sonar.organization>codesoapbox</sonar.organization>
-        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-        <sonar.login>c785d3dafd6ebaa75453625bd2006697bbcdb3bd</sonar.login>
     </properties>
 
     <scm>
@@ -212,6 +210,14 @@
     </distributionManagement>
 
     <profiles>
+
+        <profile>
+            <id>sonar-cloud</id>
+            <properties>
+                <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+                <sonar.login>c785d3dafd6ebaa75453625bd2006697bbcdb3bd</sonar.login>
+            </properties>
+        </profile>
 
         <!-- GPG Signature on release -->
         <profile>

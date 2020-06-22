@@ -1,6 +1,8 @@
 package dev.codesoapbox.dummy4j;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Random;
+import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Supplier;
 
@@ -39,6 +41,25 @@ public class RandomService {
         }
 
         return supplier.get();
+    }
+
+    /**
+     * Returns a random enum value
+     *
+     * @since 0.1.2
+     */
+    public <T extends Enum<?>> T enumValue(Class<T> clazz) {
+        int x = nextInt(clazz.getEnumConstants().length);
+        return clazz.getEnumConstants()[x];
+    }
+
+    /**
+     * Generates a random UUID
+     *
+     * @since 0.1.2
+     */
+    public String uuid() {
+        return UUID.nameUUIDFromBytes(String.valueOf(nextLong()).getBytes(StandardCharsets.UTF_8)).toString();
     }
 
     /**

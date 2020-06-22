@@ -18,6 +18,6 @@ jobs:
       with:
         java-version: 1.8
     - name: Build and analyze
-      run: mvn -B verify sonar:sonar -P code-coverage --file pom.xml
+      run: mvn -B verify sonar:sonar -P code-coverage -P sonar-cloud --file pom.xml
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
