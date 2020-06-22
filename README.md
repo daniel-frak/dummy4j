@@ -28,25 +28,6 @@ it turned out that it would be easier to write an entirely new library.
 Dummy4j focuses on ease of use, clean code and effortless extensibility, while still taking inspiration from Ruby's 
 [Faker](https://github.com/faker-ruby/faker) gem.
 
-## Why extensibility is important
-
-Not all data is going to be useful to the general public and not all data can be publicly shared due to company
-policies. Therefore, it is imperative a dummy data library allows for easy and maintainable extension of its
-data definitions.
-
-Furthermore, edge cases may exist where the functionality of the library must be altered. It is easy to imagine
-wanting to store data definitions in a central private repository from which the library would load them during
-instantiation. The classes themselves must, therefore, be clean, well documented and extensible.
-
-## Out-of-the-box dummies
-
-While you can easily add your own dummy data definitions, the following are available out of the box: 
-
-* Name
-* Address
-* Lorem
-* Sci-fi
-
 ## Getting started
 
 Add the following dependency to your `pom.xml`:
@@ -70,6 +51,25 @@ System.out.println(
 
 The default configuration of Dummy4j uses a file-based definition provider which reads data definitions from `.yml`
 files inside the `resources/dummy4j` folder. Additionally, the default locale is `en`.
+
+## Why extensibility is important
+
+Not all data is going to be useful to the general public and not all data can be publicly shared due to company
+policies. Therefore, it is imperative a dummy data library allows for easy and maintainable extension of its
+data definitions.
+
+Furthermore, edge cases may exist where the functionality of the library must be altered. It is easy to imagine
+wanting to store data definitions in a central private repository from which the library would load them during
+instantiation. The classes themselves must, therefore, be clean, well documented and extensible.
+
+## Out-of-the-box dummies
+
+While you can easily add your own dummy data definitions, the following are available out of the box: 
+
+* Name
+* Address
+* Lorem
+* Sci-fi
 
 ## Advanced usage
 
