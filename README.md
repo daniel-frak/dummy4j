@@ -49,10 +49,23 @@ While you can easily add your own dummy data definitions, the following are avai
 
 ## Getting started
 
-To start using the library right away, just create a new instance of `Dummy4j`:
+Add the following dependency to your `pom.xml`:
+
+```xml
+<dependency>
+  <groupId>dev.codesoapbox</groupId>
+  <artifactId>dummy4j</artifactId>
+  <version>0.1.2</version>
+</dependency>
+```
+
+Now you can start using Dummy4j:
 ```java
 Dummy4j dummy = new Dummy4j();
-System.out.println(dummy.name().fullName())
+
+System.out.println(
+    dummy.name().fullName()
+);
 ```
 
 The default configuration of Dummy4j uses a file-based definition provider which reads data definitions from `.yml`
