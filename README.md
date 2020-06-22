@@ -130,7 +130,9 @@ It is possible to generate unique values by wrapping a call with the `dummy.uniq
 
 ```java
 for (int i = 0; i < 10; i++) {
-    System.out.println(dummy.unique().value("fullNameGroup", () -> dummy.name()).fullName());
+    System.out.println(
+      dummy.unique().value("fullNameGroup", () -> dummy.name()).fullName())
+    );
 }
 ```
 
