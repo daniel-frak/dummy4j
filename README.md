@@ -68,8 +68,11 @@ instantiation. The classes themselves must, therefore, be clean, well documented
 While you can easily add your own dummy data definitions, the following are available out of the box: 
 
 * Name
+* Nation *(since 0.2.0)*
 * Address
 * Lorem
+* Book *(since 0.2.0)*
+* Research Paper *(since 0.2.0)*
 * Sci-fi
 
 ## Advanced usage
