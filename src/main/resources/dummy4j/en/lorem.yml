@@ -6,7 +6,7 @@ en:
     additional_sentence_ending_punctuation: [
       "!", "?"
     ]
-    words: [
+    word: [
       a,
       ab,
       accusamus,

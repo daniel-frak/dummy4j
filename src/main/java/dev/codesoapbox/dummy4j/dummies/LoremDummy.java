@@ -73,7 +73,7 @@ public class LoremDummy {
      * @return a single random word
      */
     public String word() {
-        return dummy4j.getExpressionResolver().resolveKey("lorem.words");
+        return dummy4j.getExpressionResolver().resolveKey("lorem.word");
     }
 
     /**
