@@ -23,10 +23,10 @@ public class AddressDummy {
     }
 
     public String country() {
-        return dummy4j.getExpressionResolver().resolve("#{address.country}");
+        return dummy4j.getExpressionResolver().resolve("#{nation.country}");
     }
 
     public String countryCode() {
-        return dummy4j.getExpressionResolver().resolve("#{address.country_code}");
+        return dummy4j.getExpressionResolver().resolve("#{nation.country_code}");
     }
 }

@@ -5,6 +5,7 @@ import dev.codesoapbox.dummy4j.Dummy4j;
 public class Dummies {
 
     private final NameDummy name;
+    private final NationDummy nation;
     private final AddressDummy address;
     private final LoremDummy lorem;
     private final BookDummy book;
@@ -13,6 +14,7 @@ public class Dummies {
 
     public Dummies(Dummy4j dummy4j) {
         name = new NameDummy(dummy4j);
+        nation = new NationDummy(dummy4j);
         address = new AddressDummy(dummy4j);
         lorem = new LoremDummy(dummy4j);
         book = new BookDummy(dummy4j);
@@ -48,5 +50,12 @@ public class Dummies {
 
     public ScifiDummy scifi()  {
         return spaceship;
+    }
+
+    /**
+     * @since 0.2.0
+     */
+    public NationDummy nation() {
+        return nation;
     }
 }

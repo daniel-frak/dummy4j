@@ -94,6 +94,10 @@ public class Dummy4j {
         return dummies.name();
     }
 
+    public NationDummy nation() {
+        return dummies.nation();
+    }
+
     /**
      * Provides methods for generating random addresses
      */

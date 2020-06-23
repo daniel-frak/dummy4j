@@ -58,6 +58,14 @@ class Dummy4jTest {
     }
 
     @Test
+    void shouldGetNationDummy() {
+        NationDummy nationDummy = mock(NationDummy.class);
+        when(dummies.nation())
+                .thenReturn(nationDummy);
+        assertEquals(nationDummy, dummy4j.nation());
+    }
+
+    @Test
     void shouldGetAddressDummy() {
         AddressDummy addressDummy = mock(AddressDummy.class);
         when(dummies.address())
