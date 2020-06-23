@@ -1,0 +1,40 @@
+en:
+  research_paper:
+    title_physics: [
+      "Recurrent Neutrino Emission from Supermassive Black Hole Merger",
+      "Three-component modelling of C-rich AGB star winds V. Effects of frequency-dependent radiative transfer
+      including drift",
+      "Compressing combined probes: redshift weights for joint lensing and clustering analyses",
+      "Upper boundaries of AGN regions in optical diagnostic diagrams",
+      "Kilonova Luminosity Function Constraints based on Zwicky Transient Facility Searches for 13 Neutron Star
+      Mergers",
+      "Hot Exoplanet Atmospheres Resolved with Transit Spectroscopy (HEARTS) IV. A spectral inventory of atoms and
+      molecules in the high-resolution transmission spectrum of WASP-121 b",
+      "Distinguishing the Rigidity Dependences of Acceleration and Transport in Solar Energetic Particles",
+      "Distinguishing between wet and dry atmospheres of TRAPPIST-1 e and f",
+      "A possible polar origin for the FRB associated with a Galactic magnetar",
+      "Fast Generation of Large-scale Structure Density Maps via Generative Adversarial Networks",
+      "Atmospheric chemistry on Uranus and Neptune",
+      "Spatial Variation in Strong Line Ratios and Physical Conditions in Two Strongly-Lensed Galaxies at z~1.4",
+      "Kinematic Structure of the Galactic Center S-cluster",
+      "Potential Impact of Fast Flavor Oscillations on Neutrino-driven Winds and Their Nucleosynthesis",
+      "Obliquity of an Earth-like planet from frequency modulation of its direct imaged lightcurve: mock analysis from
+      general circulation model simulation",
+      "2D Retrieval Frameworks for Hot Jupiter Phase Curves",
+      "Beyond a pale blue dot : how to search for possible bio-signatures on earth-like planets",
+      "Stellar Spectral Interpolation using Machine Learning",
+      "Testing the Weak Equivalence Principle and Lorentz Invariance with Multiwavelength Polarization Observations of
+       GRB Optical Afterglows",
+      "The dynamical evolution and the force model for asteroid (196256) 2003 EH1",
+      "Simulations of prominence eruption preceded with large amplitude longitudinal oscillations and draining",
+      "Chemical Variation among Protostellar Cores: Dependence on Prestellar Core Conditions",
+      "Solar Flare-CME Coupling Throughout Two Acceleration Phases of a Fast CME",
+      "Measurement of Hubble Constant: Do Different Cosmological Probes Provide Different Values?",
+      "Magnetic Flux Emergence in a Coronal Hole",
+      "High-Sensitivity Observations of Molecular Lines with the Arecibo Telescope",
+      "The Fornax Deep Survey with VST. IX. On the assembly history of the bright galaxies and intra-group light in the
+      Fornax A subgroup"
+    ]
+    title_natural: [
+      "#{research_paper.title_physics}"
+    ]

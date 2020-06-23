@@ -7,12 +7,16 @@ public class Dummies {
     private final NameDummy name;
     private final AddressDummy address;
     private final LoremDummy lorem;
+    private final BookDummy book;
+    private final ResearchPaperDummy researchPaper;
     private final ScifiDummy spaceship;
 
     public Dummies(Dummy4j dummy4j) {
         name = new NameDummy(dummy4j);
         address = new AddressDummy(dummy4j);
         lorem = new LoremDummy(dummy4j);
+        book = new BookDummy(dummy4j);
+        researchPaper = new ResearchPaperDummy(dummy4j);
         spaceship = new ScifiDummy(dummy4j);
     }
 
@@ -26,6 +30,20 @@ public class Dummies {
 
     public LoremDummy lorem() {
         return lorem;
+    }
+
+    /**
+     * @since 0.2.0
+     */
+    public BookDummy book() {
+        return book;
+    }
+
+    /**
+     * @since 0.2.0
+     */
+    public ResearchPaperDummy researchPaper() {
+        return researchPaper;
     }
 
     public ScifiDummy scifi()  {

@@ -109,6 +109,24 @@ public class Dummy4j {
     }
 
     /**
+     * Provides methods for generating unique book-related values
+     *
+     * @since 0.2.0
+     */
+    public BookDummy book() {
+        return dummies.book();
+    }
+
+    /**
+     * Provides methods for generating unique values related to research papers
+     *
+     * @since 0.2.0
+     */
+    public ResearchPaperDummy researchPaper() {
+        return dummies.researchPaper();
+    }
+
+    /**
      * Provides methods for generating random science fiction themed values
      */
     public ScifiDummy scifi() {

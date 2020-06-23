@@ -1,0 +1,16 @@
+en:
+  research_paper:
+    subject: [
+      "Anthropology",
+      "Psychology",
+      "Physics",
+      "Mathematics",
+      "Economics",
+      "Computer Science",
+      "Statistics",
+      "Biology"
+    ]
+    title: [
+      "#{research_paper.title_social}",
+      "#{research_paper.title_natural}"
+    ]
