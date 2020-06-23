@@ -294,6 +294,14 @@ lightly and all possible measures will be taken to ensure a smooth transition to
 
 Finally, if you disagree with any details of how this project is maintained, feel free to create an issue! 
 
+## API stability notice
+
+While you are encouraged to start using it now, beware that the API of every version before 1.0.0 is considered less
+stable than it will be after hitting that milestone - versions 0.X.X are intended to fine-tune the API for general
+usability (with your input).
+
+**The API of 0.X.X is not expected to change substantially**, however it is still important to be aware of this.
+
 ## Data sources
 
 Below are given notable sources from which data was gathered for dummy4j.
@@ -301,3 +309,6 @@ Below are given notable sources from which data was gathered for dummy4j.
 * https://github.com/stympy/faker
 * https://www.census.gov/topics/population/genealogy/data/2000_surnames.html
 * https://www.ssa.gov/cgi-bin/popularnames.cgi
+* https://en.wikipedia.org/wiki/List_of_book_titles_taken_from_literature
+* https://en.wikipedia.org/wiki/List_of_writing_genres
+* https://arxiv.org
