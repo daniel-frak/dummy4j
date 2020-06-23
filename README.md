@@ -33,10 +33,11 @@ Dummy4j focuses on ease of use, clean code and effortless extensibility, while s
 Add the following dependency to your `pom.xml`:
 
 ```xml
+<!-- https://mvnrepository.com/artifact/dev.codesoapbox/dummy4j -->
 <dependency>
   <groupId>dev.codesoapbox</groupId>
   <artifactId>dummy4j</artifactId>
-  <version>0.1.2</version>
+  <version>0.1.3</version>
 </dependency>
 ```
 
