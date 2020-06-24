@@ -113,7 +113,16 @@ public class Dummy4j {
     }
 
     /**
-     * Provides methods for generating unique book-related values
+     * Provides methods for generating random values related to education
+     *
+     * @since 0.3.0
+     */
+    public EducationDummy education() {
+        return dummies.education();
+    }
+
+    /**
+     * Provides methods for generating random book-related values
      *
      * @since 0.2.0
      */
@@ -122,7 +131,7 @@ public class Dummy4j {
     }
 
     /**
-     * Provides methods for generating unique values related to research papers
+     * Provides methods for generating random values related to research papers
      *
      * @since 0.2.0
      */

@@ -8,6 +8,7 @@ public class Dummies {
     private final NationDummy nation;
     private final AddressDummy address;
     private final LoremDummy lorem;
+    private final EducationDummy education;
     private final BookDummy book;
     private final ResearchPaperDummy researchPaper;
     private final ScifiDummy spaceship;
@@ -17,6 +18,7 @@ public class Dummies {
         nation = new NationDummy(dummy4j);
         address = new AddressDummy(dummy4j);
         lorem = new LoremDummy(dummy4j);
+        education = new EducationDummy(dummy4j);
         book = new BookDummy(dummy4j);
         researchPaper = new ResearchPaperDummy(dummy4j);
         spaceship = new ScifiDummy(dummy4j);
@@ -57,5 +59,9 @@ public class Dummies {
      */
     public NationDummy nation() {
         return nation;
+    }
+
+    public EducationDummy education() {
+        return education;
     }
 }

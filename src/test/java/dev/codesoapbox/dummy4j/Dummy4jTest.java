@@ -82,6 +82,14 @@ class Dummy4jTest {
     }
 
     @Test
+    void shouldGetEducationDummy() {
+        EducationDummy educationDummy = mock(EducationDummy.class);
+        when(dummies.education())
+                .thenReturn(educationDummy);
+        assertEquals(educationDummy, dummy4j.education());
+    }
+
+    @Test
     void shouldGetScifiDummy() {
         ScifiDummy scifiDummy = mock(ScifiDummy.class);
         when(dummies.scifi())

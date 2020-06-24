@@ -1,0 +1,60 @@
+en:
+  education:
+    major: [
+      "Arts",
+      "Science",
+      "Commerce",
+      "Engineering",
+      "Biological Science",
+      "Biomedical Science",
+      "Psychology",
+      "Business",
+      "Criminal Justice",
+      "Political Science",
+      "History",
+      "Chemistry",
+      "International Relations",
+      "Philosophy",
+      "Physics",
+      "Architecture",
+      "Pharmacy",
+      "Education",
+      "Economics"
+    ]
+    primary_institution_type: [
+      "Primary School",
+      "Elementary School",
+      "School",
+      "Academy"
+    ]
+    primary_institution: "#{address.city} #{education.primary_institution_type}"
+    secondary_institution_type: [
+      "High",
+      "High School",
+      "Secondary College"
+    ]
+    secondary_institution: "#{address.city} #{education.secondary_institution_type}"
+    tertiary_institution_type: [
+      "College",
+      "Technical College",
+      "University"
+    ]
+    tertiary_institution: "#{address.city} #{education.tertiary_institution_type}"
+    institution: [
+      "#{education.primary_institution}",
+      "#{education.secondary_institution}",
+      "#{education.tertiary_institution}",
+    ]
+    degree_type: [
+      "Associate Degree in",
+      "Bachelor of",
+      "Master of"
+    ]
+    degree: "#{education.degree_type} #{education.major}"
+    course_number: [
+      "1##",
+      "2##",
+      "3##",
+      "4##",
+      "5##"
+    ]
