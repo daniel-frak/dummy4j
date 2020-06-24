@@ -47,10 +47,12 @@ en:
     ]
     title_anthropology: [
       "The Role of #{research_paper.title_anthropology_role_of} in #{research_paper.title_anthropology_period}",
+      "An Analysis of the Relationship Between #{research_paper.title_anthropology_role_of} and
+       #{research_paper.title_anthropology_role_of} in #{research_paper.title_anthropology_period}",
       "An Analysis of the Relationship Between #{research_paper.title_anthropology_period} and
       #{research_paper.title_anthropology_role_of}",
       "A Biography of #{name.full_name}",
-      "An analysis of #{name.full_name}'s \"#{book.title}\""
+      "An Analysis of #{name.full_name}'s \"#{book.title}\""
     ]
     title_history_of: [
       "#{address.country}",
@@ -69,13 +71,13 @@ en:
     title_history: [
       "An Introduction to the History of #{research_paper.title_history_of}",
       "Causes of #{research_paper.title_history_cause_of}",
-      "How Could #{research_paper.title_history_cause_of} be prevented?",
+      "How Could #{research_paper.title_history_cause_of} Be Prevented?",
       "The Rise to Power of #{name.full_name}",
       "Links Between #{research_paper.title_history_cause_of} and #{research_paper.title_history_cause_of}",
-      "The Role of #{research_paper.title_anthropology_role_of} in #{nation.nationality} history",
-      "The Rise to power of #{name.full_name}",
-      "Methods Used And Conditions That Helped #{name.full_name} Gain Power",
-      "Methods Used By #{name.full_name} to Maintain Power",
+      "The Role of #{research_paper.title_anthropology_role_of} in #{nation.nationality} History",
+      "The Rise to Power of #{name.full_name}",
+      "Methods Used and Conditions that Helped #{name.full_name} Gain Power",
+      "Methods Used by #{name.full_name} to Maintain Power",
     ]
     title_social: [
       "#{research_paper.title_history}",
