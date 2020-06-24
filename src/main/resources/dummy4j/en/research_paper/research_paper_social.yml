@@ -55,7 +55,7 @@ en:
       "An Analysis of #{name.full_name}'s \"#{book.title}\""
     ]
     title_history_of: [
-      "#{address.country}",
+      "#{nation.country}",
       "#{address.city}",
       "Medicine"
     ]
