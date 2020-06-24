@@ -6,7 +6,7 @@
 
     <groupId>dev.codesoapbox</groupId>
     <artifactId>dummy4j</artifactId>
-    <version>0.2.0-SNAPSHOT</version>
+    <version>0.3.0-SNAPSHOT</version>
 
     <name>Dummy4j</name>
     <description>An extensible dummy/fake data generator library for Java</description>
