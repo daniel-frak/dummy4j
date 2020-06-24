@@ -17,19 +17,22 @@ class NationDummyTest {
 
     @Test
     void country() {
-        assertNotNull(dummy4j.nation().country());
-        assertFalse(dummy4j.nation().country().isEmpty());
+        String value = dummy4j.nation().country();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
     }
 
     @Test
     void countryCode() {
-        assertNotNull(dummy4j.nation().countryCode());
-        assertFalse(dummy4j.nation().countryCode().isEmpty());
+        String value = dummy4j.nation().countryCode();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
     }
 
     @Test
     void nationality() {
-        assertNotNull(dummy4j.nation().nationality());
-        assertFalse(dummy4j.nation().nationality().isEmpty());
+        String value = dummy4j.nation().nationality();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
     }
 }

@@ -17,37 +17,43 @@ class NameDummyTest {
 
     @Test
     void prefix() {
-        assertNotNull(dummy4j.name().prefix());
-        assertFalse(dummy4j.name().prefix().isEmpty());
+        String value = dummy4j.name().prefix();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
     }
 
     @Test
     void suffix() {
-        assertNotNull(dummy4j.name().suffix());
-        assertFalse(dummy4j.name().suffix().isEmpty());
+        String value = dummy4j.name().suffix();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
     }
 
     @Test
     void firstName() {
-        assertNotNull(dummy4j.name().firstName());
-        assertFalse(dummy4j.name().firstName().isEmpty());
+        String value = dummy4j.name().firstName();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
     }
 
     @Test
     void lastName() {
-        assertNotNull(dummy4j.name().lastName());
-        assertFalse(dummy4j.name().lastName().isEmpty());
+        String value = dummy4j.name().lastName();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
     }
 
     @Test
     void fullName() {
-        assertNotNull(dummy4j.name().fullName());
-        assertFalse(dummy4j.name().fullName().isEmpty());
+        String value = dummy4j.name().fullName();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
     }
 
     @Test
     void fullNameWithMiddle() {
-        assertNotNull(dummy4j.name().fullNameWithMiddle());
-        assertFalse(dummy4j.name().fullNameWithMiddle().isEmpty());
+        String value = dummy4j.name().fullNameWithMiddle();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
     }
 }

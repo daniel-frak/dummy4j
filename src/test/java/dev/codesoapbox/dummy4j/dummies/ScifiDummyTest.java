@@ -17,8 +17,9 @@ class ScifiDummyTest {
 
     @Test
     void name() {
-        assertNotNull(dummy4j.scifi().spaceship());
-        assertFalse(dummy4j.scifi().spaceship().isEmpty());
+        String value = dummy4j.scifi().spaceship();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
     }
 
 }

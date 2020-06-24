@@ -17,43 +17,50 @@ class BookDummyTest {
 
     @Test
     void title() {
-        assertNotNull(dummy4j.book().title());
-        assertFalse(dummy4j.book().title().isEmpty());
+        String value = dummy4j.book().title();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
     }
 
     @Test
     void genre() {
-        assertNotNull(dummy4j.book().genre());
-        assertFalse(dummy4j.book().genre().isEmpty());
+        String value = dummy4j.book().genre();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
     }
 
     @Test
     void genreFiction() {
-        assertNotNull(dummy4j.book().genreFiction());
-        assertFalse(dummy4j.book().genreFiction().isEmpty());
+        String value = dummy4j.book().genreFiction();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
     }
 
     @Test
     void genreNonFiction() {
-        assertNotNull(dummy4j.book().genreNonFiction());
-        assertFalse(dummy4j.book().genreNonFiction().isEmpty());
+        String value = dummy4j.book().genreNonFiction();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
     }
 
     @Test
     void publisher() {
-        assertNotNull(dummy4j.book().publisher());
-        assertFalse(dummy4j.book().publisher().isEmpty());
+        String value = dummy4j.book().publisher();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
     }
 
     @Test
     void publisherNonFiction() {
-        assertNotNull(dummy4j.book().publisherNonFiction());
-        assertFalse(dummy4j.book().publisherNonFiction().isEmpty());
+        String value = dummy4j.book().publisherNonFiction();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
     }
 
     @Test
     void publisherFiction() {
-        assertNotNull(dummy4j.book().publisherFiction());
-        assertFalse(dummy4j.book().publisherFiction().isEmpty());
+        String value = dummy4j.book().publisherFiction();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
     }
 }

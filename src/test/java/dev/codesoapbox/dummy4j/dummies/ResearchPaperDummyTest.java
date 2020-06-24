@@ -17,37 +17,43 @@ class ResearchPaperDummyTest {
 
     @Test
     void title() {
-        assertNotNull(dummy4j.researchPaper().title());
-        assertFalse(dummy4j.researchPaper().title().isEmpty());
+        String value = dummy4j.researchPaper().title();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
     }
 
     @Test
     void titleSocial() {
-        assertNotNull(dummy4j.researchPaper().titleSocial());
-        assertFalse(dummy4j.researchPaper().titleSocial().isEmpty());
+        String value = dummy4j.researchPaper().titleSocial();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
     }
 
     @Test
     void titleAnthropology() {
-        assertNotNull(dummy4j.researchPaper().titleAnthropology());
-        assertFalse(dummy4j.researchPaper().titleAnthropology().isEmpty());
+        String value = dummy4j.researchPaper().titleAnthropology();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
     }
 
     @Test
     void titleHistory() {
-        assertNotNull(dummy4j.researchPaper().titleHistory());
-        assertFalse(dummy4j.researchPaper().titleHistory().isEmpty());
+        String value = dummy4j.researchPaper().titleHistory();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
     }
 
     @Test
     void titleNatural() {
-        assertNotNull(dummy4j.researchPaper().titleNatural());
-        assertFalse(dummy4j.researchPaper().titleNatural().isEmpty());
+        String value = dummy4j.researchPaper().titleNatural();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
     }
 
     @Test
     void titlePhysics() {
-        assertNotNull(dummy4j.researchPaper().titlePhysics());
-        assertFalse(dummy4j.researchPaper().titlePhysics().isEmpty());
+        String value = dummy4j.researchPaper().titlePhysics();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
     }
 }

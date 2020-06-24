@@ -17,31 +17,36 @@ class AddressDummyTest {
 
     @Test
     void city() {
-        assertNotNull(dummy4j.address().city());
-        assertFalse(dummy4j.address().city().isEmpty());
+        String value = dummy4j.address().city();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
     }
 
     @Test
     void postCode() {
-        assertNotNull(dummy4j.address().postCode());
-        assertFalse(dummy4j.address().postCode().isEmpty());
+        String value = dummy4j.address().postCode();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
     }
 
     @Test
     void street() {
-        assertNotNull(dummy4j.address().street());
-        assertFalse(dummy4j.address().street().isEmpty());
+        String value = dummy4j.address().street();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
     }
 
     @Test
     void country() {
-        assertNotNull(dummy4j.address().country());
-        assertFalse(dummy4j.address().country().isEmpty());
+        String value = dummy4j.address().country();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
     }
 
     @Test
     void countryCode() {
-        assertNotNull(dummy4j.address().countryCode());
-        assertFalse(dummy4j.address().countryCode().isEmpty());
+        String value = dummy4j.address().countryCode();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
     }
 }
