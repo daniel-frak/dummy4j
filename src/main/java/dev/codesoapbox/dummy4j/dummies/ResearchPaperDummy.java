@@ -25,6 +25,10 @@ public class ResearchPaperDummy {
         return dummy4j.getExpressionResolver().resolve("#{research_paper.title_anthropology}");
     }
 
+    public String titleHistory() {
+        return dummy4j.getExpressionResolver().resolve("#{research_paper.title_history}");
+    }
+
     public String titleNatural() {
         return dummy4j.getExpressionResolver().resolve("#{research_paper.title_natural}");
     }

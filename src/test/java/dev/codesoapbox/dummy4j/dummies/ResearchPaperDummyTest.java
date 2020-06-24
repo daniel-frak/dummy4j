@@ -34,6 +34,12 @@ class ResearchPaperDummyTest {
     }
 
     @Test
+    void titleHistory() {
+        assertNotNull(dummy4j.researchPaper().titleHistory());
+        assertFalse(dummy4j.researchPaper().titleHistory().isEmpty());
+    }
+
+    @Test
     void titleNatural() {
         assertNotNull(dummy4j.researchPaper().titleNatural());
         assertFalse(dummy4j.researchPaper().titleNatural().isEmpty());
