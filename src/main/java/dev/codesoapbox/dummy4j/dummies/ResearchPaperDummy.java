@@ -36,4 +36,8 @@ public class ResearchPaperDummy {
     public String titlePhysics() {
         return dummy4j.expressionResolver().resolve("#{research_paper.title_physics}");
     }
+
+    public String titleBiology() {
+        return dummy4j.expressionResolver().resolve("#{research_paper.title_biology}");
+    }
 }

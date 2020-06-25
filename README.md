@@ -316,3 +316,4 @@ Below are given notable sources from which data was gathered for dummy4j.
 * https://en.wikipedia.org/wiki/List_of_book_titles_taken_from_literature
 * https://en.wikipedia.org/wiki/List_of_writing_genres
 * https://arxiv.org
+* https://biolres.biomedcentral.com

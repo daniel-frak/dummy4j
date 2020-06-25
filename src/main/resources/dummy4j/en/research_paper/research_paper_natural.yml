@@ -115,6 +115,89 @@ en:
       "#{research_paper.title_physics_on_prefix} on #{research_paper.title_physics_in_suffix}",
       "#{research_paper.title_physics_on_prefix} on #{research_paper.title_physics_on_suffix}"
     ]
+    title_biology_in_prefix: [
+      "Long-Term Therapeutic Effects of Katona Therapy",
+      "Circuits with Broken Fibration Symmetries Perform Core Logic Computations",
+      "Optimal Encoding",
+      "Heterogeneity",
+      "Understanding Gold Toxicity",
+      "Genome-Wide Characterization of the Abscisic Acid-, Stress- and Ripening-Induced (ASR) Gene Family",
+      "Analysis of the Role of the Interleukins",
+      "Regulation of Mouse Melanocyte and Skin Development",
+      "Disentangling the Genetic Bases of Saccharomyces Cerevisiae Nitrogen Consumption and Adaptation to Low
+      Nitrogen Environments",
+      "Neuroprotective Effects of an Nrf2 Agonist on High Glucose-Induced Damage",
+      "Light-Induced Injury",
+      "Desiccation Tolerance",
+      "Role of JNK and ERK1/2 MAPK Signaling Pathway",
+      "Stress and Defense Responses",
+      "Effect of Carbamylated Erythropoietin on Neuronal Apoptosis",
+      "Abnormal Expression of TBX4 During Anorectal Development",
+      "Origination and Selection of ABCDE and AGL6 Subfamily MADS-box Genes",
+      "Effect of Cytoglobin Overexpression on Extracellular Matrix Component Synthesis",
+      "Involvement of Endothelial CK2",
+      "Molecular Cloning and Subcellular Localization of Six HDACs",
+      "Identification and Characterization of CircRNAs Involved",
+      "Effects of Glutamine Deprivation on Oxidative Stress and Cell Survival",
+      "RNA Editing Analysis of ATP Synthase Genes",
+      "Identification of the Targets of Hematoporphyrin Derivative in Lung Adenocarcinoma",
+      "ErbB1 and ErbB3 Co-over Expression as a Prognostic Factor",
+      "Effects of Vagotomy on Cardiovascular and Heart Rate variability Alterations Following Chronic Normobaric
+      Hypoxia",
+      "Development and Characterization of Microsatellite Markers",
+      "Involvement of K+ATP and Ca2+ Channels",
+      "ADAR1-Mediated RNA-Editing of 3′UTRs",
+      "Attenuation of Atherogenic Apo B-48-dependent Hyperlipidemia and High Density Lipoprotein Remodeling",
+      "Protective Roles of Autophagy",
+      "Arsenic Trioxide Induces Cell Cycle Arrest and Affects Trk Receptor Expression",
+      "Transcriptome Analysis of Phosphorus Stress Responsiveness",
+      "Study on the Relationship Between Expression Patterns of Cocaine-and Amphetamine Regulated Transcript and
+      Hormones Secretion",
+      "Impaired T Cell-Mediated Hepatitis",
+      "Regulation of Aquaporins"
+    ]
+    title_biology_in_suffix: [
+      "Moderate-to-Severe Perinatal Brain Damage",
+      "Biological Networks",
+      "Stochastic Latent-Variable Models",
+      "Evolutionary Games: an Analysis of the Risk Perception",
+      "Aerobically-Grown Escherichia Coli",
+      "Wheat (Triticum aestivum L.)",
+      "Colon Cancer",
+      "The Comprehensive Detection of miRNA, lncRNA, and circRNA",
+      "Wine Fermentation",
+      "HT22 Cells",
+      "Mouse Embryos Revealed by Single-Cell RNA Sequencing",
+      "the Antarctic Moss Sanionia Uncinata",
+      "Testicular Injury of Rats Induced by di-N-butyl-phthalate (DBP)",
+      "Plant Secondary Metabolites Production",
+      "Fetal Rats during Intrauterine Hypoxic-Ischemic Encephalopathy",
+      "Rat Embryos With Ethylenethiourea-Induced Anorectal Malformations",
+      "Gymnosperms and Angiosperms",
+      "Human Tenon Fibroblasts",
+      "the Radiation Induced Perivascular Resistant Niche (PVRN) and the Induction of Radioresistance for Non-Small
+      Cell Lung Cancer (NSCLC) Cells",
+      "Breast Cell Lines",
+      "the Cotton Cytoplasmic Male Sterile Line H276A",
+      "Gastric Cancer",
+      "Adult Rabbits",
+      "Human Glioma",
+      "Gaultheria Pumila Lf. (Ericaceae)",
+      "Hydrogen Sulfide-Suppressed Ageing of Porcine Pocytes",
+      "Breast Cancer",
+      "Mice",
+      "Retinal Pigment Epithelium Under High Glucose Condition via Regulating PINK1/Parkin Pathway and BNIP3L",
+      "Electroacupuncture Ameliorate Learning and Memory by Improving N-acetylaspartate and Glutamate Metabolism",
+      "Human Neuroblastoma SK-N-SH Cells",
+      "the Seedlings of Dongxiang Wild Rice (Oryza Rufipogon Griff.)",
+      "Porcine Ovarian Follicles",
+      "Peroxisome Proliferator Activated Receptor Alpha (PPARα)-Deficient Mice",
+      "Plants Under Stress"
+    ]
+    title_biology: [
+      "#{research_paper.title_biology_in_prefix} in #{research_paper.title_biology_in_suffix}"
+    ]
     title_natural: [
-      "#{research_paper.title_physics}"
+      "#{research_paper.title_physics}",
+      "#{research_paper.title_biology}"
     ]

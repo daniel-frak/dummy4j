@@ -56,4 +56,11 @@ class ResearchPaperDummyTest {
         assertNotNull(value);
         assertFalse(value.isEmpty());
     }
+
+    @Test
+    void titleBiology() {
+        String value = dummy4j.researchPaper().titleBiology();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
+    }
 }
