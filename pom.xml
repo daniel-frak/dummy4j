@@ -27,6 +27,21 @@
         </developer>
     </developers>
 
+    <scm>
+        <url>https://github.com/daniel-frak/dummy4j</url>
+    </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>
+    </distributionManagement>
+
     <properties>
         <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
@@ -37,12 +52,7 @@
         <jacoco.version>0.8.5</jacoco.version>
 
         <sonar.projectKey>dummy4j</sonar.projectKey>
-        <sonar.organization>codesoapbox</sonar.organization>
     </properties>
-
-    <scm>
-        <url>https://github.com/daniel-frak/dummy4j</url>
-    </scm>
 
     <dependencies>
         <dependency>
@@ -198,22 +208,12 @@
         </plugins>
     </build>
 
-    <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
-        </repository>
-    </distributionManagement>
-
     <profiles>
 
         <profile>
             <id>sonar-cloud</id>
             <properties>
+                <sonar.organization>codesoapbox</sonar.organization>
                 <sonar.host.url>https://sonarcloud.io</sonar.host.url>
                 <sonar.login>c785d3dafd6ebaa75453625bd2006697bbcdb3bd</sonar.login>
             </properties>
