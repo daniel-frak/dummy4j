@@ -82,33 +82,33 @@ This section covers more advanced usage of Dummy4j, such as configuration and he
 
 ### Simple configuration
 
-A constructor is provided to define a seed and locales. Both of the parameters are nullable - Dummy4j will
+A constructor is provided to define a seed, locales and file paths. All of the parameters are nullable - Dummy4j will
 use default values for any value which is passed as NULL.
 
-Two additional constructors are provided for convenience.
+Additionally, a builder is provided for convenience.
 
 ```java
-// Custom seed and locales
-Dummy4j dummy = new Dummy4j(123456L, Collections.singletonList("en"));
+// Constructor
+Dummy4j dummy = new Dummy4j(123456L, Collections.singletonList("en"), Arrays.asList("my/custom/path", "dummy4j"));
 
-// Custom seed
-Dummy4j dummy = new Dummy4j(123456L);
-
-// Custom locales
-Dummy4j dummy = new Dummy4j(Collections.singletonList("en"));
+// Builder
+Dummy4j dummy = Dummy4j.builder()
+                .seed(123456L)
+                .locale(Collections.singletonList("en"))
+                .paths(Arrays.asList("my/custom/path", "dummy4j"))
+                .build();
 ```
 
 ### Advanced configuration
 
 Advanced configuration can be performed by using Dummy4j's dedicated constructor, which allows for injecting custom
-implementations of its dependencies. This allows, for example, to define custom paths from which definitions should
-be loaded. 
+implementations of its dependencies.
 
 ```java
 RandomService randomService = new RandomService(123456L);
 
 YamlFileDefinitionProvider definitionProvider = YamlFileDefinitionProvider.withPaths(
-        Arrays.asList("dummy4j", "customPath"));
+        Arrays.asList("dummy4j", "my/custom/path"));
 ExpressionResolver expressionResolver = new ExpressionResolver(Collections.singletonList("en"),
         randomService, definitionProvider);
 UniqueValues uniqueValues = new UniqueValues();
@@ -207,7 +207,7 @@ To make dummy4j recognize these definitions, you must put them in the `resources
 start using them immediately:
 ```java
 Dummy4j dummy = new Dummy4j();
-System.out.println(dummy.getExpressionResolver().resolve("#{my_definitions.any_thing}"));
+System.out.println(dummy.expressionResolver().resolve("#{my_definitions.any_thing}"));
 ```
 
 The above code might print a value like `def: 455-827`.
@@ -247,7 +247,7 @@ public class CustomDummy4j extends Dummy4j {
         }
 
         public String thing2() {
-            return dummy4j.expressionResolver.resolveKey("my_definitions.thing1");
+            return dummy4j.expressionResolver.resolveKey("my_definitions.thing2");
         }
 
         public String anyThing() {

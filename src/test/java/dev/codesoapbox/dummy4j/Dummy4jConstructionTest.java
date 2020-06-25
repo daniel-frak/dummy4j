@@ -29,7 +29,7 @@ class Dummy4jConstructionTest {
     void shouldConstructWithCustomSeedAndLocales() {
         List<String> locales = singletonList("en");
         long seed = 1234L;
-        Dummy4j dummy = new Dummy4j(seed, locales);
+        Dummy4j dummy = new Dummy4j(seed, locales, null);
         assertEquals(locales, dummy.expressionResolver.locales);
         assertEquals(seed, dummy.randomService.getSeed());
     }
@@ -37,7 +37,7 @@ class Dummy4jConstructionTest {
     @Test
     void shouldConstructWithSeedAndDefaultLocales() {
         long seed = 1234L;
-        Dummy4j dummy = new Dummy4j(seed);
+        Dummy4j dummy = new Dummy4j(seed, null, null);
         assertEquals(singletonList("en"), dummy.expressionResolver.locales);
         assertEquals(seed, dummy.randomService.getSeed());
     }
@@ -45,7 +45,7 @@ class Dummy4jConstructionTest {
     @Test
     void shouldConstructWithDefaultSeedAndCustomLocales() {
         List<String> locales = singletonList("en");
-        Dummy4j dummy = new Dummy4j(locales);
+        Dummy4j dummy = new Dummy4j(null, locales, null);
         assertEquals(locales, dummy.expressionResolver.locales);
     }
 

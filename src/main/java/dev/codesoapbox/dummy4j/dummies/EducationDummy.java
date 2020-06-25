@@ -14,30 +14,30 @@ public class EducationDummy {
     }
 
     public String major() {
-        return dummy4j.getExpressionResolver().resolveKey("education.major");
+        return dummy4j.expressionResolver().resolveKey("education.major");
     }
 
     public String primaryInstitution() {
-        return dummy4j.getExpressionResolver().resolve("#{education.primary_institution}");
+        return dummy4j.expressionResolver().resolve("#{education.primary_institution}");
     }
 
     public String secondaryInstitution() {
-        return dummy4j.getExpressionResolver().resolve("#{education.secondary_institution}");
+        return dummy4j.expressionResolver().resolve("#{education.secondary_institution}");
     }
 
     public String tertiaryInstitution() {
-        return dummy4j.getExpressionResolver().resolve("#{education.tertiary_institution}");
+        return dummy4j.expressionResolver().resolve("#{education.tertiary_institution}");
     }
 
     public String institution() {
-        return dummy4j.getExpressionResolver().resolve("#{education.institution}");
+        return dummy4j.expressionResolver().resolve("#{education.institution}");
     }
 
     public String degree() {
-        return dummy4j.getExpressionResolver().resolve("#{education.degree}");
+        return dummy4j.expressionResolver().resolve("#{education.degree}");
     }
 
     public String courseNumber() {
-        return dummy4j.getExpressionResolver().resolve("#{education.course_number}");
+        return dummy4j.expressionResolver().resolve("#{education.course_number}");
     }
 }

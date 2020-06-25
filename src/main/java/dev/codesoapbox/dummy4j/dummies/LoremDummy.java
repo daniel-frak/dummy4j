@@ -28,7 +28,7 @@ public class LoremDummy {
      * @return a random character
      */
     public String character() {
-        return dummy4j.getExpressionResolver().resolveKey("lorem.characters");
+        return dummy4j.expressionResolver().resolveKey("lorem.characters");
     }
 
     /**
@@ -58,7 +58,7 @@ public class LoremDummy {
         if (dummy4j.random().nextInt(15) > 1) {
             return ".";
         }
-        return dummy4j.getExpressionResolver().resolveKey("lorem.additional_sentence_ending_punctuation");
+        return dummy4j.expressionResolver().resolveKey("lorem.additional_sentence_ending_punctuation");
     }
 
     private String sentenceWithoutPunctuation(int numberOfWords) {
@@ -73,7 +73,7 @@ public class LoremDummy {
      * @return a single random word
      */
     public String word() {
-        return dummy4j.getExpressionResolver().resolveKey("lorem.word");
+        return dummy4j.expressionResolver().resolveKey("lorem.word");
     }
 
     /**

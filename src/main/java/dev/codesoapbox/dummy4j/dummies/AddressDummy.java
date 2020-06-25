@@ -11,22 +11,22 @@ public class AddressDummy {
     }
 
     public String city() {
-        return dummy4j.getExpressionResolver().resolve("#{address.city}");
+        return dummy4j.expressionResolver().resolve("#{address.city}");
     }
 
     public String postCode() {
-        return dummy4j.getExpressionResolver().resolve("#{address.postcode}");
+        return dummy4j.expressionResolver().resolve("#{address.postcode}");
     }
 
     public String street() {
-        return dummy4j.getExpressionResolver().resolve("#{address.street}");
+        return dummy4j.expressionResolver().resolve("#{address.street}");
     }
 
     public String country() {
-        return dummy4j.getExpressionResolver().resolve("#{nation.country}");
+        return dummy4j.expressionResolver().resolve("#{nation.country}");
     }
 
     public String countryCode() {
-        return dummy4j.getExpressionResolver().resolve("#{nation.country_code}");
+        return dummy4j.expressionResolver().resolve("#{nation.country_code}");
     }
 }

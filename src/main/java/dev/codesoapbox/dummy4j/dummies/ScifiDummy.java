@@ -11,6 +11,6 @@ public class ScifiDummy {
     }
 
     public String spaceship() {
-        return dummy4j.getExpressionResolver().resolve("#{scifi.spaceship.name}");
+        return dummy4j.expressionResolver().resolve("#{scifi.spaceship.name}");
     }
 }

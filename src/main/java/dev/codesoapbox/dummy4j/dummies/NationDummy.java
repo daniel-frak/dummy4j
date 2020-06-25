@@ -11,14 +11,14 @@ public class NationDummy {
     }
 
     public String country() {
-        return dummy4j.getExpressionResolver().resolve("#{nation.country}");
+        return dummy4j.expressionResolver().resolve("#{nation.country}");
     }
 
     public String countryCode() {
-        return dummy4j.getExpressionResolver().resolve("#{nation.country_code}");
+        return dummy4j.expressionResolver().resolve("#{nation.country_code}");
     }
 
     public String nationality() {
-        return dummy4j.getExpressionResolver().resolve("#{nation.nationality}");
+        return dummy4j.expressionResolver().resolve("#{nation.nationality}");
     }
 }

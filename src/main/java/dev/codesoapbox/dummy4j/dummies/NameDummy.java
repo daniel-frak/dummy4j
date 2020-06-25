@@ -11,26 +11,26 @@ public class NameDummy {
     }
 
     public String prefix() {
-        return dummy4j.getExpressionResolver().resolve("#{name.prefix}");
+        return dummy4j.expressionResolver().resolve("#{name.prefix}");
     }
 
     public String suffix() {
-        return dummy4j.getExpressionResolver().resolve("#{name.suffix}");
+        return dummy4j.expressionResolver().resolve("#{name.suffix}");
     }
 
     public String firstName() {
-        return dummy4j.getExpressionResolver().resolve("#{name.first_name}");
+        return dummy4j.expressionResolver().resolve("#{name.first_name}");
     }
 
     public String lastName() {
-        return dummy4j.getExpressionResolver().resolve("#{name.last_name}");
+        return dummy4j.expressionResolver().resolve("#{name.last_name}");
     }
 
     public String fullName() {
-        return dummy4j.getExpressionResolver().resolve("#{name.full_name}");
+        return dummy4j.expressionResolver().resolve("#{name.full_name}");
     }
 
     public String fullNameWithMiddle() {
-        return dummy4j.getExpressionResolver().resolve("name.full_name_with_middle");
+        return dummy4j.expressionResolver().resolve("name.full_name_with_middle");
     }
 }

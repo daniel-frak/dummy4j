@@ -14,30 +14,30 @@ public class BookDummy {
     }
 
     public String title() {
-        return dummy.getExpressionResolver().resolve("#{book.title}");
+        return dummy.expressionResolver().resolve("#{book.title}");
     }
 
     public String genre() {
-        return dummy.getExpressionResolver().resolve("#{book.genre}");
+        return dummy.expressionResolver().resolve("#{book.genre}");
     }
 
     public String genreFiction() {
-        return dummy.getExpressionResolver().resolve("#{book.genre_fiction}");
+        return dummy.expressionResolver().resolve("#{book.genre_fiction}");
     }
 
     public String genreNonFiction() {
-        return dummy.getExpressionResolver().resolve("#{book.genre_nonfiction}");
+        return dummy.expressionResolver().resolve("#{book.genre_nonfiction}");
     }
 
     public String publisher() {
-        return dummy.getExpressionResolver().resolve("#{book.publisher}");
+        return dummy.expressionResolver().resolve("#{book.publisher}");
     }
 
     public String publisherNonFiction() {
-        return dummy.getExpressionResolver().resolve("#{book.publisher_nonfiction}");
+        return dummy.expressionResolver().resolve("#{book.publisher_nonfiction}");
     }
 
     public String publisherFiction() {
-        return dummy.getExpressionResolver().resolve("#{book.publisher_fiction}");
+        return dummy.expressionResolver().resolve("#{book.publisher_fiction}");
     }
 }

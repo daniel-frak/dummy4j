@@ -14,26 +14,26 @@ public class ResearchPaperDummy {
     }
 
     public String title() {
-        return dummy4j.getExpressionResolver().resolve("#{research_paper.title}");
+        return dummy4j.expressionResolver().resolve("#{research_paper.title}");
     }
 
     public String titleSocial() {
-        return dummy4j.getExpressionResolver().resolve("#{research_paper.title_natural}");
+        return dummy4j.expressionResolver().resolve("#{research_paper.title_natural}");
     }
 
     public String titleAnthropology() {
-        return dummy4j.getExpressionResolver().resolve("#{research_paper.title_anthropology}");
+        return dummy4j.expressionResolver().resolve("#{research_paper.title_anthropology}");
     }
 
     public String titleHistory() {
-        return dummy4j.getExpressionResolver().resolve("#{research_paper.title_history}");
+        return dummy4j.expressionResolver().resolve("#{research_paper.title_history}");
     }
 
     public String titleNatural() {
-        return dummy4j.getExpressionResolver().resolve("#{research_paper.title_natural}");
+        return dummy4j.expressionResolver().resolve("#{research_paper.title_natural}");
     }
 
     public String titlePhysics() {
-        return dummy4j.getExpressionResolver().resolve("#{research_paper.title_physics}");
+        return dummy4j.expressionResolver().resolve("#{research_paper.title_physics}");
     }
 }

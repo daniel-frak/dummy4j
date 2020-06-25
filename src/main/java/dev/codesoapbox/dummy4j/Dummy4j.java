@@ -19,41 +19,39 @@ public class Dummy4j {
     protected final Dummies dummies;
     protected final UniqueValues uniqueValues;
 
+    /**
+     * Create a Dummy4j instance with a default configuration
+     */
     public Dummy4j() {
-        this(null, null);
+        this(null, null, null);
     }
 
     /**
-     * @param seed used for generating random values
+     * @param seed    used for generating random values
      * @param locales a list of locales, ordered by priority of resolution
+     * @param paths   a list of paths from which to load yml files (relative to the resources directory)
+     * @since 0.3.0
      */
-    public Dummy4j(Long seed, List<String> locales) {
-        this.randomService = seed != null ? new RandomService(seed) : new RandomService(null);
+    protected Dummy4j(Long seed, List<String> locales, List<String> paths) {
+        this.randomService = seed != null ? new RandomService(seed) : new RandomService();
+
+        YamlFileDefinitionProvider definitionProvider;
+        if (paths == null) {
+            definitionProvider = YamlFileDefinitionProvider.standard();
+        } else {
+            definitionProvider = YamlFileDefinitionProvider.withPaths(paths);
+        }
 
         if (locales != null) {
             this.expressionResolver = new ExpressionResolver(locales, this.randomService,
-                    YamlFileDefinitionProvider.standard());
+                    definitionProvider);
         } else {
             this.expressionResolver = new ExpressionResolver(null, this.randomService,
-                    YamlFileDefinitionProvider.standard());
+                    definitionProvider);
         }
 
         this.dummies = new Dummies(this);
         this.uniqueValues = new UniqueValues();
-    }
-
-    /**
-     * @param seed used for generating random values
-     */
-    public Dummy4j(Long seed) {
-        this(seed, null);
-    }
-
-    /**
-     * @param locales a list of locales, ordered by priority of resolution
-     */
-    public Dummy4j(List<String> locales) {
-        this(null, locales);
     }
 
     public Dummy4j(ExpressionResolver expressionResolver, RandomService randomService,
@@ -64,10 +62,14 @@ public class Dummy4j {
         this.uniqueValues = uniqueValues;
     }
 
+    public static Dummy4jBuilder builder() {
+        return new Dummy4jBuilder();
+    }
+
     /**
      * @return the resolver used for resolving expressions
      */
-    public ExpressionResolver getExpressionResolver() {
+    public ExpressionResolver expressionResolver() {
         return expressionResolver;
     }
 
