@@ -17,6 +17,13 @@ public class RandomService {
     private final long seed;
     private final Random random;
 
+    /**
+     * @since 0.3.0
+     */
+    public RandomService() {
+        this(null);
+    }
+
     public RandomService(Long seed) {
         this.seed = seed != null ? seed : ThreadLocalRandom.current().nextInt();
 
