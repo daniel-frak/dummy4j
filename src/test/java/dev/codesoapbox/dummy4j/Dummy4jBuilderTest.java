@@ -23,16 +23,22 @@ class Dummy4jBuilderTest {
         // Standard path should build fine
         new Dummy4jBuilder().build();
 
+        Dummy4jBuilder builder = new Dummy4jBuilder()
+                .paths(singletonList("somePath"));
+
         // Missing path should throw exception
-        assertThrows(MissingLocaleException.class, () -> new Dummy4jBuilder()
-                .paths(singletonList("somePath"))
-                .build());
+        assertThrows(MissingLocaleException.class, builder::build);
     }
 
     @Test
     void shouldBuildWithLocale() {
-        assertThrows(MissingLocaleException.class, () -> new Dummy4jBuilder()
-                .locale(singletonList("someLocale"))
-                .build());
+        // Standard locale should build fine
+        new Dummy4jBuilder().build();
+
+        Dummy4jBuilder builder = new Dummy4jBuilder()
+                .locale(singletonList("someLocale"));
+
+        // Missing locale should throw exception
+        assertThrows(MissingLocaleException.class, builder::build);
     }
 }
