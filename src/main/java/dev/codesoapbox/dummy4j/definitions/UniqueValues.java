@@ -1,7 +1,7 @@
 package dev.codesoapbox.dummy4j.definitions;
 
 import dev.codesoapbox.dummy4j.annotations.Experimental;
-import dev.codesoapbox.dummy4j.exceptions.RetryLimitExceeded;
+import dev.codesoapbox.dummy4j.exceptions.UniqueValueRetryLimitExceededException;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -40,7 +40,7 @@ public class UniqueValues {
      * @param supplier the value supplier
      * @param <T> the type of value to return
      * @return a unique value
-     * @throws RetryLimitExceeded if retry limit is exceeded
+     * @throws UniqueValueRetryLimitExceededException if retry limit is exceeded
      */
     public <T> T value(String uniquenessGroup, Supplier<T> supplier) {
         Set<Object> usedValuesForMethod = usedValues.computeIfAbsent(uniquenessGroup, k -> new HashSet<>());
@@ -54,6 +54,6 @@ public class UniqueValues {
             }
         }
 
-        throw new RetryLimitExceeded();
+        throw new UniqueValueRetryLimitExceededException(maxRetries, uniquenessGroup);
     }
 }

@@ -1,6 +1,6 @@
 package dev.codesoapbox.dummy4j.definitions;
 
-import dev.codesoapbox.dummy4j.exceptions.RetryLimitExceeded;
+import dev.codesoapbox.dummy4j.exceptions.UniqueValueRetryLimitExceededException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +30,7 @@ class UniqueValuesTest {
         int maxRetries = 1;
         uniqueValues.setMaxRetries(maxRetries);
 
-        assertThrows(RetryLimitExceeded.class, () -> {
+        assertThrows(UniqueValueRetryLimitExceededException.class, () -> {
             for (int i = 0; i < 2; i++) {
                 uniqueValues.value("group", stack::pop);
             }
