@@ -4,23 +4,6 @@ import java.util.List;
 
 /**
  * An abstract dummy builder which can optionally be extended to build classes extending Dummy4j.
- * <p>
- * Example:
- * <pre>
- * {@code
- * class CustomBuilder extends AbstractDummy4jBuilder<Builder, CustomDummy4j> {
- *
- *    @Override
- *    protected CustomBuilder self() {
- *      return this;
- *    }
- *
- *    @Override
- *    public CustomDummy4j build() {
- *      return new CustomDummy4j(seed, locale, paths);
- *    }
- * }
- * }</pre>
  *
  * @see Dummy4jBuilder
  * @since 0.3.1
