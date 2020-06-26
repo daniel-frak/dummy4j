@@ -35,11 +35,6 @@ class Dummy4jTest {
     }
 
     @Test
-    void shouldGetBuilder() {
-        assertNotNull(Dummy4j.builder());
-    }
-
-    @Test
     void shouldGetExpressionResolver() {
         assertEquals(expressionResolver, dummy4j.expressionResolver());
     }

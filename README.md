@@ -37,7 +37,7 @@ Add the following dependency to your `pom.xml`:
 <dependency>
   <groupId>dev.codesoapbox</groupId>
   <artifactId>dummy4j</artifactId>
-  <version>0.2.0</version>
+  <version>0.3.0</version>
 </dependency>
 ```
 
@@ -92,7 +92,7 @@ Additionally, a builder is provided for convenience.
 Dummy4j dummy = new Dummy4j(123456L, Collections.singletonList("en"), Arrays.asList("my/custom/path", "dummy4j"));
 
 // Builder
-Dummy4j dummy = Dummy4j.builder()
+Dummy4j dummy = new Dummy4jBuilder()
                 .seed(123456L)
                 .locale(Collections.singletonList("en"))
                 .paths(Arrays.asList("my/custom/path", "dummy4j"))
@@ -262,6 +262,9 @@ You can now use the new API:
 CustomDummy4j dummy = new CustomDummy4j();
 System.out.println(dummy.myDefinitions().anyThing());
 ```
+
+For convenience, you might want to extend `AbstractDummy4jBuilder` as well. The `Dummy4jBuilder` class serves as an
+example of this.
 
 ### The core classes
 

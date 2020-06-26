@@ -1,31 +1,14 @@
 package dev.codesoapbox.dummy4j;
 
-import java.util.List;
-
 /**
+ * A default builder for Dummy4j
+ *
  * @since 0.3.0
  */
-public class Dummy4jBuilder {
+public class Dummy4jBuilder extends AbstractDummy4jBuilder<Dummy4jBuilder, Dummy4j> {
 
-    private Long seed;
-    private List<String> locale;
-    private List<String> paths;
-
-    Dummy4jBuilder() {
-    }
-
-    public Dummy4jBuilder seed(Long seed) {
-        this.seed = seed;
-        return this;
-    }
-
-    public Dummy4jBuilder locale(List<String> locale) {
-        this.locale = locale;
-        return this;
-    }
-
-    public Dummy4jBuilder paths(List<String> paths) {
-        this.paths = paths;
+    @Override
+    protected Dummy4jBuilder self() {
         return this;
     }
 

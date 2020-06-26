@@ -27,12 +27,16 @@ public class Dummy4j {
     }
 
     /**
+     * This constructor is primarily used for Dummy4j's builder.
+     * It is used instead of passing the entire builder instance for better extensibility.
+     *
      * @param seed    used for generating random values
      * @param locales a list of locales, ordered by priority of resolution
      * @param paths   a list of paths from which to load yml files (relative to the resources directory)
+     *
      * @since 0.3.0
      */
-    protected Dummy4j(Long seed, List<String> locales, List<String> paths) {
+    public Dummy4j(Long seed, List<String> locales, List<String> paths) {
         this.randomService = seed != null ? new RandomService(seed) : new RandomService();
 
         YamlFileDefinitionProvider definitionProvider;
@@ -60,10 +64,6 @@ public class Dummy4j {
         this.expressionResolver = expressionResolver;
         this.dummies = dummiesFactory.apply(this);
         this.uniqueValues = uniqueValues;
-    }
-
-    public static Dummy4jBuilder builder() {
-        return new Dummy4jBuilder();
     }
 
     /**
