@@ -2,6 +2,9 @@ package dev.codesoapbox.dummy4j.dummies;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
 
+/**
+ * @since 0.2.0
+ */
 public class NationDummy {
 
     private final Dummy4j dummy4j;
