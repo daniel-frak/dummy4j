@@ -8,7 +8,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -42,6 +48,29 @@ class Dummy4jTest {
     @Test
     void shouldGetUnique() {
         assertEquals(uniqueValues, dummy4j.unique());
+    }
+
+    @Test
+    void shouldGenerateRandomList() {
+        List<Integer> expectedResult = Arrays.asList(1, 2, 3, 4, 5);
+
+        AtomicInteger i = new AtomicInteger();
+        List<Integer> result = dummy4j.listOf(5, i::incrementAndGet);
+
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    void shouldGenerateRandomSet() {
+        Set<Integer> expectedResult = new HashSet<>();
+        for (int i = 0; i < 5; i++) {
+            expectedResult.add(i + 1);
+        }
+
+        AtomicInteger i = new AtomicInteger();
+        Set<Integer> result = dummy4j.setOf(5, i::incrementAndGet);
+
+        assertEquals(expectedResult, result);
     }
 
     @Test

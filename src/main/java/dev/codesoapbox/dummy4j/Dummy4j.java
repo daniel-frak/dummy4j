@@ -4,8 +4,12 @@ import dev.codesoapbox.dummy4j.definitions.UniqueValues;
 import dev.codesoapbox.dummy4j.definitions.providers.files.yaml.YamlFileDefinitionProvider;
 import dev.codesoapbox.dummy4j.dummies.*;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * Provides methods for generating dummy data.
@@ -33,7 +37,6 @@ public class Dummy4j {
      * @param seed    used for generating random values
      * @param locales a list of locales, ordered by priority of resolution
      * @param paths   a list of paths from which to load yml files (relative to the resources directory)
-     *
      * @since 0.3.0
      */
     public Dummy4j(Long seed, List<String> locales, List<String> paths) {
@@ -87,6 +90,40 @@ public class Dummy4j {
      */
     public RandomService random() {
         return randomService;
+    }
+
+    /**
+     * Provides a list of objects supplied by a method
+     *
+     * @param count    the number of objects to generate
+     * @param supplier the method to generate an object
+     * @param <T>      the type of objects to generate
+     * @return a list of objects
+     * @since 0.4.0
+     */
+    public <T> List<T> listOf(int count, Supplier<T> supplier) {
+        List<T> list = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            list.add(supplier.get());
+        }
+        return list;
+    }
+
+    /**
+     * Provides a set of objects supplied by a method
+     *
+     * @param count    the number of objects to generate
+     * @param supplier the method to generate an object
+     * @param <T>      the type of objects to generate
+     * @return a list of objects
+     * @since 0.4.0
+     */
+    public <T> Set<T> setOf(int count, Supplier<T> supplier) {
+        Set<T> set = new HashSet<>();
+        for (int i = 0; i < count; i++) {
+            set.add(supplier.get());
+        }
+        return set;
     }
 
     /**
