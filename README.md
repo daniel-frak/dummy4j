@@ -82,14 +82,15 @@ This section covers more advanced usage of Dummy4j, such as configuration and he
 
 ### Simple configuration
 
-A constructor is provided to define a seed, locales and file paths. All of the parameters are nullable - Dummy4j will
-use default values for any value which is passed as NULL.
+A constructor is provided to define a seed, locales and file paths (either directories or specific files).
+All of the parameters are nullable - Dummy4j will use default values for any value which is passed as NULL.
 
 Additionally, a builder is provided for convenience.
 
 ```java
 // Constructor
-Dummy4j dummy = new Dummy4j(123456L, Collections.singletonList("en"), Arrays.asList("my/custom/path", "dummy4j"));
+Dummy4j dummy = new Dummy4j(123456L, Collections.singletonList("en"), 
+    Arrays.asList("my/custom/path", "dummy4j/some_specific_file.yml"));
 
 // Builder
 Dummy4j dummy = new Dummy4jBuilder()
@@ -144,6 +145,15 @@ for (int i = 0; i < 10; i++) {
 The above will print 10 names, all of which will be unique within the `fullNameGroup` uniqueness group.
 
 Note that this is an experimental feature and its API may be subject to change if it proves to not be useful enough.
+
+### Generating collections (since 0.4.0)
+
+Dummy4j provides convenience methods to quickly create collections of items.
+
+```java
+List<String> fiveNames = dummy.listOf(5, () -> dummy.name().fullName());
+Set<String> fourCities = dummy.setOf(4, () -> dummy.address().city());
+``` 
 
 ## Extending Dummy4j
 
@@ -320,3 +330,4 @@ Below are given notable sources from which data was gathered for dummy4j.
 * https://en.wikipedia.org/wiki/List_of_writing_genres
 * https://arxiv.org
 * https://biolres.biomedcentral.com
+* https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
