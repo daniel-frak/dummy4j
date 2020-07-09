@@ -35,4 +35,18 @@ class NationDummyTest {
         assertNotNull(value);
         assertFalse(value.isEmpty());
     }
+
+    @Test
+    void languageCode() {
+        String value = dummy4j.nation().languageCode();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
+    }
+
+    @Test
+    void language() {
+        String value = dummy4j.nation().language();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
+    }
 }

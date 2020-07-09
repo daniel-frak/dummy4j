@@ -14,14 +14,28 @@ public class NationDummy {
     }
 
     public String country() {
-        return dummy4j.expressionResolver().resolve("#{nation.country}");
+        return dummy4j.expressionResolver().resolveKey("nation.country");
     }
 
     public String countryCode() {
-        return dummy4j.expressionResolver().resolve("#{nation.country_code}");
+        return dummy4j.expressionResolver().resolveKey("nation.country_code");
     }
 
     public String nationality() {
-        return dummy4j.expressionResolver().resolve("#{nation.nationality}");
+        return dummy4j.expressionResolver().resolveKey("nation.nationality");
+    }
+
+    /**
+     * @since 0.4.0
+     */
+    public String languageCode() {
+        return dummy4j.expressionResolver().resolveKey("nation.language_code");
+    }
+
+    /**
+     * @since 0.4.0
+     */
+    public String language() {
+        return dummy4j.expressionResolver().resolveKey("nation.language");
     }
 }
