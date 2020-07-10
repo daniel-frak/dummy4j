@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Home
+nav_order: 0
 ---
 
 Dummy4j is an easy to use dummy data generator library for Java, designed for extensibility.

@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Convenience methods
+nav_order: 2
 ---
 
 # Chance method

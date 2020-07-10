@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Extending Dummy4j
+nav_order: 3
 ---
 
 # Contents
