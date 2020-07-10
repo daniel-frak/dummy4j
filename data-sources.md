@@ -4,7 +4,7 @@ title: List of data sources
 nav_order: 999
 ---
 
-Below are given notable sources from which data was gathered or used as inspiration for dummy4j.
+Below are given notable sources from which data was gathered or used as inspiration for Dummy4j.
 
 * https://github.com/stympy/faker
 * https://www.census.gov/topics/population/genealogy/data/2000_surnames.html
