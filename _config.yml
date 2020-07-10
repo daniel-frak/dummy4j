@@ -1,3 +1,5 @@
+title: Dummy4j
+description: An extensible dummy/fake data generator library for Java
 remote_theme: pmarsceill/just-the-docs
 color_scheme: custom
 markdown: kramdown

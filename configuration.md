@@ -4,6 +4,12 @@ title: Configuration
 nav_order: 2
 ---
 
+# Contents
+{:.no_toc}
+
+* TOC
+{:toc}
+
 # Simple configuration
 
 A constructor is provided to define a seed, locales and file paths (either directories or specific files).

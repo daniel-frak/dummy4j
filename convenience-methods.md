@@ -4,6 +4,12 @@ title: Convenience methods
 nav_order: 3
 ---
 
+# Contents
+{:.no_toc}
+
+* TOC
+{:toc}
+
 # Chance method
 
 You might want to randomize which fields should be filled and which should be left empty in an object.
