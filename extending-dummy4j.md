@@ -1,4 +1,5 @@
-* TOC {:toc}
+* TOC
+{:toc}
 
 # Custom definitions
 
