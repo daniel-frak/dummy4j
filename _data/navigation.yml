@@ -1,9 +1,0 @@
-# Site navigation links
-- title: Home
-  url: /
-- title: Advanced usage
-  url: /configuration
-- title: Convenience methods
-  url: /convenience-methods
-- title: Extending Dummy4j
-  url: /extending-dummy4j

@@ -1,3 +1,8 @@
+---
+layout: default
+title: Convenience methods
+---
+
 # Chance method
 
 You might want to randomize which fields should be filled and which should be left empty in an object.

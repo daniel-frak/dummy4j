@@ -1,3 +1,8 @@
+---
+layout: default
+title: Configuration
+---
+
 # Simple configuration
 
 A constructor is provided to define a seed, locales and file paths (either directories or specific files).

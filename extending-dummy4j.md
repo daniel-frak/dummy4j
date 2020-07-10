@@ -1,3 +1,8 @@
+---
+layout: default
+title: Extending Dummy4j
+---
+
 # Contents
 {:.no_toc}
 
