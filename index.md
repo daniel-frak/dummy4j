@@ -35,7 +35,7 @@ String randomCountry = dummy.nation().country();
 ```
 
 The default configuration of Dummy4j uses a file-based definition provider which reads data definitions from `.yml`
-files inside the `resources/dummy4j` folder. Additionally, the default locale is `en`.
+files inside the `resources/dummy4j` folder. The default locale is `en`.
 
 # Out-of-the-box dummies
 
