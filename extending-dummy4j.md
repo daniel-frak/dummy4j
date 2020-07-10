@@ -131,7 +131,7 @@ example of this.
 
 # The core classes
 
-The core classes can be configured or swapped out entirely as presented in the "Getting started" section.
+The core classes can be configured or swapped out entirely as presented in the "Configuration" section.
 
 ## DefinitionProvider
 
