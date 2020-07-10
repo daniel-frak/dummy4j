@@ -28,7 +28,7 @@ It is possible to generate unique values by wrapping a call with the `dummy.uniq
 ```java
 for (int i = 0; i < 10; i++) {
     System.out.println(
-      dummy.unique().value("fullNameGroup", () -> dummy.name()).fullName())
+      dummy.unique().value("fullNameGroup", () -> dummy.name().fullName())
     );
 }
 ```
@@ -44,4 +44,12 @@ Dummy4j provides convenience methods to quickly create collections of items.
 ```java
 List<String> fiveNames = dummy.listOf(5, () -> dummy.name().fullName());
 Set<String> fourCities = dummy.setOf(4, () -> dummy.address().city());
+```
+
+# Random Enum values (since 0.1.2)
+
+You can generate a random enum value by providing an enum class.
+
+```java
+MyEnum randomEnum = dummy.random().enumValue(MyEnum.class);
 ```
