@@ -33,9 +33,7 @@ Now you can start using Dummy4j:
 ```java
 Dummy4j dummy = new Dummy4j();
 
-System.out.println(
-    dummy.name().fullName()
-);
+String randomCountry = dummy.nation().country();
 ```
 
 The default configuration of Dummy4j uses a file-based definition provider which reads data definitions from `.yml`
