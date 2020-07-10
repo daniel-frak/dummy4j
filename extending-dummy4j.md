@@ -46,7 +46,7 @@ The parser recognizes two placeholders:
  resolved value may itself be an expression
 * `#` - will resolve to a random digit between 0 and 9 
 
-Dummy4j can resolve expressions, which are a mix of the aforementioned placeholders and other alphanumeric characters
+Dummy4j can resolve expressions, which are a mix of the aforementioned placeholders and other characters
 , e.g.:
 
 * `#{name.male_first_name} #{name.last_name}`
