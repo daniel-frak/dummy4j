@@ -90,7 +90,6 @@ public class RandomService {
         return nextInt(0, upperBound);
     }
 
-
     /**
      * Generates a random int between {@code lowerBound} and {@code upperBound} (inclusive)
      */
@@ -163,10 +162,10 @@ public class RandomService {
     }
 
     /**
-     * Generates a random positive float
+     * Generates a random positive float between 0 and 1 (inclusive)
      */
     public float nextFloat() {
-        return random.nextFloat();
+        return this.nextFloat(1);
     }
 
     /**
@@ -177,7 +176,7 @@ public class RandomService {
     }
 
     /**
-     * Generates a random float between {@code lowerBound} (inclusive) and {@code upperBound} (exclusive)
+     * Generates a random float between {@code lowerBound} and {@code upperBound} (inclusive)
      */
     public float nextFloat(float lowerBound, float upperBound) {
         if (lowerBound < 0) {
