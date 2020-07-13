@@ -3,6 +3,7 @@ package dev.codesoapbox.dummy4j;
 import dev.codesoapbox.dummy4j.definitions.UniqueValues;
 import dev.codesoapbox.dummy4j.definitions.providers.files.yaml.YamlFileDefinitionProvider;
 import dev.codesoapbox.dummy4j.dummies.*;
+import dev.codesoapbox.dummy4j.dummies.color.ColorDummy;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -183,5 +184,14 @@ public class Dummy4j {
      */
     public ScifiDummy scifi() {
         return dummies.scifi();
+    }
+
+    /**
+     * Provides methods for generating random colors
+     *
+     * @since 0.4.0
+     */
+    public ColorDummy color() {
+        return dummies.color();
     }
 }
