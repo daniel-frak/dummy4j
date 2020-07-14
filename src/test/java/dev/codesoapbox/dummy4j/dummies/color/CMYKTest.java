@@ -1,6 +1,7 @@
 package dev.codesoapbox.dummy4j.dummies.color;
 
 import dev.codesoapbox.dummy4j.exceptions.ValueOutOfRangeException;
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -38,39 +39,8 @@ class CMYKTest {
     }
 
     @Test
-    void objectsWithSameValuesShouldBeEqual() {
-        CMYK cmyk1 = new CMYK(0.1F, 0.2F, 0.3F, 0.4F);
-        CMYK cmyk2 = new CMYK(0.1F, 0.2F, 0.3F, 0.4F);
-        CMYK cmyk3 = new CMYK(0.1F, 0.2F, 0.3F, 0.4F);
-        assertAll(
-                () -> assertEquals(cmyk1, cmyk1),
-                () -> assertEquals(cmyk1, cmyk3),
-                () -> assertEquals(cmyk2, cmyk3),
-                () -> assertEquals(cmyk2, cmyk1)
-        );
-    }
-
-    @Test
-    void objectsWithDifferentValuesShouldNotBeEqual() {
-        CMYK cmyk1 = new CMYK(0.1F, 0.2F, 0.3F, 0.4F);
-        CMYK cmyk2 = new CMYK(0.9F, 0.2F, 0.3F, 0.4F);
-        assertNotEquals(cmyk1, cmyk2);
-    }
-
-    @Test
-    void shouldNotBeEqualToNull() {
-        CMYK cmyk = new CMYK(0.1F, 0.2F, 0.3F, 0.4F);
-        assertNotEquals(cmyk, null);
-    }
-
-    @Test
-    void shouldGenerateCorrectHashcodeForEqualObjects() {
-        CMYK cmyk = new CMYK(0.1F, 0.2F, 0.3F, 0.4F);
-        CMYK cmyk2 = new CMYK(0.1F, 0.2F, 0.3F, 0.4F);
-        assertAll(
-                () -> assertEquals(cmyk, cmyk2),
-                () -> assertEquals(cmyk.hashCode(), cmyk2.hashCode()),
-                () -> assertEquals(cmyk.hashCode(), cmyk2.hashCode())
-        );
+    void equalsContract() {
+        EqualsVerifier.forClass(CMYK.class)
+                .verify();
     }
 }

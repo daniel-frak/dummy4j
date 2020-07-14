@@ -8,7 +8,7 @@ import java.awt.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ColorDummyIntegrationTest {
+class ColorDummyIntegrationTest {
 
     private Dummy4j dummy4j;
 

@@ -1,6 +1,7 @@
 package dev.codesoapbox.dummy4j.dummies.color;
 
 import dev.codesoapbox.dummy4j.exceptions.ValueOutOfRangeException;
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -42,39 +43,9 @@ class HSLTest {
     }
 
     @Test
-    void objectsWithSameValuesShouldBeEqual() {
-        HSL hsl1 = new HSL(200F, 0.1F, 0.2F);
-        HSL hsl2 = new HSL(200F, 0.1F, 0.2F);
-        HSL hsl3 = new HSL(200F, 0.1F, 0.2F);
-        assertAll(
-                () -> assertEquals(hsl1, hsl1),
-                () -> assertEquals(hsl1, hsl3),
-                () -> assertEquals(hsl2, hsl3),
-                () -> assertEquals(hsl2, hsl1)
-        );
-    }
-
-    @Test
-    void objectsWithDifferentValuesShouldNotBeEqual() {
-        HSL hsl1 = new HSL(200F, 0.1F, 0.2F);
-        HSL hsl2 = new HSL(300F, 0.1F, 0.2F);
-        assertNotEquals(hsl1, hsl2);
-    }
-
-    @Test
-    void shouldNotBeEqualToNull() {
-        HSL hsl = new HSL(200F, 0.1F, 0.2F);
-        assertNotEquals(hsl, null);
-    }
-
-    @Test
-    void shouldGenerateCorrectHashcodeForEqualObjects() {
-        HSL hsl = new HSL(0.2F, 0.1F, 0.2F);
-        HSL hsl2 = new HSL(0.2F, 0.1F, 0.2F);
-        assertAll(
-                () -> assertEquals(hsl, hsl2),
-                () -> assertEquals(hsl.hashCode(), hsl.hashCode()),
-                () -> assertEquals(hsl.hashCode(), hsl2.hashCode())
-        );
+    void equalsContract() {
+        EqualsVerifier.forClass(HSL.class)
+                .usingGetClass()
+                .verify();
     }
 }

@@ -7,7 +7,7 @@ import java.text.DecimalFormat;
  */
 final class NumberFormatter {
 
-    protected static final DecimalFormat DECIMAL = new DecimalFormat("0.##");
+    static final DecimalFormat DECIMAL = new DecimalFormat("0.##");
 
     private NumberFormatter() {
     }

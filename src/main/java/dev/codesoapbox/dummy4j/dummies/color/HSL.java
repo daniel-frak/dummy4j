@@ -22,7 +22,7 @@ public class HSL {
         this.lightness = Round.toTwoDecimals(lightness);
     }
 
-    protected void validate(float hue, float saturation, float lightness) {
+    private void validate(float hue, float saturation, float lightness) {
         NumberValidator.inRange(hue, -MAX_ANGLE, MAX_ANGLE);
         NumberValidator.betweenZeroAndOne(saturation);
         NumberValidator.betweenZeroAndOne(lightness);
@@ -57,8 +57,12 @@ public class HSL {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         HSL hsl = (HSL) o;
         return Float.compare(hsl.hue, hue) == 0 &&
                 Float.compare(hsl.saturation, saturation) == 0 &&

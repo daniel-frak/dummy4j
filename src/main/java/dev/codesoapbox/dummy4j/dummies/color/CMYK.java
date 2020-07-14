@@ -7,7 +7,7 @@ import java.util.Objects;
  *
  * @since 0.4.0
  */
-public class CMYK {
+public final class CMYK {
 
     private final float cyan;
     private final float magenta;
@@ -22,7 +22,7 @@ public class CMYK {
         this.black = Round.toTwoDecimals(black);
     }
 
-    protected void validate(float cyan, float magenta, float yellow, float black) {
+    private void validate(float cyan, float magenta, float yellow, float black) {
         NumberValidator.betweenZeroAndOne(cyan);
         NumberValidator.betweenZeroAndOne(magenta);
         NumberValidator.betweenZeroAndOne(yellow);
@@ -64,8 +64,12 @@ public class CMYK {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         CMYK cmyk = (CMYK) o;
         return Float.compare(cmyk.cyan, cyan) == 0 &&
                 Float.compare(cmyk.magenta, magenta) == 0 &&

@@ -22,7 +22,7 @@ public class HSB {
         this.brightness = Round.toTwoDecimals(brightness);
     }
 
-    protected void validate(float hue, float saturation, float brightness) {
+    private void validate(float hue, float saturation, float brightness) {
         NumberValidator.inRange(hue, -MAX_ANGLE, MAX_ANGLE);
         NumberValidator.betweenZeroAndOne(saturation);
         NumberValidator.betweenZeroAndOne(brightness);
@@ -57,8 +57,12 @@ public class HSB {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         HSB hsb = (HSB) o;
         return Float.compare(hsb.hue, hue) == 0 &&
                 Float.compare(hsb.saturation, saturation) == 0 &&
