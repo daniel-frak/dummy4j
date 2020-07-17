@@ -53,3 +53,11 @@ You can generate a random enum value by providing an enum class.
 ```java
 MyEnum randomEnum = dummy.random().enumValue(MyEnum.class);
 ```
+
+# Random value from an array of suppliers
+
+The `random().of(...)` method returns a value from one of the given suppliers, chosen at random. 
+
+```java
+String nameOrCity = dummy.random().of(() -> dummy.name().fullName(), () -> dummy.address().city());
+```

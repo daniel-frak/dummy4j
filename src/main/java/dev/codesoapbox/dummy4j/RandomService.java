@@ -42,6 +42,20 @@ public class RandomService {
     }
 
     /**
+     * Returns a value from a random supplier.
+     *
+     * @param suppliers value suppliers to pick from
+     * @param <T> the type of value to return
+     * @return a value from a random supplier
+     *
+     * @since 0.4.0
+     */
+    @SafeVarargs
+    public final <T> T of(Supplier<T>... suppliers) {
+        return suppliers[nextInt(0, suppliers.length - 1)].get();
+    }
+
+    /**
      * Has a {@code howMany} in {@code in} chance to supply a value. Otherwise, returns null.
      * <p>
      * E.g. {@code chance(1, 2, () -> "hello")} has a 1-in-2 chance to supply "hello", that is it will be supplied

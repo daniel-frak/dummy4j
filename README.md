@@ -103,6 +103,8 @@ String thisValueWillBeUnique = dummy.unique().value("fullNameGroup", () -> dummy
 List<String> fiveNames = dummy.listOf(5, () -> dummy.name().fullName());
 
 Set<String> fourCities = dummy.setOf(4, () -> dummy.address().city());
+
+String nameOrCity = dummy.random().of(() -> dummy.name().fullName(), () -> dummy.address().city());
 ```
 
 ## Goals and contributing
