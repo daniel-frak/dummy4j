@@ -3013,7 +3013,7 @@ en:
     suffix: ["Jr.", "Sr.", "I", "II", "III", "IV", "V", "MD", "DDS", "PhD", "DVM"]
     full_name:
       - "#{name.prefix} #{name.first_name} #{name.last_name}"
-      - "#{name.first_name} #{name.last_name} #{suffix}"
+      - "#{name.first_name} #{name.last_name} #{name.suffix}"
       - "#{name.first_name} #{name.last_name}"
       - "#{name.first_name} #{name.last_name}"
       - "#{name.first_name} #{name.last_name}"
