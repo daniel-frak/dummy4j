@@ -37,8 +37,15 @@ class NationDummyTest {
     }
 
     @Test
-    void languageCode() {
-        String value = dummy4j.nation().languageCode();
+    void languageCodeTwoLetter() {
+        String value = dummy4j.nation().languageCodeTwoLetter();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
+    }
+
+    @Test
+    void languageCodeThreeLetter() {
+        String value = dummy4j.nation().languageCodeThreeLetter();
         assertNotNull(value);
         assertFalse(value.isEmpty());
     }
@@ -46,6 +53,27 @@ class NationDummyTest {
     @Test
     void language() {
         String value = dummy4j.nation().language();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
+    }
+
+    @Test
+    void languageCodeTwoLetterCommon() {
+        String value = dummy4j.nation().languageCodeTwoLetterCommon();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
+    }
+
+    @Test
+    void languageCodeThreeLetterCommon() {
+        String value = dummy4j.nation().languageCodeThreeLetterCommon();
+        assertNotNull(value);
+        assertFalse(value.isEmpty());
+    }
+
+    @Test
+    void languageCommon() {
+        String value = dummy4j.nation().languageCommon();
         assertNotNull(value);
         assertFalse(value.isEmpty());
     }

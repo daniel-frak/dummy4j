@@ -28,8 +28,15 @@ public class NationDummy {
     /**
      * @since 0.4.0
      */
-    public String languageCode() {
-        return dummy4j.expressionResolver().resolveKey("nation.language_code");
+    public String languageCodeTwoLetter() {
+        return dummy4j.expressionResolver().resolveKey("nation.language_code_iso_639_1");
+    }
+
+    /**
+     * @since 0.4.0
+     */
+    public String languageCodeThreeLetter() {
+        return dummy4j.expressionResolver().resolveKey("nation.language_code_iso_639_2");
     }
 
     /**
@@ -37,5 +44,26 @@ public class NationDummy {
      */
     public String language() {
         return dummy4j.expressionResolver().resolveKey("nation.language");
+    }
+
+    /**
+     * @since 0.4.0
+     */
+    public String languageCommon() {
+        return dummy4j.expressionResolver().resolveKey("nation.common_language");
+    }
+
+    /**
+     * @since 0.4.0
+     */
+    public String languageCodeTwoLetterCommon() {
+        return dummy4j.expressionResolver().resolveKey("nation.common_language_code_iso_639_1");
+    }
+
+    /**
+     * @since 0.4.0
+     */
+    public String languageCodeThreeLetterCommon() {
+        return dummy4j.expressionResolver().resolveKey("nation.common_language_code_iso_639_2");
     }
 }
