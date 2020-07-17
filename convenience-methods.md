@@ -54,7 +54,7 @@ You can generate a random enum value by providing an enum class.
 MyEnum randomEnum = dummy.random().enumValue(MyEnum.class);
 ```
 
-# Random value from an array of suppliers
+# Random value from an array of suppliers (since 0.4.0)
 
 The `random().of(...)` method returns a value from one of the given suppliers, chosen at random. 
 
