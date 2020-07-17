@@ -194,4 +194,13 @@ public class Dummy4j {
     public ColorDummy color() {
         return dummies.color();
     }
+
+    /**
+     * Provides methods for generating random numerals
+     *
+     * @since 0.4.0
+     */
+    public NumeralsDummy numerals() {
+        return dummies.numerals();
+    }
 }

@@ -134,4 +134,12 @@ class Dummy4jTest {
                 .thenReturn(colorDummy);
         assertEquals(colorDummy, dummy4j.color());
     }
+
+    @Test
+    void shouldGetNumeralsDummy() {
+        NumeralsDummy numeralsDummy = mock(NumeralsDummy.class);
+        when(dummies.numerals())
+                .thenReturn(numeralsDummy);
+        assertEquals(numeralsDummy, dummy4j.numerals());
+    }
 }
