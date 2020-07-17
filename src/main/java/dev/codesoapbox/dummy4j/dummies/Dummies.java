@@ -1,6 +1,7 @@
 package dev.codesoapbox.dummy4j.dummies;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
+import dev.codesoapbox.dummy4j.dummies.color.ColorDummy;
 
 public class Dummies {
 
@@ -12,6 +13,7 @@ public class Dummies {
     private final BookDummy book;
     private final ResearchPaperDummy researchPaper;
     private final ScifiDummy spaceship;
+    private final ColorDummy color;
 
     public Dummies(Dummy4j dummy4j) {
         name = new NameDummy(dummy4j);
@@ -22,6 +24,7 @@ public class Dummies {
         book = new BookDummy(dummy4j);
         researchPaper = new ResearchPaperDummy(dummy4j);
         spaceship = new ScifiDummy(dummy4j);
+        color = new ColorDummy(dummy4j);
     }
 
     public NameDummy name() {
@@ -50,7 +53,7 @@ public class Dummies {
         return researchPaper;
     }
 
-    public ScifiDummy scifi()  {
+    public ScifiDummy scifi() {
         return spaceship;
     }
 
@@ -63,5 +66,12 @@ public class Dummies {
 
     public EducationDummy education() {
         return education;
+    }
+
+    /**
+     * @since 0.4.0
+     */
+    public ColorDummy color() {
+        return color;
     }
 }

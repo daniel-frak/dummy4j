@@ -2,6 +2,7 @@ package dev.codesoapbox.dummy4j;
 
 import dev.codesoapbox.dummy4j.definitions.UniqueValues;
 import dev.codesoapbox.dummy4j.dummies.*;
+import dev.codesoapbox.dummy4j.dummies.color.ColorDummy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -124,5 +125,13 @@ class Dummy4jTest {
         when(dummies.scifi())
                 .thenReturn(scifiDummy);
         assertEquals(scifiDummy, dummy4j.scifi());
+    }
+
+    @Test
+    void shouldGetColorDummy() {
+        ColorDummy colorDummy = mock(ColorDummy.class);
+        when(dummies.color())
+                .thenReturn(colorDummy);
+        assertEquals(colorDummy, dummy4j.color());
     }
 }
