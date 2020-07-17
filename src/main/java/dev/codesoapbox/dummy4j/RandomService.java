@@ -165,7 +165,7 @@ public class RandomService {
      * Generates a random positive float between 0 and 1 (inclusive)
      */
     public float nextFloat() {
-        return this.nextFloat(1);
+        return nextFloat(1);
     }
 
     /**

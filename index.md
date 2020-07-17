@@ -49,6 +49,7 @@ While you can easily add your own dummy data definitions, the following are avai
 * Book *(since 0.2.0)*
 * Research Paper *(since 0.2.0)*
 * Sci-fi
+* Color *(since 0.4.0)*
 
 # API stability notice
 
