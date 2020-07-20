@@ -12,6 +12,8 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/daniel-frak/dummy4j)
 ![GitHub](https://img.shields.io/github/license/daniel-frak/dummy4j)
 
+[![javadoc](https://javadoc.io/badge2/dev.codesoapbox/dummy4j/javadoc.svg)](https://javadoc.io/doc/dev.codesoapbox/dummy4j)
+
 Dummy4j is an easy to use dummy data generator library for Java, designed for extensibility.
 
 Dummy4j can be used in all projects using Java 8+.
@@ -41,9 +43,11 @@ files inside the `resources/dummy4j` folder. Additionally, the default locale is
 
 ## Documentation
 
-Documentation for Dummy4j is available at:
-
+Reference documentation for Dummy4j is available at:\
 https://daniel-frak.github.io/dummy4j
+
+API documentation for Dummy4j is available at:\
+https://javadoc.io/doc/dev.codesoapbox/dummy4j
 
 ## Motivation
 
@@ -75,6 +79,7 @@ While you can easily add your own dummy data definitions, the following are avai
 * Nation *(since 0.2.0)*
 * Address
 * Lorem
+* Date and Time *(since 0.4.0)*
 * Education *(since 0.3.0)*
 * Book *(since 0.2.0)*
 * Research Paper *(since 0.2.0)*
@@ -93,7 +98,16 @@ String researchPaperTitle = dummy.researchPaper().title();
 
 String sixSentenceParagraph = dummy.lorem().paragraph(6);
 
-int betweenFiveAndThenInclusive = dummy.random().nextInt(5, 10);
+String romanNumeralsBetweenOneAndFifteen = dummy.numerals().roman(1, 15);
+
+LocalDate birthdayBetween18And35 = dummy.dateAndTime().birthday(18, 35);
+
+LocalDateTime upTo100YearsInThePast = dummy.dateAndTime().past(100, ChronoUnit.YEARS);
+
+LocalDateTime upTo25YearsFrom1800 = dummy.dateAndTime().future(25, ChronoUnit.YEARS,
+        LocalDateTime.parse("1800-01-01T00:00:00"));
+
+int betweenFiveAndTenInclusive = dummy.random().nextInt(5, 10);
 
 MyEnum randomEnum = dummy.random().enumValue(MyEnum.class);
 

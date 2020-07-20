@@ -153,6 +153,15 @@ public class Dummy4j {
     }
 
     /**
+     * Provides methods for generating random dates and times
+     *
+     * @since 0.4.0
+     */
+    public DateAndTimeDummy dateAndTime() {
+        return dummies.dateAndTime();
+    }
+
+    /**
      * Provides methods for generating random values related to education
      *
      * @since 0.3.0

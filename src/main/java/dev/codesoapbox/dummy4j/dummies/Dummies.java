@@ -3,12 +3,15 @@ package dev.codesoapbox.dummy4j.dummies;
 import dev.codesoapbox.dummy4j.Dummy4j;
 import dev.codesoapbox.dummy4j.dummies.color.ColorDummy;
 
+import java.time.Clock;
+
 public class Dummies {
 
     private final NameDummy name;
     private final NationDummy nation;
     private final AddressDummy address;
     private final LoremDummy lorem;
+    private final DateAndTimeDummy dateAndTime;
     private final EducationDummy education;
     private final BookDummy book;
     private final ResearchPaperDummy researchPaper;
@@ -21,6 +24,7 @@ public class Dummies {
         nation = new NationDummy(dummy4j);
         address = new AddressDummy(dummy4j);
         lorem = new LoremDummy(dummy4j);
+        dateAndTime = new DateAndTimeDummy(dummy4j, Clock.systemDefaultZone());
         education = new EducationDummy(dummy4j);
         book = new BookDummy(dummy4j);
         researchPaper = new ResearchPaperDummy(dummy4j);
@@ -39,6 +43,13 @@ public class Dummies {
 
     public LoremDummy lorem() {
         return lorem;
+    }
+
+    /**
+     * @since 0.4.0
+     */
+    public DateAndTimeDummy dateAndTime() {
+        return dateAndTime;
     }
 
     /**

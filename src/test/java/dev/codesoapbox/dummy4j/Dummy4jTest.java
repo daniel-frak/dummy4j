@@ -112,6 +112,14 @@ class Dummy4jTest {
     }
 
     @Test
+    void shouldGetDateAndTimeDummy() {
+        DateAndTimeDummy dateAndTimeDummy = mock(DateAndTimeDummy.class);
+        when(dummies.dateAndTime())
+                .thenReturn(dateAndTimeDummy);
+        assertEquals(dateAndTimeDummy, dummy4j.dateAndTime());
+    }
+
+    @Test
     void shouldGetEducationDummy() {
         EducationDummy educationDummy = mock(EducationDummy.class);
         when(dummies.education())
