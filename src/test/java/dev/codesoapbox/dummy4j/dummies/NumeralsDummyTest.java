@@ -10,11 +10,14 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class NumeralsDummyTest {
+
+    private static final int MAX_EXCEEDED = 5000;
 
     private NumeralsDummy numerals;
 
@@ -55,7 +58,7 @@ class NumeralsDummyTest {
 
     @Test
     void romanWithUpperBoundShouldThrowExceptionWhenMaxExceeded() {
-        assertThrows(IllegalArgumentException.class, () -> numerals.roman(5000));
+        assertThrows(IllegalArgumentException.class, () -> numerals.roman(MAX_EXCEEDED));
     }
 
     @Test
@@ -69,7 +72,7 @@ class NumeralsDummyTest {
 
     @Test
     void romanWithLowerAndUpperBoundShouldThrowExceptionWhenMaxExceeded() {
-        assertThrows(IllegalArgumentException.class, () -> numerals.roman(5000));
+        assertThrows(IllegalArgumentException.class, () -> numerals.roman(1, MAX_EXCEEDED));
     }
 
     @Test
