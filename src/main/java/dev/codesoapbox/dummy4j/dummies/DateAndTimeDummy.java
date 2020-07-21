@@ -15,6 +15,11 @@ public class DateAndTimeDummy {
 
     private static final int DEFAULT_MIN_AGE = 18;
     private static final int DEFAULT_MAX_AGE = 80;
+    private static final String END_MUST_NOT_PRECEDE_START = "End date must not precede start date";
+    private static final String MAX_AGE_MUST_BE_GREATER_OR_EQUAL_MIN_AGE = "Max age must be greater or equal min age";
+    private static final String AGE_MUST_BE_POSITIVE = "Given age must be a positive number";
+    private static final String AT_MOST_MUST_BE_POSITIVE = "At most must be a positive number";
+
 
     private final Dummy4j dummy4j;
     private final Clock clock;
@@ -37,6 +42,12 @@ public class DateAndTimeDummy {
     }
 
     public LocalDate birthday(int minAge, int maxAge) {
+        if (minAge < 0 || maxAge < 0) {
+            throw new IllegalArgumentException(AGE_MUST_BE_POSITIVE);
+        }
+        if (maxAge < minAge) {
+            throw new IllegalArgumentException(MAX_AGE_MUST_BE_GREATER_OR_EQUAL_MIN_AGE);
+        }
         LocalDate minDate = LocalDate.now(clock).minus((long) maxAge + 1, ChronoUnit.YEARS)
                 .plus(1, ChronoUnit.DAYS);
         LocalDate maxDate = LocalDate.now(clock).minus(minAge, ChronoUnit.YEARS);
@@ -44,6 +55,9 @@ public class DateAndTimeDummy {
     }
 
     public LocalDateTime between(LocalDateTime start, LocalDateTime end) {
+        if (end.isBefore(start)) {
+            throw new IllegalArgumentException(END_MUST_NOT_PRECEDE_START);
+        }
         long startEpoch = start.toEpochSecond(ZoneOffset.UTC);
         long endEpoch = end.toEpochSecond(ZoneOffset.UTC);
         long randomEpochSecond = nextLongWithNegativeBounds(startEpoch, endEpoch);
@@ -51,6 +65,9 @@ public class DateAndTimeDummy {
     }
 
     public LocalDate between(LocalDate start, LocalDate end) {
+        if (end.isBefore(start)) {
+            throw new IllegalArgumentException(END_MUST_NOT_PRECEDE_START);
+        }
         long randomDay = nextLongWithNegativeBounds(start.toEpochDay(), end.toEpochDay());
 
         return LocalDate.ofEpochDay(randomDay);
@@ -62,18 +79,30 @@ public class DateAndTimeDummy {
     }
 
     public LocalDateTime past(long atMost, ChronoUnit unit) {
+        if (atMost < 0) {
+            throw new IllegalArgumentException(AT_MOST_MUST_BE_POSITIVE);
+        }
         return LocalDateTime.now(clock).minus(dummy4j.random().nextLong(0, atMost), unit);
     }
 
-    public LocalDateTime past(long atMost, ChronoUnit unit, LocalDateTime referenceDate) {
+    public LocalDateTime before(LocalDateTime referenceDate, long atMost, ChronoUnit unit) {
+        if (atMost < 0) {
+            throw new IllegalArgumentException(AT_MOST_MUST_BE_POSITIVE);
+        }
         return referenceDate.minus(dummy4j.random().nextLong(0, atMost), unit);
     }
 
     public LocalDateTime future(long atMost, ChronoUnit unit) {
+        if (atMost < 0) {
+            throw new IllegalArgumentException(AT_MOST_MUST_BE_POSITIVE);
+        }
         return LocalDateTime.now(clock).plus(dummy4j.random().nextLong(0, atMost), unit);
     }
 
-    public LocalDateTime future(long atMost, ChronoUnit unit, LocalDateTime referenceDate) {
+    public LocalDateTime after(LocalDateTime referenceDate, long atMost, ChronoUnit unit) {
+        if (atMost < 0) {
+            throw new IllegalArgumentException(AT_MOST_MUST_BE_POSITIVE);
+        }
         return referenceDate.plus(dummy4j.random().nextLong(0, atMost), unit);
     }
 }
