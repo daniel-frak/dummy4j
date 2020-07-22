@@ -221,4 +221,13 @@ public class Dummy4j {
     public MedicalDummy medical() {
         return dummies.medical();
     }
+
+    /**
+     * Provides methods for generating text in the NATO phonetic alphabet
+     *
+     * @since 0.4.0
+     */
+    public NatoPhoneticAlphabetDummy natoPhoneticAlphabet() {
+        return dummies.natoPhoneticAlphabet();
+    }
 }

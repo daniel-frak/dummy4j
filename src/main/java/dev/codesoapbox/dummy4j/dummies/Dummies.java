@@ -19,6 +19,7 @@ public class Dummies {
     private final ColorDummy color;
     private final NumeralsDummy numerals;
     private final MedicalDummy medical;
+    private final NatoPhoneticAlphabetDummy natoPhoneticAlphabet;
 
     public Dummies(Dummy4j dummy4j) {
         name = new NameDummy(dummy4j);
@@ -33,6 +34,7 @@ public class Dummies {
         color = new ColorDummy(dummy4j);
         numerals = new NumeralsDummy(dummy4j);
         medical = new MedicalDummy(dummy4j);
+        natoPhoneticAlphabet = new NatoPhoneticAlphabetDummy(dummy4j);
     }
 
     public NameDummy name() {
@@ -102,5 +104,12 @@ public class Dummies {
      */
     public MedicalDummy medical() {
         return medical;
+    }
+
+    /**
+     * @since 0.4.0
+     */
+    public NatoPhoneticAlphabetDummy natoPhoneticAlphabet() {
+        return natoPhoneticAlphabet;
     }
 }

@@ -158,4 +158,12 @@ class Dummy4jTest {
                 .thenReturn(medicalDummy);
         assertEquals(medicalDummy, dummy4j.medical());
     }
+
+    @Test
+    void shouldGetNatoPhoneticAlphabetDummy() {
+        NatoPhoneticAlphabetDummy natoPhoneticAlphabetDummy = mock(NatoPhoneticAlphabetDummy.class);
+        when(dummies.natoPhoneticAlphabet())
+                .thenReturn(natoPhoneticAlphabetDummy);
+        assertEquals(natoPhoneticAlphabetDummy, dummy4j.natoPhoneticAlphabet());
+    }
 }

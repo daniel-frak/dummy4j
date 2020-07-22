@@ -73,4 +73,9 @@ class DummiesTest {
     void medical() {
         assertNotNull(dummies.medical());
     }
+
+    @Test
+    void natoPhoneticAlphabet() {
+        assertNotNull(dummies.natoPhoneticAlphabet());
+    }
 }
