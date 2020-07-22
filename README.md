@@ -106,8 +106,8 @@ LocalDate birthdayBetween18And35 = dummy.dateAndTime().birthday(18, 35);
 
 LocalDateTime upTo100YearsInThePast = dummy.dateAndTime().past(100, ChronoUnit.YEARS);
 
-LocalDateTime upTo25YearsFrom1800 = dummy.dateAndTime().future(25, ChronoUnit.YEARS,
-        LocalDateTime.parse("1800-01-01T00:00:00"));
+LocalDateTime upTo25YearsFrom1800 = dummy.dateAndTime().after(
+        LocalDateTime.parse("1800-01-01T00:00:00"), 25, ChronoUnit.YEARS);
 
 int betweenFiveAndTenInclusive = dummy.random().nextInt(5, 10);
 
