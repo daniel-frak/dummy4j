@@ -212,4 +212,13 @@ public class Dummy4j {
     public NumeralsDummy numerals() {
         return dummies.numerals();
     }
+
+    /**
+     * Provides methods for generating random medical data
+     *
+     * @since 0.4.0
+     */
+    public MedicalDummy medical() {
+        return dummies.medical();
+    }
 }

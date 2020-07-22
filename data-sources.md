@@ -14,3 +14,4 @@ Below are given notable sources from which data was gathered or used as inspirat
 * https://arxiv.org
 * https://biolres.biomedcentral.com
 * https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+* https://en.wikipedia.org/wiki/List_of_healthcare_occupations

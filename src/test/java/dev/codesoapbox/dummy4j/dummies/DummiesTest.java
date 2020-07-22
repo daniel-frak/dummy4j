@@ -68,4 +68,9 @@ class DummiesTest {
     void numerals() {
         assertNotNull(dummies.numerals());
     }
+
+    @Test
+    void medical() {
+        assertNotNull(dummies.medical());
+    }
 }

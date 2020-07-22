@@ -150,4 +150,12 @@ class Dummy4jTest {
                 .thenReturn(numeralsDummy);
         assertEquals(numeralsDummy, dummy4j.numerals());
     }
+
+    @Test
+    void shouldGetMedicalDummy() {
+        MedicalDummy medicalDummy = mock(MedicalDummy.class);
+        when(dummies.medical())
+                .thenReturn(medicalDummy);
+        assertEquals(medicalDummy, dummy4j.medical());
+    }
 }

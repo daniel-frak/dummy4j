@@ -18,6 +18,7 @@ public class Dummies {
     private final ScifiDummy spaceship;
     private final ColorDummy color;
     private final NumeralsDummy numerals;
+    private final MedicalDummy medical;
 
     public Dummies(Dummy4j dummy4j) {
         name = new NameDummy(dummy4j);
@@ -31,6 +32,7 @@ public class Dummies {
         spaceship = new ScifiDummy(dummy4j);
         color = new ColorDummy(dummy4j);
         numerals = new NumeralsDummy(dummy4j);
+        medical = new MedicalDummy(dummy4j);
     }
 
     public NameDummy name() {
@@ -93,5 +95,12 @@ public class Dummies {
      */
     public NumeralsDummy numerals() {
         return numerals;
+    }
+
+    /**
+     * @since 0.4.0
+     */
+    public MedicalDummy medical() {
+        return medical;
     }
 }
