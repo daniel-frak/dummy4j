@@ -86,6 +86,8 @@ While you can easily add your own dummy data definitions, the following are avai
 * Sci-fi
 * Color *(since 0.4.0)*
 * Numerals *(since 0.4.0)*
+* Medical *(since 0.4.0)*
+* Nato Phonetic Alphabet *(since 0.4.0)*
 
 ## Usage examples:
 
