@@ -27,7 +27,7 @@ Add the following dependency to your `pom.xml`:
 <dependency>
   <groupId>dev.codesoapbox</groupId>
   <artifactId>dummy4j</artifactId>
-  <version>0.3.1</version>
+  <version>0.4.0</version>
 </dependency>
 ```
 
