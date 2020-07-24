@@ -52,29 +52,6 @@ class Dummy4jTest {
     }
 
     @Test
-    void shouldGenerateRandomList() {
-        List<Integer> expectedResult = Arrays.asList(1, 2, 3, 4, 5);
-
-        AtomicInteger i = new AtomicInteger();
-        List<Integer> result = dummy4j.listOf(5, i::incrementAndGet);
-
-        assertEquals(expectedResult, result);
-    }
-
-    @Test
-    void shouldGenerateRandomSet() {
-        Set<Integer> expectedResult = new HashSet<>();
-        for (int i = 0; i < 5; i++) {
-            expectedResult.add(i + 1);
-        }
-
-        AtomicInteger i = new AtomicInteger();
-        Set<Integer> result = dummy4j.setOf(5, i::incrementAndGet);
-
-        assertEquals(expectedResult, result);
-    }
-
-    @Test
     void shouldGetRandomService() {
         assertEquals(randomService, dummy4j.random());
     }

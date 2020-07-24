@@ -47,9 +47,11 @@ public class RandomService {
      * @param suppliers value suppliers to pick from
      * @param <T> the type of value to return
      * @return a value from a random supplier
+     * @deprecated use Dummy4j::of
      *
      * @since 0.4.0
      */
+    @Deprecated
     @SafeVarargs
     public final <T> T of(Supplier<T>... suppliers) {
         return suppliers[nextInt(0, suppliers.length - 1)].get();

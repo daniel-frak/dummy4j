@@ -122,6 +122,10 @@ List<String> fiveNames = dummy.listOf(5, () -> dummy.name().fullName());
 Set<String> fourCities = dummy.setOf(4, () -> dummy.address().city());
 
 String nameOrCity = dummy.random().of(() -> dummy.name().fullName(), () -> dummy.address().city());
+
+String elementFromArray = dummy.of(new String[]{ "one", "two", "three" });
+
+String elementFromCollection = dummy.of(Arrays.asList("one", "two", "three"));
 ```
 
 ## Goals and contributing

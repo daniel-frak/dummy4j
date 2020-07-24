@@ -5,8 +5,6 @@ import dev.codesoapbox.dummy4j.definitions.providers.files.yaml.YamlFileDefiniti
 import dev.codesoapbox.dummy4j.dummies.*;
 import dev.codesoapbox.dummy4j.dummies.color.ColorDummy;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
@@ -23,6 +21,7 @@ public class Dummy4j {
     protected final RandomService randomService;
     protected final Dummies dummies;
     protected final UniqueValues uniqueValues;
+    protected final ConvenienceMethods convenienceMethods;
 
     /**
      * Create a Dummy4j instance with a default configuration
@@ -60,6 +59,7 @@ public class Dummy4j {
 
         this.dummies = new Dummies(this);
         this.uniqueValues = new UniqueValues();
+        this.convenienceMethods = new ConvenienceMethods(randomService);
     }
 
     public Dummy4j(ExpressionResolver expressionResolver, RandomService randomService,
@@ -68,6 +68,7 @@ public class Dummy4j {
         this.expressionResolver = expressionResolver;
         this.dummies = dummiesFactory.apply(this);
         this.uniqueValues = uniqueValues;
+        this.convenienceMethods = new ConvenienceMethods(randomService);
     }
 
     /**
@@ -103,11 +104,7 @@ public class Dummy4j {
      * @since 0.4.0
      */
     public <T> List<T> listOf(int count, Supplier<T> supplier) {
-        List<T> list = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            list.add(supplier.get());
-        }
-        return list;
+        return convenienceMethods.listOf(count, supplier);
     }
 
     /**
@@ -120,11 +117,61 @@ public class Dummy4j {
      * @since 0.4.0
      */
     public <T> Set<T> setOf(int count, Supplier<T> supplier) {
-        Set<T> set = new HashSet<>();
-        for (int i = 0; i < count; i++) {
-            set.add(supplier.get());
-        }
-        return set;
+        return convenienceMethods.setOf(count, supplier);
+    }
+
+    /**
+     * Returns a random element from an array
+     *
+     * @param array the array to pick from
+     * @param <T> the type of object to return
+     * @return a random element
+     *
+     * @since 0.5.0
+     */
+    @SafeVarargs
+    public final <T> T of(T... array) {
+        return convenienceMethods.of(array);
+    }
+
+    /**
+     * Returns a random element from a list
+     *
+     * @param list the list to pick from
+     * @param <T> the type of object to return
+     * @return a random element
+     *
+     * @since 0.5.0
+     */
+    public <T> T of(List<T> list) {
+        return convenienceMethods.of(list);
+    }
+
+    /**
+     * Returns a random element from a set
+     *
+     * @param set the list to pick from
+     * @param <T> the type of object to return
+     * @return a random element
+     *
+     * @since 0.5.0
+     */
+    public <T> T of(Set<T> set) {
+        return convenienceMethods.of(set);
+    }
+
+    /**
+     * Returns a value from a random supplier.
+     *
+     * @param suppliers value suppliers to pick from
+     * @param <T> the type of value to return
+     * @return a value from a random supplier
+     *
+     * @since 0.4.0
+     */
+    @SafeVarargs
+    public final <T> T of(Supplier<T>... suppliers) {
+        return convenienceMethods.of(suppliers);
     }
 
     /**

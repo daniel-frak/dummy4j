@@ -31,16 +31,6 @@ class RandomServiceTest {
         assertEquals(1L, randomService.getSeed());
     }
 
-    @Test
-    void shouldSupplyFromRandomSupplier() {
-        when(random.nextInt(3))
-                .thenReturn(1);
-
-        int result = randomService.of(() -> 1, () -> 2, () -> 3);
-
-        assertEquals(2, result);
-    }
-
     @ParameterizedTest
     @CsvSource({
             "1, true",
