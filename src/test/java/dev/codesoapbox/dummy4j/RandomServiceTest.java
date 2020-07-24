@@ -31,34 +31,6 @@ class RandomServiceTest {
         assertEquals(1L, randomService.getSeed());
     }
 
-    @ParameterizedTest
-    @CsvSource({
-            "1, true",
-            "9, true",
-            "10, ",
-            "11, ",
-            "20, "
-    })
-    void shouldSupplyRandomlyByChance(int randomInt, Boolean expected) {
-        int howMany = 10;
-        int in = 20;
-        when(random.nextInt(in))
-                .thenReturn(randomInt);
-        assertEquals(expected, randomService.chance(howMany, in, () -> true));
-    }
-
-    @ParameterizedTest
-    @CsvSource({
-            "0, ONE",
-            "1, TWO",
-            "2, THREE"
-    })
-    void shouldGetRandomEnumValue(int index, String expected) {
-        when(random.nextInt(3))
-                .thenReturn(index);
-        assertEquals(TestEnum.valueOf(expected), randomService.enumValue(TestEnum.class));
-    }
-
     @Test
     void shouldGetRandomUuid() {
         when(random.nextLong())
@@ -338,9 +310,5 @@ class RandomServiceTest {
                 () -> assertEquals(10F, randomService.nextFloat(10F, 10F)),
                 () -> assertEquals(Float.MAX_VALUE, randomService.nextFloat(Float.MAX_VALUE, Float.MAX_VALUE))
         );
-    }
-
-    private enum TestEnum {
-        ONE, TWO, THREE
     }
 }

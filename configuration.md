@@ -42,9 +42,6 @@ YamlFileDefinitionProvider definitionProvider = YamlFileDefinitionProvider.withP
         Arrays.asList("dummy4j", "my/custom/path"));
 ExpressionResolver expressionResolver = new ExpressionResolver(Collections.singletonList("en"),
         randomService, definitionProvider);
-UniqueValues uniqueValues = new UniqueValues();
 
-Dummy4j dummy = new Dummy4j(expressionResolver, randomService, Dummies::new, uniqueValues);
+Dummy4j dummy = new Dummy4j(expressionResolver, randomService);
 ```
-
-Keep in mind that this constructor directly exposes Dummy4j's internals, which might be altered in the future!

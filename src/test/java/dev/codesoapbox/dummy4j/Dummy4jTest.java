@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Supplier;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -36,9 +36,12 @@ class Dummy4jTest {
     @Mock
     private UniqueValues uniqueValues;
 
+    @Mock
+    private ConvenienceMethods convenienceMethods;
+
     @BeforeEach
     void setUp() {
-        dummy4j = new Dummy4j(expressionResolver, randomService, d -> dummies, uniqueValues);
+        dummy4j = new Dummy4j(expressionResolver, randomService, d -> dummies, uniqueValues, convenienceMethods);
     }
 
     @Test
@@ -57,11 +60,80 @@ class Dummy4jTest {
     }
 
     @Test
+    void shouldGenerateRandomList() {
+        List<String> expected = Arrays.asList("1", "2");
+        Supplier<String> supplier = () -> "test";
+        when(convenienceMethods.listOf(4, supplier))
+                .thenReturn(expected);
+
+        assertEquals(expected, dummy4j.listOf(4, supplier));
+    }
+
+    @Test
     void shouldGetNameDummy() {
         NameDummy nameDummy = mock(NameDummy.class);
         when(dummies.name())
                 .thenReturn(nameDummy);
         assertEquals(nameDummy, dummy4j.name());
+    }
+
+    @Test
+    void shouldGenerateRandomSet() {
+        Set<String> expected = new HashSet<>();
+        expected.add("1");
+        expected.add("2");
+        Supplier<String> supplier = () -> "test";
+        when(convenienceMethods.setOf(4, supplier))
+                .thenReturn(expected);
+
+        assertEquals(expected, dummy4j.setOf(4, supplier));
+    }
+
+    @Test
+    void shouldReturnRandomElementFromArray() {
+        assertEquals("1", new Dummy4j().of("1"));
+    }
+
+    @Test
+    void shouldReturnRandomElementFromList() {
+        List<String> list = Arrays.asList("1", "2");
+        String expected = "test";
+        when(convenienceMethods.of(list))
+                .thenReturn(expected);
+
+        assertEquals(expected, dummy4j.of(list));
+    }
+
+    @Test
+    void shouldReturnRandomElementFromSet() {
+        Set<String> set = new HashSet<>(Arrays.asList("1", "2"));
+        String expected = "test";
+        when(convenienceMethods.of(set))
+                .thenReturn(expected);
+
+        assertEquals(expected, dummy4j.of(set));
+    }
+
+    @Test
+    void shouldSupplyFromRandomSupplier() {
+        assertEquals("1", new Dummy4j().of(() -> "1"));
+    }
+
+    @Test
+    void shouldSupplyRandomlyByChance() {
+        Supplier<String> supplier = () -> "1";
+        when(convenienceMethods.chance(1, 2, supplier))
+                .thenReturn("test");
+        assertEquals("test", dummy4j.chance(1, 2, supplier));
+    }
+
+    @Test
+    void shouldGetRandomEnumValue() {
+        ConvenienceMethodsTest.TestEnum expectedEnum = ConvenienceMethodsTest.TestEnum.THREE;
+        when(convenienceMethods.nextEnum(ConvenienceMethodsTest.TestEnum.class))
+                .thenReturn(expectedEnum);
+
+        assertEquals(expectedEnum, dummy4j.nextEnum(ConvenienceMethodsTest.TestEnum.class));
     }
 
     @Test

@@ -4,7 +4,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.function.Supplier;
 
 /**
  * Provides random values which are generated based on a seed
@@ -42,54 +41,19 @@ public class RandomService {
     }
 
     /**
-     * Returns a value from a random supplier.
-     *
-     * @param suppliers value suppliers to pick from
-     * @param <T> the type of value to return
-     * @return a value from a random supplier
-     * @deprecated use Dummy4j::of
-     *
-     * @since 0.4.0
-     */
-    @Deprecated
-    @SafeVarargs
-    public final <T> T of(Supplier<T>... suppliers) {
-        return suppliers[nextInt(0, suppliers.length - 1)].get();
-    }
-
-    /**
-     * Has a {@code howMany} in {@code in} chance to supply a value. Otherwise, returns null.
-     * <p>
-     * E.g. {@code chance(1, 2, () -> "hello")} has a 1-in-2 chance to supply "hello", that is it will be supplied
-     * 50% of the time when the method is invoked.
-     *
-     * @return supplied {@code T} or null
-     */
-    public <T> T chance(int howMany, int in, Supplier<T> supplier) {
-        if (nextInt(1, in) > howMany) {
-            return null;
-        }
-
-        return supplier.get();
-    }
-
-    /**
-     * Returns a random enum value
-     *
-     * @since 0.1.2
-     */
-    public <T extends Enum<?>> T enumValue(Class<T> clazz) {
-        int x = nextInt(clazz.getEnumConstants().length - 1);
-        return clazz.getEnumConstants()[x];
-    }
-
-    /**
      * Generates a random UUID
      *
      * @since 0.1.2
      */
     public String uuid() {
         return UUID.nameUUIDFromBytes(String.valueOf(nextLong()).getBytes(StandardCharsets.UTF_8)).toString();
+    }
+
+    /**
+     * Generates a random positive long
+     */
+    public long nextLong() {
+        return random.nextLong() & Long.MAX_VALUE;
     }
 
     /**
@@ -137,13 +101,6 @@ public class RandomService {
         }
 
         return lowerBound + random.nextInt(upperBound - lowerBound + 1);
-    }
-
-    /**
-     * Generates a random positive long
-     */
-    public long nextLong() {
-        return random.nextLong() & Long.MAX_VALUE;
     }
 
     /**

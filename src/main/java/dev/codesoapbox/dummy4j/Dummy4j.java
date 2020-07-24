@@ -62,14 +62,22 @@ public class Dummy4j {
         this.convenienceMethods = new ConvenienceMethods(randomService);
     }
 
-    public Dummy4j(ExpressionResolver expressionResolver, RandomService randomService,
-                   Function<? super Dummy4j, Dummies> dummiesFactory, UniqueValues uniqueValues) {
+    public Dummy4j(ExpressionResolver expressionResolver, RandomService randomService) {
+        this(expressionResolver, randomService, Dummies::new, new UniqueValues(),
+                new ConvenienceMethods(randomService));
+    }
+
+    protected Dummy4j(ExpressionResolver expressionResolver, RandomService randomService,
+                   Function<? super Dummy4j, Dummies> dummiesFactory, UniqueValues uniqueValues,
+                   ConvenienceMethods convenienceMethods) {
         this.randomService = randomService;
         this.expressionResolver = expressionResolver;
         this.dummies = dummiesFactory.apply(this);
         this.uniqueValues = uniqueValues;
-        this.convenienceMethods = new ConvenienceMethods(randomService);
+        this.convenienceMethods = convenienceMethods;
     }
+
+
 
     /**
      * @return the resolver used for resolving expressions
@@ -167,11 +175,34 @@ public class Dummy4j {
      * @param <T> the type of value to return
      * @return a value from a random supplier
      *
-     * @since 0.4.0
+     * @since 0.5.0
      */
     @SafeVarargs
     public final <T> T of(Supplier<T>... suppliers) {
         return convenienceMethods.of(suppliers);
+    }
+
+    /**
+     * Has a {@code howMany} in {@code in} chance to supply a value. Otherwise, returns null.
+     * <p>
+     * E.g. {@code chance(1, 2, () -> "hello")} has a 1-in-2 chance to supply "hello", that is it will be supplied
+     * 50% of the time when the method is invoked.
+     *
+     * @return supplied {@code T} or null
+     *
+     * @since 0.5.0
+     */
+    public <T> T chance(int howMany, int in, Supplier<T> supplier) {
+        return convenienceMethods.chance(howMany, in, supplier);
+    }
+
+    /**
+     * Returns a random enum value
+     *
+     * @since 0.5.0
+     */
+    public <T extends Enum<?>> T nextEnum(Class<T> clazz) {
+        return convenienceMethods.nextEnum(clazz);
     }
 
     /**

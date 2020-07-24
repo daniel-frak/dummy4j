@@ -102,4 +102,30 @@ public class ConvenienceMethods {
     public final <T> T of(Supplier<T>... suppliers) {
         return suppliers[random.nextInt(0, suppliers.length - 1)].get();
     }
+
+    /**
+     * Has a {@code howMany} in {@code in} chance to supply a value. Otherwise, returns null.
+     * <p>
+     * E.g. {@code chance(1, 2, () -> "hello")} has a 1-in-2 chance to supply "hello", that is it will be supplied
+     * 50% of the time when the method is invoked.
+     *
+     * @return supplied {@code T} or null
+     */
+    public <T> T chance(int howMany, int in, Supplier<T> supplier) {
+        if (random.nextInt(1, in) > howMany) {
+            return null;
+        }
+
+        return supplier.get();
+    }
+
+    /**
+     * Returns a random enum value
+     *
+     * @since 0.1.2
+     */
+    public <T extends Enum<?>> T nextEnum(Class<T> clazz) {
+        int x = random.nextInt(clazz.getEnumConstants().length - 1);
+        return clazz.getEnumConstants()[x];
+    }
 }

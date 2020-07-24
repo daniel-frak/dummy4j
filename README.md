@@ -111,9 +111,9 @@ LocalDateTime upTo25YearsFrom1800 = dummy.dateAndTime().after(
 
 int betweenFiveAndTenInclusive = dummy.random().nextInt(5, 10);
 
-MyEnum randomEnum = dummy.random().enumValue(MyEnum.class);
+MyEnum randomEnum = dummy.nextEnum(MyEnum.class);
 
-String thisValueMightBeNull = dummy.random().chance(1, 3, () -> "hello");
+String thisValueMightBeNull = dummy.chance(1, 3, () -> "hello");
 
 String thisValueWillBeUnique = dummy.unique().value("fullNameGroup", () -> dummy.name().fullName());
 
@@ -121,7 +121,7 @@ List<String> fiveNames = dummy.listOf(5, () -> dummy.name().fullName());
 
 Set<String> fourCities = dummy.setOf(4, () -> dummy.address().city());
 
-String nameOrCity = dummy.random().of(() -> dummy.name().fullName(), () -> dummy.address().city());
+String nameOrCity = dummy.of(() -> dummy.name().fullName(), () -> dummy.address().city());
 
 String elementFromArray = dummy.of(new String[]{ "one", "two", "three" });
 

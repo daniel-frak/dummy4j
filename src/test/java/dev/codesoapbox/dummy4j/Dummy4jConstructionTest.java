@@ -50,13 +50,28 @@ class Dummy4jConstructionTest {
     }
 
     @Test
+    void shouldConstructWithBasicCustomDependencies() {
+        ExpressionResolver expressionResolver = mock(ExpressionResolver.class);
+        RandomService randomService = mock(RandomService.class);
+
+        Dummy4j dummy = new Dummy4j(expressionResolver, randomService);
+
+        assertEquals(expressionResolver, dummy.expressionResolver);
+        assertEquals(randomService, dummy.randomService);
+        assertNotNull(dummy.dummies);
+        assertNotNull(dummy.expressionResolver);
+        assertNotNull(dummy.randomService);
+    }
+
+    @Test
     void shouldConstructWithCustomDependencies() {
         ExpressionResolver expressionResolver = mock(ExpressionResolver.class);
         RandomService randomService = mock(RandomService.class);
         Dummies dummies = mock(Dummies.class);
         UniqueValues uniqueValues = mock(UniqueValues.class);
+        ConvenienceMethods convenienceMethods = mock(ConvenienceMethods.class);
 
-        Dummy4j dummy = new Dummy4j(expressionResolver, randomService, d -> dummies, uniqueValues);
+        Dummy4j dummy = new Dummy4j(expressionResolver, randomService, d -> dummies, uniqueValues, convenienceMethods);
 
         assertEquals(expressionResolver, dummy.expressionResolver);
         assertEquals(randomService, dummy.randomService);
