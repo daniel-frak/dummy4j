@@ -4,6 +4,7 @@ import dev.codesoapbox.dummy4j.definitions.UniqueValues;
 import dev.codesoapbox.dummy4j.definitions.providers.files.yaml.YamlFileDefinitionProvider;
 import dev.codesoapbox.dummy4j.dummies.*;
 import dev.codesoapbox.dummy4j.dummies.color.ColorDummy;
+import dev.codesoapbox.dummy4j.dummies.internet.InternetDummy;
 
 import java.util.List;
 import java.util.Set;
@@ -328,5 +329,14 @@ public class Dummy4j {
      */
     public NatoPhoneticAlphabetDummy natoPhoneticAlphabet() {
         return dummies.natoPhoneticAlphabet();
+    }
+
+    /**
+     * Provides methods for generating values related to internet
+     *
+     * @since 0.5.0
+     */
+    public InternetDummy internet() {
+        return dummies.internet();
     }
 }

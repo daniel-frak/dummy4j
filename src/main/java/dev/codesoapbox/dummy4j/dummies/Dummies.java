@@ -2,6 +2,7 @@ package dev.codesoapbox.dummy4j.dummies;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
 import dev.codesoapbox.dummy4j.dummies.color.ColorDummy;
+import dev.codesoapbox.dummy4j.dummies.internet.InternetDummy;
 
 import java.time.Clock;
 
@@ -21,6 +22,7 @@ public class Dummies {
     private final NumeralsDummy numerals;
     private final MedicalDummy medical;
     private final NatoPhoneticAlphabetDummy natoPhoneticAlphabet;
+    private final InternetDummy internet;
 
     public Dummies(Dummy4j dummy4j) {
         name = new NameDummy(dummy4j);
@@ -37,6 +39,7 @@ public class Dummies {
         numerals = new NumeralsDummy(dummy4j);
         medical = new MedicalDummy(dummy4j);
         natoPhoneticAlphabet = new NatoPhoneticAlphabetDummy(dummy4j);
+        internet = new InternetDummy(dummy4j);
     }
 
     public NameDummy name() {
@@ -120,5 +123,12 @@ public class Dummies {
      */
     public NatoPhoneticAlphabetDummy natoPhoneticAlphabet() {
         return natoPhoneticAlphabet;
+    }
+
+    /**
+     * @since 0.5.0
+     */
+    public InternetDummy internet() {
+        return internet;
     }
 }

@@ -1,0 +1,22 @@
+en:
+  internet:
+    root_domain: [
+      "#{lorem.word}"
+    ]
+    popular_top_level_domain: [
+      "app", "co", "com", "dev", "io", "net", "org"
+    ]
+    country_top_level_domain: [
+      "ag", "am", "asia", "at", "be", "bz", "ca", "cc", "co", "cz", "de", "es", "eu", "fm", "fr", "gs", "in", "it",
+      "jp","kr", "la", "ms", "mx", "nl", "se", "so", "tk", "tv", "tw", "uk", "us"
+    ]
+    generic_top_level_domain: [
+      "academy", "agency", "business", "biz", "blog", "club", "dance", "dating", "design", "events", "farm", "flights",
+      "global", "guru", "info", "life", "luxury", "me", "media", "news", "online", "photography", "rocks", "science",
+      "sex", "site", "solutions", "space", "tech", "today", "world"
+    ]
+    top_level_domain: [
+      "#{internet.popular_top_level_domain}",
+      "#{internet.country_top_level_domain}",
+      "#{internet.generic_top_level_domain}"
+    ]
