@@ -36,7 +36,7 @@ class RandomServiceTest {
         when(random.nextLong())
                 .thenReturn(1L);
         String expected = "c4ca4238-a0b9-3382-8dcc-509a6f75849b";
-        assertEquals(expected, randomService.uuid());
+        assertEquals(expected, randomService.uuid().toString());
     }
 
     @Test

@@ -45,8 +45,8 @@ public class RandomService {
      *
      * @since 0.1.2
      */
-    public String uuid() {
-        return UUID.nameUUIDFromBytes(String.valueOf(nextLong()).getBytes(StandardCharsets.UTF_8)).toString();
+    public UUID uuid() {
+        return UUID.nameUUIDFromBytes(String.valueOf(nextLong()).getBytes(StandardCharsets.UTF_8));
     }
 
     /**
