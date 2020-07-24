@@ -4,6 +4,7 @@ import dev.codesoapbox.dummy4j.Dummy4j;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class LoremDummy {
 
@@ -50,7 +51,7 @@ public class LoremDummy {
     }
 
     private String capitalize(String value) {
-        return value.substring(0, 1).toUpperCase() + value.substring(1);
+        return value.substring(0, 1).toUpperCase(Locale.ENGLISH) + value.substring(1);
     }
 
     private String sentenceEndingPunctuation() {
