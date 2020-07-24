@@ -169,6 +169,14 @@ class Dummy4jTest {
     }
 
     @Test
+    void shouldGetIdentifierDummy() {
+        IdentifierDummy identifierDummy = mock(IdentifierDummy.class);
+        when(dummies.identifier())
+                .thenReturn(identifierDummy);
+        assertEquals(identifierDummy, dummy4j.identifier());
+    }
+
+    @Test
     void shouldGetEducationDummy() {
         EducationDummy educationDummy = mock(EducationDummy.class);
         when(dummies.education())

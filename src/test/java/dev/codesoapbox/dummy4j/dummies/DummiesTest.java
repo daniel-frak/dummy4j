@@ -35,6 +35,11 @@ class DummiesTest {
     }
 
     @Test
+    void identifier() {
+        assertNotNull(dummies.identifier());
+    }
+
+    @Test
     void book() {
         assertNotNull(dummies.book());
     }

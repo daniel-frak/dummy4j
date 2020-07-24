@@ -41,15 +41,6 @@ public class RandomService {
     }
 
     /**
-     * Generates a random UUID
-     *
-     * @since 0.1.2
-     */
-    public UUID uuid() {
-        return UUID.nameUUIDFromBytes(String.valueOf(nextLong()).getBytes(StandardCharsets.UTF_8));
-    }
-
-    /**
      * Generates a random positive long
      */
     public long nextLong() {

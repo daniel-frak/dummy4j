@@ -206,7 +206,7 @@ public class Dummy4j {
     }
 
     /**
-     * Provides methods for generating random names
+     * Provides methods for generating names
      */
     public NameDummy name() {
         return dummies.name();
@@ -217,21 +217,21 @@ public class Dummy4j {
     }
 
     /**
-     * Provides methods for generating random addresses
+     * Provides methods for generating addresses
      */
     public AddressDummy address() {
         return dummies.address();
     }
 
     /**
-     * Provides methods for generating random text
+     * Provides methods for generating text
      */
     public LoremDummy lorem() {
         return dummies.lorem();
     }
 
     /**
-     * Provides methods for generating random dates and times
+     * Provides methods for generating dates and times
      *
      * @since 0.4.0
      */
@@ -240,7 +240,16 @@ public class Dummy4j {
     }
 
     /**
-     * Provides methods for generating random values related to education
+     * Provides methods for generating identifiers
+     *
+     * @since 0.5.0
+     */
+    public IdentifierDummy identifier() {
+        return dummies.identifier();
+    }
+
+    /**
+     * Provides methods for generating values related to education
      *
      * @since 0.3.0
      */
@@ -249,7 +258,7 @@ public class Dummy4j {
     }
 
     /**
-     * Provides methods for generating random book-related values
+     * Provides methods for generating book-related values
      *
      * @since 0.2.0
      */
@@ -258,7 +267,7 @@ public class Dummy4j {
     }
 
     /**
-     * Provides methods for generating random values related to research papers
+     * Provides methods for generating values related to research papers
      *
      * @since 0.2.0
      */
@@ -267,14 +276,14 @@ public class Dummy4j {
     }
 
     /**
-     * Provides methods for generating random science fiction themed values
+     * Provides methods for generating science fiction themed values
      */
     public ScifiDummy scifi() {
         return dummies.scifi();
     }
 
     /**
-     * Provides methods for generating random colors
+     * Provides methods for generating colors
      *
      * @since 0.4.0
      */
@@ -283,7 +292,7 @@ public class Dummy4j {
     }
 
     /**
-     * Provides methods for generating random numerals
+     * Provides methods for generating numerals
      *
      * @since 0.4.0
      */
@@ -292,7 +301,7 @@ public class Dummy4j {
     }
 
     /**
-     * Provides methods for generating random medical data
+     * Provides methods for generating medical data
      *
      * @since 0.4.0
      */

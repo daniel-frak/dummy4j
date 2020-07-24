@@ -12,6 +12,7 @@ public class Dummies {
     private final AddressDummy address;
     private final LoremDummy lorem;
     private final DateAndTimeDummy dateAndTime;
+    private final IdentifierDummy identifier;
     private final EducationDummy education;
     private final BookDummy book;
     private final ResearchPaperDummy researchPaper;
@@ -27,6 +28,7 @@ public class Dummies {
         address = new AddressDummy(dummy4j);
         lorem = new LoremDummy(dummy4j);
         dateAndTime = new DateAndTimeDummy(dummy4j, Clock.systemDefaultZone());
+        identifier = new IdentifierDummy(dummy4j);
         education = new EducationDummy(dummy4j);
         book = new BookDummy(dummy4j);
         researchPaper = new ResearchPaperDummy(dummy4j);
@@ -54,6 +56,13 @@ public class Dummies {
      */
     public DateAndTimeDummy dateAndTime() {
         return dateAndTime;
+    }
+
+    /**
+     * @since 0.5.0
+     */
+    public IdentifierDummy identifier() {
+        return identifier;
     }
 
     /**
