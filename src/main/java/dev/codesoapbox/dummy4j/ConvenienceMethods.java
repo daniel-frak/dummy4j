@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
 
+/**
+ * @since 0.5.0
+ */
 public class ConvenienceMethods {
 
     private final RandomService random;
@@ -21,7 +24,6 @@ public class ConvenienceMethods {
      * @param supplier the method to generate an object
      * @param <T>      the type of objects to generate
      * @return a list of objects
-     * @since 0.4.0
      */
     public <T> List<T> listOf(int count, Supplier<T> supplier) {
         List<T> list = new ArrayList<>();
@@ -38,7 +40,6 @@ public class ConvenienceMethods {
      * @param supplier the method to generate an object
      * @param <T>      the type of objects to generate
      * @return a list of objects
-     * @since 0.4.0
      */
     public <T> Set<T> setOf(int count, Supplier<T> supplier) {
         Set<T> set = new HashSet<>();
@@ -54,8 +55,6 @@ public class ConvenienceMethods {
      * @param array the array to pick from
      * @param <T> the type of object to return
      * @return a random element
-     *
-     * @since 0.5.0
      */
     @SafeVarargs
     public final <T> T of(T... array) {
@@ -68,8 +67,6 @@ public class ConvenienceMethods {
      * @param list the list to pick from
      * @param <T> the type of object to return
      * @return a random element
-     *
-     * @since 0.5.0
      */
     public <T> T of(List<T> list) {
         return list.get(random.nextInt(list.size() - 1));
@@ -81,8 +78,6 @@ public class ConvenienceMethods {
      * @param set the list to pick from
      * @param <T> the type of object to return
      * @return a random element
-     *
-     * @since 0.5.0
      */
     @SuppressWarnings("unchecked")
     public <T> T of(Set<T> set) {
@@ -95,8 +90,6 @@ public class ConvenienceMethods {
      * @param suppliers value suppliers to pick from
      * @param <T> the type of value to return
      * @return a value from a random supplier
-     *
-     * @since 0.4.0
      */
     @SafeVarargs
     public final <T> T of(Supplier<T>... suppliers) {
@@ -121,8 +114,6 @@ public class ConvenienceMethods {
 
     /**
      * Returns a random enum value
-     *
-     * @since 0.1.2
      */
     public <T extends Enum<?>> T nextEnum(Class<T> clazz) {
         int x = random.nextInt(clazz.getEnumConstants().length - 1);
