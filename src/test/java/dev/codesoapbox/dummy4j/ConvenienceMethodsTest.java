@@ -58,7 +58,7 @@ class ConvenienceMethodsTest {
     void shouldReturnRandomElementFromArray() {
         String[] array = { "one", "two", "three" };
 
-        when(random.nextInt(3))
+        when(random.nextInt(2))
                 .thenReturn(2);
 
         assertEquals("three", convenienceMethods.of(array));
@@ -68,7 +68,7 @@ class ConvenienceMethodsTest {
     void shouldReturnRandomElementFromList() {
         List<String> list = asList("one", "two", "three");
 
-        when(random.nextInt(3))
+        when(random.nextInt(2))
                 .thenReturn(2);
 
         assertEquals("three", convenienceMethods.of(list));
@@ -78,7 +78,7 @@ class ConvenienceMethodsTest {
     void shouldReturnRandomElementFromSet() {
         Set<String> set = new HashSet<>(asList("one", "two", "three"));
 
-        when(random.nextInt(3))
+        when(random.nextInt(2))
                 .thenReturn(2);
 
         assertEquals("three", convenienceMethods.of(set));
