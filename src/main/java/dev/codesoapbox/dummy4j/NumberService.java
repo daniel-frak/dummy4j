@@ -1,14 +1,14 @@
 package dev.codesoapbox.dummy4j;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Random;
-import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * Provides random values which are generated based on a seed
+ * Provides random numbers which are generated based on a seed
+ *
+ * @since 0.5.0
  */
-public class RandomService {
+public class NumberService {
 
     private static final String UPPER_BOUND_MUST_BE_POSITIVE = "Upper bound must be positive or zero";
     private static final String LOWER_BOUND_MUST_BE_POSITIVE = "Lower bound must be positive or zero";
@@ -18,7 +18,7 @@ public class RandomService {
     private final long seed;
     private final Random random;
 
-    RandomService(Random random, long seed) {
+    NumberService(Random random, long seed) {
         this.random = random;
         this.seed = seed;
     }
@@ -26,11 +26,11 @@ public class RandomService {
     /**
      * @since 0.3.0
      */
-    public RandomService() {
+    public NumberService() {
         this(null);
     }
 
-    public RandomService(Long seed) {
+    public NumberService(Long seed) {
         this.seed = seed != null ? seed : ThreadLocalRandom.current().nextInt();
 
         this.random = new Random(this.seed);

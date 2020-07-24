@@ -43,7 +43,7 @@ public class NumeralsDummy {
     }
 
     public String roman() {
-        return toRoman(dummy4j.random().nextInt(1, ROMAN_NUMERAL_MAX));
+        return toRoman(dummy4j.number().nextInt(1, ROMAN_NUMERAL_MAX));
     }
 
     private String toRoman(int number) {
@@ -59,7 +59,7 @@ public class NumeralsDummy {
             throw new IllegalArgumentException(ROMAN_NUMERAL_MAX_EXCEEDED);
         }
 
-        return toRoman(dummy4j.random().nextInt(1, upperBound));
+        return toRoman(dummy4j.number().nextInt(1, upperBound));
     }
 
     public String roman(int lowerBound, int upperBound) {
@@ -70,6 +70,6 @@ public class NumeralsDummy {
             throw new IllegalArgumentException(ROMAN_NUMERAL_MUST_BE_GREATER_THAN_ZERO);
         }
 
-        return toRoman(dummy4j.random().nextInt(lowerBound, upperBound));
+        return toRoman(dummy4j.number().nextInt(lowerBound, upperBound));
     }
 }

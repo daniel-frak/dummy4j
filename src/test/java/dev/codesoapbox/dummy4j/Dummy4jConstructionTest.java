@@ -21,8 +21,8 @@ class Dummy4jConstructionTest {
         Dummy4j dummy = new Dummy4j();
         assertNotNull(dummy.dummies);
         assertNotNull(dummy.expressionResolver);
-        assertNotNull(dummy.randomService);
-        assertEquals(dummy.randomService, dummy.expressionResolver.randomService);
+        assertNotNull(dummy.numberService);
+        assertEquals(dummy.numberService, dummy.expressionResolver.numberService);
     }
 
     @Test
@@ -31,7 +31,7 @@ class Dummy4jConstructionTest {
         long seed = 1234L;
         Dummy4j dummy = new Dummy4j(seed, locales, null);
         assertEquals(locales, dummy.expressionResolver.locales);
-        assertEquals(seed, dummy.randomService.getSeed());
+        assertEquals(seed, dummy.numberService.getSeed());
     }
 
     @Test
@@ -39,7 +39,7 @@ class Dummy4jConstructionTest {
         long seed = 1234L;
         Dummy4j dummy = new Dummy4j(seed, null, null);
         assertEquals(singletonList("en"), dummy.expressionResolver.locales);
-        assertEquals(seed, dummy.randomService.getSeed());
+        assertEquals(seed, dummy.numberService.getSeed());
     }
 
     @Test
@@ -52,29 +52,29 @@ class Dummy4jConstructionTest {
     @Test
     void shouldConstructWithBasicCustomDependencies() {
         ExpressionResolver expressionResolver = mock(ExpressionResolver.class);
-        RandomService randomService = mock(RandomService.class);
+        NumberService numberService = mock(NumberService.class);
 
-        Dummy4j dummy = new Dummy4j(expressionResolver, randomService);
+        Dummy4j dummy = new Dummy4j(expressionResolver, numberService);
 
         assertEquals(expressionResolver, dummy.expressionResolver);
-        assertEquals(randomService, dummy.randomService);
+        assertEquals(numberService, dummy.numberService);
         assertNotNull(dummy.dummies);
         assertNotNull(dummy.expressionResolver);
-        assertNotNull(dummy.randomService);
+        assertNotNull(dummy.numberService);
     }
 
     @Test
     void shouldConstructWithCustomDependencies() {
         ExpressionResolver expressionResolver = mock(ExpressionResolver.class);
-        RandomService randomService = mock(RandomService.class);
+        NumberService numberService = mock(NumberService.class);
         Dummies dummies = mock(Dummies.class);
         UniqueValues uniqueValues = mock(UniqueValues.class);
         ConvenienceMethods convenienceMethods = mock(ConvenienceMethods.class);
 
-        Dummy4j dummy = new Dummy4j(expressionResolver, randomService, d -> dummies, uniqueValues, convenienceMethods);
+        Dummy4j dummy = new Dummy4j(expressionResolver, numberService, d -> dummies, uniqueValues, convenienceMethods);
 
         assertEquals(expressionResolver, dummy.expressionResolver);
-        assertEquals(randomService, dummy.randomService);
+        assertEquals(numberService, dummy.numberService);
         assertEquals(dummies, dummy.dummies);
     }
 

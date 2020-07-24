@@ -28,7 +28,7 @@ class Dummy4jTest {
     private ExpressionResolver expressionResolver;
 
     @Mock
-    private RandomService randomService;
+    private NumberService numberService;
 
     @Mock
     private Dummies dummies;
@@ -41,7 +41,7 @@ class Dummy4jTest {
 
     @BeforeEach
     void setUp() {
-        dummy4j = new Dummy4j(expressionResolver, randomService, d -> dummies, uniqueValues, convenienceMethods);
+        dummy4j = new Dummy4j(expressionResolver, numberService, d -> dummies, uniqueValues, convenienceMethods);
     }
 
     @Test
@@ -55,8 +55,8 @@ class Dummy4jTest {
     }
 
     @Test
-    void shouldGetRandomService() {
-        assertEquals(randomService, dummy4j.random());
+    void shouldGetNumberService() {
+        assertEquals(numberService, dummy4j.number());
     }
 
     @Test

@@ -20,6 +20,6 @@ public class IdentifierDummy {
      * Generates a random UUID
      */
     public UUID uuid() {
-        return UUID.nameUUIDFromBytes(String.valueOf(dummy4j.random().nextLong()).getBytes(StandardCharsets.UTF_8));
+        return UUID.nameUUIDFromBytes(String.valueOf(dummy4j.number().nextLong()).getBytes(StandardCharsets.UTF_8));
     }
 }

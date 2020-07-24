@@ -30,7 +30,7 @@ public class DateAndTimeDummy {
     }
 
     public LocalDateTime any() {
-        return LocalDateTime.ofEpochSecond(dummy4j.random().nextLong(), 0, ZoneOffset.UTC);
+        return LocalDateTime.ofEpochSecond(dummy4j.number().nextLong(), 0, ZoneOffset.UTC);
     }
 
     public LocalDate birthday() {
@@ -75,34 +75,34 @@ public class DateAndTimeDummy {
 
     private long nextLongWithNegativeBounds(long lowerBound, long upperBound) {
         long diff = Math.abs(lowerBound - upperBound);
-        return dummy4j.random().nextLong(0, diff) + lowerBound;
+        return dummy4j.number().nextLong(0, diff) + lowerBound;
     }
 
     public LocalDateTime past(long atMost, ChronoUnit unit) {
         if (atMost < 0) {
             throw new IllegalArgumentException(AT_MOST_MUST_BE_POSITIVE);
         }
-        return LocalDateTime.now(clock).minus(dummy4j.random().nextLong(0, atMost), unit);
+        return LocalDateTime.now(clock).minus(dummy4j.number().nextLong(0, atMost), unit);
     }
 
     public LocalDateTime before(LocalDateTime referenceDate, long atMost, ChronoUnit unit) {
         if (atMost < 0) {
             throw new IllegalArgumentException(AT_MOST_MUST_BE_POSITIVE);
         }
-        return referenceDate.minus(dummy4j.random().nextLong(0, atMost), unit);
+        return referenceDate.minus(dummy4j.number().nextLong(0, atMost), unit);
     }
 
     public LocalDateTime future(long atMost, ChronoUnit unit) {
         if (atMost < 0) {
             throw new IllegalArgumentException(AT_MOST_MUST_BE_POSITIVE);
         }
-        return LocalDateTime.now(clock).plus(dummy4j.random().nextLong(0, atMost), unit);
+        return LocalDateTime.now(clock).plus(dummy4j.number().nextLong(0, atMost), unit);
     }
 
     public LocalDateTime after(LocalDateTime referenceDate, long atMost, ChronoUnit unit) {
         if (atMost < 0) {
             throw new IllegalArgumentException(AT_MOST_MUST_BE_POSITIVE);
         }
-        return referenceDate.plus(dummy4j.random().nextLong(0, atMost), unit);
+        return referenceDate.plus(dummy4j.number().nextLong(0, atMost), unit);
     }
 }

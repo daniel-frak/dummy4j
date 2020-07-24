@@ -33,15 +33,15 @@ Dummy4j dummy = new Dummy4jBuilder()
 # Advanced configuration
 
 Advanced configuration can be performed by using Dummy4j's dedicated constructor, which allows for injecting custom
-implementations of its dependencies.
+implementations of some of its dependencies.
 
 ```java
-RandomService randomService = new RandomService(123456L);
+NumberService numberService = new NumberService(123456L);
 
 YamlFileDefinitionProvider definitionProvider = YamlFileDefinitionProvider.withPaths(
         Arrays.asList("dummy4j", "my/custom/path"));
 ExpressionResolver expressionResolver = new ExpressionResolver(Collections.singletonList("en"),
-        randomService, definitionProvider);
+        numberService, definitionProvider);
 
-Dummy4j dummy = new Dummy4j(expressionResolver, randomService);
+Dummy4j dummy = new Dummy4j(expressionResolver, numberService);
 ```

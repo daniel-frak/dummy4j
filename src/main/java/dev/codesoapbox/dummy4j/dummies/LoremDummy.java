@@ -36,7 +36,7 @@ public class LoremDummy {
      * @return a sentence of word count between {@code minWords} and {@code maxWords}
      */
     public String sentence(int minWords, int maxWords) {
-        int numberOfWords = dummy4j.random().nextInt(minWords, maxWords);
+        int numberOfWords = dummy4j.number().nextInt(minWords, maxWords);
 
         return sentence(numberOfWords);
     }
@@ -56,7 +56,7 @@ public class LoremDummy {
 
     private String sentenceEndingPunctuation() {
         // Reduce the chance of punctuation marks other than a full stop
-        if (dummy4j.random().nextInt(15) > 1) {
+        if (dummy4j.number().nextInt(15) > 1) {
             return ".";
         }
         return dummy4j.expressionResolver().resolveKey("lorem.additional_sentence_ending_punctuation");
@@ -81,7 +81,7 @@ public class LoremDummy {
      * @return a random paragraph
      */
     public String paragraph() {
-        int numberOfParagraphs = dummy4j.random().nextInt(3, 10);
+        int numberOfParagraphs = dummy4j.number().nextInt(3, 10);
 
         return paragraph(numberOfParagraphs);
     }
@@ -102,7 +102,7 @@ public class LoremDummy {
      * @return a random sentence
      */
     public String sentence() {
-        int numberOfWords = dummy4j.random().nextInt(3, 10);
+        int numberOfWords = dummy4j.number().nextInt(3, 10);
         return sentence(numberOfWords);
     }
 }

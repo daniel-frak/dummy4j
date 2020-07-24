@@ -25,7 +25,7 @@ class ExpressionResolverTest {
     private DefinitionProvider definitionProvider;
 
     @Mock
-    private RandomService randomService;
+    private NumberService numberService;
 
     private ExpressionResolver expressionResolver;
 
@@ -37,7 +37,7 @@ class ExpressionResolverTest {
         when(definitionProvider.get())
                 .thenReturn(singletonList(dummyDefinitions));
 
-        expressionResolver = new ExpressionResolver(singletonList(locale), randomService, definitionProvider);
+        expressionResolver = new ExpressionResolver(singletonList(locale), numberService, definitionProvider);
     }
 
     private Map<String, Object> buildDefinitionMap() {
@@ -67,7 +67,7 @@ class ExpressionResolverTest {
                 .thenReturn(null);
         when(dummyDefinitions.getLocale())
                 .thenReturn("en");
-        expressionResolver = new ExpressionResolver(singletonList("en"), randomService, definitionProvider);
+        expressionResolver = new ExpressionResolver(singletonList("en"), numberService, definitionProvider);
         String result = expressionResolver.resolveKey("something.notexisting");
         assertEquals("", result);
     }
@@ -86,7 +86,7 @@ class ExpressionResolverTest {
 
     @Test
     void shouldResolveExpressionWithDigits() {
-        when(randomService.nextInt(9))
+        when(numberService.nextInt(9))
                 .thenReturn(9, 1, 2, 3, 4, 5);
         String result = expressionResolver.resolve("#-##-###");
         assertEquals("9-12-345", result);

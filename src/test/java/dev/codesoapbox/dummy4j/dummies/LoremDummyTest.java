@@ -2,7 +2,7 @@ package dev.codesoapbox.dummy4j.dummies;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
 import dev.codesoapbox.dummy4j.ExpressionResolver;
-import dev.codesoapbox.dummy4j.RandomService;
+import dev.codesoapbox.dummy4j.NumberService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,7 +26,7 @@ class LoremDummyTest {
     private ExpressionResolver expressionResolver;
 
     @Mock
-    private RandomService randomService;
+    private NumberService numberService;
 
     private LoremDummy loremDummy;
 
@@ -58,10 +58,10 @@ class LoremDummyTest {
 
     @Test
     void shouldReturnSentenceEndingWithDot() {
-        mockRandomService();
-        when(randomService.nextInt(3, 10))
+        mockNumberService();
+        when(numberService.nextInt(3, 10))
                 .thenReturn(4);
-        when(dummy4j.random().nextInt(ENDING_CHAR_PROBABILITY))
+        when(dummy4j.number().nextInt(ENDING_CHAR_PROBABILITY))
                 .thenReturn(END_WITH_DOT);
 
         mockExpressionResolver();
@@ -71,17 +71,17 @@ class LoremDummyTest {
         assertEquals("Lorem lorem lorem lorem.", loremDummy.sentence());
     }
 
-    private void mockRandomService() {
-        when(dummy4j.random())
-                .thenReturn(randomService);
+    private void mockNumberService() {
+        when(dummy4j.number())
+                .thenReturn(numberService);
     }
 
     @Test
     void shouldReturnSentenceEndingWithExclamationMark() {
-        mockRandomService();
-        when(randomService.nextInt(3, 10))
+        mockNumberService();
+        when(numberService.nextInt(3, 10))
                 .thenReturn(4);
-        when(dummy4j.random().nextInt(ENDING_CHAR_PROBABILITY))
+        when(dummy4j.number().nextInt(ENDING_CHAR_PROBABILITY))
                 .thenReturn(END_WITH_OTHER);
 
         mockExpressionResolver();
@@ -95,8 +95,8 @@ class LoremDummyTest {
 
     @Test
     void shouldReturnSentenceWithGivenNumberOfWords() {
-        mockRandomService();
-        when(dummy4j.random().nextInt(ENDING_CHAR_PROBABILITY))
+        mockNumberService();
+        when(dummy4j.number().nextInt(ENDING_CHAR_PROBABILITY))
                 .thenReturn(END_WITH_DOT);
 
         mockExpressionResolver();
@@ -108,10 +108,10 @@ class LoremDummyTest {
 
     @Test
     void shouldReturnSentenceOfWordCountBetweenMinAndMax() {
-        mockRandomService();
-        when(randomService.nextInt(1, 10))
+        mockNumberService();
+        when(numberService.nextInt(1, 10))
                 .thenReturn(1);
-        when(dummy4j.random().nextInt(ENDING_CHAR_PROBABILITY))
+        when(dummy4j.number().nextInt(ENDING_CHAR_PROBABILITY))
                 .thenReturn(END_WITH_DOT);
 
         mockExpressionResolver();
@@ -131,10 +131,10 @@ class LoremDummyTest {
 
     @Test
     void shouldReturnParagraph() {
-        mockRandomService();
-        when(randomService.nextInt(3, 10))
+        mockNumberService();
+        when(numberService.nextInt(3, 10))
                 .thenReturn(3);
-        when(dummy4j.random().nextInt(ENDING_CHAR_PROBABILITY))
+        when(dummy4j.number().nextInt(ENDING_CHAR_PROBABILITY))
                 .thenReturn(END_WITH_DOT);
 
         mockExpressionResolver();
@@ -146,10 +146,10 @@ class LoremDummyTest {
 
     @Test
     void shouldReturnParagraphWithGivenNumberOfSentences() {
-        mockRandomService();
-        when(randomService.nextInt(3, 10))
+        mockNumberService();
+        when(numberService.nextInt(3, 10))
                 .thenReturn(3);
-        when(dummy4j.random().nextInt(ENDING_CHAR_PROBABILITY))
+        when(dummy4j.number().nextInt(ENDING_CHAR_PROBABILITY))
                 .thenReturn(END_WITH_DOT);
 
         mockExpressionResolver();

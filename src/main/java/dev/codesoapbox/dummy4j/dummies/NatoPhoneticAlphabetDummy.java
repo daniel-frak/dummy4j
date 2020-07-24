@@ -60,7 +60,7 @@ public class NatoPhoneticAlphabetDummy {
 
     public String word() {
         String[] values = natoAlphabet.values().toArray(new String[0]);
-        return values[dummy4j.random().nextInt(values.length - 1)];
+        return values[dummy4j.number().nextInt(values.length - 1)];
     }
 
     public String of(String text) {

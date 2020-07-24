@@ -1,7 +1,7 @@
 package dev.codesoapbox.dummy4j.dummies;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
-import dev.codesoapbox.dummy4j.RandomService;
+import dev.codesoapbox.dummy4j.NumberService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,7 +25,7 @@ class NumeralsDummyTest {
     private Dummy4j dummy4j;
 
     @Mock
-    private RandomService randomService;
+    private NumberService numberService;
 
     @BeforeEach
     void setUp() {
@@ -40,18 +40,18 @@ class NumeralsDummyTest {
             "4999, MMMMCMXCIX"
     })
     void shouldGenerateRoman(int arabic, String expected) {
-        when(dummy4j.random())
-                .thenReturn(randomService);
-        when(randomService.nextInt(1, NumeralsDummy.ROMAN_NUMERAL_MAX))
+        when(dummy4j.number())
+                .thenReturn(numberService);
+        when(numberService.nextInt(1, NumeralsDummy.ROMAN_NUMERAL_MAX))
                 .thenReturn(arabic);
         assertEquals(expected, numerals.roman());
     }
 
     @Test
     void shouldGenerateRomanWithUpperBound() {
-        when(dummy4j.random())
-                .thenReturn(randomService);
-        when(randomService.nextInt(1, 500))
+        when(dummy4j.number())
+                .thenReturn(numberService);
+        when(numberService.nextInt(1, 500))
                 .thenReturn(354);
         assertEquals("CCCLIV", numerals.roman(500));
     }
@@ -63,9 +63,9 @@ class NumeralsDummyTest {
 
     @Test
     void shouldGenerateRomanWithLowerAndUpperBound() {
-        when(dummy4j.random())
-                .thenReturn(randomService);
-        when(randomService.nextInt(200, 500))
+        when(dummy4j.number())
+                .thenReturn(numberService);
+        when(numberService.nextInt(200, 500))
                 .thenReturn(354);
         assertEquals("CCCLIV", numerals.roman(200, 500));
     }

@@ -1,7 +1,7 @@
 package dev.codesoapbox.dummy4j.dummies;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
-import dev.codesoapbox.dummy4j.RandomService;
+import dev.codesoapbox.dummy4j.NumberService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,7 +30,7 @@ class DateAndTimeDummyTest {
     private Dummy4j dummy4j;
 
     @Mock
-    private RandomService randomService;
+    private NumberService numberService;
 
     @BeforeEach
     void setUp() {
@@ -40,9 +40,9 @@ class DateAndTimeDummyTest {
     @Test
     void shouldReturnAnyDateAndTime() {
         LocalDateTime expected = LocalDateTime.parse("1993-03-17T00:00:00");
-        when(dummy4j.random())
-                .thenReturn(randomService);
-        when(randomService.nextLong())
+        when(dummy4j.number())
+                .thenReturn(numberService);
+        when(numberService.nextLong())
                 .thenReturn(732326400L);
 
         assertEquals(expected, dateAndTimeDummy.any());
@@ -51,9 +51,9 @@ class DateAndTimeDummyTest {
     @Test
     void shouldReturnBirthdayForDefaultAges() {
         LocalDate expected = LocalDate.parse("1943-01-20");
-        when(dummy4j.random())
-                .thenReturn(randomService);
-        when(randomService.nextLong(0, 23010))
+        when(dummy4j.number())
+                .thenReturn(numberService);
+        when(numberService.nextLong(0, 23010))
                 .thenReturn(8784L);
 
         assertEquals(expected, dateAndTimeDummy.birthday());
@@ -62,9 +62,9 @@ class DateAndTimeDummyTest {
     @Test
     void shouldReturnBirthdayForAge() {
         LocalDate expected = LocalDate.parse("1975-01-01");
-        when(dummy4j.random())
-                .thenReturn(randomService);
-        when(randomService.nextLong(0, 364))
+        when(dummy4j.number())
+                .thenReturn(numberService);
+        when(numberService.nextLong(0, 364))
                 .thenReturn(364L);
 
         assertEquals(expected, dateAndTimeDummy.birthday(25));
@@ -78,9 +78,9 @@ class DateAndTimeDummyTest {
     @Test
     void shouldReturnBirthdayIfAgeInYearsIsZero() {
         LocalDate expected = LocalDate.parse("1999-01-03");
-        when(dummy4j.random())
-                .thenReturn(randomService);
-        when(randomService.nextLong(0, 364))
+        when(dummy4j.number())
+                .thenReturn(numberService);
+        when(numberService.nextLong(0, 364))
                 .thenReturn(1L);
 
         assertEquals(expected, dateAndTimeDummy.birthday(0));
@@ -89,9 +89,9 @@ class DateAndTimeDummyTest {
     @Test
     void shouldReturnBirthdayBetweenAges() {
         LocalDate expected = LocalDate.parse("1980-01-01");
-        when(dummy4j.random())
-                .thenReturn(randomService);
-        when(randomService.nextLong(0, 4016))
+        when(dummy4j.number())
+                .thenReturn(numberService);
+        when(numberService.nextLong(0, 4016))
                 .thenReturn(4016L);
 
         assertEquals(expected, dateAndTimeDummy.birthday(20, 30));
@@ -104,9 +104,9 @@ class DateAndTimeDummyTest {
     })
     void shouldReturnBirthdayBetweenSameAges(String expectedDate, long random) {
         LocalDate expected = LocalDate.parse(expectedDate);
-        when(dummy4j.random())
-                .thenReturn(randomService);
-        when(randomService.nextLong(0, 364))
+        when(dummy4j.number())
+                .thenReturn(numberService);
+        when(numberService.nextLong(0, 364))
                 .thenReturn(random);
 
         assertEquals(expected, dateAndTimeDummy.birthday(20, 20));
@@ -132,9 +132,9 @@ class DateAndTimeDummyTest {
         LocalDate startDate = LocalDate.parse("1980-01-01");
         LocalDate endDate = LocalDate.parse("1980-02-01");
         LocalDate expected = LocalDate.parse("1980-01-21");
-        when(dummy4j.random())
-                .thenReturn(randomService);
-        when(randomService.nextLong(0, 31))
+        when(dummy4j.number())
+                .thenReturn(numberService);
+        when(numberService.nextLong(0, 31))
                 .thenReturn(20L);
 
         assertEquals(expected, dateAndTimeDummy.between(startDate, endDate));
@@ -153,9 +153,9 @@ class DateAndTimeDummyTest {
         LocalDateTime startDate = LocalDateTime.parse("1980-01-01T00:00:00");
         LocalDateTime endDate = LocalDateTime.parse("1980-02-01T00:00:00");
         LocalDateTime expected = LocalDateTime.parse("1980-01-06T05:38:41");
-        when(dummy4j.random())
-                .thenReturn(randomService);
-        when(randomService.nextLong(0, 2678400))
+        when(dummy4j.number())
+                .thenReturn(numberService);
+        when(numberService.nextLong(0, 2678400))
                 .thenReturn(452321L);
 
         assertEquals(expected, dateAndTimeDummy.between(startDate, endDate));
@@ -172,9 +172,9 @@ class DateAndTimeDummyTest {
     @Test
     void shouldReturnDateAndTimeInThePast() {
         LocalDateTime expected = LocalDateTime.parse("1999-12-27T00:00");
-        when(dummy4j.random())
-                .thenReturn(randomService);
-        when(randomService.nextLong(0, 10))
+        when(dummy4j.number())
+                .thenReturn(numberService);
+        when(numberService.nextLong(0, 10))
                 .thenReturn(5L);
 
         assertEquals(expected, dateAndTimeDummy.past(10, ChronoUnit.DAYS));
@@ -183,9 +183,9 @@ class DateAndTimeDummyTest {
     @Test
     void pastShouldReturnNowWhenAtMostIsZero() {
         LocalDateTime expected = LocalDateTime.parse("2000-01-01T00:00");
-        when(dummy4j.random())
-                .thenReturn(randomService);
-        when(randomService.nextLong(0, 0))
+        when(dummy4j.number())
+                .thenReturn(numberService);
+        when(numberService.nextLong(0, 0))
                 .thenReturn(0L);
 
         assertEquals(expected, dateAndTimeDummy.past(0, ChronoUnit.DAYS));
@@ -200,9 +200,9 @@ class DateAndTimeDummyTest {
     void shouldReturnDateAndTimeBeforeReferenceDate() {
         LocalDateTime referenceDate = LocalDateTime.parse("1998-05-17T06:11:24");
         LocalDateTime expected = LocalDateTime.parse("1998-05-12T06:11:24");
-        when(dummy4j.random())
-                .thenReturn(randomService);
-        when(randomService.nextLong(0, 10))
+        when(dummy4j.number())
+                .thenReturn(numberService);
+        when(numberService.nextLong(0, 10))
                 .thenReturn(5L);
 
         assertEquals(expected, dateAndTimeDummy.before(referenceDate, 10, ChronoUnit.DAYS));
@@ -211,9 +211,9 @@ class DateAndTimeDummyTest {
     @Test
     void beforeShouldReturnReferenceDateWhenAtMostIsZero() {
         LocalDateTime referenceDate = LocalDateTime.parse("1998-05-17T00:00");
-        when(dummy4j.random())
-                .thenReturn(randomService);
-        when(randomService.nextLong(0, 0))
+        when(dummy4j.number())
+                .thenReturn(numberService);
+        when(numberService.nextLong(0, 0))
                 .thenReturn(0L);
 
         assertEquals(referenceDate, dateAndTimeDummy.before(referenceDate, 0, ChronoUnit.DAYS));
@@ -229,9 +229,9 @@ class DateAndTimeDummyTest {
     @Test
     void shouldReturnDateAndTimeInTheFuture() {
         LocalDateTime expected = LocalDateTime.parse("2000-01-06T00:00");
-        when(dummy4j.random())
-                .thenReturn(randomService);
-        when(randomService.nextLong(0, 10))
+        when(dummy4j.number())
+                .thenReturn(numberService);
+        when(numberService.nextLong(0, 10))
                 .thenReturn(5L);
 
         assertEquals(expected, dateAndTimeDummy.future(10, ChronoUnit.DAYS));
@@ -240,9 +240,9 @@ class DateAndTimeDummyTest {
     @Test
     void futureShouldReturnNowWhenAtMostIsZero() {
         LocalDateTime expected = LocalDateTime.parse("2000-01-01T00:00");
-        when(dummy4j.random())
-                .thenReturn(randomService);
-        when(randomService.nextLong(0, 0))
+        when(dummy4j.number())
+                .thenReturn(numberService);
+        when(numberService.nextLong(0, 0))
                 .thenReturn(0L);
 
         assertEquals(expected, dateAndTimeDummy.future(0, ChronoUnit.DAYS));
@@ -257,9 +257,9 @@ class DateAndTimeDummyTest {
     void shouldReturnDateAndTimeAfterReferenceDate() {
         LocalDateTime referenceDate = LocalDateTime.parse("1998-05-17T06:11:24");
         LocalDateTime expected = LocalDateTime.parse("1998-05-22T06:11:24");
-        when(dummy4j.random())
-                .thenReturn(randomService);
-        when(randomService.nextLong(0, 10))
+        when(dummy4j.number())
+                .thenReturn(numberService);
+        when(numberService.nextLong(0, 10))
                 .thenReturn(5L);
 
         assertEquals(expected, dateAndTimeDummy.after(referenceDate, 10, ChronoUnit.DAYS));
@@ -268,9 +268,9 @@ class DateAndTimeDummyTest {
     @Test
     void afterShouldReturnReferenceDateWhenAtMostIsZero() {
         LocalDateTime referenceDate = LocalDateTime.parse("1998-05-17T00:00");
-        when(dummy4j.random())
-                .thenReturn(randomService);
-        when(randomService.nextLong(0, 0))
+        when(dummy4j.number())
+                .thenReturn(numberService);
+        when(numberService.nextLong(0, 0))
                 .thenReturn(0L);
 
         assertEquals(referenceDate, dateAndTimeDummy.after(referenceDate, 0, ChronoUnit.DAYS));

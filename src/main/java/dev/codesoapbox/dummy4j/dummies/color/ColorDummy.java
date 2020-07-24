@@ -34,44 +34,44 @@ public class ColorDummy {
     }
 
     public String hex() {
-        return String.format("#%06x", dummy4j.random().nextInt(MAX_RGB));
+        return String.format("#%06x", dummy4j.number().nextInt(MAX_RGB));
     }
 
     public String hexAlpha() {
-        return String.format("#%08x", dummy4j.random().nextLong(MAX_RGBA));
+        return String.format("#%08x", dummy4j.number().nextLong(MAX_RGBA));
     }
 
     public Color rgb() {
-        return new Color(dummy4j.random().nextInt(MAX_RGB));
+        return new Color(dummy4j.number().nextInt(MAX_RGB));
     }
 
     public Color rgba() {
-        int randomValue = (int) dummy4j.random().nextLong(MAX_RGBA);
+        int randomValue = (int) dummy4j.number().nextLong(MAX_RGBA);
         return new Color(randomValue, true);
     }
 
     public HSB hsb() {
-        return new HSB(dummy4j.random().nextFloat(MAX_ANGLE), dummy4j.random().nextFloat(),
-                dummy4j.random().nextFloat());
+        return new HSB(dummy4j.number().nextFloat(MAX_ANGLE), dummy4j.number().nextFloat(),
+                dummy4j.number().nextFloat());
     }
 
     public HSBA hsba() {
-        return new HSBA(dummy4j.random().nextFloat(MAX_ANGLE), dummy4j.random().nextFloat(),
-                dummy4j.random().nextFloat(), dummy4j.random().nextFloat());
+        return new HSBA(dummy4j.number().nextFloat(MAX_ANGLE), dummy4j.number().nextFloat(),
+                dummy4j.number().nextFloat(), dummy4j.number().nextFloat());
     }
 
     public HSL hsl() {
-        return new HSL(dummy4j.random().nextFloat(MAX_ANGLE), dummy4j.random().nextFloat(),
-                dummy4j.random().nextFloat());
+        return new HSL(dummy4j.number().nextFloat(MAX_ANGLE), dummy4j.number().nextFloat(),
+                dummy4j.number().nextFloat());
     }
 
     public HSLA hsla() {
-        return new HSLA(dummy4j.random().nextFloat(MAX_ANGLE), dummy4j.random().nextFloat(),
-                dummy4j.random().nextFloat(), dummy4j.random().nextFloat());
+        return new HSLA(dummy4j.number().nextFloat(MAX_ANGLE), dummy4j.number().nextFloat(),
+                dummy4j.number().nextFloat(), dummy4j.number().nextFloat());
     }
 
     public CMYK cmyk() {
-        return new CMYK(dummy4j.random().nextFloat(), dummy4j.random().nextFloat(), dummy4j.random().nextFloat(),
-                dummy4j.random().nextFloat());
+        return new CMYK(dummy4j.number().nextFloat(), dummy4j.number().nextFloat(), dummy4j.number().nextFloat(),
+                dummy4j.number().nextFloat());
     }
 }

@@ -1,7 +1,7 @@
 package dev.codesoapbox.dummy4j.dummies;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
-import dev.codesoapbox.dummy4j.RandomService;
+import dev.codesoapbox.dummy4j.NumberService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,7 +21,7 @@ class NatoPhoneticAlphabetDummyTest {
     private Dummy4j dummy4j;
 
     @Mock
-    private RandomService randomService;
+    private NumberService numberService;
 
     @BeforeEach
     void setUp() {
@@ -30,9 +30,9 @@ class NatoPhoneticAlphabetDummyTest {
 
     @Test
     void shouldReturnRandomWord() {
-        when(dummy4j.random())
-                .thenReturn(randomService);
-        when(randomService.nextInt(35))
+        when(dummy4j.number())
+                .thenReturn(numberService);
+        when(numberService.nextInt(35))
                 .thenReturn(4);
 
         assertEquals("Echo", natoPhoneticAlphabetDummy.word());

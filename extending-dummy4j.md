@@ -142,9 +142,9 @@ The `DefinitionProvider` interface represents the source of dummy data definitio
 
 `ExpressionResolver` is responsible for all logic of parsing and resolving expressions into actual dummy data.
 
-## RandomService
+## NumberService
 
-`RandomService` encapsulates Java's `Random` and provides additional functionality, such as accessing the seed.
+`NumberService` encapsulates Java's `Random` and provides additional functionality, such as accessing the seed.
 
 ## LocalizedDummyDefinitions
 

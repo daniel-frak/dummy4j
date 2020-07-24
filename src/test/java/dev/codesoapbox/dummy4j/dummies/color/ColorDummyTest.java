@@ -2,7 +2,7 @@ package dev.codesoapbox.dummy4j.dummies.color;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
 import dev.codesoapbox.dummy4j.ExpressionResolver;
-import dev.codesoapbox.dummy4j.RandomService;
+import dev.codesoapbox.dummy4j.NumberService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,7 +28,7 @@ class ColorDummyTest {
     private ExpressionResolver expressionResolver;
 
     @Mock
-    private RandomService randomService;
+    private NumberService numberService;
 
     private ColorDummy colorDummy;
 
@@ -76,29 +76,29 @@ class ColorDummyTest {
 
     @Test
     void shouldReturnHex() {
-        mockRandomService();
-        when(randomService.nextInt(MAX_RGB))
+        mockNumberService();
+        when(numberService.nextInt(MAX_RGB))
                 .thenReturn(11896066);
         assertEquals("#b58502", colorDummy.hex());
     }
 
-    private void mockRandomService() {
-        when(dummy4j.random())
-                .thenReturn(randomService);
+    private void mockNumberService() {
+        when(dummy4j.number())
+                .thenReturn(numberService);
     }
 
     @Test
     void shouldReturnHexAlpha() {
-        mockRandomService();
-        when(randomService.nextLong(MAX_RGBA))
+        mockNumberService();
+        when(numberService.nextLong(MAX_RGBA))
                 .thenReturn(3890366421L);
         assertEquals("#e7e247d5", colorDummy.hexAlpha());
     }
 
     @Test
     void shouldReturnRGB() {
-        mockRandomService();
-        when(randomService.nextInt(MAX_RGB))
+        mockNumberService();
+        when(numberService.nextInt(MAX_RGB))
                 .thenReturn(11896066);
         Color color = colorDummy.rgb();
         assertAll(
@@ -111,8 +111,8 @@ class ColorDummyTest {
 
     @Test
     void shouldReturnRGBA() {
-        mockRandomService();
-        when(randomService.nextLong(MAX_RGBA))
+        mockNumberService();
+        when(numberService.nextLong(MAX_RGBA))
                 .thenReturn(3890366421L);
         Color color = colorDummy.rgba();
         assertAll(
@@ -126,10 +126,10 @@ class ColorDummyTest {
 
     @Test
     void shouldReturnHSB() {
-        mockRandomService();
-        when(randomService.nextFloat(MAX_ANGLE))
+        mockNumberService();
+        when(numberService.nextFloat(MAX_ANGLE))
                 .thenReturn(150.16583F);
-        when(randomService.nextFloat())
+        when(numberService.nextFloat())
                 .thenReturn(0.3374765F);
         HSB color = colorDummy.hsb();
         assertAll(
@@ -141,10 +141,10 @@ class ColorDummyTest {
 
     @Test
     void shouldReturnHSBA() {
-        mockRandomService();
-        when(randomService.nextFloat(MAX_ANGLE))
+        mockNumberService();
+        when(numberService.nextFloat(MAX_ANGLE))
                 .thenReturn(150.16583F);
-        when(randomService.nextFloat())
+        when(numberService.nextFloat())
                 .thenReturn(0.3374765F);
         HSBA color = colorDummy.hsba();
         assertAll(
@@ -157,10 +157,10 @@ class ColorDummyTest {
 
     @Test
     void shouldReturnHSL() {
-        mockRandomService();
-        when(randomService.nextFloat(MAX_ANGLE))
+        mockNumberService();
+        when(numberService.nextFloat(MAX_ANGLE))
                 .thenReturn(150.16583F);
-        when(randomService.nextFloat())
+        when(numberService.nextFloat())
                 .thenReturn(0.3374765F);
         HSL color = colorDummy.hsl();
         assertAll(
@@ -172,10 +172,10 @@ class ColorDummyTest {
 
     @Test
     void shouldReturnHSLA() {
-        mockRandomService();
-        when(randomService.nextFloat(MAX_ANGLE))
+        mockNumberService();
+        when(numberService.nextFloat(MAX_ANGLE))
                 .thenReturn(150.16583F);
-        when(randomService.nextFloat())
+        when(numberService.nextFloat())
                 .thenReturn(0.3374765F);
         HSLA color = colorDummy.hsla();
         assertAll(
@@ -188,8 +188,8 @@ class ColorDummyTest {
 
     @Test
     void shouldReturnCMYK() {
-        mockRandomService();
-        when(randomService.nextFloat())
+        mockNumberService();
+        when(numberService.nextFloat())
                 .thenReturn(0.3374765F);
         CMYK color = colorDummy.cmyk();
         assertAll(
