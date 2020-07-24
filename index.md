@@ -46,6 +46,7 @@ While you can easily add your own dummy data definitions, the following are avai
 * Address
 * Lorem
 * Date and Time *(since 0.4.0)*
+* Identifier *(since 0.5.0)*
 * Education *(since 0.3.0)*
 * Book *(since 0.2.0)*
 * Research Paper *(since 0.2.0)*
