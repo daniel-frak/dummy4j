@@ -24,7 +24,7 @@ class ConvenienceMethodsTest {
     private ConvenienceMethods convenienceMethods;
 
     @Mock
-    private NumberService random;
+    private RandomService random;
 
     @BeforeEach
     void setUp() {

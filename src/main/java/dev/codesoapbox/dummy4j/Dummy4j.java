@@ -18,7 +18,7 @@ import java.util.function.Supplier;
 public class Dummy4j {
 
     protected final ExpressionResolver expressionResolver;
-    protected final NumberService numberService;
+    protected final RandomService randomService;
     protected final Dummies dummies;
     protected final UniqueValues uniqueValues;
     protected final ConvenienceMethods convenienceMethods;
@@ -40,7 +40,7 @@ public class Dummy4j {
      * @since 0.3.0
      */
     public Dummy4j(Long seed, List<String> locales, List<String> paths) {
-        this.numberService = seed != null ? new NumberService(seed) : new NumberService();
+        this.randomService = seed != null ? new RandomService(seed) : new RandomService();
 
         YamlFileDefinitionProvider definitionProvider;
         if (paths == null) {
@@ -50,27 +50,27 @@ public class Dummy4j {
         }
 
         if (locales != null) {
-            this.expressionResolver = new ExpressionResolver(locales, this.numberService,
+            this.expressionResolver = new ExpressionResolver(locales, this.randomService,
                     definitionProvider);
         } else {
-            this.expressionResolver = new ExpressionResolver(null, this.numberService,
+            this.expressionResolver = new ExpressionResolver(null, this.randomService,
                     definitionProvider);
         }
 
         this.dummies = new Dummies(this);
         this.uniqueValues = new UniqueValues();
-        this.convenienceMethods = new ConvenienceMethods(numberService);
+        this.convenienceMethods = new ConvenienceMethods(randomService);
     }
 
-    public Dummy4j(ExpressionResolver expressionResolver, NumberService numberService) {
-        this(expressionResolver, numberService, Dummies::new, new UniqueValues(),
-                new ConvenienceMethods(numberService));
+    public Dummy4j(ExpressionResolver expressionResolver, RandomService randomService) {
+        this(expressionResolver, randomService, Dummies::new, new UniqueValues(),
+                new ConvenienceMethods(randomService));
     }
 
-    protected Dummy4j(ExpressionResolver expressionResolver, NumberService numberService,
+    protected Dummy4j(ExpressionResolver expressionResolver, RandomService randomService,
                    Function<? super Dummy4j, Dummies> dummiesFactory, UniqueValues uniqueValues,
                    ConvenienceMethods convenienceMethods) {
-        this.numberService = numberService;
+        this.randomService = randomService;
         this.expressionResolver = expressionResolver;
         this.dummies = dummiesFactory.apply(this);
         this.uniqueValues = uniqueValues;
@@ -99,7 +99,14 @@ public class Dummy4j {
      * Provides methods for generating random numbers
      */
     public NumberService number() {
-        return numberService;
+        return randomService;
+    }
+
+    /**
+     * @return a random boolean value
+     */
+    public boolean nextBoolean() {
+        return randomService.nextBoolean();
     }
 
     /**

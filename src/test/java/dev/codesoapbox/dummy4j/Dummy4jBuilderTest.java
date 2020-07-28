@@ -15,7 +15,7 @@ class Dummy4jBuilderTest {
         Dummy4j dummy = new Dummy4jBuilder()
                 .seed(seed)
                 .build();
-        assertEquals(seed, dummy.numberService.getSeed());
+        assertEquals(seed, dummy.randomService.getSeed());
     }
 
     @Test

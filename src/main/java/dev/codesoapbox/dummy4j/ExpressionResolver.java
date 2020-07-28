@@ -18,17 +18,17 @@ public class ExpressionResolver {
     private static final Pattern VARIABLE_PATTERN = Pattern.compile("#\\{(.*?)\\}");
     private static final Pattern DIGIT_PATTERN = Pattern.compile("#(?!\\{)");
 
-    protected final NumberService numberService;
+    protected final RandomService randomService;
     protected final List<String> locales;
     protected final Map<String, LocalizedDummyDefinitions> localizedDefinitions;
 
-    public ExpressionResolver(List<String> locales, NumberService numberService,
+    public ExpressionResolver(List<String> locales, RandomService randomService,
                               DefinitionProvider definitionProvider) {
         if(locales == null || locales.isEmpty()) {
             locales = singletonList("en");
         }
         this.locales = locales;
-        this.numberService = numberService;
+        this.randomService = randomService;
         this.localizedDefinitions = Maps.uniqueIndex(definitionProvider.get(), LocalizedDummyDefinitions::getLocale);
 
         locales.forEach(locale -> {
@@ -71,7 +71,7 @@ public class ExpressionResolver {
         final Matcher digitMatcher = DIGIT_PATTERN.matcher(expressionWithResolvedKeys);
 
         return replace(expressionWithResolvedKeys, digitMatcher,
-                () -> String.valueOf(numberService.nextInt(9)));
+                () -> String.valueOf(randomService.nextInt(9)));
     }
 
     private String replaceKeyPlaceholders(String expression) {
@@ -110,7 +110,7 @@ public class ExpressionResolver {
     }
 
     private String getRandom(List<String> result) {
-        int i = numberService.nextInt(result.size() - 1);
+        int i = randomService.nextInt(result.size() - 1);
         return result.get(i);
     }
 }

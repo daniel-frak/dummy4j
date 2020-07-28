@@ -14,72 +14,72 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class NumberServiceTest {
+class RandomServiceTest {
 
-    private NumberService numberService;
+    private RandomService randomService;
 
     @Mock
     private Random random;
 
     @BeforeEach
     void setUp() {
-        numberService = new NumberService(random, 1L);
+        randomService = new RandomService(random, 1L);
     }
 
     @Test
     void shouldGetSeed() {
-        assertEquals(1L, numberService.getSeed());
+        assertEquals(1L, randomService.getSeed());
     }
 
     @Test
     void shouldGetRandomBoolean() {
         when(random.nextBoolean())
                 .thenReturn(false);
-        assertFalse(numberService.nextBoolean());
+        assertFalse(randomService.nextBoolean());
         when(random.nextBoolean())
                 .thenReturn(true);
-        assertTrue(numberService.nextBoolean());
+        assertTrue(randomService.nextBoolean());
     }
 
     @Test
     void shouldGetRandomInt() {
         when(random.nextInt())
                 .thenReturn(2);
-        assertEquals(2, numberService.nextInt());
+        assertEquals(2, randomService.nextInt());
     }
 
     @Test
     void shouldConvertNegativeRandomIntToOtherPositiveNumber() {
         when(random.nextInt())
                 .thenReturn(-5);
-        assertTrue(numberService.nextInt() >= 0);
+        assertTrue(randomService.nextInt() >= 0);
     }
 
     @Test
     void shouldGetRandomIntWhenUpperBoundIsIntegerMax() {
         when(random.nextInt(Integer.MAX_VALUE))
                 .thenReturn(2147483646);
-        assertEquals(Integer.MAX_VALUE - 1, numberService.nextInt(Integer.MAX_VALUE));
+        assertEquals(Integer.MAX_VALUE - 1, randomService.nextInt(Integer.MAX_VALUE));
     }
 
     @Test
     void shouldGetRandomIntWithInclusiveUpperBound() {
         when(random.nextInt(11))
                 .thenReturn(10);
-        assertEquals(10, numberService.nextInt(10));
+        assertEquals(10, randomService.nextInt(10));
     }
 
     @Test
     void shouldGetRandomIntWithLowerAndUpperBoundInclusiveLower() {
         when(random.nextInt(6))
                 .thenReturn(0);
-        assertEquals(10, numberService.nextInt(10, 15));
+        assertEquals(10, randomService.nextInt(10, 15));
     }
 
     @Test
     void shouldThrowExceptionOnNegativeUpperBoundForRandomInteger() {
         assertThrows(IllegalArgumentException.class,
-                () -> numberService.nextInt(-1));
+                () -> randomService.nextInt(-1));
     }
 
     @ParameterizedTest
@@ -90,14 +90,14 @@ class NumberServiceTest {
     })
     void shouldThrowExceptionOnInvalidBoundsForRandomInteger(int lowerBound, int upperBound) {
         assertThrows(IllegalArgumentException.class,
-                () -> numberService.nextInt(lowerBound, upperBound));
+                () -> randomService.nextInt(lowerBound, upperBound));
     }
 
     @Test
     void shouldAcceptZeroBoundForRandomInteger() {
         when(random.nextInt(1))
                 .thenReturn(0);
-        assertEquals(0, numberService.nextInt(0));
+        assertEquals(0, randomService.nextInt(0));
     }
 
     @Test
@@ -105,9 +105,9 @@ class NumberServiceTest {
         when(random.nextInt(1))
                 .thenReturn(0);
         assertAll(
-                () -> assertEquals(0, numberService.nextInt(0, 0)),
-                () -> assertEquals(10, numberService.nextInt(10, 10)),
-                () -> assertEquals(Integer.MAX_VALUE, numberService.nextInt(Integer.MAX_VALUE, Integer.MAX_VALUE))
+                () -> assertEquals(0, randomService.nextInt(0, 0)),
+                () -> assertEquals(10, randomService.nextInt(10, 10)),
+                () -> assertEquals(Integer.MAX_VALUE, randomService.nextInt(Integer.MAX_VALUE, Integer.MAX_VALUE))
         );
     }
 
@@ -115,41 +115,41 @@ class NumberServiceTest {
     void shouldGetRandomLong() {
         when(random.nextLong())
                 .thenReturn(2L);
-        assertEquals(2L, numberService.nextLong());
+        assertEquals(2L, randomService.nextLong());
     }
 
     @Test
     void shouldConvertNegativeRandomLongToOtherPositiveNumber() {
         when(random.nextLong())
                 .thenReturn(-5L);
-        assertTrue(numberService.nextLong() >= 0);
+        assertTrue(randomService.nextLong() >= 0);
     }
 
     @Test
     void shouldGetRandomLongWhenUpperBoundIsLongMax() {
         when(random.nextDouble())
                 .thenReturn(0.9999999999999999D);
-        assertEquals(9223372036854774784L, numberService.nextLong(Long.MAX_VALUE));
+        assertEquals(9223372036854774784L, randomService.nextLong(Long.MAX_VALUE));
     }
 
     @Test
     void shouldGetRandomLongWithInclusiveUpperBound() {
         when(random.nextDouble())
                 .thenReturn(0.9999999999999999D);
-        assertEquals(17L, numberService.nextLong(17L));
+        assertEquals(17L, randomService.nextLong(17L));
     }
 
     @Test
     void shouldGetRandomLongWithLowerAndUpperBoundInclusiveLower() {
         when(random.nextDouble())
                 .thenReturn(0.01D);
-        assertEquals(1, numberService.nextLong(1L, 10L));
+        assertEquals(1, randomService.nextLong(1L, 10L));
     }
 
     @Test
     void shouldThrowExceptionOnNegativeUpperBoundForRandomLong() {
         assertThrows(IllegalArgumentException.class,
-                () -> numberService.nextLong(-1L));
+                () -> randomService.nextLong(-1L));
     }
 
     @ParameterizedTest
@@ -160,14 +160,14 @@ class NumberServiceTest {
     })
     void shouldThrowExceptionOnInvalidBoundsForRandomLong(long lowerBound, long upperBound) {
         assertThrows(IllegalArgumentException.class,
-                () -> numberService.nextLong(lowerBound, upperBound));
+                () -> randomService.nextLong(lowerBound, upperBound));
     }
 
     @Test
     void shouldAcceptZeroBoundForRandomLong() {
         when(random.nextDouble())
                 .thenReturn(0.9D);
-        assertEquals(0, numberService.nextLong(0));
+        assertEquals(0, randomService.nextLong(0));
     }
 
     @Test
@@ -175,9 +175,9 @@ class NumberServiceTest {
         when(random.nextDouble())
                 .thenReturn(0.9D);
         assertAll(
-                () -> assertEquals(0L, numberService.nextLong(0L, 0L)),
-                () -> assertEquals(10L, numberService.nextLong(10L, 10L)),
-                () -> assertEquals(Long.MAX_VALUE, numberService.nextLong(Long.MAX_VALUE, Long.MAX_VALUE))
+                () -> assertEquals(0L, randomService.nextLong(0L, 0L)),
+                () -> assertEquals(10L, randomService.nextLong(10L, 10L)),
+                () -> assertEquals(Long.MAX_VALUE, randomService.nextLong(Long.MAX_VALUE, Long.MAX_VALUE))
         );
     }
 
@@ -185,7 +185,7 @@ class NumberServiceTest {
     void shouldGetRandomDouble() {
         when(random.nextDouble())
                 .thenReturn(0.2D);
-        assertEquals(0.2D, numberService.nextDouble());
+        assertEquals(0.2D, randomService.nextDouble());
     }
 
     @Test
@@ -193,8 +193,8 @@ class NumberServiceTest {
         when(random.nextDouble())
                 .thenReturn(0.2D);
         assertAll(
-                () -> assertEquals(0.8D, numberService.nextDouble(4D)),
-                () -> assertEquals(Double.MAX_VALUE * 0.2D, numberService.nextDouble(Double.MAX_VALUE))
+                () -> assertEquals(0.8D, randomService.nextDouble(4D)),
+                () -> assertEquals(Double.MAX_VALUE * 0.2D, randomService.nextDouble(Double.MAX_VALUE))
         );
     }
 
@@ -202,20 +202,20 @@ class NumberServiceTest {
     void shouldGetRandomDoubleWithLowerAndUpperBound() {
         when(random.nextDouble())
                 .thenReturn(0.2D);
-        assertEquals(2.8D, numberService.nextDouble(1D, 10D));
+        assertEquals(2.8D, randomService.nextDouble(1D, 10D));
     }
 
     @Test
     void shouldGetRandomDoubleWithLowerAndUpperBoundInclusiveLower() {
         when(random.nextDouble())
                 .thenReturn(0D);
-        assertEquals(4, numberService.nextDouble(4, 5));
+        assertEquals(4, randomService.nextDouble(4, 5));
     }
 
     @Test
     void shouldThrowExceptionOnNegativeUpperBoundForRandomDouble() {
         assertThrows(IllegalArgumentException.class,
-                () -> numberService.nextDouble(-1D));
+                () -> randomService.nextDouble(-1D));
     }
 
     @ParameterizedTest
@@ -226,14 +226,14 @@ class NumberServiceTest {
     })
     void shouldThrowExceptionOnInvalidBoundsForRandomDouble(double lowerBound, double upperBound) {
         assertThrows(IllegalArgumentException.class,
-                () -> numberService.nextDouble(lowerBound, upperBound));
+                () -> randomService.nextDouble(lowerBound, upperBound));
     }
 
     @Test
     void shouldAcceptZeroBoundForRandomDouble() {
         when(random.nextDouble())
                 .thenReturn(0.2D);
-        assertEquals(0, numberService.nextDouble(0));
+        assertEquals(0, randomService.nextDouble(0));
     }
 
     @Test
@@ -241,9 +241,9 @@ class NumberServiceTest {
         when(random.nextDouble())
                 .thenReturn(0.2D);
         assertAll(
-                () -> assertEquals(0, numberService.nextDouble(0, 0)),
-                () -> assertEquals(10D, numberService.nextDouble(10D, 10D)),
-                () -> assertEquals(Double.MAX_VALUE, numberService.nextDouble(Double.MAX_VALUE, Double.MAX_VALUE))
+                () -> assertEquals(0, randomService.nextDouble(0, 0)),
+                () -> assertEquals(10D, randomService.nextDouble(10D, 10D)),
+                () -> assertEquals(Double.MAX_VALUE, randomService.nextDouble(Double.MAX_VALUE, Double.MAX_VALUE))
         );
     }
 
@@ -251,28 +251,28 @@ class NumberServiceTest {
     void shouldGetRandomFloat() {
         when(random.nextFloat())
                 .thenReturn(0.2F);
-        assertEquals(0.2F, numberService.nextFloat());
+        assertEquals(0.2F, randomService.nextFloat());
     }
 
     @Test
     void shouldGetRandomFloatWithUpperBound() {
         when(random.nextFloat())
                 .thenReturn(0.8F);
-        assertEquals(8F, numberService.nextFloat(10F));
-        assertEquals(Float.MAX_VALUE * 0.8F, numberService.nextFloat(Float.MAX_VALUE));
+        assertEquals(8F, randomService.nextFloat(10F));
+        assertEquals(Float.MAX_VALUE * 0.8F, randomService.nextFloat(Float.MAX_VALUE));
     }
 
     @Test
     void shouldGetRandomFloatWithLowerAndUpperBoundInclusiveLower() {
         when(random.nextFloat())
                 .thenReturn(0F);
-        assertEquals(4F, numberService.nextFloat(4F, 5F));
+        assertEquals(4F, randomService.nextFloat(4F, 5F));
     }
 
     @Test
     void shouldThrowExceptionOnNegativeUpperBoundForRandomFloat() {
         assertThrows(IllegalArgumentException.class,
-                () -> numberService.nextFloat(-1F));
+                () -> randomService.nextFloat(-1F));
     }
 
     @ParameterizedTest
@@ -283,14 +283,14 @@ class NumberServiceTest {
     })
     void shouldThrowExceptionOnInvalidBoundsForRandomFloat(float lowerBound, float upperBound) {
         assertThrows(IllegalArgumentException.class,
-                () -> numberService.nextFloat(lowerBound, upperBound));
+                () -> randomService.nextFloat(lowerBound, upperBound));
     }
 
     @Test
     void shouldAcceptZeroBoundForRandomFloat() {
         when(random.nextFloat())
                 .thenReturn(0.3F);
-        assertEquals(0F, numberService.nextFloat(0F));
+        assertEquals(0F, randomService.nextFloat(0F));
     }
 
     @Test
@@ -298,9 +298,9 @@ class NumberServiceTest {
         when(random.nextFloat())
                 .thenReturn(0.3F);
         assertAll(
-                () -> assertEquals(0F, numberService.nextFloat(0F, 0F)),
-                () -> assertEquals(10F, numberService.nextFloat(10F, 10F)),
-                () -> assertEquals(Float.MAX_VALUE, numberService.nextFloat(Float.MAX_VALUE, Float.MAX_VALUE))
+                () -> assertEquals(0F, randomService.nextFloat(0F, 0F)),
+                () -> assertEquals(10F, randomService.nextFloat(10F, 10F)),
+                () -> assertEquals(Float.MAX_VALUE, randomService.nextFloat(Float.MAX_VALUE, Float.MAX_VALUE))
         );
     }
 }

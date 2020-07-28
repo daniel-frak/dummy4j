@@ -11,9 +11,9 @@ import java.util.function.Supplier;
  */
 public class ConvenienceMethods {
 
-    private final NumberService random;
+    private final RandomService random;
 
-    public ConvenienceMethods(NumberService random) {
+    public ConvenienceMethods(RandomService random) {
         this.random = random;
     }
 

@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 class ExpressionResolverConstructionTest {
 
     @Mock
-    private NumberService numberService;
+    private RandomService randomService;
 
     @Mock
     private DefinitionProvider definitionProvider;
@@ -33,7 +33,7 @@ class ExpressionResolverConstructionTest {
         when(definitionProvider.get())
                 .thenReturn(definitions);
 
-        ExpressionResolver resolver = new ExpressionResolver(null, numberService, definitionProvider);
+        ExpressionResolver resolver = new ExpressionResolver(null, randomService, definitionProvider);
 
         assertEquals(singletonList("en"), resolver.locales);
     }
@@ -47,7 +47,7 @@ class ExpressionResolverConstructionTest {
         when(definitionProvider.get())
                 .thenReturn(definitions);
 
-        ExpressionResolver resolver = new ExpressionResolver(emptyList(), numberService, definitionProvider);
+        ExpressionResolver resolver = new ExpressionResolver(emptyList(), randomService, definitionProvider);
 
         assertEquals(singletonList("en"), resolver.locales);
     }
@@ -62,7 +62,7 @@ class ExpressionResolverConstructionTest {
         when(definitionProvider.get())
                 .thenReturn(definitions);
 
-        ExpressionResolver resolver = new ExpressionResolver(singletonList(customLocale), numberService,
+        ExpressionResolver resolver = new ExpressionResolver(singletonList(customLocale), randomService,
                 definitionProvider);
 
         assertEquals(singletonList(customLocale), resolver.locales);
@@ -79,7 +79,7 @@ class ExpressionResolverConstructionTest {
                 .thenReturn(definitions);
 
         assertThrows(MissingLocaleException.class,
-                () -> new ExpressionResolver(singletonList("en"), numberService, definitionProvider));
+                () -> new ExpressionResolver(singletonList("en"), randomService, definitionProvider));
     }
 
 }

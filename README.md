@@ -103,14 +103,16 @@ String sixSentenceParagraph = dummy.lorem().paragraph(6);
 
 String romanNumeralsBetweenOneAndFifteen = dummy.numerals().roman(1, 15);
 
+int betweenFiveAndTenInclusive = dummy.number().nextInt(5, 10);
+
+boolean trueOrFalse = dummy.nextBoolean();
+
 LocalDate birthdayBetween18And35 = dummy.dateAndTime().birthday(18, 35);
 
 LocalDateTime upTo100YearsInThePast = dummy.dateAndTime().past(100, ChronoUnit.YEARS);
 
 LocalDateTime upTo25YearsFrom1800 = dummy.dateAndTime().after(
         LocalDateTime.parse("1800-01-01T00:00:00"), 25, ChronoUnit.YEARS);
-
-int betweenFiveAndTenInclusive = dummy.random().nextInt(5, 10);
 
 MyEnum randomEnum = dummy.nextEnum(MyEnum.class);
 

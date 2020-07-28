@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -28,7 +28,7 @@ class Dummy4jTest {
     private ExpressionResolver expressionResolver;
 
     @Mock
-    private NumberService numberService;
+    private RandomService randomService;
 
     @Mock
     private Dummies dummies;
@@ -41,7 +41,7 @@ class Dummy4jTest {
 
     @BeforeEach
     void setUp() {
-        dummy4j = new Dummy4j(expressionResolver, numberService, d -> dummies, uniqueValues, convenienceMethods);
+        dummy4j = new Dummy4j(expressionResolver, randomService, d -> dummies, uniqueValues, convenienceMethods);
     }
 
     @Test
@@ -56,7 +56,19 @@ class Dummy4jTest {
 
     @Test
     void shouldGetNumberService() {
-        assertEquals(numberService, dummy4j.number());
+        assertEquals(randomService, dummy4j.number());
+    }
+
+    @Test
+    void shouldReturnRandomBoolean() {
+        when(randomService.nextBoolean())
+                .thenReturn(true)
+                .thenReturn(false);
+
+        assertAll(
+                () -> assertTrue(dummy4j.nextBoolean()),
+                () -> assertFalse(dummy4j.nextBoolean())
+        );
     }
 
     @Test
