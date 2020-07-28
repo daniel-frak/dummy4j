@@ -3,6 +3,7 @@ package dev.codesoapbox.dummy4j.dummies;
 import dev.codesoapbox.dummy4j.Dummy4j;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.StringJoiner;
 
@@ -65,7 +66,7 @@ public class NatoPhoneticAlphabetDummy {
 
     public String of(String text) {
         StringJoiner joiner = new StringJoiner(" ");
-        text.toLowerCase().chars()
+        text.toLowerCase(Locale.ENGLISH).chars()
                 .forEach(c -> joiner.add(natoAlphabet.get((char) c)));
         return joiner.toString();
     }
