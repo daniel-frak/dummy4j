@@ -78,8 +78,9 @@ class ExpressionResolverConstructionTest {
         when(definitionProvider.get())
                 .thenReturn(definitions);
 
+        List<String> locales = singletonList("en");
         assertThrows(MissingLocaleException.class,
-                () -> new ExpressionResolver(singletonList("en"), randomService, definitionProvider));
+                () -> new ExpressionResolver(locales, randomService, definitionProvider));
     }
 
 }
