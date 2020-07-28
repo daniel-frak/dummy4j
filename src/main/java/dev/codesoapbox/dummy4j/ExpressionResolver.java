@@ -15,7 +15,7 @@ import static java.util.Collections.singletonList;
 
 public class ExpressionResolver {
 
-    private static final Pattern VARIABLE_PATTERN = Pattern.compile("#\\{(.*?)\\}");
+    private static final Pattern VARIABLE_PATTERN = Pattern.compile("#\\{(.*?)}");
     private static final Pattern DIGIT_PATTERN = Pattern.compile("#(?!\\{)");
 
     protected final RandomService randomService;
