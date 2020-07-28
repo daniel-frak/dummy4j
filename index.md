@@ -41,20 +41,20 @@ files inside the `resources/dummy4j` folder. The default locale is `en`.
 
 While you can easily add your own dummy data definitions, the following are available out of the box: 
 
-* Name
-* Nation *(since 0.2.0)*
-* Address
-* Lorem
-* Date and Time *(since 0.4.0)*
+* [Name](https://javadoc.io/doc/dev.codesoapbox/dummy4j/latest/dev/codesoapbox/dummy4j/dummies/NameDummy.html)
+* [Nation](https://javadoc.io/doc/dev.codesoapbox/dummy4j/latest/dev/codesoapbox/dummy4j/dummies/NationDummy.html) *(since 0.2.0)*
+* [Address](https://javadoc.io/doc/dev.codesoapbox/dummy4j/latest/dev/codesoapbox/dummy4j/dummies/AddressDummy.html)
+* [Lorem](https://javadoc.io/doc/dev.codesoapbox/dummy4j/latest/dev/codesoapbox/dummy4j/dummies/LoremDummy.html)
+* [Date and Time](https://javadoc.io/doc/dev.codesoapbox/dummy4j/latest/dev/codesoapbox/dummy4j/dummies/DateAndTimeDummy.html) *(since 0.4.0)*
 * Identifier *(since 0.5.0)*
-* Education *(since 0.3.0)*
-* Book *(since 0.2.0)*
-* Research Paper *(since 0.2.0)*
-* Sci-fi
-* Color *(since 0.4.0)*
-* Numerals *(since 0.4.0)*
-* Medical *(since 0.4.0)*
-* Nato Phonetic Alphabet *(since 0.4.0)*
+* [Education]() *(since 0.3.0)*
+* [Book](https://javadoc.io/doc/dev.codesoapbox/dummy4j/latest/dev/codesoapbox/dummy4j/dummies/EducationDummy.html) *(since 0.2.0)*
+* [Research Paper](https://javadoc.io/doc/dev.codesoapbox/dummy4j/latest/dev/codesoapbox/dummy4j/dummies/ResearchPaperDummy.html) *(since 0.2.0)*
+* [Sci-fi](https://javadoc.io/doc/dev.codesoapbox/dummy4j/latest/dev/codesoapbox/dummy4j/dummies/ScifiDummy.html)
+* [Color](https://javadoc.io/doc/dev.codesoapbox/dummy4j/latest/dev/codesoapbox/dummy4j/dummies/color/ColorDummy.html) *(since 0.4.0)*
+* [Numerals](https://javadoc.io/doc/dev.codesoapbox/dummy4j/latest/dev/codesoapbox/dummy4j/dummies/NumeralsDummy.html) *(since 0.4.0)*
+* [Medical](https://javadoc.io/doc/dev.codesoapbox/dummy4j/latest/dev/codesoapbox/dummy4j/dummies/MedicalDummy.html) *(since 0.4.0)*
+* [Nato Phonetic Alphabet](https://javadoc.io/doc/dev.codesoapbox/dummy4j/latest/dev/codesoapbox/dummy4j/dummies/NatoPhoneticAlphabetDummy.html) *(since 0.4.0)*
 
 # API stability notice
 
