@@ -18,6 +18,8 @@ Dummy4j is an easy to use dummy data generator library for Java, designed for ex
 
 Dummy4j can be used in all projects using Java 8+.
 
+![Dummy4j](readme-images/dummy4j_usage_research_paper.gif)
+
 ## Getting started
 
 Add the following dependency to your `pom.xml`:
