@@ -12,6 +12,7 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/daniel-frak/dummy4j)
 ![GitHub](https://img.shields.io/github/license/daniel-frak/dummy4j)
 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/dev.codesoapbox/dummy4j/badge.svg)](https://search.maven.org/artifact/dev.codesoapbox/dummy4j)
 [![javadoc](https://javadoc.io/badge2/dev.codesoapbox/dummy4j/javadoc.svg)](https://javadoc.io/doc/dev.codesoapbox/dummy4j)
 
 Dummy4j is an easy to use dummy data generator library for Java, designed for extensibility.
