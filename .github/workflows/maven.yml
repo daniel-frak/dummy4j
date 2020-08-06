@@ -20,4 +20,5 @@ jobs:
     - name: Build and analyze
       run: mvn -B verify sonar:sonar -P code-coverage -P sonar-cloud --file pom.xml
       env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
