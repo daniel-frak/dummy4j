@@ -17,7 +17,7 @@ import java.util.StringJoiner;
  * <p><ul>
  * <li>port: -1 (no port)</li>
  * <li>protocol: https</li>
- * </ul></p>
+ * </ul>
  */
 public final class UrlBuilder {
 
