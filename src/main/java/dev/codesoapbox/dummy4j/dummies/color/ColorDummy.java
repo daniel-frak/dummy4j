@@ -18,7 +18,7 @@ public class ColorDummy {
     }
 
     public String primaryName() {
-        return dummy4j.expressionResolver().resolveKey("color.primary_name");
+        return dummy4j.expressionResolver().resolve("#{color.primary_name}");
     }
 
     public String basicName() {
@@ -26,7 +26,7 @@ public class ColorDummy {
     }
 
     public String additionalName() {
-        return dummy4j.expressionResolver().resolveKey("color.additional_name");
+        return dummy4j.expressionResolver().resolve("#{color.additional_name}");
     }
 
     public String name() {

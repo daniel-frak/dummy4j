@@ -54,7 +54,7 @@ class ExpressionResolverTest {
 
     @Test
     void shouldResolveKey() {
-        String result = expressionResolver.resolveKey("something.deep");
+        String result = expressionResolver.resolve("#{something.deep}");
         assertEquals("value", result);
     }
 
@@ -68,13 +68,13 @@ class ExpressionResolverTest {
         when(dummyDefinitions.getLocale())
                 .thenReturn("en");
         expressionResolver = new ExpressionResolver(singletonList("en"), randomService, definitionProvider);
-        String result = expressionResolver.resolveKey("something.notexisting");
+        String result = expressionResolver.resolve("#{something.notexisting}");
         assertEquals("", result);
     }
 
     @Test
     void shouldReturnEmptyStringWhenKeyIsEmpty() {
-        String result = expressionResolver.resolveKey("something.empty");
+        String result = expressionResolver.resolve("#{something.empty}");
         assertEquals("", result);
     }
 

@@ -14,56 +14,56 @@ public class NationDummy {
     }
 
     public String country() {
-        return dummy4j.expressionResolver().resolveKey("nation.country");
+        return dummy4j.expressionResolver().resolve("#{nation.country}");
     }
 
     public String countryCode() {
-        return dummy4j.expressionResolver().resolveKey("nation.country_code");
+        return dummy4j.expressionResolver().resolve("#{nation.country_code}");
     }
 
     public String nationality() {
-        return dummy4j.expressionResolver().resolveKey("nation.nationality");
+        return dummy4j.expressionResolver().resolve("#{nation.nationality}");
     }
 
     /**
      * @since 0.4.0
      */
     public String languageCodeTwoLetter() {
-        return dummy4j.expressionResolver().resolveKey("nation.language_code_iso_639_1");
+        return dummy4j.expressionResolver().resolve("#{nation.language_code_iso_639_1}");
     }
 
     /**
      * @since 0.4.0
      */
     public String languageCodeThreeLetter() {
-        return dummy4j.expressionResolver().resolveKey("nation.language_code_iso_639_2");
+        return dummy4j.expressionResolver().resolve("#{nation.language_code_iso_639_2}");
     }
 
     /**
      * @since 0.4.0
      */
     public String language() {
-        return dummy4j.expressionResolver().resolveKey("nation.language");
+        return dummy4j.expressionResolver().resolve("#{nation.language}");
     }
 
     /**
      * @since 0.4.0
      */
     public String languageCommon() {
-        return dummy4j.expressionResolver().resolveKey("nation.common_language");
+        return dummy4j.expressionResolver().resolve("#{nation.common_language}");
     }
 
     /**
      * @since 0.4.0
      */
     public String languageCodeTwoLetterCommon() {
-        return dummy4j.expressionResolver().resolveKey("nation.common_language_code_iso_639_1");
+        return dummy4j.expressionResolver().resolve("#{nation.common_language_code_iso_639_1}");
     }
 
     /**
      * @since 0.4.0
      */
     public String languageCodeThreeLetterCommon() {
-        return dummy4j.expressionResolver().resolveKey("nation.common_language_code_iso_639_2");
+        return dummy4j.expressionResolver().resolve("#{nation.common_language_code_iso_639_2}");
     }
 }

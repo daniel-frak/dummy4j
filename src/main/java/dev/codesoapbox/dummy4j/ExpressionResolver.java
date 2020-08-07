@@ -99,7 +99,7 @@ public class ExpressionResolver {
      * @param key the key to resolved
      * @return a random value based on the key
      */
-    public String resolveKey(String key) {
+    private String resolveKey(String key) {
         for (String locale : locales) {
             List<String> result = localizedDefinitions.get(locale).resolve(key);
             if (result != null && !result.isEmpty()) {

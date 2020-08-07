@@ -106,11 +106,11 @@ public class CustomDummy4j extends Dummy4j {
         }
 
         public String thing1() {
-            return dummy4j.expressionResolver.resolveKey("my_definitions.thing1");
+            return dummy4j.expressionResolver.resolve("#{my_definitions.thing1}");
         }
 
         public String thing2() {
-            return dummy4j.expressionResolver.resolveKey("my_definitions.thing2");
+            return dummy4j.expressionResolver.resolve("#{my_definitions.thing2}");
         }
 
         public String anyThing() {

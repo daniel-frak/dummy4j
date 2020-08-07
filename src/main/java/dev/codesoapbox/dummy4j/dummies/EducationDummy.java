@@ -14,7 +14,7 @@ public class EducationDummy {
     }
 
     public String major() {
-        return dummy4j.expressionResolver().resolveKey("education.major");
+        return dummy4j.expressionResolver().resolve("#{education.major}");
     }
 
     public String primaryInstitution() {

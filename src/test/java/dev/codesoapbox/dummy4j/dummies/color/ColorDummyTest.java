@@ -40,7 +40,7 @@ class ColorDummyTest {
     @Test
     void shouldReturnPrimaryName() {
         mockExpressionResolver();
-        when(expressionResolver.resolveKey("color.primary_name"))
+        when(expressionResolver.resolve("#{color.primary_name}"))
                 .thenReturn(expected);
         assertEquals(expected, colorDummy.primaryName());
     }
@@ -61,7 +61,7 @@ class ColorDummyTest {
     @Test
     void shouldReturnAdditionalName() {
         mockExpressionResolver();
-        when(expressionResolver.resolveKey("color.additional_name"))
+        when(expressionResolver.resolve("#{color.additional_name}"))
                 .thenReturn(expected);
         assertEquals(expected, colorDummy.additionalName());
     }

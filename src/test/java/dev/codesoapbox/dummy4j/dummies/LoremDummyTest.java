@@ -38,7 +38,7 @@ class LoremDummyTest {
     @Test
     void shouldReturnCharacter() {
         mockExpressionResolver();
-        when(expressionResolver.resolveKey("lorem.characters"))
+        when(expressionResolver.resolve("#{lorem.characters}"))
                 .thenReturn("a");
         assertEquals("a", loremDummy.character());
     }
@@ -51,7 +51,7 @@ class LoremDummyTest {
     @Test
     void shouldReturnStringOfCharacters() {
         mockExpressionResolver();
-        when(expressionResolver.resolveKey("lorem.characters"))
+        when(expressionResolver.resolve("#{lorem.characters}"))
                 .thenReturn("a");
         assertEquals("aaa", loremDummy.characters(3));
     }
@@ -65,7 +65,7 @@ class LoremDummyTest {
                 .thenReturn(END_WITH_DOT);
 
         mockExpressionResolver();
-        when(dummy4j.expressionResolver().resolveKey("lorem.word"))
+        when(dummy4j.expressionResolver().resolve("#{lorem.word}"))
                 .thenReturn("lorem");
 
         assertEquals("Lorem lorem lorem lorem.", loremDummy.sentence());
@@ -85,9 +85,9 @@ class LoremDummyTest {
                 .thenReturn(END_WITH_OTHER);
 
         mockExpressionResolver();
-        when(dummy4j.expressionResolver().resolveKey("lorem.word"))
+        when(dummy4j.expressionResolver().resolve("#{lorem.word}"))
                 .thenReturn("lorem");
-        when(dummy4j.expressionResolver().resolveKey("lorem.additional_sentence_ending_punctuation"))
+        when(dummy4j.expressionResolver().resolve("#{lorem.additional_sentence_ending_punctuation}"))
                 .thenReturn("!");
 
         assertEquals("Lorem lorem lorem lorem!", loremDummy.sentence());
@@ -100,7 +100,7 @@ class LoremDummyTest {
                 .thenReturn(END_WITH_DOT);
 
         mockExpressionResolver();
-        when(dummy4j.expressionResolver().resolveKey("lorem.word"))
+        when(dummy4j.expressionResolver().resolve("#{lorem.word}"))
                 .thenReturn("lorem");
 
         assertEquals("Lorem lorem.", loremDummy.sentence(2));
@@ -115,7 +115,7 @@ class LoremDummyTest {
                 .thenReturn(END_WITH_DOT);
 
         mockExpressionResolver();
-        when(dummy4j.expressionResolver().resolveKey("lorem.word"))
+        when(dummy4j.expressionResolver().resolve("#{lorem.word}"))
                 .thenReturn("lorem");
         assertEquals("Lorem.", loremDummy.sentence(1, 10));
     }
@@ -123,7 +123,7 @@ class LoremDummyTest {
     @Test
     void shouldReturnWord() {
         mockExpressionResolver();
-        when(expressionResolver.resolveKey("lorem.word"))
+        when(expressionResolver.resolve("#{lorem.word}"))
                 .thenReturn("lorem");
 
         assertEquals("lorem", loremDummy.word());
@@ -138,7 +138,7 @@ class LoremDummyTest {
                 .thenReturn(END_WITH_DOT);
 
         mockExpressionResolver();
-        when(dummy4j.expressionResolver().resolveKey("lorem.word"))
+        when(dummy4j.expressionResolver().resolve("#{lorem.word}"))
                 .thenReturn("lorem");
 
         assertEquals("Lorem lorem lorem. Lorem lorem lorem. Lorem lorem lorem.", loremDummy.paragraph());
@@ -153,7 +153,7 @@ class LoremDummyTest {
                 .thenReturn(END_WITH_DOT);
 
         mockExpressionResolver();
-        when(dummy4j.expressionResolver().resolveKey("lorem.word"))
+        when(dummy4j.expressionResolver().resolve("#{lorem.word}"))
                 .thenReturn("lorem");
 
         assertEquals("Lorem lorem lorem. Lorem lorem lorem.", loremDummy.paragraph(2));

@@ -14,14 +14,14 @@ public class MedicalDummy {
     }
 
     public String bloodType() {
-        return dummy4j.expressionResolver().resolveKey("medical.blood_type");
+        return dummy4j.expressionResolver().resolve("#{medical.blood_type}");
     }
 
     public String discipline() {
-        return dummy4j.expressionResolver().resolveKey("medical.discipline");
+        return dummy4j.expressionResolver().resolve("#{medical.discipline}");
     }
 
     public String occupation() {
-        return dummy4j.expressionResolver().resolveKey("medical.occupation");
+        return dummy4j.expressionResolver().resolve("#{medical.occupation}");
     }
 }
