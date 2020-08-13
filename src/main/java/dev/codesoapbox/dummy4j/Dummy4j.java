@@ -219,6 +219,11 @@ public class Dummy4j {
         return dummies.name();
     }
 
+    /**
+     * Provides methods for generating values related to countries, languages and nationalities
+     *
+     * @since 0.2.0
+     */
     public NationDummy nation() {
         return dummies.nation();
     }

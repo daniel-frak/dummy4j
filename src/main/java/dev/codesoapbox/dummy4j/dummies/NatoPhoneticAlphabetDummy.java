@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.StringJoiner;
 
 /**
+ * Provides methods for generating text in the NATO phonetic alphabet
+ *
  * @since 0.4.0
  */
 public class NatoPhoneticAlphabetDummy {
@@ -59,11 +61,17 @@ public class NatoPhoneticAlphabetDummy {
         this.dummy4j = dummy4j;
     }
 
+    /**
+     * Provides a random character from the NATO phonetic alphabet
+     */
     public String word() {
         String[] values = natoAlphabet.values().toArray(new String[0]);
         return values[dummy4j.number().nextInt(values.length - 1)];
     }
 
+    /**
+     * Spells out the given text in the NATO phonetic alphabet
+     */
     public String of(String text) {
         StringJoiner joiner = new StringJoiner(" ");
         text.toLowerCase(Locale.ENGLISH).chars()

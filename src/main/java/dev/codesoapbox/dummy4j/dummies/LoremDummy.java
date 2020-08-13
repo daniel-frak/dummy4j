@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Provides methods for generating text
+ */
 public class LoremDummy {
 
     private final Dummy4j dummy4j;
@@ -15,6 +18,7 @@ public class LoremDummy {
     }
 
     /**
+     * Generates a specified amount of random alphabetic characters
      * @return a string of random characters
      */
     public String characters(int numberOfCharacters) {
@@ -26,6 +30,7 @@ public class LoremDummy {
     }
 
     /**
+     * Generates a random alphabetic character
      * @return a random character
      */
     public String character() {
@@ -33,6 +38,7 @@ public class LoremDummy {
     }
 
     /**
+     * Generates a sentence that is between {@code minWords} and {@code maxWords} long and contains random words
      * @return a sentence of word count between {@code minWords} and {@code maxWords}
      */
     public String sentence(int minWords, int maxWords) {
@@ -42,6 +48,7 @@ public class LoremDummy {
     }
 
     /**
+     * Generates a sentence of specified length and containing random words
      * @return a sentence with the given number of words
      */
     public String sentence(int numberOfWords) {
@@ -71,6 +78,7 @@ public class LoremDummy {
     }
 
     /**
+     * Provides a random word
      * @return a single random word
      */
     public String word() {
@@ -78,6 +86,7 @@ public class LoremDummy {
     }
 
     /**
+     * Generates a paragraph of random size
      * @return a random paragraph
      */
     public String paragraph() {
@@ -87,6 +96,7 @@ public class LoremDummy {
     }
 
     /**
+     * Generates a paragraph of specified size
      * @return a paragraph with the given number of sentences
      */
     public String paragraph(int numberOfSentences) {
@@ -99,6 +109,7 @@ public class LoremDummy {
     }
 
     /**
+     * Generates a sentence containing random words
      * @return a random sentence
      */
     public String sentence() {

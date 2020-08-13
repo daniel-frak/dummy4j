@@ -5,6 +5,8 @@ import dev.codesoapbox.dummy4j.Dummy4j;
 import java.util.TreeMap;
 
 /**
+ * Provides methods for generating numerals
+ *
  * @since 0.4.0
  */
 public class NumeralsDummy {
@@ -42,6 +44,9 @@ public class NumeralsDummy {
         this.dummy4j = dummy4j;
     }
 
+    /**
+     * Provides a random roman numeral
+     */
     public String roman() {
         return toRoman(dummy4j.number().nextInt(1, ROMAN_NUMERAL_MAX));
     }
@@ -54,6 +59,9 @@ public class NumeralsDummy {
         return romanNumerals.get(l) + toRoman(number - l);
     }
 
+    /**
+     * Provides a random roman numeral between {@code 1} and {@code upperBound}
+     */
     public String roman(int upperBound) {
         if (upperBound > ROMAN_NUMERAL_MAX) {
             throw new IllegalArgumentException(ROMAN_NUMERAL_MAX_EXCEEDED);
@@ -62,6 +70,9 @@ public class NumeralsDummy {
         return toRoman(dummy4j.number().nextInt(1, upperBound));
     }
 
+    /**
+     * Provides a random roman numeral between {@code lowerBound} and {@code upperBound}
+     */
     public String roman(int lowerBound, int upperBound) {
         if (upperBound > ROMAN_NUMERAL_MAX) {
             throw new IllegalArgumentException(ROMAN_NUMERAL_MAX_EXCEEDED);

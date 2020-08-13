@@ -6,6 +6,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 /**
+ * Provides methods for generating identifiers
+ *
  * @since 0.5.0
  */
 public class IdentifierDummy {
