@@ -17,12 +17,24 @@ public final class UrlHost {
     private final String topLevelDomain;
 
     public UrlHost(String rootDomain, String topLevelDomain, boolean withoutPrefix) {
+        validateDomains(rootDomain, topLevelDomain);
         this.rootDomain = rootDomain;
         this.topLevelDomain = topLevelDomain;
         if (withoutPrefix) {
             this.wwwPrefix = "";
         } else {
             this.wwwPrefix = PREFIX_VALUE;
+        }
+    }
+
+    private void validateDomains(String rootDomain, String topLevelDomain) {
+        validateArgument(rootDomain, "root domain");
+        validateArgument(topLevelDomain, "top level domain");
+    }
+
+    private void validateArgument(String argument, String name) {
+        if (argument == null || argument.isEmpty()) {
+            throw new IllegalArgumentException("The " + name + " can't be null or empty");
         }
     }
 

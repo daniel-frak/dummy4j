@@ -113,6 +113,18 @@ public class ConvenienceMethods {
     }
 
     /**
+     * Has a {@code howMany} in {@code in} chance to return {@code true}. Otherwise, returns {@code false}.
+     * <p>
+     * E.g. {@code chance(1, 2)} has a 1-in-2 chance to return {@code true}, that is it will return {@code true}
+     * 50% of the time when the method is invoked.
+     *
+     * @return {@code boolean}
+     */
+    public boolean chance(int howMany, int in) {
+        return random.nextInt(1, in) <= howMany;
+    }
+
+    /**
      * Returns a random enum value
      */
     public <T extends Enum<?>> T nextEnum(Class<T> clazz) {

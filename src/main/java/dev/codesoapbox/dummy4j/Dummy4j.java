@@ -205,6 +205,20 @@ public class Dummy4j {
     }
 
     /**
+     * Has a {@code howMany} in {@code in} chance to return {@code true}. Otherwise, returns {@code false}.
+     * <p>
+     * E.g. {@code chance(1, 2)} has a 1-in-2 chance to return {@code true}, that is it will return {@code true}
+     * 50% of the time when the method is invoked.
+     *
+     * @return {@code boolean}
+     *
+     * @since 0.5.0
+     */
+    public boolean chance(int howMany, int in) {
+        return convenienceMethods.chance(howMany, in);
+    }
+
+    /**
      * Returns a random enum value
      *
      * @since 0.5.0
@@ -332,7 +346,7 @@ public class Dummy4j {
     }
 
     /**
-     * Provides methods for generating values related to internet
+     * Provides methods for generating values related to the internet
      *
      * @since 0.5.0
      */

@@ -20,3 +20,9 @@ en:
       "#{internet.country_top_level_domain}",
       "#{internet.generic_top_level_domain}"
     ]
+    param: [
+      "#{lorem.word}"
+    ]
+    param_value: [
+      "#{lorem.word}"
+    ]

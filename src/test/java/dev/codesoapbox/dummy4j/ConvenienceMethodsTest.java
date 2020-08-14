@@ -113,6 +113,23 @@ class ConvenienceMethodsTest {
 
     @ParameterizedTest
     @CsvSource({
+            "1, true",
+            "9, true",
+            "10, true",
+            "11, false",
+            "20, false"
+    })
+    void shouldReturnBooleanRandomlyByChance(int randomInt, boolean expected) {
+        int howMany = 10;
+        int in = 20;
+        when(random.nextInt(1, in))
+                .thenReturn(randomInt);
+
+        assertEquals(expected, convenienceMethods.chance(howMany, in));
+    }
+
+    @ParameterizedTest
+    @CsvSource({
             "0, ONE",
             "1, TWO",
             "2, THREE"

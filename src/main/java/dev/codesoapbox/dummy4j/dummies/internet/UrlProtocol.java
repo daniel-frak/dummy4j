@@ -8,7 +8,7 @@ public enum UrlProtocol {
     FILE("file"),
     JAR("jar");
 
-    String value;
+    private String value;
 
     UrlProtocol(String value) {
         this.value = value;

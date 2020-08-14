@@ -14,9 +14,10 @@ import java.util.StringJoiner;
  * Generates randomized urls.
  * <p>
  * Default values:
- * <p><ul>
- * <li>port: -1 (no port)</li>
- * <li>protocol: https</li>
+ * <p>
+ * <ul>
+ *  <li>port: -1 (no port)</li>
+ *  <li>protocol: https</li>
  * </ul>
  */
 public final class UrlBuilder {
@@ -32,45 +33,63 @@ public final class UrlBuilder {
     public static final int MAX_PORT = 9999;
 
     /**
-     * Default port value compatible with the URL class
+     * Default port value (must be compatible with the URL class)
      */
     public static final int DEFAULT_PORT = -1;
 
     /**
-     * By default, the top level domain is chosen at random from a domain list
+     * Points to a list of possible top level domains
      */
     public static final String DEFAULT_TOP_LEVEL_DOMAIN_KEY = "#{internet.top_level_domain}";
 
     /**
-     * If used, the top level domain is chosen at random from a list of popular domains
+     * Points to a list of popular top level domains
      */
     public static final String POPULAR_TOP_LEVEL_DOMAIN_KEY = "#{internet.popular_top_level_domain}";
 
     /**
-     * If used, the top level domain is chosen at random from a list of country domains
+     * Points to a list of country top level domains
      */
     public static final String COUNTRY_TOP_LEVEL_DOMAIN_KEY = "#{internet.country_top_level_domain}";
 
     /**
-     * If used, the top level domain is chosen at random from a list of country domains
+     * Points to a list of generic top level domains
      */
     public static final String GENERIC_TOP_LEVEL_DOMAIN_KEY = "#{internet.generic_top_level_domain}";
 
     /**
-     * Root domain is chosen at random from a list of words
+     * Points to a list of random words that are used as domains
      */
-    public static final String ROOT_DOMAIN_KEY = "#{internet.root_domain}";
+    public static final String ROOT_DOMAIN_KEY = "#{internet.param}";
+
+    /**
+     * Points to a list of random words that are used as parameter names
+     */
+    public static final String PARAM_KEY = "#{internet.root_domain}";
+
+    /**
+     * Points to a list of random words that are used as parameter values
+     */
+    public static final String PARAM_VALUE_KEY = "#{internet.root_domain}";
+
+    /**
+     * Represents the chance of generating a string value for a query param
+     */
+    public static final int CHANCE_OF_PARAM_VALUE_AS_STRING = 4;
+
+    /**
+     * Represents the {@code in} value for the chance method
+     */
+    public static final int CHANCE_IN_PARAM_VALUE_AS_STRING = 6;
 
     private static final String FILE_EXTENSION = ".html";
     private static final String PATH_DELIMITER = "/";
-    private static final int FILE_EXTENSION_LENGTH = 5;
     private static final int FILE_NAME_LENGTH = 10;
 
     private final Dummy4j dummy4j;
 
     private List<UrlProtocol> possibleProtocols = Collections.singletonList(UrlProtocol.HTTPS);
-    private boolean withQueryParams;
-    private int howManyParams = 1;
+    private int howManyParams = 0;
     private boolean withFilePath;
     private boolean withoutWwwPrefix;
     private int port = DEFAULT_PORT;
@@ -139,40 +158,40 @@ public final class UrlBuilder {
      * Adds one query param with a randomly generated value that will be either numeric or alphabetical
      */
     public UrlBuilder withQueryParam() {
-        withQueryParams = true;
+        howManyParams = 1;
         return this;
     }
 
     /**
-     * Adds the specified amount of query params with a randomly generated values that will be either
+     * Adds the specified amount of query params with randomly generated values that will be either
      * numeric or alphabetical.
      *
      * @throws IllegalArgumentException when a negative number is given as the argument
      */
     public UrlBuilder withQueryParams(int howManyParams) {
-        if (howManyParams == 0) {
-            return this;
-        }
+        validateHowManyParams(howManyParams);
+        this.howManyParams = howManyParams;
+        return this;
+    }
+
+    private void validateHowManyParams(int howManyParams) {
         if (howManyParams < 0) {
             String message = String.format("The specified amount of query params must be a positive number," +
                     " but \"%d\" was given", howManyParams);
             throw new IllegalArgumentException(message);
         }
-        withQueryParam();
-        this.howManyParams = howManyParams;
-        return this;
     }
 
     /**
      * Sets the top level domain for the generated url
      */
-    public UrlBuilder withCustomTopLevelDomain(String domain) {
+    public UrlBuilder withTopLevelDomain(String domain) {
         this.customTopLevelDomain = domain;
         return this;
     }
 
     /**
-     * The top level domain is chosen at random from a list of popular domains.
+     * Chooses a top level domain at random from a list of popular domains.
      * <p>
      * E.g. {@code com, dev, io, org}.
      */
@@ -183,7 +202,7 @@ public final class UrlBuilder {
     }
 
     /**
-     * The top level domain is chosen at random from a list of country domains.
+     * Chooses a top level domain at random from a list of country domains.
      * <p>
      * E.g. {@code es, uk, it}.
      */
@@ -194,7 +213,7 @@ public final class UrlBuilder {
     }
 
     /**
-     * The top level domain is chosen at random from a list of generic domains.
+     * Chooses a top level domain at random from a list of generic domains.
      * <p>
      * E.g. {@code academy, photography, tech}.
      */
@@ -208,7 +227,7 @@ public final class UrlBuilder {
      * The generated url will be expanded with random characters until it is {@code minLength} characters long.
      * <p>
      * Random characters will be added to a domain, a filename or the value of the last query param
-     * – depends on which elements are included in the generated url.
+     * – depending on which elements are included in the generated url.
      * <p>
      * In case the generated url is already at least {@code minLength} characters long no characters will be added.
      */
@@ -228,7 +247,7 @@ public final class UrlBuilder {
         UrlHost host = getUrlHost();
         String filePathAndQueryParams = getFilePath();
 
-        if (withQueryParams) {
+        if (howManyParams > 0) {
             filePathAndQueryParams += getParams();
         }
 
@@ -248,7 +267,7 @@ public final class UrlBuilder {
 
     private UrlHost getUrlHost() {
         String rootDomain = dummy4j.expressionResolver().resolve(ROOT_DOMAIN_KEY);
-        if(customTopLevelDomain != null) {
+        if (customTopLevelDomain != null) {
             return new UrlHost(rootDomain, customTopLevelDomain, withoutWwwPrefix);
         }
         String topLevelDomain = dummy4j.expressionResolver().resolve(domainKey);
@@ -265,16 +284,16 @@ public final class UrlBuilder {
     private String getParams() {
         StringJoiner path = new StringJoiner("&", "?", "");
         for (int i = 0; i < howManyParams; i++) {
-            path.add(dummy4j.expressionResolver().resolve(ROOT_DOMAIN_KEY) + "=" + generateParamValue());
+            path.add(dummy4j.expressionResolver().resolve(PARAM_KEY) + "=" + generateParamValue());
         }
         return path.toString();
     }
 
     private String generateParamValue() {
-        if (dummy4j.number().nextInt(6) > 4) {
-            return String.valueOf(dummy4j.number().nextInt());
+        if (dummy4j.chance(CHANCE_OF_PARAM_VALUE_AS_STRING, CHANCE_IN_PARAM_VALUE_AS_STRING)) {
+            return dummy4j.expressionResolver().resolve(PARAM_VALUE_KEY);
         }
-        return dummy4j.expressionResolver().resolve(ROOT_DOMAIN_KEY);
+        return String.valueOf(dummy4j.number().nextInt());
     }
 
     private URL buildUrlWithProperLength(UrlProtocol protocol, UrlHost host, String filePath) {
@@ -298,9 +317,9 @@ public final class UrlBuilder {
     }
 
     private URL buildUrlAdjustedForLength(UrlProtocol protocol, UrlHost host, String filePath, int missingLength) {
-        if (withFilePath && !withQueryParams) {
+        if (withFilePath && howManyParams == 0) {
             filePath = increaseFileNameLength(filePath, missingLength);
-        } else if (withQueryParams) {
+        } else if (howManyParams > 0) {
             filePath = increaseLastParamValueLength(filePath, missingLength);
         } else {
             host = increaseRootDomainLength(host, missingLength);
@@ -310,7 +329,7 @@ public final class UrlBuilder {
     }
 
     private String increaseFileNameLength(String filePath, int missingLength) {
-        String withoutExtension = filePath.substring(0, filePath.length() - FILE_EXTENSION_LENGTH);
+        String withoutExtension = filePath.substring(0, filePath.length() - FILE_EXTENSION.length());
         String extraCharacters = dummy4j.lorem().characters(missingLength);
         return withoutExtension + extraCharacters + FILE_EXTENSION;
     }
@@ -329,12 +348,12 @@ public final class UrlBuilder {
     public String toString() {
         return "UrlBuilder{" +
                 "possibleProtocols=" + possibleProtocols +
-                ", withQueryParams=" + withQueryParams +
                 ", howManyParams=" + howManyParams +
                 ", withFilePath=" + withFilePath +
                 ", withoutWwwPrefix=" + withoutWwwPrefix +
                 ", port=" + port +
                 ", domainKey='" + domainKey + '\'' +
+                ", customTopLevelDomain='" + customTopLevelDomain + '\'' +
                 ", minLength=" + minLength +
                 '}';
     }

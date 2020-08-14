@@ -3,7 +3,7 @@ package dev.codesoapbox.dummy4j.dummies.internet;
 import dev.codesoapbox.dummy4j.Dummy4j;
 
 /**
- * Provides methods for generating values related to internet
+ * Provides methods for generating values related to the internet
  *
  * @since 0.5.0
  */
