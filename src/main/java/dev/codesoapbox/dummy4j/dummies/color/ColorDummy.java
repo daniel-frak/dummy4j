@@ -60,7 +60,7 @@ public class ColorDummy {
     }
 
     /**
-     * Generates a random hexadecimal color with alpha channel.
+     * Generates a random hexadecimal color with an alpha channel.
      * E.g. {@code #e7e247d5}
      */
     public String hexAlpha() {

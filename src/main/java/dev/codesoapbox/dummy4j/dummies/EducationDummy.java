@@ -16,14 +16,14 @@ public class EducationDummy {
     }
 
     /**
-     * Provides a discipline chosen at random from a set of formal, natural and social sciences
+     * Provides an academic discipline chosen at random from a set of formal, natural and social sciences
      */
     public String major() {
         return dummy4j.expressionResolver().resolve("#{education.major}");
     }
 
     /**
-     * Generates a random institution providing primary education.
+     * Generates the name of a random institution providing primary education.
      * E.g. {@code New Cristopher Primary School}
      */
     public String primaryInstitution() {
@@ -31,7 +31,7 @@ public class EducationDummy {
     }
 
     /**
-     * Generates a random institution providing secondary education.
+     * Generates the name of a random institution providing secondary education.
      * E.g. {@code Turnerburgh High}
      */
     public String secondaryInstitution() {
@@ -39,7 +39,7 @@ public class EducationDummy {
     }
 
     /**
-     * Generates a random institution providing third-level education.
+     * Generates the name of a random institution providing third-level education.
      * E.g. {@code Wilfredoburgh University}
      */
     public String tertiaryInstitution() {
@@ -47,7 +47,7 @@ public class EducationDummy {
     }
 
     /**
-     * Generates a random educational institution name
+     * Generates the name of a random educational institution name
      */
     public String institution() {
         return dummy4j.expressionResolver().resolve("#{education.institution}");

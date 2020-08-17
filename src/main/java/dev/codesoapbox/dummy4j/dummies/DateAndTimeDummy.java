@@ -100,7 +100,7 @@ public class DateAndTimeDummy {
     }
 
     /**
-     * Generates a random date and time from the past that does not exceed the specified time lapse
+     * Generates a random date and time from the past that fits in the time range between {@code atMost units} and now
      */
     public LocalDateTime past(long atMost, ChronoUnit unit) {
         if (atMost < 0) {
@@ -110,7 +110,8 @@ public class DateAndTimeDummy {
     }
 
     /**
-     * Generates a random date and time before the {@code referenceDate} that does not exceed the specified time lapse
+     * Generates a random date and time before the {@code referenceDate} that fits in the time range between
+     * {@code atMost units} and {@code referenceDate}
      */
     public LocalDateTime before(LocalDateTime referenceDate, long atMost, ChronoUnit unit) {
         if (atMost < 0) {
@@ -120,7 +121,7 @@ public class DateAndTimeDummy {
     }
 
     /**
-     * Generates a random date and time from the future that does not exceed the specified time lapse
+     * Generates a random date and time from the future that fits in the time range between {@code atMost units} and now
      */
     public LocalDateTime future(long atMost, ChronoUnit unit) {
         if (atMost < 0) {
@@ -130,7 +131,8 @@ public class DateAndTimeDummy {
     }
 
     /**
-     * Generates a random date and time after the {@code referenceDate} that does not exceed the specified time lapse
+     * Generates a random date and time after the {@code referenceDate} that fits in the time range between
+     * {@code atMost units} and {@code referenceDate}
      */
     public LocalDateTime after(LocalDateTime referenceDate, long atMost, ChronoUnit unit) {
         if (atMost < 0) {
