@@ -103,6 +103,8 @@ public class ConvenienceMethods {
      * 50% of the time when the method is invoked.
      *
      * @return supplied {@code T} or null
+     *
+     * @since 0.5.0
      */
     public <T> T chance(int howMany, int in, Supplier<T> supplier) {
         if (random.nextInt(1, in) > howMany) {
@@ -119,6 +121,8 @@ public class ConvenienceMethods {
      * 50% of the time when the method is invoked.
      *
      * @return {@code boolean}
+     *
+     * @since 0.5.0
      */
     public boolean chance(int howMany, int in) {
         return random.nextInt(1, in) <= howMany;

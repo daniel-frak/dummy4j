@@ -28,11 +28,11 @@ public final class UrlHost {
     }
 
     private void validateDomains(String rootDomain, String topLevelDomain) {
-        validateArgument(rootDomain, "root domain");
-        validateArgument(topLevelDomain, "top level domain");
+        validateNotEmpty(rootDomain, "root domain");
+        validateNotEmpty(topLevelDomain, "top level domain");
     }
 
-    private void validateArgument(String argument, String name) {
+    private void validateNotEmpty(String argument, String name) {
         if (argument == null || argument.isEmpty()) {
             throw new IllegalArgumentException("The " + name + " can't be null or empty");
         }
