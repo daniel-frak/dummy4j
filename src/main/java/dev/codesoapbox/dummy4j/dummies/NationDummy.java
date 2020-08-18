@@ -3,6 +3,8 @@ package dev.codesoapbox.dummy4j.dummies;
 import dev.codesoapbox.dummy4j.Dummy4j;
 
 /**
+ * Provides methods for generating values related to countries, languages and nationalities
+ *
  * @since 0.2.0
  */
 public class NationDummy {
@@ -13,19 +15,30 @@ public class NationDummy {
         this.dummy4j = dummy4j;
     }
 
+    /**
+     * Provides a random country name
+     */
     public String country() {
         return dummy4j.expressionResolver().resolve("#{nation.country}");
     }
 
+    /**
+     * Provides a random country code
+     */
     public String countryCode() {
         return dummy4j.expressionResolver().resolve("#{nation.country_code}");
     }
 
+    /**
+     * Provides a random nationality
+     */
     public String nationality() {
         return dummy4j.expressionResolver().resolve("#{nation.nationality}");
     }
 
     /**
+     * Provides a random language code according to the ISO 639-1 standard
+     *
      * @since 0.4.0
      */
     public String languageCodeTwoLetter() {
@@ -33,6 +46,8 @@ public class NationDummy {
     }
 
     /**
+     * Provides a random language code according to the ISO 639-2 standard
+     *
      * @since 0.4.0
      */
     public String languageCodeThreeLetter() {
@@ -40,6 +55,8 @@ public class NationDummy {
     }
 
     /**
+     * Provides a random language name
+     *
      * @since 0.4.0
      */
     public String language() {
@@ -47,6 +64,8 @@ public class NationDummy {
     }
 
     /**
+     * Provides a random language name from a set of commonly used languages
+     *
      * @since 0.4.0
      */
     public String languageCommon() {
@@ -54,6 +73,8 @@ public class NationDummy {
     }
 
     /**
+     * Provides a random language code according to the ISO 639-1 standard from a set of commonly used languages
+     *
      * @since 0.4.0
      */
     public String languageCodeTwoLetterCommon() {
@@ -61,6 +82,8 @@ public class NationDummy {
     }
 
     /**
+     * Provides a random language code according to the ISO 639-2 standard from a set of commonly used languages
+     *
      * @since 0.4.0
      */
     public String languageCodeThreeLetterCommon() {
