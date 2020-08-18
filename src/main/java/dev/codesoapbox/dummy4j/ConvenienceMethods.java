@@ -103,6 +103,8 @@ public class ConvenienceMethods {
      * 50% of the time when the method is invoked.
      *
      * @return supplied {@code T} or null
+     *
+     * @since 0.5.0
      */
     public <T> T chance(int howMany, int in, Supplier<T> supplier) {
         if (random.nextInt(1, in) > howMany) {
@@ -110,6 +112,20 @@ public class ConvenienceMethods {
         }
 
         return supplier.get();
+    }
+
+    /**
+     * Has a {@code howMany} in {@code in} chance to return {@code true}. Otherwise, returns {@code false}.
+     * <p>
+     * E.g. {@code chance(1, 2)} has a 1-in-2 chance to return {@code true}, that is it will return {@code true}
+     * 50% of the time when the method is invoked.
+     *
+     * @return {@code boolean}
+     *
+     * @since 0.5.0
+     */
+    public boolean chance(int howMany, int in) {
+        return random.nextInt(1, in) <= howMany;
     }
 
     /**

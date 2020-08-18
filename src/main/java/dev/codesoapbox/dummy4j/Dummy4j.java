@@ -4,6 +4,7 @@ import dev.codesoapbox.dummy4j.definitions.UniqueValues;
 import dev.codesoapbox.dummy4j.definitions.providers.files.yaml.YamlFileDefinitionProvider;
 import dev.codesoapbox.dummy4j.dummies.*;
 import dev.codesoapbox.dummy4j.dummies.color.ColorDummy;
+import dev.codesoapbox.dummy4j.dummies.internet.InternetDummy;
 
 import java.util.List;
 import java.util.Set;
@@ -204,6 +205,20 @@ public class Dummy4j {
     }
 
     /**
+     * Has a {@code howMany} in {@code in} chance to return {@code true}. Otherwise, returns {@code false}.
+     * <p>
+     * E.g. {@code chance(1, 2)} has a 1-in-2 chance to return {@code true}, that is it will return {@code true}
+     * 50% of the time when the method is invoked.
+     *
+     * @return {@code boolean}
+     *
+     * @since 0.5.0
+     */
+    public boolean chance(int howMany, int in) {
+        return convenienceMethods.chance(howMany, in);
+    }
+
+    /**
      * Returns a random enum value
      *
      * @since 0.5.0
@@ -328,5 +343,14 @@ public class Dummy4j {
      */
     public NatoPhoneticAlphabetDummy natoPhoneticAlphabet() {
         return dummies.natoPhoneticAlphabet();
+    }
+
+    /**
+     * Provides methods for generating values related to the internet
+     *
+     * @since 0.5.0
+     */
+    public InternetDummy internet() {
+        return dummies.internet();
     }
 }

@@ -3,7 +3,7 @@ package dev.codesoapbox.dummy4j.dummies;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class DummiesTest {
 
@@ -82,5 +82,10 @@ class DummiesTest {
     @Test
     void natoPhoneticAlphabet() {
         assertNotNull(dummies.natoPhoneticAlphabet());
+    }
+
+    @Test
+    void internet() {
+        assertNotNull(dummies.internet());
     }
 }

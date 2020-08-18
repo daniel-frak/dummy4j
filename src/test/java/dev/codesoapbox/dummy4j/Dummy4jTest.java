@@ -3,6 +3,7 @@ package dev.codesoapbox.dummy4j;
 import dev.codesoapbox.dummy4j.definitions.UniqueValues;
 import dev.codesoapbox.dummy4j.dummies.*;
 import dev.codesoapbox.dummy4j.dummies.color.ColorDummy;
+import dev.codesoapbox.dummy4j.dummies.internet.InternetDummy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -234,5 +235,13 @@ class Dummy4jTest {
         when(dummies.natoPhoneticAlphabet())
                 .thenReturn(natoPhoneticAlphabetDummy);
         assertEquals(natoPhoneticAlphabetDummy, dummy4j.natoPhoneticAlphabet());
+    }
+    
+    @Test
+    void shouldGetInternetDummy() {
+        InternetDummy internetDummy = mock(InternetDummy.class);
+        when(dummies.internet())
+                .thenReturn(internetDummy);
+        assertEquals(internetDummy, dummy4j.internet());
     }
 }
