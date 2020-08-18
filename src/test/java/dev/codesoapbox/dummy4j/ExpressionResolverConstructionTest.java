@@ -1,5 +1,7 @@
 package dev.codesoapbox.dummy4j;
 
+import dev.codesoapbox.dummy4j.DefaultExpressionResolver;
+import dev.codesoapbox.dummy4j.RandomService;
 import dev.codesoapbox.dummy4j.definitions.providers.DefinitionProvider;
 import dev.codesoapbox.dummy4j.definitions.LocalizedDummyDefinitions;
 import dev.codesoapbox.dummy4j.exceptions.MissingLocaleException;
@@ -33,7 +35,7 @@ class ExpressionResolverConstructionTest {
         when(definitionProvider.get())
                 .thenReturn(definitions);
 
-        ExpressionResolver resolver = new ExpressionResolver(null, randomService, definitionProvider);
+        DefaultExpressionResolver resolver = new DefaultExpressionResolver(null, randomService, definitionProvider);
 
         assertEquals(singletonList("en"), resolver.locales);
     }
@@ -47,7 +49,7 @@ class ExpressionResolverConstructionTest {
         when(definitionProvider.get())
                 .thenReturn(definitions);
 
-        ExpressionResolver resolver = new ExpressionResolver(emptyList(), randomService, definitionProvider);
+        DefaultExpressionResolver resolver = new DefaultExpressionResolver(emptyList(), randomService, definitionProvider);
 
         assertEquals(singletonList("en"), resolver.locales);
     }
@@ -62,7 +64,7 @@ class ExpressionResolverConstructionTest {
         when(definitionProvider.get())
                 .thenReturn(definitions);
 
-        ExpressionResolver resolver = new ExpressionResolver(singletonList(customLocale), randomService,
+        DefaultExpressionResolver resolver = new DefaultExpressionResolver(singletonList(customLocale), randomService,
                 definitionProvider);
 
         assertEquals(singletonList(customLocale), resolver.locales);
@@ -80,7 +82,7 @@ class ExpressionResolverConstructionTest {
 
         List<String> locales = singletonList("en");
         assertThrows(MissingLocaleException.class,
-                () -> new ExpressionResolver(locales, randomService, definitionProvider));
+                () -> new DefaultExpressionResolver(locales, randomService, definitionProvider));
     }
 
 }

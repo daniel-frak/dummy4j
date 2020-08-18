@@ -22,7 +22,7 @@ class Dummy4jConstructionTest {
         assertNotNull(dummy.dummies);
         assertNotNull(dummy.expressionResolver);
         assertNotNull(dummy.randomService);
-        assertEquals(dummy.randomService, dummy.expressionResolver.randomService);
+        assertEquals(dummy.randomService, ((DefaultExpressionResolver)dummy.expressionResolver).randomService);
     }
 
     @Test
@@ -30,7 +30,7 @@ class Dummy4jConstructionTest {
         List<String> locales = singletonList("en");
         long seed = 1234L;
         Dummy4j dummy = new Dummy4j(seed, locales, null);
-        assertEquals(locales, dummy.expressionResolver.locales);
+        assertEquals(locales, ((DefaultExpressionResolver)dummy.expressionResolver).locales);
         assertEquals(seed, dummy.randomService.getSeed());
     }
 
@@ -38,7 +38,7 @@ class Dummy4jConstructionTest {
     void shouldConstructWithSeedAndDefaultLocales() {
         long seed = 1234L;
         Dummy4j dummy = new Dummy4j(seed, null, null);
-        assertEquals(singletonList("en"), dummy.expressionResolver.locales);
+        assertEquals(singletonList("en"), ((DefaultExpressionResolver)dummy.expressionResolver).locales);
         assertEquals(seed, dummy.randomService.getSeed());
     }
 
@@ -46,7 +46,7 @@ class Dummy4jConstructionTest {
     void shouldConstructWithDefaultSeedAndCustomLocales() {
         List<String> locales = singletonList("en");
         Dummy4j dummy = new Dummy4j(null, locales, null);
-        assertEquals(locales, dummy.expressionResolver.locales);
+        assertEquals(locales, ((DefaultExpressionResolver)dummy.expressionResolver).locales);
     }
 
     @Test

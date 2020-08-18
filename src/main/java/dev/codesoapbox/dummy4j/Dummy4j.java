@@ -51,10 +51,10 @@ public class Dummy4j {
         }
 
         if (locales != null) {
-            this.expressionResolver = new ExpressionResolver(locales, this.randomService,
+            this.expressionResolver = new DefaultExpressionResolver(locales, this.randomService,
                     definitionProvider);
         } else {
-            this.expressionResolver = new ExpressionResolver(null, this.randomService,
+            this.expressionResolver = new DefaultExpressionResolver(null, this.randomService,
                     definitionProvider);
         }
 
@@ -69,8 +69,8 @@ public class Dummy4j {
     }
 
     protected Dummy4j(ExpressionResolver expressionResolver, RandomService randomService,
-                   Function<? super Dummy4j, Dummies> dummiesFactory, UniqueValues uniqueValues,
-                   ConvenienceMethods convenienceMethods) {
+                      Function<? super Dummy4j, Dummies> dummiesFactory, UniqueValues uniqueValues,
+                      ConvenienceMethods convenienceMethods) {
         this.randomService = randomService;
         this.expressionResolver = expressionResolver;
         this.dummies = dummiesFactory.apply(this);

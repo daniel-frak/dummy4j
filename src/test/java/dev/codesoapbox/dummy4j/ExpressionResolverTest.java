@@ -1,8 +1,8 @@
 package dev.codesoapbox.dummy4j;
 
-import dev.codesoapbox.dummy4j.definitions.providers.DefinitionProvider;
 import dev.codesoapbox.dummy4j.definitions.LocalizedDummyDefinitions;
 import dev.codesoapbox.dummy4j.definitions.LocalizedDummyDefinitionsMap;
+import dev.codesoapbox.dummy4j.definitions.providers.DefinitionProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,8 +12,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.HashMap;
 import java.util.Map;
 
-import static java.util.Collections.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.singletonList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -37,7 +38,7 @@ class ExpressionResolverTest {
         when(definitionProvider.get())
                 .thenReturn(singletonList(dummyDefinitions));
 
-        expressionResolver = new ExpressionResolver(singletonList(locale), randomService, definitionProvider);
+        expressionResolver = new DefaultExpressionResolver(singletonList(locale), randomService, definitionProvider);
     }
 
     private Map<String, Object> buildDefinitionMap() {
@@ -67,7 +68,7 @@ class ExpressionResolverTest {
                 .thenReturn(null);
         when(dummyDefinitions.getLocale())
                 .thenReturn("en");
-        expressionResolver = new ExpressionResolver(singletonList("en"), randomService, definitionProvider);
+        expressionResolver = new DefaultExpressionResolver(singletonList("en"), randomService, definitionProvider);
         String result = expressionResolver.resolve("#{something.notexisting}");
         assertEquals("", result);
     }
