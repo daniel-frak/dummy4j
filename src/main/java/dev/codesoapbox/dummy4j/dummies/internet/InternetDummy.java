@@ -23,4 +23,13 @@ public class InternetDummy {
     public UrlBuilder url() {
         return new UrlBuilder(dummy4j);
     }
+
+    /**
+     * Provides a builder for random passwords generated according to customisable parameters
+     * <p>
+     * E.g. {@code password().withDigits().withUpperCaseChars().withMinLength(15).build()}
+     */
+    public PasswordBuilder password() {
+        return new PasswordBuilder(dummy4j);
+    }
 }

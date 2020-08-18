@@ -2,6 +2,8 @@ package dev.codesoapbox.dummy4j.dummies.internet;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
 import dev.codesoapbox.dummy4j.ExpressionResolver;
+import dev.codesoapbox.dummy4j.NumberService;
+import dev.codesoapbox.dummy4j.dummies.LoremDummy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,6 +23,12 @@ class InternetDummyTest {
 
     @Mock
     private ExpressionResolver expressionResolver;
+
+    @Mock
+    private LoremDummy loremDummy;
+
+    @Mock
+    private NumberService numberService;
 
     private InternetDummy internetDummy;
 
@@ -52,5 +60,26 @@ class InternetDummyTest {
     private void mockExpressionResolver() {
         when(dummy4j.expressionResolver())
                 .thenReturn(expressionResolver);
+    }
+
+    @Test
+    void shouldReturnSimplePassword() {
+        when(dummy4j.number())
+                .thenReturn(numberService);
+        int defaultLength = 12;
+        when(numberService.nextInt(defaultLength, defaultLength))
+                .thenReturn(defaultLength);
+        when(dummy4j.lorem())
+                .thenReturn(loremDummy);
+        when(loremDummy.characters(defaultLength))
+                .thenReturn("passwordpass");
+        String actual = internetDummy.password()
+                .build();
+
+        assertAll(
+                () -> assertNotNull(actual),
+                () -> assertEquals("passwordpass", actual),
+                () -> assertEquals(defaultLength, actual.length())
+        );
     }
 }

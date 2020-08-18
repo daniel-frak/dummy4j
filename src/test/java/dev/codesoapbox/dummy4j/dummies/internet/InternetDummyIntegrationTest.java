@@ -10,6 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class InternetDummyIntegrationTest {
 
+    private static final int DEFAULT_PASSWORD_LENGTH = 12;
+
     private Dummy4j dummy4j;
 
     @BeforeEach
@@ -38,6 +40,25 @@ class InternetDummyIntegrationTest {
                 () -> assertFalse(value.getFile().isEmpty()),
                 () -> assertNotNull(value.getQuery()),
                 () -> assertFalse(value.getQuery().isEmpty())
+        );
+    }
+
+    @Test
+    void password() {
+        String value = dummy4j.internet().password()
+                .withDigits()
+                .withSpecialChars()
+                .withUpperCaseChars()
+                .build();
+
+        assertAll(
+                () -> assertNotNull(value),
+                () -> assertFalse(value.isEmpty()),
+                () -> assertEquals(DEFAULT_PASSWORD_LENGTH, value.length(), "Invalid length"),
+                () -> assertTrue(value.matches(".*\\d+.*"), "Digits are missing"),
+                () -> assertTrue(value.matches(".*[!@#$%^&*_\\-?]+.*"), "Special characters are missing"),
+                () -> assertTrue(value.matches(".*[A-Z]+.*"), "Upper case characters are missing"),
+                () -> assertTrue(value.matches(".*[a-z]+.*"), "Lower case characters are missing")
         );
     }
 }
