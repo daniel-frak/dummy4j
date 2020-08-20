@@ -46,6 +46,8 @@ class ExpressionResolverTest {
         nestedMap.put("deep", "value");
         nestedMap.put("advanced", "#{something.deep}123");
         nestedMap.put("empty", emptyList());
+        nestedMap.put("special", "$ $$ #{something.special_nested}");
+        nestedMap.put("special_nested", "$ $$ \\abc");
 
         Map<String, Object> rootMap = new HashMap<>();
         rootMap.put("something", nestedMap);
@@ -97,5 +99,11 @@ class ExpressionResolverTest {
     void shouldResolveExpressionWithinExpression() {
         String result = expressionResolver.resolve("#{something.advanced}");
         assertEquals("value123", result);
+    }
+
+    @Test
+    void shouldResolveSpecialChars() {
+        String result = expressionResolver.resolve("#{something.special}");
+        assertEquals("$ $$ $ $$ \\abc", result);
     }
 }
