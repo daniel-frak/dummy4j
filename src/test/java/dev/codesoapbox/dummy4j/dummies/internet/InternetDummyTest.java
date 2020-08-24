@@ -38,9 +38,17 @@ class InternetDummyTest {
     }
 
     @Test
-    void shouldReturnSimpleUrl() {
+    void shouldReturnDefaultUrl() {
         mockSimpleUrl();
-        URL actual = internetDummy.url()
+        URL actual = internetDummy.url();
+
+        assertEquals("https://www.test.dev", actual.toString());
+    }
+
+    @Test
+    void shouldBuildSimpleUrl() {
+        mockSimpleUrl();
+        URL actual = internetDummy.urlBuilder()
                 .build();
 
         assertAll(
@@ -63,23 +71,38 @@ class InternetDummyTest {
     }
 
     @Test
-    void shouldReturnSimplePassword() {
+    void shouldReturnDefaultPassword() {
+        mockSimplePassword();
+        String actual = internetDummy.password();
+
+        assertAll(
+                () -> assertNotNull(actual, "Value is null"),
+                () -> assertEquals("passwordpass", actual, "Invalid value"),
+                () -> assertEquals(12, actual.length(), "Invalid length")
+        );
+    }
+
+    private void mockSimplePassword() {
         when(dummy4j.number())
                 .thenReturn(numberService);
-        int defaultLength = 12;
-        when(numberService.nextInt(defaultLength, defaultLength))
-                .thenReturn(defaultLength);
+        when(numberService.nextInt(12, 12))
+                .thenReturn(12);
         when(dummy4j.lorem())
                 .thenReturn(loremDummy);
-        when(loremDummy.characters(defaultLength))
+        when(loremDummy.characters(12))
                 .thenReturn("passwordpass");
-        String actual = internetDummy.password()
+    }
+
+    @Test
+    void shouldBuildSimplePassword() {
+        mockSimplePassword();
+        String actual = internetDummy.passwordBuilder()
                 .build();
 
         assertAll(
-                () -> assertNotNull(actual),
-                () -> assertEquals("passwordpass", actual),
-                () -> assertEquals(defaultLength, actual.length())
+                () -> assertNotNull(actual, "Value is null"),
+                () -> assertEquals("passwordpass", actual, "Invalid value"),
+                () -> assertEquals(12, actual.length(), "Invalid length")
         );
     }
 }
