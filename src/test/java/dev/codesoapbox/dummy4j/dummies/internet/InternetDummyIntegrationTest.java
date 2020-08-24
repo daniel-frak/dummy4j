@@ -28,16 +28,14 @@ class InternetDummyIntegrationTest {
                 .withProtocol(UrlProtocol.HTTP)
                 .build();
         assertAll(
-                () -> {
-                    String expected = "http://www.test-root-domain.eu/aaaaaaaaaa.html?test=test";
-                    assertEquals(expected, value.toString());
-                },
                 () -> assertEquals("/aaaaaaaaaa.html", value.getPath(), "Invalid path"),
                 () -> assertEquals(UrlProtocol.HTTP.getValue(), value.getProtocol(), "Invalid protocol"),
                 () -> assertEquals(UrlBuilder.DEFAULT_PORT, value.getPort(), "Invalid port"),
                 () -> assertEquals("www.test-root-domain.eu", value.getHost(), "Invalid host"),
-                () -> assertEquals("/aaaaaaaaaa.html?test=test", value.getFile(), "Invalid file"),
-                () -> assertEquals("test=test", value.getQuery(), "Invalid query params")
+                () -> assertNotNull(value.getFile(),"File is null"),
+                () -> assertFalse(value.getFile().isEmpty(),"File is empty"),
+                () -> assertNotNull(value.getQuery(), "Query is null"),
+                () -> assertFalse(value.getQuery().isEmpty(), "Query is empty")
         );
     }
 
