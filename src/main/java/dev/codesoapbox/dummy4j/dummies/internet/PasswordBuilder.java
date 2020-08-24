@@ -20,7 +20,7 @@ import java.util.function.Supplier;
 public class PasswordBuilder {
 
     /**
-     * Upper boundary for randomly generated digit
+     * Upper boundary for randomly generated digits
      */
     public static final int DIGIT_UPPER_BOUND = 9;
 
@@ -30,7 +30,7 @@ public class PasswordBuilder {
     public static final String SPECIAL_CHAR_KEY = "#{internet.password_special_char}";
 
     private final Dummy4j dummy4j;
-    private final Map<String, Supplier<Character>> constraints = new LinkedHashMap<>();
+    private final Map<String, Supplier<Character>> constraintCharacters = new LinkedHashMap<>();
 
     private int minLength = 12;
     private int maxLength = 12;
@@ -43,7 +43,7 @@ public class PasswordBuilder {
      * Adds randomly generated digits
      */
     public PasswordBuilder withDigits() {
-        constraints.put("with digits", this::getDigit);
+        constraintCharacters.put("with digits", this::getDigit);
         return this;
     }
 
@@ -56,7 +56,7 @@ public class PasswordBuilder {
      * Adds randomly selected special characters
      */
     public PasswordBuilder withSpecialChars() {
-        constraints.put("with special characters", this::getSpecialChar);
+        constraintCharacters.put("with special characters", this::getSpecialChar);
         return this;
     }
 
@@ -68,7 +68,7 @@ public class PasswordBuilder {
      * Adds random upper case characters
      */
     public PasswordBuilder withUpperCaseChars() {
-        constraints.put("with upper case characters", this::getUpperCaseChar);
+        constraintCharacters.put("with upper case characters", this::getUpperCaseChar);
         return this;
     }
 
@@ -77,7 +77,7 @@ public class PasswordBuilder {
     }
 
     /**
-     * Sets length of the generated password
+     * Sets the length of the generated password
      */
     public PasswordBuilder withLength(int length) {
         this.minLength = length;
@@ -86,8 +86,8 @@ public class PasswordBuilder {
     }
 
     /**
-     * Sets minimum length of the generated password.
-     * If minimum length is greater than maximum length the password will be {@code minLength} long.
+     * Sets the minimum length of the generated password.
+     * If the minimum length is greater than the maximum length the password will be exactly {@code minLength} long.
      * Otherwise, the password will be between {@code minLength} and {@code maxLength} characters long.
      */
     public PasswordBuilder withMinLength(int minLength) {
@@ -99,8 +99,8 @@ public class PasswordBuilder {
     }
 
     /**
-     * Sets maximum length of the generated password.
-     * If maximum length is smaller than minimum length the password will be {@code maxLength} long.
+     * Sets the maximum length of the generated password.
+     * If the maximum length is smaller than the minimum length the password will be exactly {@code maxLength} long.
      * Otherwise, the password will be between {@code minLength} and {@code maxLength} characters long.
      */
     public PasswordBuilder withMaxLength(int maxLength) {
@@ -115,37 +115,37 @@ public class PasswordBuilder {
      * Returns a randomly generated password
      */
     public String build() {
-        checkMinLengthAgainstConstraints(constraints);
-        return buildPasswordWithConstraints(constraints);
+        verifyMinLengthCanAccommodateConstraints();
+        return buildPasswordWithConstraints();
     }
 
-    private void checkMinLengthAgainstConstraints(Map<String, Supplier<Character>> constraints) {
-        if (constraints.size() >= minLength) {
-            String selectedConstraints = String.join(", ", constraints.keySet());
-            throw new IllegalArgumentException("Minimum length of the password must be GREATER than the number of " +
-                    "selected constraints. The following constraints were selected: [" + selectedConstraints + "] " +
-                    "and the specified minimum password length is " + minLength + ".");
+    private void verifyMinLengthCanAccommodateConstraints() {
+        if (constraintCharacters.size() >= minLength) {
+            String selectedConstraints = String.join(", ", constraintCharacters.keySet());
+            throw new IllegalArgumentException("Minimum length of the password (" + minLength + ") must be GREATER " +
+                    "than the number of selected constraints (" + constraintCharacters.size() + "). " +
+                    "The following constraints were selected: [" + selectedConstraints + "].");
         }
     }
 
-    private String buildPasswordWithConstraints(Map<String, Supplier<Character>> constraints) {
-        StringBuilder password = getPasswordWithOnlyChars();
-        applyConstraints(constraints, password);
+    private String buildPasswordWithConstraints() {
+        StringBuilder password = getPasswordWithOnlyLetters();
+        applyConstraints(password);
         return password.toString();
     }
 
-    private StringBuilder getPasswordWithOnlyChars() {
+    private StringBuilder getPasswordWithOnlyLetters() {
         int length = dummy4j.number().nextInt(minLength, maxLength);
         return new StringBuilder(dummy4j.lorem().characters(length));
     }
 
-    private void applyConstraints(Map<String, Supplier<Character>> constraints, StringBuilder password) {
+    private void applyConstraints(StringBuilder password) {
         int offset = 0;
         int passwordLength = password.toString().length();
-        int howManyToSkip = constraints.size() + 1;
-        for (Map.Entry<String, Supplier<Character>> supplier : constraints.entrySet()) {
-            for (int i = offset; i < passwordLength; i += howManyToSkip) {
-                password.setCharAt(i, supplier.getValue().get());
+        int howManyCharsToSkip = constraintCharacters.size() + 1;
+        for (Supplier<Character> supplier : constraintCharacters.values()) {
+            for (int i = offset; i < passwordLength; i += howManyCharsToSkip) {
+                password.setCharAt(i, supplier.get());
             }
             offset += 1;
         }

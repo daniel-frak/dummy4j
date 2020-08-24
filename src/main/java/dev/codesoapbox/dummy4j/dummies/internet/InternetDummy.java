@@ -4,7 +4,6 @@ import dev.codesoapbox.dummy4j.Dummy4j;
 import dev.codesoapbox.dummy4j.exceptions.UrlCouldNotBeCreatedException;
 
 import java.net.URL;
-import java.util.Locale;
 
 /**
  * Provides methods for generating values related to the internet
