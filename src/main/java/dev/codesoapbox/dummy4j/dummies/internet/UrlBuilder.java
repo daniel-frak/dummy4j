@@ -60,17 +60,17 @@ public final class UrlBuilder {
     /**
      * Points to a list of random words that are used as domains
      */
-    public static final String ROOT_DOMAIN_KEY = "#{internet.param}";
+    public static final String ROOT_DOMAIN_KEY = "#{internet.root_domain}";
 
     /**
      * Points to a list of random words that are used as parameter names
      */
-    public static final String PARAM_KEY = "#{internet.root_domain}";
+    public static final String PARAM_KEY = "#{internet.param}";
 
     /**
      * Points to a list of random words that are used as parameter values
      */
-    public static final String PARAM_VALUE_KEY = "#{internet.root_domain}";
+    public static final String PARAM_VALUE_KEY = "#{internet.param_value}";
 
     /**
      * Represents the chance of generating a string value for a query param

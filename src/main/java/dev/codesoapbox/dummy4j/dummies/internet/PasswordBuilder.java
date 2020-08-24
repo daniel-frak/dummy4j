@@ -2,7 +2,7 @@ package dev.codesoapbox.dummy4j.dummies.internet;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.function.Supplier;
@@ -30,7 +30,7 @@ public class PasswordBuilder {
     public static final String SPECIAL_CHAR_KEY = "#{internet.password_special_char}";
 
     private final Dummy4j dummy4j;
-    private final Map<String, Supplier<Character>> constraints = new HashMap<>();
+    private final Map<String, Supplier<Character>> constraints = new LinkedHashMap<>();
 
     private int minLength = 12;
     private int maxLength = 12;

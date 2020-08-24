@@ -1,0 +1,11 @@
+en:
+  lorem:
+    characters: [
+      "a"
+    ]
+    additional_sentence_ending_punctuation: [
+      "!"
+    ]
+    word: [
+      "test"
+    ]

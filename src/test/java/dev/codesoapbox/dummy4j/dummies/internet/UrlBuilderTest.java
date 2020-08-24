@@ -178,6 +178,7 @@ class UrlBuilderTest {
     void shouldReturnUrlWithWordsInQueryParam() {
         mockDomain();
         mockQueryParam();
+        mockQueryParamStringValue();
         when(dummy4j.chance(UrlBuilder.CHANCE_OF_PARAM_VALUE_AS_STRING, UrlBuilder.CHANCE_IN_PARAM_VALUE_AS_STRING))
                 .thenReturn(true);
         URL actual = builder
@@ -196,11 +197,7 @@ class UrlBuilderTest {
     void shouldReturnUrlWithDigitsInQueryParam() {
         mockDomain();
         mockQueryParam();
-        mockNumberService();
-        when(dummy4j.chance(UrlBuilder.CHANCE_OF_PARAM_VALUE_AS_STRING, UrlBuilder.CHANCE_IN_PARAM_VALUE_AS_STRING))
-                .thenReturn(false);
-        when(numberService.nextInt())
-                .thenReturn(123);
+        mockQueryParamDigitValue();
         URL actual = builder
                 .withQueryParam()
                 .build();
@@ -214,14 +211,26 @@ class UrlBuilderTest {
     private void mockQueryParam() {
         when(expressionResolver.resolve(UrlBuilder.PARAM_KEY))
                 .thenReturn("test");
+    }
+
+    private void mockQueryParamStringValue() {
         when(expressionResolver.resolve(UrlBuilder.PARAM_VALUE_KEY))
                 .thenReturn("test");
+    }
+
+    private void mockQueryParamDigitValue() {
+        mockNumberService();
+        when(dummy4j.chance(UrlBuilder.CHANCE_OF_PARAM_VALUE_AS_STRING, UrlBuilder.CHANCE_IN_PARAM_VALUE_AS_STRING))
+                .thenReturn(false);
+        when(numberService.nextInt())
+                .thenReturn(123);
     }
 
     @Test
     void shouldReturnUrlWithMultipleQueryParams() {
         mockDomain();
         mockQueryParam();
+        mockQueryParamStringValue();
         when(dummy4j.chance(UrlBuilder.CHANCE_OF_PARAM_VALUE_AS_STRING, UrlBuilder.CHANCE_IN_PARAM_VALUE_AS_STRING))
                 .thenReturn(true);
         URL actual = builder
@@ -238,6 +247,7 @@ class UrlBuilderTest {
     void shouldReturnUrlWithQueryParamAndMinLength() {
         mockDomain();
         mockQueryParam();
+        mockQueryParamStringValue();
         mockLoremDummy();
         when(dummy4j.chance(UrlBuilder.CHANCE_OF_PARAM_VALUE_AS_STRING, UrlBuilder.CHANCE_IN_PARAM_VALUE_AS_STRING))
                 .thenReturn(true);
@@ -260,6 +270,7 @@ class UrlBuilderTest {
     void shouldReturnUrlWithMultipleQueryParamsAndFile() {
         mockDomain();
         mockQueryParam();
+        mockQueryParamStringValue();
         mockLoremDummy();
         when(dummy4j.chance(UrlBuilder.CHANCE_OF_PARAM_VALUE_AS_STRING, UrlBuilder.CHANCE_IN_PARAM_VALUE_AS_STRING))
                 .thenReturn(true);
@@ -281,6 +292,7 @@ class UrlBuilderTest {
     void shouldReturnUrlWithRandomProtocolMultipleQueryParamsAndFileAndMinLength() {
         mockDomain();
         mockQueryParam();
+        mockQueryParamStringValue();
         mockLoremDummy();
         when(dummy4j.nextEnum(UrlProtocol.class))
                 .thenReturn(UrlProtocol.HTTP);
@@ -344,6 +356,7 @@ class UrlBuilderTest {
     void shouldReturnUrlWithSpecifiedProtocolWithoutWwwPrefixWithWithRandomPortQueryParamsAndFileAndMinLength() {
         mockDomain();
         mockQueryParam();
+        mockQueryParamStringValue();
         mockNumberService();
         mockLoremDummy();
         when(numberService.nextInt(UrlBuilder.MIN_PORT, UrlBuilder.MAX_PORT))

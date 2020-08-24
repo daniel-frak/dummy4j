@@ -25,28 +25,25 @@ class InternetDummyIntegrationTest {
                 .withFilePath()
                 .withQueryParam()
                 .withCountryTopLevelDomain()
-                .withRandomProtocol(UrlProtocol.FTP, UrlProtocol.HTTP)
+                .withProtocol(UrlProtocol.HTTP)
                 .build();
         assertAll(
-                () -> assertNotNull(value),
-                () -> assertNotNull(value.getPath()),
-                () -> assertFalse(value.getPath().isEmpty()),
-                () -> assertNotNull(value.getProtocol()),
-                () -> assertFalse(value.getProtocol().isEmpty()),
-                () -> assertEquals(UrlBuilder.DEFAULT_PORT, value.getPort()),
-                () -> assertNotNull(value.getHost()),
-                () -> assertFalse(value.getHost().isEmpty()),
-                () -> assertNotNull(value.getFile()),
-                () -> assertFalse(value.getFile().isEmpty()),
-                () -> assertNotNull(value.getQuery()),
-                () -> assertFalse(value.getQuery().isEmpty())
+                () -> {
+                    String expected = "http://www.test-root-domain.eu/aaaaaaaaaa.html?test=test";
+                    assertEquals(expected, value.toString());
+                },
+                () -> assertEquals("/aaaaaaaaaa.html", value.getPath(), "Invalid path"),
+                () -> assertEquals(UrlProtocol.HTTP.getValue(), value.getProtocol(), "Invalid protocol"),
+                () -> assertEquals(UrlBuilder.DEFAULT_PORT, value.getPort(), "Invalid port"),
+                () -> assertEquals("www.test-root-domain.eu", value.getHost(), "Invalid host"),
+                () -> assertEquals("/aaaaaaaaaa.html?test=test", value.getFile(), "Invalid file"),
+                () -> assertEquals("test=test", value.getQuery(), "Invalid query params")
         );
     }
 
     @Test
-    void password() {
+    void shouldCreatePasswordWithSpecialAndUpperCaseChars() {
         String value = dummy4j.internet().password()
-                .withDigits()
                 .withSpecialChars()
                 .withUpperCaseChars()
                 .build();
@@ -55,10 +52,24 @@ class InternetDummyIntegrationTest {
                 () -> assertNotNull(value),
                 () -> assertFalse(value.isEmpty()),
                 () -> assertEquals(DEFAULT_PASSWORD_LENGTH, value.length(), "Invalid length"),
-                () -> assertTrue(value.matches(".*\\d+.*"), "Digits are missing"),
                 () -> assertTrue(value.matches(".*[!@#$%^&*_\\-?]+.*"), "Special characters are missing"),
                 () -> assertTrue(value.matches(".*[A-Z]+.*"), "Upper case characters are missing"),
-                () -> assertTrue(value.matches(".*[a-z]+.*"), "Lower case characters are missing")
+                () -> assertTrue(value.matches(".*[a-z]+.*"), "Lower case characters are missing"),
+                () -> assertEquals("$Aa$Aa$Aa$Aa", value, "Invalid value")
+        );
+    }
+
+    @Test
+    void shouldCreatePasswordWithDigits() {
+        String value = dummy4j.internet().password()
+                .withDigits()
+                .build();
+
+        assertAll(
+                () -> assertNotNull(value),
+                () -> assertFalse(value.isEmpty()),
+                () -> assertEquals(DEFAULT_PASSWORD_LENGTH, value.length(), "Invalid length"),
+                () -> assertTrue(value.matches(".*\\d+.*"), "Digits are missing")
         );
     }
 }

@@ -208,4 +208,31 @@ class PasswordBuilderTest {
         verify(numberService, times(1)).nextInt(PasswordBuilder.DIGIT_UPPER_BOUND);
         verify(loremDummy, times(1)).character();
     }
+
+    @Test
+    void shouldKeepConstraintInsertionOrderWithUpperCaseCharBeingFirst() {
+        mockDefaultPassword();
+        mockUpperCase();
+        mockSpecialChar();
+        String actual = builder
+                .withUpperCaseChars()
+                .withSpecialChars()
+                .build();
+
+        assertEquals("A?sA?oA?pA?s", actual);
+    }
+
+    @Test
+    void shouldKeepConstraintInsertionOrderWithSpecialCharBeingFirst() {
+        mockDefaultPassword();
+        mockUpperCase();
+        mockSpecialChar();
+
+        String actual = builder
+                .withSpecialChars()
+                .withUpperCaseChars()
+                .build();
+
+        assertEquals("?As?Ao?Ap?As", actual);
+    }
 }
