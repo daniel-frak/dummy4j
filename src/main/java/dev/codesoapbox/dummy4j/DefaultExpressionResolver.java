@@ -1,8 +1,8 @@
 package dev.codesoapbox.dummy4j;
 
 import com.google.common.collect.Maps;
-import dev.codesoapbox.dummy4j.definitions.providers.DefinitionProvider;
 import dev.codesoapbox.dummy4j.definitions.LocalizedDummyDefinitions;
+import dev.codesoapbox.dummy4j.definitions.providers.DefinitionProvider;
 import dev.codesoapbox.dummy4j.exceptions.MissingLocaleException;
 
 import java.util.List;
@@ -29,7 +29,7 @@ public class DefaultExpressionResolver implements ExpressionResolver {
 
     public DefaultExpressionResolver(List<String> locales, RandomService randomService,
                                      DefinitionProvider definitionProvider) {
-        if(locales == null || locales.isEmpty()) {
+        if (locales == null || locales.isEmpty()) {
             locales = singletonList("en");
         }
         this.locales = locales;
@@ -58,13 +58,6 @@ public class DefaultExpressionResolver implements ExpressionResolver {
         return replaceDigitPlaceholders(expressionWithResolvedKeys);
     }
 
-    private String replaceDigitPlaceholders(String expressionWithResolvedKeys) {
-        final Matcher digitMatcher = DIGIT_PATTERN.matcher(expressionWithResolvedKeys);
-
-        return replace(expressionWithResolvedKeys, digitMatcher,
-                () -> String.valueOf(randomService.nextInt(9)));
-    }
-
     private String replaceKeyPlaceholders(String expression) {
         final Matcher expressionMatcher = VARIABLE_PATTERN.matcher(expression);
 
@@ -72,10 +65,17 @@ public class DefaultExpressionResolver implements ExpressionResolver {
                 () -> resolveKey(expressionMatcher.group(1)));
     }
 
+    private String replaceDigitPlaceholders(String expressionWithResolvedKeys) {
+        final Matcher digitMatcher = DIGIT_PATTERN.matcher(expressionWithResolvedKeys);
+
+        return replace(expressionWithResolvedKeys, digitMatcher,
+                () -> String.valueOf(randomService.nextInt(9)));
+    }
+
     private String replace(String expression, Matcher expressionMatcher, Supplier<String> replacementSupplier) {
         final StringBuffer b = new StringBuffer(expression.length());
         while (expressionMatcher.find()) {
-            expressionMatcher.appendReplacement(b, replacementSupplier.get());
+            expressionMatcher.appendReplacement(b, Matcher.quoteReplacement(replacementSupplier.get()));
         }
         expressionMatcher.appendTail(b);
 
