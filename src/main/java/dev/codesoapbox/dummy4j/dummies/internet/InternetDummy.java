@@ -31,7 +31,7 @@ public class InternetDummy {
     /**
      * Provides a builder for random urls generated according to customisable parameters
      * <p>
-     * E.g. {@code url().withPort(80).withQueryParams().minLength(70).build()}
+     * E.g. {@code urlBuilder().withPort(80).withQueryParams().minLength(70).build()}
      */
     public UrlBuilder urlBuilder() {
         return new UrlBuilder(dummy4j);
@@ -47,7 +47,7 @@ public class InternetDummy {
     /**
      * Provides a builder for random passwords generated according to customisable parameters
      * <p>
-     * E.g. {@code password().withDigits().withUpperCaseChars().withMinLength(15).build()}
+     * E.g. {@code passwordBuilder().withDigits().withUpperCaseChars().withMinLength(15).build()}
      */
     public PasswordBuilder passwordBuilder() {
         return new PasswordBuilder(dummy4j);

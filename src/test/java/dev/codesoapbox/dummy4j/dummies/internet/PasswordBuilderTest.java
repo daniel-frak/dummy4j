@@ -235,4 +235,11 @@ class PasswordBuilderTest {
 
         assertEquals("?As?Ao?Ap?As", actual);
     }
+
+    @Test
+    void shouldConvertBuilderToString() {
+        String expected = "PasswordBuilder{constraintCharacters=[with upper case characters, with digits], " +
+                "minLength=12, maxLength=12}";
+        assertEquals(expected, builder.withUpperCaseChars().withDigits().toString());
+    }
 }

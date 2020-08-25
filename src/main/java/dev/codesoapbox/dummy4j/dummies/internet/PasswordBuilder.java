@@ -150,4 +150,13 @@ public class PasswordBuilder {
             offset += 1;
         }
     }
+
+    @Override
+    public String toString() {
+        return "PasswordBuilder{" +
+                "constraintCharacters=" + constraintCharacters.keySet() +
+                ", minLength=" + minLength +
+                ", maxLength=" + maxLength +
+                '}';
+    }
 }
