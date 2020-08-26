@@ -26,6 +26,7 @@ class PasswordBuilderTest {
     private static final Pattern UPPER_CASE_PATTERN = Pattern.compile(".*[A-Z]+.*");
     private static final Pattern LOWER_CASE_PATTERN = Pattern.compile(".*[a-z]+.*");
     private static final String DIFFERENT_THAN_EXPECTED = "Actual value is different than expected";
+
     @Mock
     private Dummy4j dummy4j;
 
@@ -80,13 +81,16 @@ class PasswordBuilderTest {
     void shouldBuildPasswordWithDigits() {
         mockDefaultPassword();
         mockRandomDigit();
+
         String actual = builder
                 .withDigits()
                 .build();
-        Matcher digitMatcher = DIGIT_PATTERN.matcher(actual);
 
         assertAll(
-                () -> assertTrue(digitMatcher.find(), "Digits are missing"),
+                () -> {
+                    Matcher digitMatcher = DIGIT_PATTERN.matcher(actual);
+                    assertTrue(digitMatcher.matches(), "Digits are missing");
+                },
                 () -> assertEquals("5a5s5o5d5a5s", actual, DIFFERENT_THAN_EXPECTED)
         );
     }
@@ -100,13 +104,16 @@ class PasswordBuilderTest {
     void shouldBuildPasswordWithSpecialChars() {
         mockDefaultPassword();
         mockSpecialChar();
+
         String actual = builder
                 .withSpecialChars()
                 .build();
-        Matcher specialCharMatcher = SPECIAL_CHAR_PATTERN.matcher(actual);
 
         assertAll(
-                () -> assertTrue(specialCharMatcher.find(), "Special characters are missing"),
+                () -> {
+                    Matcher specialCharMatcher = SPECIAL_CHAR_PATTERN.matcher(actual);
+                    assertTrue(specialCharMatcher.matches(), "Special characters are missing");
+                },
                 () -> assertEquals("?a?s?o?d?a?s", actual, DIFFERENT_THAN_EXPECTED)
         );
     }
@@ -127,16 +134,21 @@ class PasswordBuilderTest {
         mockDefaultPassword();
         mockRandomDigit();
         mockSpecialChar();
+
         String actual = builder
                 .withDigits()
                 .withSpecialChars()
                 .build();
-        Matcher specialCharMatcher = SPECIAL_CHAR_PATTERN.matcher(actual);
-        Matcher digitMatcher = DIGIT_PATTERN.matcher(actual);
 
         assertAll(
-                () -> assertTrue(digitMatcher.find(), "Digits are missing"),
-                () -> assertTrue(specialCharMatcher.find(), "Special characters are missing")
+                () -> {
+                    Matcher digitMatcher = DIGIT_PATTERN.matcher(actual);
+                    assertTrue(digitMatcher.matches(), "Digits are missing");
+                },
+                () -> {
+                    Matcher specialCharMatcher = SPECIAL_CHAR_PATTERN.matcher(actual);
+                    assertTrue(specialCharMatcher.matches(), "Special characters are missing");
+                }
         );
     }
 
@@ -144,14 +156,17 @@ class PasswordBuilderTest {
     void shouldBuildPasswordWithUpperCaseChars() {
         mockDefaultPassword();
         mockUpperCase();
+
         String actual = builder
                 .withUpperCaseChars()
                 .build();
-        Matcher upperCaseMatcher = UPPER_CASE_PATTERN.matcher(actual);
 
         assertAll(
                 () -> assertEquals("AaAsAoAdAaAs", actual, DIFFERENT_THAN_EXPECTED),
-                () -> assertTrue(upperCaseMatcher.find(), "Upper case characters are missing")
+                () -> {
+                    Matcher upperCaseMatcher = UPPER_CASE_PATTERN.matcher(actual);
+                    assertTrue(upperCaseMatcher.matches(), "Upper case characters are missing");
+                }
         );
     }
 
@@ -166,20 +181,30 @@ class PasswordBuilderTest {
         mockUpperCase();
         mockRandomDigit();
         mockSpecialChar();
+
         String actual = builder
                 .withUpperCaseChars()
                 .withDigits()
                 .withSpecialChars()
                 .build();
-        Matcher specialCharMatcher = SPECIAL_CHAR_PATTERN.matcher(actual);
-        Matcher digitMatcher = DIGIT_PATTERN.matcher(actual);
-        Matcher upperCaseMatcher = UPPER_CASE_PATTERN.matcher(actual);
-        Matcher lowerCaseMatcher = LOWER_CASE_PATTERN.matcher(actual);
+
         assertAll(
-                () -> assertTrue(digitMatcher.find(), "Digits are missing"),
-                () -> assertTrue(specialCharMatcher.find(), "Special characters are missing"),
-                () -> assertTrue(upperCaseMatcher.find(), "Upper case characters are missing"),
-                () -> assertTrue(lowerCaseMatcher.find(), "Lower case characters are missing")
+                () -> {
+                    Matcher digitMatcher = DIGIT_PATTERN.matcher(actual);
+                    assertTrue(digitMatcher.matches(), "Digits are missing");
+                },
+                () -> {
+                    Matcher specialCharMatcher = SPECIAL_CHAR_PATTERN.matcher(actual);
+                    assertTrue(specialCharMatcher.matches(), "Special characters are missing");
+                },
+                () -> {
+                    Matcher upperCaseMatcher = UPPER_CASE_PATTERN.matcher(actual);
+                    assertTrue(upperCaseMatcher.matches(), "Upper case characters are missing");
+                },
+                () -> {
+                    Matcher lowerCaseMatcher = LOWER_CASE_PATTERN.matcher(actual);
+                    assertTrue(lowerCaseMatcher.matches(), "Lower case characters are missing");
+                }
         );
     }
 
@@ -195,6 +220,7 @@ class PasswordBuilderTest {
         mockRandomDigit();
         mockSpecialChar();
         mockUpperCase();
+
         builder.withMaxLength(maxLength)
                 .withDigits()
                 .withSpecialChars()
@@ -214,6 +240,7 @@ class PasswordBuilderTest {
         mockDefaultPassword();
         mockUpperCase();
         mockSpecialChar();
+
         String actual = builder
                 .withUpperCaseChars()
                 .withSpecialChars()
@@ -240,6 +267,7 @@ class PasswordBuilderTest {
     void shouldConvertBuilderToString() {
         String expected = "PasswordBuilder{constraintCharacters=[with upper case characters, with digits], " +
                 "minLength=12, maxLength=12}";
+
         assertEquals(expected, builder.withUpperCaseChars().withDigits().toString());
     }
 }

@@ -116,7 +116,7 @@ public class PasswordBuilder {
      */
     public String build() {
         verifyMinLengthCanAccommodateConstraints();
-        return buildPasswordWithConstraints();
+        return applyConstraints(getPasswordWithOnlyLetters());
     }
 
     private void verifyMinLengthCanAccommodateConstraints() {
@@ -128,27 +128,22 @@ public class PasswordBuilder {
         }
     }
 
-    private String buildPasswordWithConstraints() {
-        StringBuilder password = getPasswordWithOnlyLetters();
-        applyConstraints(password);
-        return password.toString();
-    }
-
-    private StringBuilder getPasswordWithOnlyLetters() {
-        int length = dummy4j.number().nextInt(minLength, maxLength);
-        return new StringBuilder(dummy4j.lorem().characters(length));
-    }
-
-    private void applyConstraints(StringBuilder password) {
+    private String applyConstraints(String password) {
         int offset = 0;
-        int passwordLength = password.toString().length();
         int howManyCharsToSkip = constraintCharacters.size() + 1;
+        StringBuilder passwordWithConstraints = new StringBuilder(password);
         for (Supplier<Character> supplier : constraintCharacters.values()) {
-            for (int i = offset; i < passwordLength; i += howManyCharsToSkip) {
-                password.setCharAt(i, supplier.get());
+            for (int i = offset; i < password.length(); i += howManyCharsToSkip) {
+                passwordWithConstraints.setCharAt(i, supplier.get());
             }
             offset += 1;
         }
+        return passwordWithConstraints.toString();
+    }
+
+    private String getPasswordWithOnlyLetters() {
+        int length = dummy4j.number().nextInt(minLength, maxLength);
+        return dummy4j.lorem().characters(length);
     }
 
     @Override

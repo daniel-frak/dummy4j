@@ -13,15 +13,13 @@ en:
       "space"
     ]
     top_level_domain: [
-      "#{internet.popular_top_level_domain}",
-      "#{internet.country_top_level_domain}",
-      "#{internet.generic_top_level_domain}"
+      "test-top-level-domain"
     ]
     param: [
-      "#{lorem.word}"
+      "test"
     ]
     param_value: [
-      "#{lorem.word}"
+      "test"
     ]
     password_special_char: [
       "$"

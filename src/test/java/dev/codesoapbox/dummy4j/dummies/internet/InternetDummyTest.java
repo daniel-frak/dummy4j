@@ -40,6 +40,7 @@ class InternetDummyTest {
     @Test
     void shouldReturnDefaultUrl() {
         mockSimpleUrl();
+
         URL actual = internetDummy.url();
 
         assertEquals("https://www.test.dev", actual.toString());
@@ -48,8 +49,8 @@ class InternetDummyTest {
     @Test
     void shouldBuildSimpleUrl() {
         mockSimpleUrl();
-        URL actual = internetDummy.urlBuilder()
-                .build();
+
+        URL actual = internetDummy.urlBuilder().build();
 
         assertAll(
                 () -> assertEquals("https://www.test.dev", actual.toString()),
@@ -73,6 +74,7 @@ class InternetDummyTest {
     @Test
     void shouldReturnDefaultPassword() {
         mockSimplePassword();
+
         String actual = internetDummy.password();
 
         assertAll(
@@ -96,8 +98,8 @@ class InternetDummyTest {
     @Test
     void shouldBuildSimplePassword() {
         mockSimplePassword();
-        String actual = internetDummy.passwordBuilder()
-                .build();
+
+        String actual = internetDummy.passwordBuilder().build();
 
         assertAll(
                 () -> assertNotNull(actual, "Value is null"),
