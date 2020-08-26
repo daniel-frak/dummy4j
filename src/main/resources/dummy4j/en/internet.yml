@@ -26,3 +26,6 @@ en:
     param_value: [
       "#{lorem.word}"
     ]
+    password_special_char: [
+      "!", "@", "#", "$", "%", "^", "&", "*", "-", "_", "?"
+    ]

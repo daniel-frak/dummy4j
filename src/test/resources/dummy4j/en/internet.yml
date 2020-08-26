@@ -1,0 +1,26 @@
+en:
+  internet:
+    root_domain: [
+      "test-root-domain"
+    ]
+    popular_top_level_domain: [
+      "com"
+    ]
+    country_top_level_domain: [
+      "eu"
+    ]
+    generic_top_level_domain: [
+      "space"
+    ]
+    top_level_domain: [
+      "test-top-level-domain"
+    ]
+    param: [
+      "test"
+    ]
+    param_value: [
+      "test"
+    ]
+    password_special_char: [
+      "$"
+    ]
