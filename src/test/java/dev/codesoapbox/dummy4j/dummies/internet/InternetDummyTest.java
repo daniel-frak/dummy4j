@@ -4,6 +4,7 @@ import dev.codesoapbox.dummy4j.Dummy4j;
 import dev.codesoapbox.dummy4j.ExpressionResolver;
 import dev.codesoapbox.dummy4j.NumberService;
 import dev.codesoapbox.dummy4j.dummies.LoremDummy;
+import dev.codesoapbox.dummy4j.dummies.NameDummy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,6 +27,9 @@ class InternetDummyTest {
 
     @Mock
     private LoremDummy loremDummy;
+
+    @Mock
+    private NameDummy nameDummy;
 
     @Mock
     private NumberService numberService;
@@ -105,6 +109,50 @@ class InternetDummyTest {
                 () -> assertNotNull(actual, "Value is null"),
                 () -> assertEquals("passwordpass", actual, "Invalid value"),
                 () -> assertEquals(12, actual.length(), "Invalid length")
+        );
+    }
+
+    @Test
+    void shouldReturnDefaultEmail() {
+        mockSimpleEmail();
+        String actual = internetDummy.email();
+
+        assertAll(
+                () -> assertNotNull(actual),
+                () -> assertEquals("zoe.anderson@gmail.com", actual)
+        );
+    }
+
+    private void mockSimpleEmail() {
+        mockProvider();
+        mockLocalPart();
+    }
+
+    private void mockProvider() {
+        mockExpressionResolver();
+        when(expressionResolver.resolve(EmailBuilder.DOMAIN_KEY))
+                .thenReturn("gmail.com");
+    }
+
+    private void mockLocalPart() {
+        when(dummy4j.name())
+                .thenReturn(nameDummy);
+        when(nameDummy.firstName())
+                .thenReturn("Zoe");
+        when(nameDummy.lastName())
+                .thenReturn("Anderson");
+    }
+
+    @Test
+    void shouldBuildEmail() {
+        mockSimpleEmail();
+        String actual = internetDummy.emailBuilder()
+                .withSubAddress("tag")
+                .build();
+
+        assertAll(
+                () -> assertNotNull(actual),
+                () -> assertEquals("zoe.anderson+tag@gmail.com", actual)
         );
     }
 }

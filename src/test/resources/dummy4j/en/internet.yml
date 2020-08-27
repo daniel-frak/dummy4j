@@ -24,3 +24,12 @@ en:
     password_special_char: [
       "$"
     ]
+    email_domain: [
+      "gmail.com"
+    ]
+    email_sub_address: [
+      "tag1"
+    ]
+    email_safe_domains: [
+      "example.com"
+    ]
