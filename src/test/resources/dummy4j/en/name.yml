@@ -1,0 +1,19 @@
+en:
+  name:
+    male_first_name: [
+      "Drake"
+    ]
+    female_first_name: [
+      "Zoe"
+    ]
+    first_name:
+      - "#{name.female_first_name}"
+    last_name: [
+      "Anderson"
+    ]
+    prefix: ["Dr."]
+    suffix: ["Jr."]
+    full_name:
+      - "#{name.prefix} #{name.first_name} #{name.last_name}"
+    full_name_with_middle:
+      - "#{name.prefix} #{name.first_name} #{name.last_name} #{name.last_name}"

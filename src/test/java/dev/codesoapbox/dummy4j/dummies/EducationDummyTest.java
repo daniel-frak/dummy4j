@@ -1,66 +1,81 @@
 package dev.codesoapbox.dummy4j.dummies;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
+import dev.codesoapbox.dummy4j.ExpressionResolver;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class EducationDummyTest {
 
+    @Mock
     private Dummy4j dummy4j;
+    
+    @Mock
+    private ExpressionResolver expressionResolver;
+    
+    private EducationDummy educationDummy;
 
     @BeforeEach
     void setUp() {
-        dummy4j = new Dummy4j();
+        educationDummy = new EducationDummy(dummy4j);
+        when(dummy4j.expressionResolver())
+                .thenReturn(expressionResolver);
+        
     }
 
     @Test
     void major() {
-        String value = dummy4j.education().major();
-        assertNotNull(value);
-        assertFalse(value.isEmpty());
+        when(expressionResolver.resolve("#{education.major}"))
+                .thenReturn("Major");
+        assertEquals("Major", educationDummy.major());
     }
 
     @Test
     void primaryInstitution() {
-        String value = dummy4j.education().primaryInstitution();
-        assertNotNull(value);
-        assertFalse(value.isEmpty());
+        when(expressionResolver.resolve("#{education.primary_institution}"))
+                .thenReturn("Primary");
+        assertEquals("Primary", educationDummy.primaryInstitution());
     }
 
     @Test
     void secondaryInstitution() {
-        String value = dummy4j.education().secondaryInstitution();
-        assertNotNull(value);
-        assertFalse(value.isEmpty());
+        when(expressionResolver.resolve("#{education.secondary_institution}"))
+                .thenReturn("Secondary");
+        assertEquals("Secondary", educationDummy.secondaryInstitution());
     }
 
     @Test
     void tertiaryInstitution() {
-        String value = dummy4j.education().tertiaryInstitution();
-        assertNotNull(value);
-        assertFalse(value.isEmpty());
+        when(expressionResolver.resolve("#{education.tertiary_institution}"))
+                .thenReturn("Tertiary");
+        assertEquals("Tertiary", educationDummy.tertiaryInstitution());
     }
 
     @Test
     void institution() {
-        String value = dummy4j.education().institution();
-        assertNotNull(value);
-        assertFalse(value.isEmpty());
+        when(expressionResolver.resolve("#{education.institution}"))
+                .thenReturn("Institution");
+        assertEquals("Institution", educationDummy.institution());
     }
 
     @Test
     void degree() {
-        String value = dummy4j.education().degree();
-        assertNotNull(value);
-        assertFalse(value.isEmpty());
+        when(expressionResolver.resolve("#{education.degree}"))
+                .thenReturn("Degree");
+        assertEquals("Degree", educationDummy.degree());
     }
 
     @Test
     void courseNumber() {
-        String value = dummy4j.education().courseNumber();
-        assertNotNull(value);
-        assertFalse(value.isEmpty());
+        when(expressionResolver.resolve("#{education.course_number}"))
+                .thenReturn("11");
+        assertEquals("11", educationDummy.courseNumber());
     }
 }

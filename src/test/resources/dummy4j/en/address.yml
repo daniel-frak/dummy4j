@@ -1,0 +1,26 @@
+en:
+  address:
+    city_prefix: [
+      "North"
+    ]
+    city_suffix: [
+      "shire"
+    ]
+    city: [
+      "North Zoeshire"
+    ]
+    postcode: [
+      "12345-678"
+    ]
+    street_suffix: [
+      "Canyon"
+    ]
+    street_name: [
+      "Anderson Canyon"
+    ]
+    building_number: [
+      "10"
+    ]
+    street: [
+      "#{address.building_number} #{address.street_name}"
+    ]

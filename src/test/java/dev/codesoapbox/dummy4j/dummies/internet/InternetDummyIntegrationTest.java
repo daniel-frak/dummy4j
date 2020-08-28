@@ -5,6 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.net.URL;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,17 +22,13 @@ class InternetDummyIntegrationTest {
     }
 
     @Test
-    void shouldReturnDefaultUrl() {
+    void shouldReturnUrl() {
         URL value = dummy4j.internet().url();
 
         assertAll(
-                () -> assertNotNull(value, "Value is null"),
-                () -> assertFalse(value.toString().isEmpty(), "Value is empty"),
-                () -> assertEquals("", value.getPath(), "Invalid path"),
-                () -> assertNotNull(value.getProtocol(), "Protocol is null"),
+                () -> assertEquals("www.test-root-domain.test-top-level-domain", value.getHost()),
                 () -> assertEquals(UrlBuilder.DEFAULT_PORT, value.getPort(), "Invalid port"),
-                () -> assertFalse(value.getHost().isEmpty(), "Host is empty"),
-                () -> assertNotNull(value.getFile(), "File is null"),
+                () -> assertEquals("", value.getPath(), "Path is not empty"),
                 () -> assertEquals("", value.getFile(), "File is not empty"),
                 () -> assertNull(value.getQuery(), "Query is not null")
         );
@@ -42,31 +40,28 @@ class InternetDummyIntegrationTest {
                 .withFilePath()
                 .withQueryParam()
                 .withCountryTopLevelDomain()
-                .withProtocol(UrlProtocol.HTTP)
+                .withProtocol(UrlProtocol.HTTPS)
                 .build();
 
         assertAll(
-                () -> assertEquals("/aaaaaaaaaa.html", value.getPath(), "Invalid path"),
-                () -> assertEquals(UrlProtocol.HTTP.getValue(), value.getProtocol(), "Invalid protocol"),
-                () -> assertEquals(UrlBuilder.DEFAULT_PORT, value.getPort(), "Invalid port"),
+                () -> assertEquals(UrlProtocol.HTTPS.getValue(), value.getProtocol(), "Invalid protocol"),
                 () -> assertEquals("www.test-root-domain.eu", value.getHost(), "Invalid host"),
-                () -> assertNotNull(value.getFile(), "File is null"),
-                () -> assertFalse(value.getFile().isEmpty(), "File is empty"),
+                () -> assertEquals(UrlBuilder.DEFAULT_PORT, value.getPort(), "Invalid port"),
                 () -> assertNotNull(value.getQuery(), "Query is null"),
-                () -> assertFalse(value.getQuery().isEmpty(), "Query is empty")
+                () -> assertEquals("/aaaaaaaaaa.html", value.getPath(), "Invalid path"),
+                () -> {
+                    Pattern queryPattern = Pattern.compile(".*/aaaaaaaaaa\\.html\\?param=.*");
+                    Matcher queryMatcher = queryPattern.matcher(value.getFile());
+                    assertTrue(queryMatcher.matches(), "Invalid file");
+                }
         );
     }
 
     @Test
-    void shouldReturnDefaultPassword() {
+    void shouldReturnPassword() {
         String value = dummy4j.internet().password();
 
-        assertAll(
-                () -> assertNotNull(value, "Value is null"),
-                () -> assertFalse(value.isEmpty(), "Value is empty"),
-                () -> assertEquals(DEFAULT_PASSWORD_LENGTH, value.length(), "Invalid length"),
-                () -> assertEquals("aaaaaaaaaaaa", value, "Invalid value")
-        );
+        assertEquals("aaaaaaaaaaaa", value, "Invalid password");
     }
 
     @Test
@@ -77,26 +72,25 @@ class InternetDummyIntegrationTest {
                 .build();
 
         assertAll(
-                () -> assertNotNull(value, "Value is null"),
-                () -> assertFalse(value.isEmpty(), "Value is empty"),
+                () -> assertNotNull(value, "Password is null"),
+                () -> assertEquals("$Aa$Aa$Aa$Aa", value, "Invalid password"),
                 () -> assertEquals(DEFAULT_PASSWORD_LENGTH, value.length(), "Invalid length"),
                 () -> assertTrue(value.matches(".*[!@#$%^&*_\\-?]+.*"), "Special characters are missing"),
                 () -> assertTrue(value.matches(".*[A-Z]+.*"), "Upper case characters are missing"),
-                () -> assertTrue(value.matches(".*[a-z]+.*"), "Lower case characters are missing"),
-                () -> assertEquals("$Aa$Aa$Aa$Aa", value, "Invalid value")
+                () -> assertTrue(value.matches(".*[a-z]+.*"), "Lower case characters are missing")
         );
     }
 
     @Test
-    void shouldBuildPasswordWithDigits() {
+    void shouldBuildPasswordWithDigitsAndLength() {
         String value = dummy4j.internet().passwordBuilder()
                 .withDigits()
+                .withLength(10)
                 .build();
 
         assertAll(
-                () -> assertNotNull(value),
-                () -> assertFalse(value.isEmpty()),
-                () -> assertEquals(DEFAULT_PASSWORD_LENGTH, value.length(), "Invalid length"),
+                () -> assertNotNull(value, "Password is null"),
+                () -> assertEquals(10, value.length(), "Invalid length"),
                 () -> assertTrue(value.matches(".*\\d+.*"), "Digits are missing")
         );
     }
