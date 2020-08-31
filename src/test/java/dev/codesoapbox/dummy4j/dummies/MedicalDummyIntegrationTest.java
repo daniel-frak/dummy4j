@@ -4,13 +4,9 @@ import dev.codesoapbox.dummy4j.Dummy4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.regex.Pattern;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MedicalDummyIntegrationTest {
-
-    private static final Pattern BLOOD_TYPE_PATTERN = Pattern.compile("(A|B|AB|O)[+-]");
 
     private Dummy4j dummy4j;
 
@@ -21,20 +17,16 @@ class MedicalDummyIntegrationTest {
 
     @Test
     void shouldReturnValidBloodType() {
-        assertTrue(BLOOD_TYPE_PATTERN.matcher(dummy4j.medical().bloodType()).matches());
+        assertEquals("A+", dummy4j.medical().bloodType());
     }
 
     @Test
     void shouldReturnDiscipline() {
-        String value = dummy4j.medical().discipline();
-        assertNotNull(value);
-        assertFalse(value.isEmpty());
+        assertEquals("Anesthesiology", dummy4j.medical().discipline());
     }
 
     @Test
     void shouldReturnOccupation() {
-        String value = dummy4j.medical().occupation();
-        assertNotNull(value);
-        assertFalse(value.isEmpty());
+        assertEquals("Certified Emergency Registered Nurse", dummy4j.medical().occupation());
     }
 }

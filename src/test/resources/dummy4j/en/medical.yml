@@ -1,0 +1,9 @@
+en:
+  medical:
+    blood_type: ["A+"]
+    discipline: [
+      "Anesthesiology"
+    ]
+    occupation: [
+      "Certified Emergency Registered Nurse"
+    ]

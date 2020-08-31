@@ -1,0 +1,8 @@
+en:
+  research_paper:
+    subject: [
+        "Psychology"
+    ]
+    title: [
+        "#{research_paper.title_social}"
+    ]
