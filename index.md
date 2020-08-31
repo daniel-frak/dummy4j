@@ -47,14 +47,15 @@ While you can easily add your own dummy data definitions, the following are avai
 * [Lorem](https://javadoc.io/doc/dev.codesoapbox/dummy4j/latest/dev/codesoapbox/dummy4j/dummies/LoremDummy.html)
 * [Date and Time](https://javadoc.io/doc/dev.codesoapbox/dummy4j/latest/dev/codesoapbox/dummy4j/dummies/DateAndTimeDummy.html) *(since 0.4.0)*
 * Identifier *(since 0.5.0)*
-* [Education]() *(since 0.3.0)*
-* [Book](https://javadoc.io/doc/dev.codesoapbox/dummy4j/latest/dev/codesoapbox/dummy4j/dummies/EducationDummy.html) *(since 0.2.0)*
+* [Education](https://javadoc.io/doc/dev.codesoapbox/dummy4j/latest/dev/codesoapbox/dummy4j/dummies/EducationDummy.html) *(since 0.3.0)*
+* [Book](https://javadoc.io/doc/dev.codesoapbox/dummy4j/latest/dev/codesoapbox/dummy4j/dummies/BookDummy.html) *(since 0.2.0)*
 * [Research Paper](https://javadoc.io/doc/dev.codesoapbox/dummy4j/latest/dev/codesoapbox/dummy4j/dummies/ResearchPaperDummy.html) *(since 0.2.0)*
 * [Sci-fi](https://javadoc.io/doc/dev.codesoapbox/dummy4j/latest/dev/codesoapbox/dummy4j/dummies/ScifiDummy.html)
 * [Color](https://javadoc.io/doc/dev.codesoapbox/dummy4j/latest/dev/codesoapbox/dummy4j/dummies/color/ColorDummy.html) *(since 0.4.0)*
 * [Numerals](https://javadoc.io/doc/dev.codesoapbox/dummy4j/latest/dev/codesoapbox/dummy4j/dummies/NumeralsDummy.html) *(since 0.4.0)*
 * [Medical](https://javadoc.io/doc/dev.codesoapbox/dummy4j/latest/dev/codesoapbox/dummy4j/dummies/MedicalDummy.html) *(since 0.4.0)*
 * [Nato Phonetic Alphabet](https://javadoc.io/doc/dev.codesoapbox/dummy4j/latest/dev/codesoapbox/dummy4j/dummies/NatoPhoneticAlphabetDummy.html) *(since 0.4.0)*
+* Internet *(since 0.5.0)*
 
 # API stability notice
 
