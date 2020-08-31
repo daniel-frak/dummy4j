@@ -1,0 +1,29 @@
+en:
+  nation:
+    country: [
+      "Armenia"
+    ]
+    country_code: [
+      "AD",
+    ]
+    nationality: [
+      "Belarusian"
+    ]
+    language_code_iso_639_1: [
+      "ch"
+    ]
+    language_code_iso_639_2: [
+      "alb"
+    ]
+    language: [
+      "Haitian"
+    ]
+    common_language_code_iso_639_1: [
+      "ja"
+    ]
+    common_language_code_iso_639_2: [
+      "spa"
+    ]
+    common_language: [
+      "Portuguese"
+    ]

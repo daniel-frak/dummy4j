@@ -1,0 +1,29 @@
+en:
+  research_paper:
+    title_physics_in_prefix: [
+        "Transport Phenomena"
+    ]
+    title_physics_in_suffix: [
+        "Cosmic-ray Interactions"
+    ]
+    title_physics_on_prefix: [
+        "Scaling Effect"
+    ]
+    title_physics_on_suffix: [
+        "Statistical Behavior of Switching Parameters of Ferroelectric Capacitors"
+    ]
+    title_physics: [
+        "#{research_paper.title_physics_in_prefix} in #{research_paper.title_physics_in_suffix}",
+    ]
+    title_biology_in_prefix: [
+        "Regulation of Aquaporins"
+    ]
+    title_biology_in_suffix: [
+        "Plants Under Stress"
+    ]
+    title_biology: [
+        "#{research_paper.title_biology_in_prefix} in #{research_paper.title_biology_in_suffix}"
+    ]
+    title_natural: [
+        "#{research_paper.title_physics}"
+    ]

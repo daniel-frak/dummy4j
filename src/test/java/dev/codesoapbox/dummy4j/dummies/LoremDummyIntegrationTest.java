@@ -17,17 +17,12 @@ class LoremDummyIntegrationTest {
 
     @Test
     void characters() {
-        String value = dummy4j.lorem().characters(10);
-        assertNotNull(value);
-        assertFalse(value.isEmpty());
-        assertEquals(10, value.length());
+        assertEquals("aaa", dummy4j.lorem().characters(3));
     }
 
     @Test
     void character() {
-        String value = dummy4j.lorem().character();
-        assertNotNull(value);
-        assertFalse(value.isEmpty());
+        assertEquals("a", dummy4j.lorem().character());
     }
 
     @Test
@@ -53,9 +48,7 @@ class LoremDummyIntegrationTest {
 
     @Test
     void word() {
-        String value = dummy4j.lorem().word();
-        assertNotNull(value);
-        assertFalse(value.isEmpty());
+        assertEquals("test", dummy4j.lorem().word());
     }
 
     @Test

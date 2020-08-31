@@ -44,6 +44,7 @@ class UrlBuilderTest {
     @Test
     void shouldReturnSimpleUrl() {
         mockDomain();
+
         URL actual = builder.build();
 
         assertAll(
@@ -80,6 +81,7 @@ class UrlBuilderTest {
     void shouldNotAddExtraCharsWhenMinLengthSatisfied() {
         mockDomain();
         int minLength = 20;
+
         URL actual = builder
                 .minLength(minLength)
                 .build();
@@ -91,6 +93,7 @@ class UrlBuilderTest {
     @Test
     void shouldReturnUrlWithoutHostPrefix() {
         mockDomain();
+
         URL actual = builder
                 .withoutWwwPrefix()
                 .build();
@@ -104,6 +107,7 @@ class UrlBuilderTest {
     @Test
     void shouldReturnUrlWithGivenPort() {
         mockDomain();
+
         URL actual = builder
                 .withPort(12)
                 .build();
@@ -120,6 +124,7 @@ class UrlBuilderTest {
         mockNumberService();
         when(numberService.nextInt(UrlBuilder.MIN_PORT, UrlBuilder.MAX_PORT))
                 .thenReturn(9999);
+
         URL actual = builder
                 .withRandomPort()
                 .build();
@@ -141,6 +146,7 @@ class UrlBuilderTest {
         mockLoremDummy();
         when(loremDummy.characters(10))
                 .thenReturn(FILENAME);
+
         URL actual = builder
                 .withFilePath()
                 .build();
@@ -161,6 +167,7 @@ class UrlBuilderTest {
         when(loremDummy.characters(10))
                 .thenReturn(FILENAME);
         int minLength = 40;
+
         URL actual = builder
                 .withFilePath()
                 .minLength(minLength)
@@ -181,6 +188,7 @@ class UrlBuilderTest {
         mockQueryParamStringValue();
         when(dummy4j.chance(UrlBuilder.CHANCE_OF_PARAM_VALUE_AS_STRING, UrlBuilder.CHANCE_IN_PARAM_VALUE_AS_STRING))
                 .thenReturn(true);
+
         URL actual = builder
                 .withQueryParam()
                 .build();
@@ -198,6 +206,7 @@ class UrlBuilderTest {
         mockDomain();
         mockQueryParam();
         mockQueryParamDigitValue();
+
         URL actual = builder
                 .withQueryParam()
                 .build();
@@ -233,6 +242,7 @@ class UrlBuilderTest {
         mockQueryParamStringValue();
         when(dummy4j.chance(UrlBuilder.CHANCE_OF_PARAM_VALUE_AS_STRING, UrlBuilder.CHANCE_IN_PARAM_VALUE_AS_STRING))
                 .thenReturn(true);
+
         URL actual = builder
                 .withQueryParams(2)
                 .build();
@@ -254,6 +264,7 @@ class UrlBuilderTest {
         when(loremDummy.characters(1))
                 .thenReturn("a");
         int minLength = 31;
+
         URL actual = builder
                 .withQueryParam()
                 .minLength(minLength)
@@ -276,6 +287,7 @@ class UrlBuilderTest {
                 .thenReturn(true);
         when(loremDummy.characters(10))
                 .thenReturn(FILENAME);
+
         URL actual = builder
                 .withQueryParams(2)
                 .withFilePath()
@@ -295,14 +307,15 @@ class UrlBuilderTest {
         mockQueryParamStringValue();
         mockLoremDummy();
         when(dummy4j.nextEnum(UrlProtocol.class))
-                .thenReturn(UrlProtocol.HTTP);
+                .thenReturn(UrlProtocol.HTTPS);
         when(dummy4j.chance(UrlBuilder.CHANCE_OF_PARAM_VALUE_AS_STRING, UrlBuilder.CHANCE_IN_PARAM_VALUE_AS_STRING))
                 .thenReturn(true);
         when(loremDummy.characters(2))
                 .thenReturn("aa");
         when(loremDummy.characters(10))
                 .thenReturn(FILENAME);
-        int minLength = 55;
+        int minLength = 56;
+
         URL actual = builder
                 .withRandomProtocol()
                 .withQueryParams(2)
@@ -311,7 +324,7 @@ class UrlBuilderTest {
                 .build();
 
         assertAll(
-                () -> assertEquals("http://www.test.dev/filename.html?test=test&test=testaa",
+                () -> assertEquals("https://www.test.dev/filename.html?test=test&test=testaa",
                         actual.toString()),
                 () -> assertEquals(minLength, actual.toString().length()),
                 () -> assertEquals("test=test&test=testaa", actual.getQuery()),
@@ -322,6 +335,7 @@ class UrlBuilderTest {
     @Test
     void shouldReturnUrlWithSpecifiedProtocol() {
         mockDomain();
+
         URL actual = builder
                 .withProtocol(UrlProtocol.HTTPS)
                 .build();
@@ -336,19 +350,20 @@ class UrlBuilderTest {
     void shouldReturnUrlWithSpecifiedProtocolAndMinimumLength() {
         mockDomain();
         mockLoremDummy();
-        when(loremDummy.characters(4))
-                .thenReturn("aaaa");
+        when(loremDummy.characters(2))
+                .thenReturn("aa");
         int minLength = 22;
+
         URL actual = builder
-                .withProtocol(UrlProtocol.FTP)
+                .withProtocol(UrlProtocol.HTTPS)
                 .minLength(minLength)
                 .build();
 
         assertAll(
-                () -> assertEquals("ftp://www.testaaaa.dev", actual.toString()),
+                () -> assertEquals("https://www.testaa.dev", actual.toString()),
                 () -> assertEquals(minLength, actual.toString().length()),
-                () -> assertEquals("www.testaaaa.dev", actual.getHost()),
-                () -> assertEquals("ftp", actual.getProtocol())
+                () -> assertEquals("www.testaa.dev", actual.getHost()),
+                () -> assertEquals("https", actual.getProtocol())
         );
     }
 
@@ -363,13 +378,14 @@ class UrlBuilderTest {
                 .thenReturn(1001);
         when(dummy4j.chance(UrlBuilder.CHANCE_OF_PARAM_VALUE_AS_STRING, UrlBuilder.CHANCE_IN_PARAM_VALUE_AS_STRING))
                 .thenReturn(true);
-        when(loremDummy.characters(4))
-                .thenReturn("aaaa");
+        when(loremDummy.characters(3))
+                .thenReturn("aaa");
         when(loremDummy.characters(10))
                 .thenReturn(FILENAME);
         int minLength = 48;
+
         URL actual = builder
-                .withProtocol(UrlProtocol.FILE)
+                .withProtocol(UrlProtocol.HTTPS)
                 .withoutWwwPrefix()
                 .withRandomPort()
                 .withQueryParam()
@@ -378,12 +394,12 @@ class UrlBuilderTest {
                 .build();
 
         assertAll(
-                () -> assertEquals("file://test.dev:1001/filename.html?test=testaaaa", actual.toString()),
+                () -> assertEquals("https://test.dev:1001/filename.html?test=testaaa", actual.toString()),
                 () -> assertEquals(minLength, actual.toString().length()),
-                () -> assertEquals("file", actual.getProtocol()),
+                () -> assertEquals("https", actual.getProtocol()),
                 () -> assertEquals("test.dev", actual.getHost()),
                 () -> assertEquals(1001, actual.getPort()),
-                () -> assertEquals("test=testaaaa", actual.getQuery()),
+                () -> assertEquals("test=testaaa", actual.getQuery()),
                 () -> assertEquals(FILEPATH, actual.getPath())
         );
     }
@@ -391,6 +407,7 @@ class UrlBuilderTest {
     @Test
     void shouldThrowExceptionOnInvalidUrl() {
         mockDomain();
+
         UrlBuilder actual = builder
                 .withPort(-2);
 
@@ -411,21 +428,20 @@ class UrlBuilderTest {
     void shouldReturnUrlWithRandomProtocol() {
         mockDomain();
         when(dummy4j.nextEnum(UrlProtocol.class))
-                .thenReturn(UrlProtocol.FILE);
+                .thenReturn(UrlProtocol.HTTPS);
+
         URL actual = builder.withRandomProtocol().build();
 
-        assertEquals("file", actual.getProtocol());
+        assertEquals("https", actual.getProtocol());
     }
 
     @Test
     void shouldReturnUrlWithRandomProtocolChosenFromGivenList() {
         mockDomain();
-        mockNumberService();
-        when(numberService.nextInt(2))
-                .thenReturn(1);
-        URL actual = builder.withRandomProtocol(UrlProtocol.FILE, UrlProtocol.HTTP, UrlProtocol.HTTPS).build();
 
-        assertEquals("http", actual.getProtocol());
+        URL actual = builder.withRandomProtocol(UrlProtocol.HTTPS).build();
+
+        assertEquals("https", actual.getProtocol());
     }
 
     @Test
@@ -435,6 +451,7 @@ class UrlBuilderTest {
                 .thenReturn("test");
         when(expressionResolver.resolve(UrlBuilder.POPULAR_TOP_LEVEL_DOMAIN_KEY))
                 .thenReturn("com");
+
         URL actual = builder.withPopularTopLevelDomain().build();
 
         assertEquals("https://www.test.com", actual.toString());
@@ -447,6 +464,7 @@ class UrlBuilderTest {
                 .thenReturn("test");
         when(expressionResolver.resolve(UrlBuilder.COUNTRY_TOP_LEVEL_DOMAIN_KEY))
                 .thenReturn("uk");
+
         URL actual = builder.withCountryTopLevelDomain().build();
 
         assertEquals("https://www.test.uk", actual.toString());
@@ -459,6 +477,7 @@ class UrlBuilderTest {
                 .thenReturn("test");
         when(expressionResolver.resolve(UrlBuilder.GENERIC_TOP_LEVEL_DOMAIN_KEY))
                 .thenReturn("dating");
+
         URL actual = builder.withGenericTopLevelDomain().build();
 
         assertEquals("https://www.test.dating", actual.toString());
@@ -467,6 +486,7 @@ class UrlBuilderTest {
     @Test
     void shouldNotAddQueryParamsWhenRequiredAmountIsZero() {
         mockDomain();
+
         URL actual = builder.withQueryParams(0).build();
 
         assertAll(
@@ -478,6 +498,7 @@ class UrlBuilderTest {
     @Test
     void shouldNotAddQueryParamsWhenLatestRequiredAmountIsZero() {
         mockDomain();
+
         URL actual = builder.withQueryParams(2)
                 .withQueryParams(0)
                 .build();
@@ -495,6 +516,7 @@ class UrlBuilderTest {
         mockExpressionResolver();
         when(expressionResolver.resolve(UrlBuilder.ROOT_DOMAIN_KEY))
                 .thenReturn("test");
+
         URL actual = builder.withTopLevelDomain("xxx").build();
 
         assertEquals("https://www.test.xxx", actual.toString());
@@ -505,6 +527,7 @@ class UrlBuilderTest {
         String expected = "UrlBuilder{possibleProtocols=[HTTPS], howManyParams=0, withFilePath=false, " +
                 "withoutWwwPrefix=false, port=-1, domainKey='#{internet.top_level_domain}', " +
                 "customTopLevelDomain='null', minLength=0}";
+
         assertEquals(expected, builder.toString());
     }
 }

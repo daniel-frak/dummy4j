@@ -1,0 +1,23 @@
+en:
+  research_paper:
+    title_anthropology_role_of: [
+        "Social Networks"
+    ]
+    title_anthropology_period: [
+        "Modern times"
+    ]
+    title_anthropology: [
+        "The Role of #{research_paper.title_anthropology_role_of} in #{research_paper.title_anthropology_period}"
+    ]
+    title_history_of: [
+        "Medicine"
+    ]
+    title_history_cause_of: [
+        "the Industrial Evolution"
+    ]
+    title_history: [
+        "An Introduction to the History of #{research_paper.title_history_of}"
+    ]
+    title_social: [
+        "#{research_paper.title_history}"
+    ]

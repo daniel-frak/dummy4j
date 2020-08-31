@@ -20,37 +20,25 @@ class ColorDummyIntegrationTest {
     @Test
     void primaryName() {
         String value = dummy4j.color().primaryName();
-        assertAll(
-                () -> assertNotNull(value),
-                () -> assertFalse(value.isEmpty())
-        );
+        assertEquals("green", value);
     }
 
     @Test
     void basicName() {
         String value = dummy4j.color().basicName();
-        assertAll(
-                () -> assertNotNull(value),
-                () -> assertFalse(value.isEmpty())
-        );
+        assertEquals("yellow", value);
     }
 
     @Test
     void additionalName() {
         String value = dummy4j.color().additionalName();
-        assertAll(
-                () -> assertNotNull(value),
-                () -> assertFalse(value.isEmpty())
-        );
+        assertEquals("crimson", value);
     }
 
     @Test
     void name() {
         String value = dummy4j.color().name();
-        assertAll(
-                () -> assertNotNull(value),
-                () -> assertFalse(value.isEmpty())
-        );
+        assertEquals("red", value);
     }
 
     @Test

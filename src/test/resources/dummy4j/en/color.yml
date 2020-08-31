@@ -1,0 +1,14 @@
+en:
+  color:
+    primary_name: [
+      "green"
+    ]
+    basic_name: [
+      "yellow"
+    ]
+    additional_name: [
+      "crimson"
+    ]
+    name: [
+      "red"
+    ]

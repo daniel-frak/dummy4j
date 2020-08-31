@@ -1,0 +1,27 @@
+en:
+  education:
+    major: [
+      "Arts"
+    ]
+    primary_institution_type: [
+      "Academy"
+    ]
+    primary_institution: "North Zoeshire #{education.primary_institution_type}"
+    secondary_institution_type: [
+      "Secondary College"
+    ]
+    secondary_institution: "North Zoeshire #{education.secondary_institution_type}"
+    tertiary_institution_type: [
+      "University"
+    ]
+    tertiary_institution: "North Zoeshire #{education.tertiary_institution_type}"
+    institution: [
+      "#{education.tertiary_institution}",
+    ]
+    degree_type: [
+      "Master of"
+    ]
+    degree: "#{education.degree_type} #{education.major}"
+    course_number: [
+      "104"
+    ]

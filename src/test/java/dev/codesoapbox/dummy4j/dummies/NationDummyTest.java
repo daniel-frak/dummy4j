@@ -1,80 +1,94 @@
 package dev.codesoapbox.dummy4j.dummies;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
+import dev.codesoapbox.dummy4j.ExpressionResolver;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class NationDummyTest {
 
+    @Mock
     private Dummy4j dummy4j;
+
+    @Mock
+    private ExpressionResolver expressionResolver;
+
+    private NationDummy nationDummy;
 
     @BeforeEach
     void setUp() {
-        dummy4j = new Dummy4j();
+        nationDummy = new NationDummy(dummy4j);
+        when(dummy4j.expressionResolver())
+                .thenReturn(expressionResolver);
     }
 
     @Test
     void country() {
-        String value = dummy4j.nation().country();
-        assertNotNull(value);
-        assertFalse(value.isEmpty());
+        when(expressionResolver.resolve("#{nation.country}"))
+                .thenReturn("Spain");
+        assertEquals("Spain", nationDummy.country());
     }
 
     @Test
     void countryCode() {
-        String value = dummy4j.nation().countryCode();
-        assertNotNull(value);
-        assertFalse(value.isEmpty());
+        when(expressionResolver.resolve("#{nation.country_code}"))
+                .thenReturn("AD");
+        assertEquals("AD", nationDummy.countryCode());
     }
 
     @Test
     void nationality() {
-        String value = dummy4j.nation().nationality();
-        assertNotNull(value);
-        assertFalse(value.isEmpty());
+        when(expressionResolver.resolve("#{nation.nationality}"))
+                .thenReturn("Belarusian");
+        assertEquals("Belarusian", nationDummy.nationality());
     }
 
     @Test
     void languageCodeTwoLetter() {
-        String value = dummy4j.nation().languageCodeTwoLetter();
-        assertNotNull(value);
-        assertFalse(value.isEmpty());
+        when(expressionResolver.resolve("#{nation.language_code_iso_639_1}"))
+                .thenReturn("ch");
+        assertEquals("ch", nationDummy.languageCodeTwoLetter());
     }
 
     @Test
     void languageCodeThreeLetter() {
-        String value = dummy4j.nation().languageCodeThreeLetter();
-        assertNotNull(value);
-        assertFalse(value.isEmpty());
+        when(expressionResolver.resolve("#{nation.language_code_iso_639_2}"))
+                .thenReturn("alb");
+        assertEquals("alb", nationDummy.languageCodeThreeLetter());
     }
 
     @Test
     void language() {
-        String value = dummy4j.nation().language();
-        assertNotNull(value);
-        assertFalse(value.isEmpty());
+        when(expressionResolver.resolve("#{nation.language}"))
+                .thenReturn("Haitian");
+        assertEquals("Haitian", nationDummy.language());
     }
 
     @Test
     void languageCodeTwoLetterCommon() {
-        String value = dummy4j.nation().languageCodeTwoLetterCommon();
-        assertNotNull(value);
-        assertFalse(value.isEmpty());
+        when(expressionResolver.resolve("#{nation.common_language_code_iso_639_1}"))
+                .thenReturn("ja");
+        assertEquals("ja", nationDummy.languageCodeTwoLetterCommon());
     }
 
     @Test
     void languageCodeThreeLetterCommon() {
-        String value = dummy4j.nation().languageCodeThreeLetterCommon();
-        assertNotNull(value);
-        assertFalse(value.isEmpty());
+        when(expressionResolver.resolve("#{nation.common_language_code_iso_639_2}"))
+                .thenReturn("spa");
+        assertEquals("spa", nationDummy.languageCodeThreeLetterCommon());
     }
 
     @Test
     void languageCommon() {
-        String value = dummy4j.nation().languageCommon();
-        assertNotNull(value);
-        assertFalse(value.isEmpty());
+        when(expressionResolver.resolve("#{nation.common_language}"))
+                .thenReturn("Portuguese");
+        assertEquals("Portuguese", nationDummy.languageCommon());
     }
 }

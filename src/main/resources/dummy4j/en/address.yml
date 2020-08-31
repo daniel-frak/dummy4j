@@ -267,11 +267,11 @@ en:
       "Well",
       "Wells"
     ]
-    street: [
+    street_name: [
       "#{name.first_name} #{address.street_suffix}",
       "#{name.last_name} #{address.street_suffix}"
     ]
-    street_address: [
+    street: [
       "#{building_number} #{street_name}"
     ]
     building_number: [

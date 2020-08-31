@@ -16,10 +16,10 @@ en:
       "test-top-level-domain"
     ]
     param: [
-      "test"
+      "param"
     ]
     param_value: [
-      "test"
+      "param-value"
     ]
     password_special_char: [
       "$"

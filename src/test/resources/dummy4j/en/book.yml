@@ -1,0 +1,44 @@
+en:
+  book:
+    title_prefix: [
+      "Grim"
+    ]
+    title_prefix_of: [
+      "Curse"
+    ]
+    title_middle: [
+      "Osiris"
+    ]
+    title_middle_the: [
+      "Devil"
+    ]
+    title_suffix: [
+      "Lost"
+    ]
+    title_full: [
+      "The Yellow Meads of Asphodel"
+    ]
+    title: [
+      "#{book.title_prefix_of} of the #{book.title_middle_the}"
+    ]
+    genre_fiction: [
+      "Science fiction"
+    ]
+    genre_nonfiction: [
+      "Biography"
+    ]
+    genre: [
+      "#{book.genre_fiction}"
+    ]
+    publisher_suffix: [
+      "Press"
+    ]
+    publisher: [
+      "#{book.publisher_nonfiction}"
+    ]
+    publisher_fiction: [
+      "Anderson #{book.publisher_suffix}"
+    ]
+    publisher_nonfiction: [
+      "North Zoeshire Research Institute"
+    ]
