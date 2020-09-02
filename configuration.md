@@ -36,12 +36,12 @@ Advanced configuration can be performed by using Dummy4j's dedicated constructor
 implementations of some of its dependencies.
 
 ```java
-NumberService numberService = new NumberService(123456L);
+RandomService randomService = new DefaultRandomService(123456L);
 
 YamlFileDefinitionProvider definitionProvider = YamlFileDefinitionProvider.withPaths(
         Arrays.asList("dummy4j", "my/custom/path"));
-ExpressionResolver expressionResolver = new ExpressionResolver(Collections.singletonList("en"),
-        numberService, definitionProvider);
+ExpressionResolver expressionResolver = new DefaultExpressionResolver(Collections.singletonList("en"),
+        randomService, definitionProvider);
 
-Dummy4j dummy = new Dummy4j(expressionResolver, numberService);
+Dummy4j dummy = new Dummy4j(expressionResolver, randomService);
 ```

@@ -41,7 +41,7 @@ public class Dummy4j {
      * @since 0.3.0
      */
     public Dummy4j(Long seed, List<String> locales, List<String> paths) {
-        this.randomService = seed != null ? new RandomService(seed) : new RandomService();
+        this.randomService = seed != null ? new DefaultRandomService(seed) : new DefaultRandomService();
 
         YamlFileDefinitionProvider definitionProvider;
         if (paths == null) {

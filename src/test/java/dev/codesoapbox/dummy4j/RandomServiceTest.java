@@ -23,7 +23,7 @@ class RandomServiceTest {
 
     @BeforeEach
     void setUp() {
-        randomService = new RandomService(random, 1L);
+        randomService = new DefaultRandomService(random, 1L);
     }
 
     @Test

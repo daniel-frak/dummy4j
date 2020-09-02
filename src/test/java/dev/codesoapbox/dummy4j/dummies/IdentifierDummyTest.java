@@ -1,8 +1,8 @@
 package dev.codesoapbox.dummy4j.dummies;
 
+import dev.codesoapbox.dummy4j.DefaultRandomService;
 import dev.codesoapbox.dummy4j.Dummy4j;
 import dev.codesoapbox.dummy4j.NumberService;
-import dev.codesoapbox.dummy4j.RandomService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,7 +28,7 @@ class IdentifierDummyTest {
 
     @Test
     void shouldGetRandomUuid() {
-        NumberService numberService = mock(RandomService.class);
+        NumberService numberService = mock(DefaultRandomService.class);
         when(dummy4j.number())
                 .thenReturn(numberService);
         when(numberService.nextLong())

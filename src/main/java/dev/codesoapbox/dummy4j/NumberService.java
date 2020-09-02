@@ -1,7 +1,7 @@
 package dev.codesoapbox.dummy4j;
 
 /**
- * @since 0.6.0
+ * @since 0.5.0
  */
 public interface NumberService {
 
