@@ -52,4 +52,21 @@ public class InternetDummy {
     public PasswordBuilder passwordBuilder() {
         return new PasswordBuilder(dummy4j);
     }
+
+    /**
+     * Provides a random email
+     */
+    public String email() {
+        return new EmailBuilder(dummy4j).build();
+    }
+
+    /**
+     * Provides a builder for random emails generated according to customisable parameters
+     * <p>
+     * E.g. {@code emailBuilder().withSubAddresses("custom-tag").safe().build();} may generate an email similar to
+     * {@code zoe.anderson+custom-tag@example.com}
+     */
+    public EmailBuilder emailBuilder() {
+        return new EmailBuilder(dummy4j);
+    }
 }

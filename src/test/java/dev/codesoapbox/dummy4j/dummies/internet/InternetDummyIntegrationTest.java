@@ -94,4 +94,21 @@ class InternetDummyIntegrationTest {
                 () -> assertTrue(value.matches(".*\\d+.*"), "Digits are missing")
         );
     }
+
+    @Test
+    void shouldReturnDefaultEmail() {
+        String value = dummy4j.internet().email();
+
+        assertEquals("zoe.anderson@gmail.com", value);
+    }
+
+    @Test
+    void shouldBuildEmail() {
+        String value = dummy4j.internet().emailBuilder()
+                .withRandomSubAddress()
+                .safe()
+                .build();
+
+        assertEquals("zoe.anderson+tag1@example.com", value);
+    }
 }
