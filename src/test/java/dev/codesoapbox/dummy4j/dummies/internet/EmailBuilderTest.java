@@ -75,7 +75,7 @@ class EmailBuilderTest {
     }
 
     @Test
-    void shouldBuildEmailWithLocalPart() {
+    void shouldBuildEmailWithLocalPartAndIgnoreCustomDelimiter() {
         mockDomain();
 
         String actual = builder
@@ -115,7 +115,7 @@ class EmailBuilderTest {
     }
 
     @Test
-    void shouldBuildEmailWithLocalPartAndSafe() {
+    void shouldBuildEmailWithLocalPartAndSafeDomain() {
         mockExpressionResolver();
         mockSafeDomain();
 
@@ -147,7 +147,7 @@ class EmailBuilderTest {
         mockDomain();
 
         String actual = builder
-                .withSubAddress("tag1", "tag2", "tag3")
+                .withSubAddresses("tag1", "tag2", "tag3")
                 .build();
 
         assertEquals("zoe.anderson+tag1+tag2+tag3@gmail.com", actual);
@@ -159,7 +159,7 @@ class EmailBuilderTest {
         mockDomain();
 
         String actual = builder
-                .withSubAddress("custom-tag")
+                .withSubAddresses("custom-tag")
                 .build();
 
         assertEquals("zoe.anderson+custom-tag@gmail.com", actual);
@@ -171,7 +171,7 @@ class EmailBuilderTest {
         mockDomain();
 
         String actual = builder
-                .withSubAddress()
+                .withSubAddresses()
                 .build();
 
         assertEquals("zoe.anderson@gmail.com", actual);
@@ -183,10 +183,10 @@ class EmailBuilderTest {
         mockDomain();
 
         builder
-                .withSubAddress("tag1", "tag2")
+                .withSubAddresses("tag1", "tag2")
                 .build();
         String actual = builder
-                .withSubAddress("tag3")
+                .withSubAddresses("tag3")
                 .build();
 
         assertEquals("zoe.anderson+tag3@gmail.com", actual);
@@ -200,7 +200,7 @@ class EmailBuilderTest {
                 .thenReturn("random");
 
         String actual = builder
-                .withSubAddress("tag1", "tag2")
+                .withSubAddresses("tag1", "tag2")
                 .withRandomSubAddress()
                 .build();
 
@@ -214,7 +214,7 @@ class EmailBuilderTest {
 
         String actual = builder
                 .withRandomSubAddress()
-                .withSubAddress("tag1", "tag2")
+                .withSubAddresses("tag1", "tag2")
                 .build();
 
         assertEquals("zoe.anderson+tag1+tag2@gmail.com", actual);
@@ -266,7 +266,7 @@ class EmailBuilderTest {
         mockLocalPart();
         mockDomain();
         builder
-                .withSubAddress("tag")
+                .withSubAddresses("tag")
                 .build();
 
         String actual = builder.build();
@@ -282,7 +282,7 @@ class EmailBuilderTest {
                 .withLocalPart("custom")
                 .build();
         String actual = builder
-                .withSubAddress("tag")
+                .withSubAddresses("tag")
                 .build();
 
         assertEquals("custom+tag@gmail.com", actual);
@@ -294,11 +294,11 @@ class EmailBuilderTest {
         mockDomain();
 
         builder
-                .withSubAddress("tag")
+                .withSubAddresses("tag")
                 .build();
         String actual = builder
                 .withLocalPart("custom")
-                .withSubAddress()
+                .withSubAddresses()
                 .build();
 
         assertEquals("custom@gmail.com", actual);
@@ -310,7 +310,7 @@ class EmailBuilderTest {
 
         builder
                 .withLocalPart("custom1")
-                .withSubAddress("tag")
+                .withSubAddresses("tag")
                 .build();
         String actual = builder
                 .withLocalPart("custom2")
@@ -353,7 +353,7 @@ class EmailBuilderTest {
 
         String actual = builder
                 .withLocalPart("local párt")
-                .withSubAddress("sub address")
+                .withSubAddresses("sub address")
                 .notSanitized()
                 .build();
 
@@ -366,7 +366,7 @@ class EmailBuilderTest {
 
         String actual = builder
                 .withLocalPart("ločál pártÆ\\\"")
-                .withSubAddress("sub áddress")
+                .withSubAddresses("sub áddress")
                 .build();
 
         assertEquals("localpart+subaddress@gmail.com", actual);
@@ -374,7 +374,7 @@ class EmailBuilderTest {
 
     @Test
     void shouldConvertBuilderToString() {
-        String expected = "EmailBuilder{customDomain='null', customLocalPart='null', subAddresses=[], " +
+        String expected = "EmailBuilder{customDomain='null', customLocalPart='null', customSubAddresses=[], " +
                 "randomizeSubAddress=false, localPartDelimiter='.', sanitize=true}";
         assertEquals(expected, builder.toString());
     }

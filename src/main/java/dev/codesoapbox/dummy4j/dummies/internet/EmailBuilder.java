@@ -2,7 +2,10 @@ package dev.codesoapbox.dummy4j.dummies.internet;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 
 import static java.util.Collections.singletonList;
 
@@ -39,7 +42,7 @@ public class EmailBuilder {
 
     private String customDomain;
     private String customLocalPart;
-    private List<String> subAddresses = new ArrayList<>();
+    private List<String> customSubAddresses = new ArrayList<>();
     private boolean randomizeSubAddress;
     private String localPartDelimiter = ".";
     private boolean sanitize = true;
@@ -49,7 +52,7 @@ public class EmailBuilder {
     }
 
     /**
-     * Sets the domain to one that is randomly selected from the list of domain names reserved for testing
+     * Sets the domain to one that is randomly selected from a list of domain names reserved for testing
      * and documentation
      */
     public EmailBuilder safe() {
@@ -89,28 +92,27 @@ public class EmailBuilder {
      * E.g. {@code zoe.anderson+random-sub-address@gmail.com}
      */
     public EmailBuilder withRandomSubAddress() {
-        subAddresses = new ArrayList<>();
         randomizeSubAddress = true;
+        customSubAddresses = new ArrayList<>();
         return this;
     }
 
     /**
      * Adds every provided value to the local part as a sub-address.
      * <p>
-     * E.g. using {@code withSubAddress("tag1", "tag2")} will produce an email similar to
+     * E.g. using {@code withSubAddresses("tag1", "tag2")} will produce an email similar to
      * {@code zoe.anderson+tag1+tag2@gmail.com}
      */
-    public EmailBuilder withSubAddress(String... subAddresses) {
+    public EmailBuilder withSubAddresses(String... customSubAddresses) {
         randomizeSubAddress = false;
-        this.subAddresses = Arrays.asList(subAddresses);
+        this.customSubAddresses = Arrays.asList(customSubAddresses);
         return this;
     }
 
     /**
      * Skips email sanitization.
      * <p>
-     * By default the local part of the generated email won't contain whitespaces, quotes, backslashes
-     * and non ASCII characters even if those characters were given in a custom local part.
+     * By default, whitespaces, quotes, backslashes and non-ASCII characters will be removed from the local part.
      * <p>
      * Use this option if you don't want the local part to be sanitized.
      */
@@ -128,10 +130,12 @@ public class EmailBuilder {
 
     private String getFullLocalPart() {
         String localPart = getLocalPart();
-        localPart += addSubAddresses(getSubAddresses());
+        localPart += processSubAddresses(getSubAddresses());
+
         if (sanitize) {
             localPart = StringSanitizer.sanitizeForEmail(localPart);
         }
+
         return localPart;
     }
 
@@ -146,25 +150,24 @@ public class EmailBuilder {
     private String getRandomLocalPart() {
         String firstName = dummy4j.name().firstName().toLowerCase(Locale.ENGLISH);
         String lastName = dummy4j.name().lastName().toLowerCase(Locale.ENGLISH);
+
         return firstName + localPartDelimiter + lastName;
     }
 
-    private String addSubAddresses(List<String> subAddresses) {
+    private String processSubAddresses(List<String> subAddresses) {
         if (subAddresses.isEmpty()) {
             return "";
         }
-        StringJoiner tags = new StringJoiner("+", "+", "");
-        for (String subAddress : subAddresses) {
-            tags.add(subAddress);
-        }
-        return tags.toString();
+
+        return "+" + String.join("+", subAddresses);
     }
 
     private List<String> getSubAddresses() {
         if (randomizeSubAddress) {
             return singletonList(dummy4j.expressionResolver().resolve(SUB_ADDRESS_KEY));
         }
-        return subAddresses;
+
+        return customSubAddresses;
     }
 
     private String getDomain() {
@@ -180,7 +183,7 @@ public class EmailBuilder {
         return "EmailBuilder{" +
                 "customDomain='" + customDomain + '\'' +
                 ", customLocalPart='" + customLocalPart + '\'' +
-                ", subAddresses=" + subAddresses +
+                ", customSubAddresses=" + customSubAddresses +
                 ", randomizeSubAddress=" + randomizeSubAddress +
                 ", localPartDelimiter='" + localPartDelimiter + '\'' +
                 ", sanitize=" + sanitize +

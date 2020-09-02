@@ -147,7 +147,7 @@ class InternetDummyTest {
     void shouldBuildEmail() {
         mockSimpleEmail();
         String actual = internetDummy.emailBuilder()
-                .withSubAddress("tag")
+                .withSubAddresses("tag")
                 .build();
 
         assertAll(

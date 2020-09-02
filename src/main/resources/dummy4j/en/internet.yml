@@ -1,40 +1,41 @@
 en:
   internet:
     root_domain: [
-      "#{lorem.word}"
+        "#{lorem.word}"
     ]
     popular_top_level_domain: [
-      "app", "co", "com", "dev", "io", "net", "org"
+        "app", "co", "com", "dev", "io", "net", "org"
     ]
     country_top_level_domain: [
-      "ag", "am", "asia", "at", "be", "bz", "ca", "cc", "co", "cz", "de", "es", "eu", "fm", "fr", "gs", "in", "it",
-      "jp","kr", "la", "ms", "mx", "nl", "se", "so", "tk", "tv", "tw", "uk", "us"
+        "ag", "am", "asia", "at", "be", "bz", "ca", "cc", "co", "cz", "de", "es", "eu", "fm", "fr", "gs", "in", "it",
+        "jp","kr", "la", "ms", "mx", "nl", "se", "so", "tk", "tv", "tw", "uk", "us"
     ]
     generic_top_level_domain: [
-      "academy", "agency", "business", "biz", "blog", "club", "dance", "dating", "design", "events", "farm", "flights",
-      "global", "guru", "info", "life", "luxury", "me", "media", "news", "online", "photography", "rocks", "science",
-      "sex", "site", "solutions", "space", "tech", "today", "world"
+        "academy", "agency", "business", "biz", "blog", "club", "dance", "dating", "design", "events", "farm", "flights",
+        "global", "guru", "info", "life", "luxury", "me", "media", "news", "online", "photography", "rocks", "science",
+        "sex", "site", "solutions", "space", "tech", "today", "world"
     ]
     top_level_domain: [
-      "#{internet.popular_top_level_domain}",
-      "#{internet.country_top_level_domain}",
-      "#{internet.generic_top_level_domain}"
+        "#{internet.popular_top_level_domain}",
+        "#{internet.country_top_level_domain}",
+        "#{internet.generic_top_level_domain}"
     ]
     param: [
-      "#{lorem.word}"
+        "#{lorem.word}"
     ]
     param_value: [
-      "#{lorem.word}"
+        "#{lorem.word}"
     ]
     password_special_char: [
-      "!", "@", "#", "$", "%", "^", "&", "*", "-", "_", "?"
+        "!", "@", "#", "$", "%", "^", "&", "*", "-", "_", "?"
     ]
     email_domain: [
-      "gmail.com", "yahoo.com", "protonmail.com", "hotmail.com", "aol.com", "outlook.com"
+        "gmail.com", "yahoo.com", "protonmail.com", "hotmail.com", "aol.com", "outlook.com"
     ]
     email_sub_address: [
-      "#{lorem.word}"
+        "#{lorem.word}"
     ]
     email_safe_domains: [
-      "example.com", "example.net", "example.org",".example", ".invalid", ".test", ".localhost"
+        "example.com", "example.net", "example.org","#{lorem.word}.example", "#{lorem.word}.invalid",
+        "#{lorem.word}.test", "#{lorem.word}.localhost"
     ]

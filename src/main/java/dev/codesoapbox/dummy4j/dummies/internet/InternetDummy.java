@@ -63,7 +63,7 @@ public class InternetDummy {
     /**
      * Provides a builder for random emails generated according to customisable parameters
      * <p>
-     * E.g. {@code emailBuilder().withSubAddress("custom-tag").safe().build();} may generate an email similar to
+     * E.g. {@code emailBuilder().withSubAddresses("custom-tag").safe().build();} may generate an email similar to
      * {@code zoe.anderson+custom-tag@example.com}
      */
     public EmailBuilder emailBuilder() {
