@@ -33,3 +33,6 @@ en:
     email_safe_domains: [
       "example.com"
     ]
+    username_separator: [
+        "."
+    ]

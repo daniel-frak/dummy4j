@@ -125,7 +125,7 @@ class InternetDummyTest {
 
     private void mockSimpleEmail() {
         mockProvider();
-        mockLocalPart();
+        mockUsername();
     }
 
     private void mockProvider() {
@@ -134,13 +134,13 @@ class InternetDummyTest {
                 .thenReturn("gmail.com");
     }
 
-    private void mockLocalPart() {
+    private void mockUsername() {
         when(dummy4j.name())
                 .thenReturn(nameDummy);
         when(nameDummy.firstName())
-                .thenReturn("Zoe");
+                .thenReturn("Zoé");
         when(nameDummy.lastName())
-                .thenReturn("Anderson");
+                .thenReturn("Ànderson");
     }
 
     @Test
@@ -154,5 +154,17 @@ class InternetDummyTest {
                 () -> assertNotNull(actual),
                 () -> assertEquals("zoe.anderson+tag@gmail.com", actual)
         );
+    }
+
+    @Test
+    void shouldReturnUsername() {
+        mockExpressionResolver();
+        mockUsername();
+        when(expressionResolver.resolve(InternetDummy.USERNAME_SEPARATOR_KEY))
+                .thenReturn("-");
+
+        String actual = internetDummy.username();
+
+        assertEquals("zoe-anderson", actual);
     }
 }

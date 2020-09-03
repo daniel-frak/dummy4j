@@ -39,3 +39,6 @@ en:
         "example.com", "example.net", "example.org","#{lorem.word}.example", "#{lorem.word}.invalid",
         "#{lorem.word}.test", "#{lorem.word}.localhost"
     ]
+    username_separator: [
+        ".", "-", "_"
+    ]
