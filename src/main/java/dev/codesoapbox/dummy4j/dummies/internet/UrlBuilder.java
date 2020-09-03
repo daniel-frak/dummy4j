@@ -271,6 +271,7 @@ public final class UrlBuilder {
             return new UrlHost(rootDomain, customTopLevelDomain, withoutWwwPrefix);
         }
         String topLevelDomain = dummy4j.expressionResolver().resolve(domainKey);
+
         return new UrlHost(rootDomain, topLevelDomain, withoutWwwPrefix);
     }
 
@@ -278,6 +279,7 @@ public final class UrlBuilder {
         if (withFilePath) {
             return PATH_DELIMITER + dummy4j.lorem().characters(FILE_NAME_LENGTH) + FILE_EXTENSION;
         }
+
         return "";
     }
 
@@ -286,6 +288,7 @@ public final class UrlBuilder {
         for (int i = 0; i < howManyParams; i++) {
             path.add(dummy4j.expressionResolver().resolve(PARAM_KEY) + "=" + generateParamValue());
         }
+
         return path.toString();
     }
 
@@ -293,6 +296,7 @@ public final class UrlBuilder {
         if (dummy4j.chance(CHANCE_OF_PARAM_VALUE_AS_STRING, CHANCE_IN_PARAM_VALUE_AS_STRING)) {
             return dummy4j.expressionResolver().resolve(PARAM_VALUE_KEY);
         }
+
         return String.valueOf(dummy4j.number().nextInt());
     }
 
@@ -305,6 +309,7 @@ public final class UrlBuilder {
         }
 
         int missingLength = minLength - urlLength;
+
         return buildUrlAdjustedForLength(protocol, host, filePath, missingLength);
     }
 
@@ -331,6 +336,7 @@ public final class UrlBuilder {
     private String increaseFileNameLength(String filePath, int missingLength) {
         String withoutExtension = filePath.substring(0, filePath.length() - FILE_EXTENSION.length());
         String extraCharacters = dummy4j.lorem().characters(missingLength);
+
         return withoutExtension + extraCharacters + FILE_EXTENSION;
     }
 
@@ -341,6 +347,7 @@ public final class UrlBuilder {
     private UrlHost increaseRootDomainLength(UrlHost host, int missingLength) {
         String rootDomain = host.getRootDomain() + dummy4j.lorem().characters(missingLength);
         host = new UrlHost(rootDomain, host.getTopLevelDomain(), withoutWwwPrefix);
+
         return host;
     }
 
