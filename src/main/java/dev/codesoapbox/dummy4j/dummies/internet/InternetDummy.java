@@ -79,7 +79,7 @@ public class InternetDummy {
     /**
      * Provides a random username.
      * <p>
-     * The username doesn't contain  whitespaces, quotes, backslashes and non-ASCII characters.
+     * The username will not contain  whitespaces, quotes, backslashes and non-ASCII characters.
      * E.g. {@code zoe-anderson}
      *
      * @since SNAPSHOT
