@@ -438,10 +438,13 @@ class UrlBuilderTest {
     @Test
     void shouldReturnUrlWithRandomProtocolChosenFromGivenList() {
         mockDomain();
+        mockNumberService();
+        when(dummy4j.number().nextInt(1))
+                .thenReturn(1);
 
-        URL actual = builder.withRandomProtocol(UrlProtocol.HTTPS).build();
+        URL actual = builder.withRandomProtocol(UrlProtocol.HTTPS, UrlProtocol.FTP).build();
 
-        assertEquals("https", actual.getProtocol());
+        assertEquals("ftp", actual.getProtocol());
     }
 
     @Test
