@@ -1,0 +1,75 @@
+en:
+  finance:
+    currency:
+      code: [
+          "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AUD", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN", "BHD",
+          "BIF", "BMD", "BND", "BOB", "BOV", "BRL", "BSD", "BTN", "BWP", "BYN", "BZD", "CAD", "CDF", "CHE", "CHF",
+          "CHW", "CLF", "CLP", "CNY", "COP", "COU", "CRC", "CUC", "CUP", "CVE", "CZK", "DJF", "DKK", "DOP", "DZD",
+          "EGP", "ERN", "ETB", "EUR", "FJD", "FKP", "GBP", "GEL", "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD",
+          "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "INR", "IQD", "IRR", "ISK", "JMD", "JOD", "JPY", "KES", "KGS",
+          "KHR", "KMF", "KPW", "KRW", "KWD", "KYD", "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LYD", "MAD", "MDL",
+          "MGA", "MKD", "MMK", "MNT", "MOP", "MRU", "MUR", "MVR", "MWK", "MXN", "MXV", "MYR", "MZN", "NAD", "NGN",
+          "NIO", "NOK", "NPR", "NZD", "OMR", "PAB", "PEN", "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD",
+          "RUB", "RWF", "SAR", "SBD", "SCR", "SDG", "SEK", "SGD", "SHP", "SLL", "SOS", "SRD", "SSP", "STN", "SVC",
+          "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", "TTD", "TWD", "TZS", "UAH", "UGX", "USD", "USN",
+          "UYI", "UYU", "UYW", "UZS", "VES", "VND", "VUV", "WST", "XAF", "XCD", "XDR", "XOF", "XPF", "XSU", "XUA",
+          "YER", "ZAR", "ZMW", "ZWL"
+      ]
+      name: [
+          "Afghani", "Algerian Dinar", "Argentine Peso", "Armenian Dram", "Aruban Florin", "Australian Dollar",
+          "Azerbaijan Manat", "Bahamian Dollar", "Bahraini Dinar", "Baht", "Balboa", "Barbados Dollar",
+          "Belarusian Ruble", "Belize Dollar", "Bermudian Dollar", "Bolívar Soberano", "Boliviano", "Brazilian Real",
+          "Brunei Dollar", "Bulgarian Lev", "Burundi Franc", "Cabo Verde Escudo", "Canadian Dollar",
+          "Cayman Islands Dollar", "CFA Franc BCEAO", "CFA Franc BEAC", "CFP Franc", "Chilean Peso", "Colombian Peso",
+          "Comorian Franc", "Congolese Franc", "Convertible Mark", "Cordoba Oro", "Costa Rican Colon", "Cuban Peso",
+          "Czech Koruna", "Dalasi", "Danish Krone", "Denar", "Djibouti Franc", "Dobra", "Dominican Peso", "Dong",
+          "East Caribbean Dollar", "Egyptian Pound", "El Salvador Colon", "Ethiopian Birr", "Euro",
+          "Falkland Islands Pound", "Fiji Dollar", "Forint", "Ghana Cedi", "Gibraltar Pound", "Gourde", "Guarani",
+          "Guinean Franc", "Guyana Dollar", "Hong Kong Dollar", "Hryvnia", "Iceland Krona", "Indian Rupee",
+          "Iranian Rial", "Iraqi Dinar", "Jamaican Dollar", "Jordanian Dinar", "Kenyan Shilling", "Kina", "Kuna",
+          "Kuwaiti Dinar", "Kwanza", "Kyat", "Lao Kip", "Lari", "Lebanese Pound", "Lek", "Lempira", "Leone",
+          "Liberian Dollar", "Libyan Dinar", "Lilangeni", "Loti", "Malagasy Ariary", "Malawi Kwacha",
+          "Malaysian Ringgit", "Mauritius Rupee", "Mexican Peso", "Mexican Unidad de Inversion (UDI)", "Moldovan Leu",
+          "Moroccan Dirham", "Mozambique Metical", "Mvdol", "Naira", "Nakfa", "Namibia Dollar", "Nepalese Rupee",
+          "Netherlands Antillean Guilder", "New Israeli Sheqel", "New Taiwan Dollar", "New Zealand Dollar", "Ngultrum",
+          "North Korean Won", "Norwegian Krone", "Ouguiya", "Pa’anga", "Pakistan Rupee", "Pataca", "Peso Convertible",
+          "Peso Uruguayo", "Philippine Peso", "Pound Sterling", "Pula", "Qatari Rial", "Quetzal", "Rand", "Rial Omani",
+          "Riel", "Romanian Leu", "Rufiyaa", "Rupiah", "Russian Ruble", "Rwanda Franc", "Saint Helena Pound",
+          "Saudi Riyal", "Serbian Dinar", "Seychelles Rupee", "Singapore Dollar", "Sol", "Solomon Islands Dollar",
+          "Som", "Somali Shilling", "Somoni", "South Sudanese Pound", "Sri Lanka Rupee", "Sucre", "Sudanese Pound",
+          "Surinam Dollar", "Swedish Krona", "Swiss Franc", "Syrian Pound", "Taka", "Tala", "Tanzanian Shilling",
+          "Tenge", "Trinidad and Tobago Dollar", "Tugrik", "Tunisian Dinar", "Turkish Lira", "Turkmenistan New Manat",
+          "UAE Dirham", "Uganda Shilling", "Unidad de Fomento", "Unidad de Valor Real", "Unidad Previsional",
+          "Uruguay Peso en Unidades Indexadas (UI)", "US Dollar", "US Dollar (Next day)", "Uzbekistan Sum", "Vatu",
+          "WIR Euro", "WIR Franc", "Won", "Yemeni Rial", "Yen", "Yuan Renminbi", "Zambian Kwacha", "Zimbabwe Dollar",
+          "Zloty"
+
+      ]
+      symbol: [
+          "HK$", "Ft", "₪", "¥", "$", "kr", "PhP", "zł", "CHF", "NT$", "฿", "£", "¢", "Rp", "ƒ", "€", "रू", "лв", "Kč",
+          "kn", "lei", "₴", "₦", "₩"
+      ]
+      numeric_code: [
+          "971", "978", "008", "012", "840", "973", "951", "032", "051", "533", "036", "944", "044", "048", "050",
+          "052", "933", "084", "952", "060", "356", "064", "068", "984", "977", "072", "578", "986", "096", "975",
+          "108", "132", "116", "950", "124", "136", "152", "990", "156", "170", "970", "174", "976", "554", "188",
+          "191", "192", "931", "532", "203", "208", "262", "214", "818", "222", "232", "748", "230", "238", "242",
+          "953", "270", "981", "936", "292", "320", "826", "324", "328", "332", "340", "344", "348", "352", "360",
+          "960", "364", "368", "376", "388", "392", "400", "398", "404", "408", "410", "414", "417", "418", "422",
+          "426", "710", "430", "434", "756", "446", "807", "969", "454", "458", "462", "929", "480", "965", "484",
+          "979", "498", "496", "504", "943", "104", "516", "524", "558", "566", "512", "586", "590", "598", "600",
+          "604", "608", "985", "634", "946", "643", "646", "654", "882", "930", "682", "941", "690", "694", "702",
+          "994", "090", "706", "728", "144", "938", "968", "752", "947", "948", "760", "901", "972", "834", "764",
+          "776", "780", "788", "949", "934", "800", "980", "784", "997", "858", "940", "927", "860", "548", "928",
+          "704", "886", "967", "932", "955", "956", "957", "958", "963", "999", "959", "964", "962", "961"
+      ]
+    cryptocurrency:
+      code: [
+          "BTC", "XRP", "XMR", "LTC", "ETH", "ZEC", "XZC"
+      ]
+      name: [
+          "Bitcoin", "Ripples", "Monero", "Litecoin", "Ethereum", "Zcoin", "Zcash"
+      ]
+      symbol: [
+          "ɱ", "Ł", "Ξ", "ℕ"
+      ]

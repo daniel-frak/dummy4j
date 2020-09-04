@@ -88,4 +88,9 @@ class DummiesTest {
     void internet() {
         assertNotNull(dummies.internet());
     }
+
+    @Test
+    void finance() {
+        assertNotNull(dummies.finance());
+    }
 }

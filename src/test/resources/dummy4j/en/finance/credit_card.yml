@@ -1,0 +1,8 @@
+en:
+  finance:
+    credit_card_without_check_digit:
+      visa: "415025918277486"
+      mastercard: "530394403141969"
+      american_express: "37490275886891"
+      discover: "601123901915332"
+      jcb: "353078973064760"
