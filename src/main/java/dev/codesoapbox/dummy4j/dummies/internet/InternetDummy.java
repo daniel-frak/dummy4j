@@ -4,6 +4,7 @@ import dev.codesoapbox.dummy4j.Dummy4j;
 import dev.codesoapbox.dummy4j.exceptions.UrlCouldNotBeCreatedException;
 
 import java.net.URL;
+import java.util.Locale;
 
 /**
  * Provides methods for generating values related to the internet
@@ -11,6 +12,11 @@ import java.net.URL;
  * @since 0.5.0
  */
 public class InternetDummy {
+
+    /**
+     * Points to a list of possible separators for a username
+     */
+    public static final String USERNAME_SEPARATOR_KEY = "#{internet.username_separator}";
 
     private final Dummy4j dummy4j;
 
@@ -68,5 +74,21 @@ public class InternetDummy {
      */
     public EmailBuilder emailBuilder() {
         return new EmailBuilder(dummy4j);
+    }
+
+    /**
+     * Provides a random username.
+     * <p>
+     * The username will not contain  whitespaces, quotes, backslashes and non-ASCII characters.
+     * E.g. {@code zoe-anderson}
+     *
+     * @since SNAPSHOT
+     */
+    public String username() {
+        String firstName = dummy4j.name().firstName().toLowerCase(Locale.ENGLISH);
+        String lastName = dummy4j.name().lastName().toLowerCase(Locale.ENGLISH);
+        String separator = dummy4j.expressionResolver().resolve(USERNAME_SEPARATOR_KEY);
+
+        return StringSanitizer.sanitizeForEmail(firstName + separator + lastName);
     }
 }

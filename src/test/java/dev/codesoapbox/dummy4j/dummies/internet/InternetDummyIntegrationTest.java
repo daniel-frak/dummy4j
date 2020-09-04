@@ -111,4 +111,9 @@ class InternetDummyIntegrationTest {
 
         assertEquals("zoe.anderson+tag1@example.com", value);
     }
+
+    @Test
+    void shouldReturnUsername() {
+        assertEquals("zoe.anderson", dummy4j.internet().username());
+    }
 }
