@@ -1,5 +1,9 @@
 package dev.codesoapbox.dummy4j.dummies.color;
 
+import dev.codesoapbox.dummy4j.dummies.sharedmath.NumberFormatter;
+import dev.codesoapbox.dummy4j.dummies.sharedmath.NumberValidator;
+import dev.codesoapbox.dummy4j.dummies.sharedmath.Round;
+
 import java.util.Objects;
 
 /**

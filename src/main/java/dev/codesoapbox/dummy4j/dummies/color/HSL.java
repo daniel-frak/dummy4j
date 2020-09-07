@@ -1,8 +1,10 @@
 package dev.codesoapbox.dummy4j.dummies.color;
 
-import java.util.Objects;
+import dev.codesoapbox.dummy4j.dummies.sharedmath.NumberFormatter;
+import dev.codesoapbox.dummy4j.dummies.sharedmath.NumberValidator;
+import dev.codesoapbox.dummy4j.dummies.sharedmath.Round;
 
-import static dev.codesoapbox.dummy4j.dummies.color.NumberValidator.MAX_ANGLE;
+import java.util.Objects;
 
 /**
  * A representation of color in the HSL (hue, saturation, lightness) model.
@@ -23,7 +25,7 @@ public class HSL {
     }
 
     private void validate(float hue, float saturation, float lightness) {
-        NumberValidator.inRange(hue, -MAX_ANGLE, MAX_ANGLE);
+        NumberValidator.inRange(hue, -ColorDummy.MAX_ANGLE, ColorDummy.MAX_ANGLE);
         NumberValidator.betweenZeroAndOne(saturation);
         NumberValidator.betweenZeroAndOne(lightness);
     }

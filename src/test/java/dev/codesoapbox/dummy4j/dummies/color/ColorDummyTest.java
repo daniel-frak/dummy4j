@@ -11,7 +11,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.awt.*;
 
-import static dev.codesoapbox.dummy4j.dummies.color.NumberValidator.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -77,7 +76,7 @@ class ColorDummyTest {
     @Test
     void shouldReturnHex() {
         mockNumberService();
-        when(numberService.nextInt(MAX_RGB))
+        when(numberService.nextInt(ColorDummy.MAX_RGB))
                 .thenReturn(11896066);
         assertEquals("#b58502", colorDummy.hex());
     }
@@ -90,7 +89,7 @@ class ColorDummyTest {
     @Test
     void shouldReturnHexAlpha() {
         mockNumberService();
-        when(numberService.nextLong(MAX_RGBA))
+        when(numberService.nextLong(ColorDummy.MAX_RGBA))
                 .thenReturn(3890366421L);
         assertEquals("#e7e247d5", colorDummy.hexAlpha());
     }
@@ -98,7 +97,7 @@ class ColorDummyTest {
     @Test
     void shouldReturnRGB() {
         mockNumberService();
-        when(numberService.nextInt(MAX_RGB))
+        when(numberService.nextInt(ColorDummy.MAX_RGB))
                 .thenReturn(11896066);
         Color color = colorDummy.rgb();
         assertAll(
@@ -112,7 +111,7 @@ class ColorDummyTest {
     @Test
     void shouldReturnRGBA() {
         mockNumberService();
-        when(numberService.nextLong(MAX_RGBA))
+        when(numberService.nextLong(ColorDummy.MAX_RGBA))
                 .thenReturn(3890366421L);
         Color color = colorDummy.rgba();
         assertAll(
@@ -127,7 +126,7 @@ class ColorDummyTest {
     @Test
     void shouldReturnHSB() {
         mockNumberService();
-        when(numberService.nextFloat(MAX_ANGLE))
+        when(numberService.nextFloat(ColorDummy.MAX_ANGLE))
                 .thenReturn(150.16583F);
         when(numberService.nextFloat())
                 .thenReturn(0.3374765F);
@@ -142,7 +141,7 @@ class ColorDummyTest {
     @Test
     void shouldReturnHSBA() {
         mockNumberService();
-        when(numberService.nextFloat(MAX_ANGLE))
+        when(numberService.nextFloat(ColorDummy.MAX_ANGLE))
                 .thenReturn(150.16583F);
         when(numberService.nextFloat())
                 .thenReturn(0.3374765F);
@@ -158,7 +157,7 @@ class ColorDummyTest {
     @Test
     void shouldReturnHSL() {
         mockNumberService();
-        when(numberService.nextFloat(MAX_ANGLE))
+        when(numberService.nextFloat(ColorDummy.MAX_ANGLE))
                 .thenReturn(150.16583F);
         when(numberService.nextFloat())
                 .thenReturn(0.3374765F);
@@ -173,7 +172,7 @@ class ColorDummyTest {
     @Test
     void shouldReturnHSLA() {
         mockNumberService();
-        when(numberService.nextFloat(MAX_ANGLE))
+        when(numberService.nextFloat(ColorDummy.MAX_ANGLE))
                 .thenReturn(150.16583F);
         when(numberService.nextFloat())
                 .thenReturn(0.3374765F);
