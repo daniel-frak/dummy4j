@@ -1,4 +1,4 @@
-package dev.codesoapbox.dummy4j.dummies.sharedmath;
+package dev.codesoapbox.dummy4j.dummies.shared.math;
 
 /**
  * Provides convenience methods for rounding

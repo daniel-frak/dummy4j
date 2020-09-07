@@ -1,4 +1,4 @@
-package dev.codesoapbox.dummy4j.dummies.sharedmath;
+package dev.codesoapbox.dummy4j.dummies.shared.math;
 
 import java.text.DecimalFormat;
 
