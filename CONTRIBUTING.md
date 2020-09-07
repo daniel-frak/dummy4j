@@ -51,10 +51,43 @@ Try to follow the coding style prevalent throughout the codebase - consistency i
 If you feel like doing things another way would be better for the project, feel free to open an issue to discuss your
 concerns.
 
-## Code coverage
+## Tests
 
-We aim to have 100% code coverage and encourage Test Driven Development in order to achieve it. This means that any
-code you write should have all possible paths tested.
+The quality gate for Dummy4j's test coverage is set at 100%. That is not a required value, it's an expected one.
+
+While 100% test coverage might be an asymptotic goal for most projects, we should always strive towards it.
+Moreover, a library is a smaller project than, say, an entire application and its lack of external frameworks makes it
+even easier to test.
+
+Additionally, a library should be trustworthy and the best way to generate trust is by having a complete suite of tests
+proving that everything works correctly. This suite of tests also provides a way to document the code's behavior,
+further increasing its value.
+
+Finally, using Test-Driven Development is greatly encouraged. It is a practice which not only results in better code, 
+but also produces 100% test coverage "for free".
+
+It must be said, of course, that a high coverage value does not indicate the quality of the tests.
+The tests themselves must also be well-written and thought-out.
+Coverage is, then, only a tool to find the obvious issue - code not covered by tests is guaranteed not to have good
+tests.
+
+Test what you can through unit tests. What can't be tested using unit tests, test via supplementary integration tests.
+Make sure your test cases are reasonable, readable and maintainable. Don't forget about edge cases!
+
+## Javadoc
+
+All public methods and classes should be suitably furnished with Javadoc comments so that there is no ambiguity as to
+what they do. While good code should, of course, be self-documenting, it never hurts to help the client when building
+a library.
+
+Additionally, `@since SNAPSHOT` tags should be used for any changes introduced into the code. These will later be
+replaced with the proper version number before release.
+
+## Project philosophy
+
+Make sure you're familiar with the
+[Dummy4j design philosophy](https://daniel-frak.github.io/dummy4j/philosophy.html) document, as it details
+architectural decisions you should make in your code to better align it with the rest of the project.
 
 ## Any contributions you make will be under the MIT Software License
 In short, when you submit code changes, your submissions are understood to be under the same 
