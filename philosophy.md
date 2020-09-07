@@ -1,6 +1,6 @@
 ---
 layout: default
-title: The design philosophy of Dummy4j
+title: Dummy4j design philosophy
 nav_order: 500
 ---
 
