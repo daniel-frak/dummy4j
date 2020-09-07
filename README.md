@@ -132,6 +132,8 @@ String nameOrCity = dummy.of(() -> dummy.name().fullName(), () -> dummy.address(
 
 String elementFromArray = dummy.of(new String[]{ "one", "two", "three" });
 
+String elementFromVarArgs = dummy.of("one", "two", "three");
+
 String elementFromCollection = dummy.of(Arrays.asList("one", "two", "three"));
 ```
 
