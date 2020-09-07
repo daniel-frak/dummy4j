@@ -4,14 +4,16 @@ import dev.codesoapbox.dummy4j.Dummy4j;
 
 import java.awt.*;
 
-import static dev.codesoapbox.dummy4j.dummies.color.NumberValidator.*;
-
 /**
  * Provides methods for generating random colors in various formats
  *
  * @since 0.4.0
  */
 public class ColorDummy {
+
+    static final float MAX_ANGLE = 360F;
+    static final int MAX_RGB = 0xFFFFFF;
+    static final long MAX_RGBA = 0xFFFFFFFFL;
 
     private final Dummy4j dummy4j;
 
@@ -70,6 +72,7 @@ public class ColorDummy {
     /**
      * Generates an instance of Color with randomized {@code red}, {@code green} and {@code blue} values.
      * E.g. {@code java.awt.Color[r=181,g=133,b=2]}
+     *
      * @see Color
      */
     public Color rgb() {
@@ -79,6 +82,7 @@ public class ColorDummy {
     /**
      * Generates an instance of Color with randomized {@code red}, {@code green}, {@code blue} and {@code alpha} values.
      * E.g. {@code java.awt.Color[r=226,g=71,b=213], alpha = 231}
+     *
      * @see Color
      */
     public Color rgba() {
@@ -89,6 +93,7 @@ public class ColorDummy {
     /**
      * Generates a random HSB color.
      * E.g. {@code hsb(150.17, 34%, 34%)}
+     *
      * @see HSB
      */
     public HSB hsb() {
@@ -99,6 +104,7 @@ public class ColorDummy {
     /**
      * Generates a random HSBA color.
      * E.g. {@code hsba(150.17, 34%, 34%, 0.34)}
+     *
      * @see HSBA
      */
     public HSBA hsba() {
@@ -109,6 +115,7 @@ public class ColorDummy {
     /**
      * Generates a random HSL color.
      * E.g. {@code hsl(150.17, 34%, 34%)}
+     *
      * @see HSL
      */
     public HSL hsl() {
@@ -119,6 +126,7 @@ public class ColorDummy {
     /**
      * Generates a random HSLA color.
      * E.g. {@code hsla(150.17, 34%, 34%, 0.34)}
+     *
      * @see HSLA
      */
     public HSLA hsla() {
@@ -129,6 +137,7 @@ public class ColorDummy {
     /**
      * Generates a random CMYK color.
      * E.g. {@code cmyk(15%, 34%, 20%, 75%)}
+     *
      * @see CMYK
      */
     public CMYK cmyk() {

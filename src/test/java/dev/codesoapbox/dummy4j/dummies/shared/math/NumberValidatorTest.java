@@ -1,4 +1,4 @@
-package dev.codesoapbox.dummy4j.dummies.color;
+package dev.codesoapbox.dummy4j.dummies.shared.math;
 
 import dev.codesoapbox.dummy4j.exceptions.ValueOutOfRangeException;
 import org.junit.jupiter.api.Test;
