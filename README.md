@@ -139,6 +139,8 @@ String elementFromCollection = dummy.of(Arrays.asList("one", "two", "three"));
 
 ## Goals and contributing
 
+Please read the [contributing guidelines](CONTRIBUTING.md) if you are considering contributing to this project.
+
 The goal of Dummy4j is to become the most versatile, extensible and easy to use dummy data generation library.
 To that end, all contributions are welcome - whether it's Pull Requests, architectural proposals or simply issues, feel
 free to share them as only a continued conversation around the use of this tool can lead to innovation.
