@@ -10,6 +10,15 @@ nav_order: 2
 * TOC
 {:toc}
 
+# No configuration
+
+You can use Dummy4j straight away with the no-args constructor:
+```java
+Dummy4j dummy = new Dummy4j();
+``` 
+
+This will create an instance with a default configuration.
+
 # Simple configuration
 
 A constructor is provided to define a seed, locales and file paths (either directories or specific files).
