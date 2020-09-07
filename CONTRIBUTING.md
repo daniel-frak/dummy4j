@@ -89,7 +89,7 @@ Make sure you're familiar with the
 [Dummy4j design philosophy](https://daniel-frak.github.io/dummy4j/philosophy.html) document, as it details
 architectural decisions you should make in your code to better align it with the rest of the project.
 
-## Any contributions you make will be under the MIT Software License
+## Any contributions you make will be under the Apache 2.0 License
 In short, when you submit code changes, your submissions are understood to be under the same 
 [Apache License 2.0](https://choosealicense.com/licenses/apache-2.0/) that covers the project.
 Feel free to contact the maintainers if that's a concern.
