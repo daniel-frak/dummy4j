@@ -43,20 +43,8 @@ public class Dummy4j {
     public Dummy4j(Long seed, List<String> locales, List<String> paths) {
         this.randomService = seed != null ? new DefaultRandomService(seed) : new DefaultRandomService();
 
-        YamlFileDefinitionProvider definitionProvider;
-        if (paths == null) {
-            definitionProvider = YamlFileDefinitionProvider.standard();
-        } else {
-            definitionProvider = YamlFileDefinitionProvider.withPaths(paths);
-        }
-
-        if (locales != null) {
-            this.expressionResolver = new DefaultExpressionResolver(locales, this.randomService,
-                    definitionProvider);
-        } else {
-            this.expressionResolver = new DefaultExpressionResolver(null, this.randomService,
-                    definitionProvider);
-        }
+        YamlFileDefinitionProvider definitionProvider = YamlFileDefinitionProvider.withPaths(paths);
+        this.expressionResolver = new DefaultExpressionResolver(locales, this.randomService, definitionProvider);
 
         this.dummies = new Dummies(this);
         this.uniqueValues = new UniqueValues();
@@ -77,8 +65,6 @@ public class Dummy4j {
         this.uniqueValues = uniqueValues;
         this.convenienceMethods = convenienceMethods;
     }
-
-
 
     /**
      * @return the resolver used for resolving expressions
@@ -140,9 +126,8 @@ public class Dummy4j {
      * Returns a random element from an array
      *
      * @param array the array to pick from
-     * @param <T> the type of object to return
+     * @param <T>   the type of object to return
      * @return a random element
-     *
      * @since 0.5.0
      */
     @SafeVarargs
@@ -154,9 +139,8 @@ public class Dummy4j {
      * Returns a random element from a list
      *
      * @param list the list to pick from
-     * @param <T> the type of object to return
+     * @param <T>  the type of object to return
      * @return a random element
-     *
      * @since 0.5.0
      */
     public <T> T of(List<T> list) {
@@ -169,7 +153,6 @@ public class Dummy4j {
      * @param set the list to pick from
      * @param <T> the type of object to return
      * @return a random element
-     *
      * @since 0.5.0
      */
     public <T> T of(Set<T> set) {
@@ -180,9 +163,8 @@ public class Dummy4j {
      * Returns a value from a random supplier.
      *
      * @param suppliers value suppliers to pick from
-     * @param <T> the type of value to return
+     * @param <T>       the type of value to return
      * @return a value from a random supplier
-     *
      * @since 0.5.0
      */
     @SafeVarargs
@@ -197,7 +179,6 @@ public class Dummy4j {
      * 50% of the time when the method is invoked.
      *
      * @return supplied {@code T} or null
-     *
      * @since 0.5.0
      */
     public <T> T chance(int howMany, int in, Supplier<T> supplier) {
@@ -211,7 +192,6 @@ public class Dummy4j {
      * 50% of the time when the method is invoked.
      *
      * @return {@code boolean}
-     *
      * @since 0.5.0
      */
     public boolean chance(int howMany, int in) {

@@ -1,5 +1,7 @@
 package dev.codesoapbox.dummy4j;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -31,6 +33,34 @@ public abstract class AbstractDummy4jBuilder<T extends AbstractDummy4jBuilder<T,
 
     public T paths(List<String> paths) {
         self().paths = paths;
+        return self();
+    }
+
+    /**
+     * @since SNAPSHOT
+     */
+    public T locale(String... locale) {
+        if (theOnlyElementIsNull(locale)) {
+            self().locale = new ArrayList<>();
+        } else {
+            self().locale = Arrays.asList(locale);
+        }
+        return self();
+    }
+
+    private boolean theOnlyElementIsNull(String[] elements) {
+        return elements.length == 1 && elements[0] == null;
+    }
+
+    /**
+     * @since SNAPSHOT
+     */
+    public T paths(String... paths) {
+        if (theOnlyElementIsNull(paths)) {
+            self().paths = new ArrayList<>();
+        } else {
+            self().paths = Arrays.asList(paths);
+        }
         return self();
     }
 

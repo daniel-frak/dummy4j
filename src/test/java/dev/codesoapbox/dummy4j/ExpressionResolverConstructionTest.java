@@ -2,7 +2,7 @@ package dev.codesoapbox.dummy4j;
 
 import dev.codesoapbox.dummy4j.definitions.LocalizedDummyDefinitions;
 import dev.codesoapbox.dummy4j.definitions.providers.DefinitionProvider;
-import dev.codesoapbox.dummy4j.exceptions.MissingLocaleException;
+import dev.codesoapbox.dummy4j.exceptions.MissingLocaleDefinitionsException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -81,7 +81,7 @@ class ExpressionResolverConstructionTest {
                 .thenReturn(definitions);
 
         List<String> locales = singletonList("en");
-        assertThrows(MissingLocaleException.class,
+        assertThrows(MissingLocaleDefinitionsException.class,
                 () -> new DefaultExpressionResolver(locales, randomService, definitionProvider));
     }
 
