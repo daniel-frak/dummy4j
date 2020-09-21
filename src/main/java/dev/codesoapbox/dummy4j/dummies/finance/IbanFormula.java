@@ -59,6 +59,7 @@ public class IbanFormula {
      */
     private int getNumericValue(Character character) {
         char lowerCaseChar = Character.toLowerCase(character);
+
         return Character.getNumericValue(lowerCaseChar);
     }
 

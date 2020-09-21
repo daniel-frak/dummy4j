@@ -43,7 +43,7 @@ public final class IbanBuilder {
     }
 
     /**
-     * Formats the generated IBAN by separating every 4 character long or a remaining piece with a space.
+     * Formats the generated IBAN, separating every 4 characters or the remainder with a space.
      * E.g. {@code GL25 3015 7608 5103 56}.
      */
     public IbanBuilder format() {
@@ -83,7 +83,7 @@ public final class IbanBuilder {
     }
 
     /**
-     * Teh {@code (?<=\G.{4})} pattern explanation:
+     * The {@code (?<=\G.{4})} pattern explanation:
      * <p>
      * <ul>
      *   <li>

@@ -8,27 +8,13 @@ import dev.codesoapbox.dummy4j.dummies.shared.math.NumberFormatter;
  */
 public class PriceBuilder {
 
-    /**
-     * Lower boundary for a regular price
-     */
-    public static final float LOWER_BOUNDARY = 1F;
-
-    /**
-     * Upper boundary for a regular price
-     */
-    public static final float UPPER_BOUNDARY = 100F;
-
-    /**
-     * Lower boundary for a high price
-     */
-    public static final float LOWER_BOUNDARY_FOR_HIGH_PRICE = 100F;
-
-    /**
-     * Upper boundary for a high price
-     */
-    public static final float UPPER_BOUNDARY_FOR_HIGH_PRICE = 10000F;
+    static final float LOWER_BOUNDARY = 1F;
+    static final float UPPER_BOUNDARY = 100F;
+    static final float LOWER_BOUNDARY_FOR_HIGH_PRICE = 100F;
+    static final float UPPER_BOUNDARY_FOR_HIGH_PRICE = 10000F;
 
     private final Dummy4j dummy4j;
+
     private String customCurrency;
     private boolean randomizeCurrency;
     private float min = LOWER_BOUNDARY;
@@ -39,7 +25,8 @@ public class PriceBuilder {
     }
 
     /**
-     * Sets the currency that will be added to the generated price, e.g. {@code EUR 12.35}
+     * Sets the currency that will be added to the generated price.
+     * E.g. {@code EUR 12.35}
      */
     public PriceBuilder withCurrency(String customCurrency) {
         this.customCurrency = customCurrency;
@@ -48,7 +35,8 @@ public class PriceBuilder {
     }
 
     /**
-     * Sets the random currency that will be added to the generated price, e.g. {@code JPY 12.35}
+     * Sets the random currency that will be added to the generated price.
+     * E.g. {@code JPY 12.35}
      */
     public PriceBuilder withRandomCurrency() {
         this.customCurrency = null;

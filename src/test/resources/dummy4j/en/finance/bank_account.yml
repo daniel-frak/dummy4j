@@ -89,9 +89,6 @@ en:
       financial_operation: [
           "Deposit"
       ]
-      bitcoin_address_format: [
-          "bc1"
-      ]
-      bitcoin_address_characters: [
-          "X"
-      ]
+      bitcoin_address:
+        format: "bc1"
+        characters: "X"

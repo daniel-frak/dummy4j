@@ -24,8 +24,8 @@ public class FinanceDummy {
     static final String PARTIAL_ACCOUNT_NUMBER_KEY = "#{finance.bank_account.number_structure.";
     static final String PAYMENT_OPTION_KEY = "#{finance.bank_account.payment_option}";
     static final String FINANCIAL_OPERATION_KEY = "#{finance.bank_account.financial_operation}";
-    static final String BITCOIN_ADDRESS_FORMAT_KEY = "#{finance.bank_account.bitcoin_address_format}";
-    static final String BITCOIN_ADDRESS_CHARACTERS_KEY = "#{finance.bank_account.bitcoin_address_characters}";
+    static final String BITCOIN_ADDRESS_FORMAT_KEY = "#{finance.bank_account.bitcoin_address.format}";
+    static final String BITCOIN_ADDRESS_CHARACTERS_KEY = "#{finance.bank_account.bitcoin_address.characters}";
     static final int BITCOIN_ADDRESS_MIN_LENGTH = 26;
     static final int BITCOIN_ADDRESS_MAX_LENGTH = 35;
 
@@ -242,7 +242,7 @@ public class FinanceDummy {
      * uppercase letter "I", lowercase letter "l", and the number "0".
      * E.g. {@code bc1qarsrrr7xfkvy5643ydnw9re59gtzzwf5mdq}
      * <p>
-     * The generated address does not pass any real validation.
+     * The generated address does not pass any real-life validation.
      *
      * @see <a href="https://en.bitcoin.it/wiki/Address">Bitcoin address</a>
      */

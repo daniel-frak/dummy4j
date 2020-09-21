@@ -8,7 +8,7 @@ package dev.codesoapbox.dummy4j.dummies.finance;
 public class LuhnFormula {
 
     /**
-     * Returns a valid check digit for the given number
+     * Returns a valid check digit calculated with the Luhn algorithm for the given number
      */
     String getCheckDigit(String input) {
         char[] sanitizedInput = removeInvalidCharacters(input);
@@ -19,15 +19,18 @@ public class LuhnFormula {
 
     private char[] removeInvalidCharacters(String input) {
         String sanitized = input.replaceAll("[^\\d]", "");
+
         return sanitized.toCharArray();
     }
 
     private int getSum(char[] chars) {
         int sum = 0;
+
         for (int i = 0; i < chars.length; i++) {
             int number = getInReverseOrder(chars, i);
             sum += getElementValue(i, number);
         }
+
         return sum;
     }
 

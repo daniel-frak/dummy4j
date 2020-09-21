@@ -177,7 +177,7 @@ class FinanceDummyTest {
     void shouldReturnCreditCardNumber() {
         mockCreditCardProvider();
         mockExpressionResolver();
-        when(expressionResolver.resolve("#{finance.credit_card_without_check_digit.american_express}"))
+        when(expressionResolver.resolve(FinanceDummy.PARTIAL_CREDIT_CARD_KEY + "american_express}"))
                 .thenReturn("341234567890123");
         when(luhnFormula.getCheckDigit("341234567890123"))
                 .thenReturn("7");
@@ -190,7 +190,7 @@ class FinanceDummyTest {
     @Test
     void shouldReturnCreditCardNumberForGivenProvider() {
         mockExpressionResolver();
-        when(expressionResolver.resolve("#{finance.credit_card_without_check_digit.visa}"))
+        when(expressionResolver.resolve(FinanceDummy.PARTIAL_CREDIT_CARD_KEY + "visa}"))
                 .thenReturn("415025918277486");
         when(luhnFormula.getCheckDigit("415025918277486"))
                 .thenReturn("1");
@@ -213,25 +213,21 @@ class FinanceDummyTest {
         assertEquals("ABCDADEF123", actual);
     }
 
-    private void mockBankCode() {
-        when(loremDummy.characters(4))
-                .thenReturn("ABCD");
-    }
-
     private void mockLoremDummy() {
         when(dummy4j.lorem())
                 .thenReturn(loremDummy);
     }
 
-    private void mockCountryCode() {
-        mockNationDummy();
-        when(nationDummy.countryCode())
-                .thenReturn("AD");
+    private void mockBankCode() {
+        when(loremDummy.characters(4))
+                .thenReturn("ABCD");
     }
 
-    private void mockNationDummy() {
+    private void mockCountryCode() {
         when(dummy4j.nation())
                 .thenReturn(nationDummy);
+        when(nationDummy.countryCode())
+                .thenReturn("AD");
     }
 
     private void mockLocationCode() {
@@ -251,11 +247,11 @@ class FinanceDummyTest {
         mockLettersInAccountNumber();
         CountrySupportingBankAccount country = CountrySupportingBankAccount.GERMANY;
         when(expressionResolver.resolve(FinanceDummy.PARTIAL_ACCOUNT_NUMBER_KEY + country.getCode() + "}"))
-                .thenReturn("123456789123456789");
+                .thenReturn("12345678912345678_");
 
         String actual = financeDummy.bankAccountNumber(country);
 
-        assertEquals("123456789123456789", actual);
+        assertEquals("12345678912345678A", actual);
     }
 
     private void mockLettersInAccountNumber() {

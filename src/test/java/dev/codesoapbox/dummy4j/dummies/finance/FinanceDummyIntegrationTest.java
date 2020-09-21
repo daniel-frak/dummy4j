@@ -18,6 +18,7 @@ class FinanceDummyIntegrationTest {
     @Test
     void shouldReturnPrice() {
         String actual = dummy4j.finance().price();
+
         assertAll(
                 () -> assertNotNull(actual),
                 () -> assertFalse(actual.isEmpty())
@@ -27,6 +28,7 @@ class FinanceDummyIntegrationTest {
     @Test
     void shouldBuildPrice() {
         String actual = dummy4j.finance().priceBuilder().build();
+
         assertAll(
                 () -> assertNotNull(actual),
                 () -> assertFalse(actual.isEmpty())
@@ -70,7 +72,12 @@ class FinanceDummyIntegrationTest {
 
     @Test
     void shouldReturnCreditCardProvider() {
-        assertNotNull(dummy4j.finance().creditCardProvider());
+        String actual = dummy4j.finance().creditCardProvider();
+
+        assertAll(
+                () -> assertNotNull(actual, "Credit card provider is null"),
+                () -> assertFalse(actual.isEmpty(), "Credit card provider is empty")
+        );
     }
 
     @Test
@@ -118,7 +125,10 @@ class FinanceDummyIntegrationTest {
 
     @Test
     void shouldBuildIban() {
-        String actual = dummy4j.finance().ibanBuilder().build();
+        String actual = dummy4j.finance().ibanBuilder()
+                .withCountry(CountrySupportingBankAccount.ALBANIA)
+                .format()
+                .build();
 
         assertAll(
                 () -> assertNotNull(actual, "IBAN is null"),

@@ -21,7 +21,7 @@ class IbanFormulaTest {
     /**
      * Tests for example IBAN values
      * @see <a href="https://www.swift.com/standards/data-standards/iban-international-bank-account-number">
-     *      * IBAN Registry</a>
+     * IBAN Registry</a>
      */
     @ParameterizedTest
     @CsvSource({
@@ -108,10 +108,11 @@ class IbanFormulaTest {
             "3223130000026007233566001, UA, 21", // Ukraine
             "001123000012345678, VA, 59",        // Vatican City State
             "VPVG0000012345678901, VG, 96",      // Virgin Islands
-            "1212012345678906, XK, 05"           // Kososvo
+            "1212012345678906, XK, 05"           // Kosovo
     })
     void shouldReturnCheckDigits(String accountNumber, String countryCode, String expected) {
         String digits = formula.getCheckDigits(accountNumber, countryCode);
+
         assertEquals(expected, digits);
     }
 }
