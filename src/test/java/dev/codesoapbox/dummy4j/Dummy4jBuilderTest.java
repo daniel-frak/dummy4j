@@ -126,6 +126,24 @@ class Dummy4jBuilderTest {
     }
 
     @Test
+    void shouldBuildWhenSomeOfTheProvidedPathsAreNonExisting() {
+        Dummy4j fromArrays = new Dummy4jBuilder()
+                .paths(Arrays.asList("dummy4j", "nonExistingPath"))
+                .locale(singletonList("en"))
+                .build();
+
+        Dummy4j fromStrings = new Dummy4jBuilder()
+                .paths("dummy4j", "nonExistingPath")
+                .locale("en")
+                .build();
+
+        assertAll(
+                () -> assertNotNull(fromArrays),
+                () -> assertNotNull(fromStrings)
+        );
+    }
+
+    @Test
     void shouldThrowExceptionWhenSomeOfTheProvidedLocaleAreNull() {
         Dummy4jBuilder fromArrays = new Dummy4jBuilder()
                 .paths(singletonList("dummy4j"))
@@ -134,6 +152,22 @@ class Dummy4jBuilderTest {
         Dummy4jBuilder fromStrings = new Dummy4jBuilder()
                 .paths("dummy4j")
                 .locale("en", null);
+
+        assertAll(
+                () -> assertThrows(MissingLocaleDefinitionsException.class, fromArrays::build),
+                () -> assertThrows(MissingLocaleDefinitionsException.class, fromStrings::build)
+        );
+    }
+
+    @Test
+    void shouldThrowExceptionWhenSomeOfTheProvidedLocaleAreNonExisting() {
+        Dummy4jBuilder fromArrays = new Dummy4jBuilder()
+                .paths(singletonList("dummy4j"))
+                .locale(Arrays.asList("en", "nonExistingLocale"));
+
+        Dummy4jBuilder fromStrings = new Dummy4jBuilder()
+                .paths("dummy4j")
+                .locale("en", "nonExistingLocale");
 
         assertAll(
                 () -> assertThrows(MissingLocaleDefinitionsException.class, fromArrays::build),
