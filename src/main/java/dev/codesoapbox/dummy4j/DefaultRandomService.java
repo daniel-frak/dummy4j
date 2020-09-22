@@ -41,47 +41,26 @@ public class DefaultRandomService implements RandomService {
         return seed;
     }
 
-    /**
-     * Generates a random positive long
-     */
     @Override
     public long nextLong() {
         return random.nextLong() & Long.MAX_VALUE;
     }
 
-    /**
-     * Generates a random boolean
-     */
     @Override
     public boolean nextBoolean() {
         return random.nextBoolean();
     }
 
-    /**
-     * Generates a random positive int
-     */
     @Override
     public int nextInt() {
         return random.nextInt() & Integer.MAX_VALUE;
     }
 
-    /**
-     * Generates a random int between 0 and {@code upperBound} (inclusive).
-     * <p>
-     * If {@code upperBound} equals {@code Integer.MAX_VALUE} generates a random int between 0 (inclusive)
-     * and {@code upperBound} (exclusive).
-     */
     @Override
     public int nextInt(int upperBound) {
         return nextInt(0, upperBound);
     }
 
-    /**
-     * Generates a random int between {@code lowerBound} and {@code upperBound} (inclusive).
-     * <p>
-     * If {@code upperBound} equals {@code Integer.MAX_VALUE} generates a random int between
-     * {@code lowerBound} (inclusive) and {@code upperBound} (exclusive).
-     */
     @Override
     public int nextInt(int lowerBound, int upperBound) {
         if (lowerBound < 0) {
@@ -100,23 +79,11 @@ public class DefaultRandomService implements RandomService {
         return lowerBound + random.nextInt(upperBound - lowerBound + 1);
     }
 
-    /**
-     * Generates a random long between 0 and {@code upperBound} (inclusive).
-     * <p>
-     * If {@code upperBound} equals {@code Long.MAX_VALUE} generates a random long between 0 (inclusive)
-     * and {@code upperBound} (exclusive).
-     */
     @Override
     public long nextLong(long upperBound) {
         return nextLong(0, upperBound);
     }
 
-    /**
-     * Generates a random long between @{code lowerBound} and {@code upperBound} (inclusive)
-     * <p>
-     * If {@code upperBound} equals {@code Long.MAX_VALUE} generates a random long between
-     * {@code lowerBound} (inclusive) and {@code upperBound} (exclusive).
-     */
     @Override
     public long nextLong(long lowerBound, long upperBound) {
         if (lowerBound < 0) {
@@ -135,25 +102,16 @@ public class DefaultRandomService implements RandomService {
         return lowerBound + (long) (random.nextDouble() * (upperBound - lowerBound + 1));
     }
 
-    /**
-     * Generates a random positive double
-     */
     @Override
     public double nextDouble() {
         return random.nextDouble();
     }
 
-    /**
-     * Generates a random double between 0 (inclusive) and {@code upperBound} (exclusive)
-     */
     @Override
-    public double nextDouble(double bound) {
-        return nextDouble(0, bound);
+    public double nextDouble(double upperBound) {
+        return nextDouble(0, upperBound);
     }
 
-    /**
-     * Generates a random double between {@code lowerBound} (inclusive) and {@code upperBound} (exclusive)
-     */
     @Override
     public double nextDouble(double lowerBound, double upperBound) {
         if (lowerBound < 0) {
@@ -169,25 +127,16 @@ public class DefaultRandomService implements RandomService {
         return lowerBound + (upperBound - lowerBound) * random.nextDouble();
     }
 
-    /**
-     * Generates a random positive float between 0 and 1 (inclusive)
-     */
     @Override
     public float nextFloat() {
         return nextFloat(1);
     }
 
-    /**
-     * Generates a random double between 0 (inclusive) and {@code upperBound} (exclusive)
-     */
     @Override
     public float nextFloat(float upperBound) {
         return nextFloat(0, upperBound);
     }
 
-    /**
-     * Generates a random float between {@code lowerBound} and {@code upperBound} (inclusive)
-     */
     @Override
     public float nextFloat(float lowerBound, float upperBound) {
         if (lowerBound < 0) {
