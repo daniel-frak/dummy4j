@@ -7,7 +7,13 @@ package dev.codesoapbox.dummy4j;
  */
 public interface RandomService extends NumberService {
 
+    /**
+     * Returns the seed
+     */
     long getSeed();
 
+    /**
+     * Generates a random boolean
+     */
     boolean nextBoolean();
 }
