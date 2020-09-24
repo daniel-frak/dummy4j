@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
+import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,20 +30,20 @@ class Dummy4jBuilderTest {
     }
 
     @Test
-    void shouldBuildWithGivenAndValidLocaleAndPaths() {
-        Dummy4j fromArrays = new Dummy4jBuilder()
+    void shouldBuildWithGivenAndExistingLocaleAndPaths() {
+        Dummy4j fromList = new Dummy4jBuilder()
                 .paths(singletonList("dummy4j"))
                 .locale(singletonList("en"))
                 .build();
 
-        Dummy4j fromStrings = new Dummy4jBuilder()
+        Dummy4j fromVarArgs = new Dummy4jBuilder()
                 .paths("dummy4j")
                 .locale("en")
                 .build();
 
         assertAll(
-                () -> assertNotNull(fromArrays),
-                () -> assertNotNull(fromStrings)
+                () -> assertNotNull(fromList),
+                () -> assertNotNull(fromVarArgs)
         );
     }
 
@@ -63,19 +63,19 @@ class Dummy4jBuilderTest {
     }
 
     @Test
-    void shouldFallBackToDefaultLocaleAndPathsWhenEmptyArrayIsGiven() {
+    void shouldFallBackToDefaultLocaleAndPathsWhenEmptyListsAreGiven() {
         Dummy4j bothEmpty = new Dummy4jBuilder()
-                .paths(new ArrayList<>())
-                .locale(new ArrayList<>())
+                .paths(emptyList())
+                .locale(emptyList())
                 .build();
 
         Dummy4j localeEmpty = new Dummy4jBuilder()
                 .paths(singletonList("dummy4j"))
-                .locale(new ArrayList<>())
+                .locale(emptyList())
                 .build();
 
         Dummy4j pathEmpty = new Dummy4jBuilder()
-                .paths(new ArrayList<>())
+                .paths(emptyList())
                 .locale(singletonList("en"))
                 .build();
 
@@ -93,85 +93,85 @@ class Dummy4jBuilderTest {
             "nonExistingPath, nonExistingLocale"
     })
     void shouldThrowExceptionWhenPathOrLocaleDontExist(String path, String locale) {
-        Dummy4jBuilder fromArrays = new Dummy4jBuilder()
+        Dummy4jBuilder fromList = new Dummy4jBuilder()
                 .paths(singletonList(path))
                 .locale(singletonList(locale));
 
-        Dummy4jBuilder fromStrings = new Dummy4jBuilder()
+        Dummy4jBuilder fromVarArgs = new Dummy4jBuilder()
                 .paths(path)
                 .locale(locale);
 
         assertAll(
-                () -> assertThrows(MissingLocaleDefinitionsException.class, fromArrays::build),
-                () -> assertThrows(MissingLocaleDefinitionsException.class, fromStrings::build)
+                () -> assertThrows(MissingLocaleDefinitionsException.class, fromList::build),
+                () -> assertThrows(MissingLocaleDefinitionsException.class, fromVarArgs::build)
         );
     }
 
     @Test
     void shouldBuildWhenSomeOfTheProvidedPathsAreNull() {
-        Dummy4j fromArrays = new Dummy4jBuilder()
+        Dummy4j fromList = new Dummy4jBuilder()
                 .paths(Arrays.asList("dummy4j", null))
                 .locale(singletonList("en"))
                 .build();
 
-        Dummy4j fromStrings = new Dummy4jBuilder()
+        Dummy4j fromVarArgs = new Dummy4jBuilder()
                 .paths("dummy4j", null)
                 .locale("en")
                 .build();
 
         assertAll(
-                () -> assertNotNull(fromArrays),
-                () -> assertNotNull(fromStrings)
+                () -> assertNotNull(fromList),
+                () -> assertNotNull(fromVarArgs)
         );
     }
 
     @Test
     void shouldBuildWhenSomeOfTheProvidedPathsAreNonExisting() {
-        Dummy4j fromArrays = new Dummy4jBuilder()
+        Dummy4j fromList = new Dummy4jBuilder()
                 .paths(Arrays.asList("dummy4j", "nonExistingPath"))
                 .locale(singletonList("en"))
                 .build();
 
-        Dummy4j fromStrings = new Dummy4jBuilder()
+        Dummy4j fromVarArgs = new Dummy4jBuilder()
                 .paths("dummy4j", "nonExistingPath")
                 .locale("en")
                 .build();
 
         assertAll(
-                () -> assertNotNull(fromArrays),
-                () -> assertNotNull(fromStrings)
+                () -> assertNotNull(fromList),
+                () -> assertNotNull(fromVarArgs)
         );
     }
 
     @Test
     void shouldThrowExceptionWhenSomeOfTheProvidedLocaleAreNull() {
-        Dummy4jBuilder fromArrays = new Dummy4jBuilder()
+        Dummy4jBuilder fromList = new Dummy4jBuilder()
                 .paths(singletonList("dummy4j"))
                 .locale(Arrays.asList("en", null));
 
-        Dummy4jBuilder fromStrings = new Dummy4jBuilder()
+        Dummy4jBuilder fromVarArgs = new Dummy4jBuilder()
                 .paths("dummy4j")
                 .locale("en", null);
 
         assertAll(
-                () -> assertThrows(MissingLocaleDefinitionsException.class, fromArrays::build),
-                () -> assertThrows(MissingLocaleDefinitionsException.class, fromStrings::build)
+                () -> assertThrows(MissingLocaleDefinitionsException.class, fromList::build),
+                () -> assertThrows(MissingLocaleDefinitionsException.class, fromVarArgs::build)
         );
     }
 
     @Test
     void shouldThrowExceptionWhenSomeOfTheProvidedLocaleAreNonExisting() {
-        Dummy4jBuilder fromArrays = new Dummy4jBuilder()
+        Dummy4jBuilder fromList = new Dummy4jBuilder()
                 .paths(singletonList("dummy4j"))
                 .locale(Arrays.asList("en", "nonExistingLocale"));
 
-        Dummy4jBuilder fromStrings = new Dummy4jBuilder()
+        Dummy4jBuilder fromVarArgs = new Dummy4jBuilder()
                 .paths("dummy4j")
                 .locale("en", "nonExistingLocale");
 
         assertAll(
-                () -> assertThrows(MissingLocaleDefinitionsException.class, fromArrays::build),
-                () -> assertThrows(MissingLocaleDefinitionsException.class, fromStrings::build)
+                () -> assertThrows(MissingLocaleDefinitionsException.class, fromList::build),
+                () -> assertThrows(MissingLocaleDefinitionsException.class, fromVarArgs::build)
         );
     }
 }
