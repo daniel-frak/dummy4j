@@ -1,5 +1,7 @@
 package dev.codesoapbox.dummy4j.dummies.finance;
 
+import dev.codesoapbox.dummy4j.dummies.shared.string.Padding;
+
 /**
  * Provides a method for calculating IBAN check digits.
  * <p>
@@ -16,7 +18,6 @@ public class IbanFormula {
     private static final int MOD = 97;
     private static final int CHECK_SUM = 98;
     private static final String CHECK_DIGIT_REPLACEMENT = "00";
-    private static final String LEFT_PAD_VALUE = "0";
     private static final int MIN_NUMERIC_CHAR = 10;
     private static final int ONE_PLACE = 10;
     private static final int TWO_PLACES = 100;
@@ -27,8 +28,9 @@ public class IbanFormula {
      */
     public String getCheckDigits(String accountNumber, String countryCode) {
         int modulus = getModulusForNumericValues(accountNumber + countryCode + CHECK_DIGIT_REPLACEMENT);
+        int checkDigit = CHECK_SUM - modulus;
 
-        return leftPad(CHECK_SUM - modulus);
+        return Padding.leftPad(String.valueOf(checkDigit), 2, '0');
     }
 
     /**
@@ -80,12 +82,5 @@ public class IbanFormula {
 
     private boolean isNineDigitsLong(long value) {
         return value > MAX_FOR_EIGHT_DIGITS;
-    }
-
-    private String leftPad(int digits) {
-        if (digits > 9) {
-            return Integer.toString(digits);
-        }
-        return LEFT_PAD_VALUE + digits;
     }
 }

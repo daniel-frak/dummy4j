@@ -1,6 +1,7 @@
 package dev.codesoapbox.dummy4j.dummies.finance;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
+import dev.codesoapbox.dummy4j.dummies.shared.valueobject.Address;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -95,6 +96,27 @@ class FinanceDummyIntegrationTest {
         String actual = dummy4j.finance().creditCardNumber(CreditCardProvider.VISA);
 
         assertEquals("4150259182774861", actual);
+    }
+
+    @Test
+    void shouldReturnCreditCard() {
+        Address address = new Address("10 Anderson Canyon", "12345-678", "North Zoeshire",
+                "Armenia");
+
+        CreditCard actual = dummy4j.finance().creditCard();
+
+        assertAll(
+                () -> assertNotNull(actual, "Credit card is null"),
+                () -> assertNotNull(actual.getNumber(), "Credit card number is null"),
+                () -> assertFalse(actual.getNumber().isEmpty(), "Credit card number is empty"),
+                () -> assertNotNull(actual.getProvider(), "Credit card provider is null"),
+                () -> assertEquals("Zoe Anderson", actual.getOwnerName(), "Invalid credit card owner"),
+                () -> assertEquals(address, actual.getOwnerAddress(), "Invalid credit card address"),
+                () -> assertNotNull(actual.getExpiryDate(), "Credit card expiry date is null"),
+                () -> assertFalse(actual.getExpiryDate().isEmpty(), "Credit card expiry date is empty"),
+                () -> assertNotNull(actual.getSecurityCode(), "Credit card expiry date is null"),
+                () -> assertFalse(actual.getSecurityCode().isEmpty(), "Credit card expiry date is null")
+        );
     }
 
     @Test

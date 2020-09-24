@@ -1,8 +1,13 @@
 package dev.codesoapbox.dummy4j.dummies.finance;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
+import dev.codesoapbox.dummy4j.dummies.AddressDummy;
 import dev.codesoapbox.dummy4j.dummies.shared.math.NumberValidator;
+import dev.codesoapbox.dummy4j.dummies.shared.string.Padding;
+import dev.codesoapbox.dummy4j.dummies.shared.valueobject.Address;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Locale;
 
 /**
@@ -28,6 +33,9 @@ public class FinanceDummy {
     static final String BITCOIN_ADDRESS_CHARACTERS_KEY = "#{finance.bank_account.bitcoin_address.characters}";
     static final int BITCOIN_ADDRESS_MIN_LENGTH = 26;
     static final int BITCOIN_ADDRESS_MAX_LENGTH = 35;
+    static final int MAX_DAYS_FOR_EXPIRY_DATE = 3650;
+    static final int MIN_SECURITY_CODE = 100;
+    static final int MAX_SECURITY_CODE = 999;
 
     /**
      * There is no standardized minimum Basic Bank Account Number length, currently Norway has the shortest - 11
@@ -148,6 +156,45 @@ public class FinanceDummy {
     private String getProviderKey(CreditCardProvider provider) {
         String providerKey = provider.getValue().toLowerCase(Locale.ENGLISH).replaceAll("\\s", "_");
         return PARTIAL_CREDIT_CARD_KEY + providerKey + "}";
+    }
+
+    /**
+     * Returns a credit card with random data
+     *
+     * @see CreditCard
+     */
+    public CreditCard creditCard() {
+        CreditCardProvider randomProvider = dummy4j.nextEnum(CreditCardProvider.class);
+
+        return creditCard(randomProvider);
+    }
+
+    /**
+     * Returns a credit card for the given provider
+     *
+     * @see CreditCard
+     */
+    public CreditCard creditCard(CreditCardProvider provider) {
+        String number = creditCardNumber(provider);
+        String ownerName = dummy4j.name().firstName() + " " + dummy4j.name().lastName();
+        Address ownerAddress = generateAddress();
+        String expiryDate = generateExpiryDate();
+        String securityCode = String.valueOf(dummy4j.number().nextInt(MIN_SECURITY_CODE, MAX_SECURITY_CODE));
+
+        return new CreditCard(number, provider, ownerName, ownerAddress, expiryDate, securityCode);
+    }
+
+    private Address generateAddress() {
+        AddressDummy dummy = dummy4j.address();
+        return new Address(dummy.street(), dummy.postCode(), dummy.city(), dummy.country());
+    }
+
+    private String generateExpiryDate() {
+        LocalDate date = dummy4j.dateAndTime().future(MAX_DAYS_FOR_EXPIRY_DATE, ChronoUnit.DAYS).toLocalDate();
+        int month = date.getMonthValue();
+        int year = date.getYear();
+
+        return Padding.leftPad(String.valueOf(month), 2, '0') + "/" + year;
     }
 
     /**
