@@ -26,7 +26,7 @@ class CreditCardTest {
                 () -> assertEquals("111", actual.getSecurityCode()),
                 () -> {
                     String expectedString = "CreditCard{number='123', provider=American Express, " +
-                            "ownerName='Zoe Anderson', ownerAddress='street, 123 city country', " +
+                            "ownerName='Zoe Anderson', ownerAddress='street, 123 city, country', " +
                             "expiryDate='05/2030', securityCode='111'}";
                     assertEquals(expectedString, actual.toString());
                 }
@@ -39,10 +39,12 @@ class CreditCardTest {
             "123,,05/2030,111",
             "123,Zoe Anderson,,111",
             "123,Zoe Anderson,05/2030,",
+            ",,,",
             "'',Zoe Anderson,05/2030,111",
             "123,'',05/2030,111",
             "123,Zoe Anderson,'',111",
             "123,Zoe Anderson,05/2030,''",
+            "'','','',''"
     })
     void shouldThrowExceptionOnNullStringValues(String number, String owner, String expiryDate, String securityCode) {
         Address address = new Address("street", "123", "city", "country");

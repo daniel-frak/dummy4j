@@ -159,7 +159,9 @@ public class FinanceDummy {
     }
 
     /**
-     * Returns a credit card with random data
+     * Returns a credit card with random data.
+     * E.g. {@code CreditCard{number='4150259182774861', provider=Visa, ownerName='Zoe Anderson',
+     * ownerAddress='10 Amos Alley, 1234-55 North Austinshire, Canada', "expiryDate='05/2030', securityCode='111'}}
      *
      * @see CreditCard
      */
@@ -170,7 +172,9 @@ public class FinanceDummy {
     }
 
     /**
-     * Returns a credit card for the given provider
+     * Returns a credit card for the given provider.
+     * E.g. {@code CreditCard{number='4150259182774861', provider=Visa, ownerName='Zoe Anderson',
+     * ownerAddress='10 Amos Alley, 1234-55 North Austinshire, Canada', "expiryDate='05/2030', securityCode='111'}}
      *
      * @see CreditCard
      */

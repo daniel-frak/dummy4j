@@ -41,7 +41,7 @@ public final class Address {
         }
         if (!missingFields.isEmpty()) {
             String fields = String.join(", ", missingFields);
-            throw new IllegalArgumentException("Missing values for the following Address fields: " + fields);
+            throw new IllegalArgumentException("Missing values for the following fields: " + fields);
         }
     }
 
@@ -83,6 +83,6 @@ public final class Address {
 
     @Override
     public String toString() {
-        return street + ", " + postCode + " " + city + " " + country;
+        return street + ", " + postCode + " " + city + ", " + country;
     }
 }

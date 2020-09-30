@@ -53,7 +53,7 @@ final class CreditCard {
         }
         if (!missingFields.isEmpty()) {
             String fields = String.join(", ", missingFields);
-            throw new IllegalArgumentException("Missing values for the following Credit card fields: " + fields);
+            throw new IllegalArgumentException("Missing values for the following fields: " + fields);
         }
     }
 

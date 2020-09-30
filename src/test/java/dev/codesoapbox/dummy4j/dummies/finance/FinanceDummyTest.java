@@ -232,7 +232,7 @@ class FinanceDummyTest {
                 () -> assertEquals("111", actual.getSecurityCode()),
                 () -> {
                     String expectedString = "CreditCard{number='3412345678901237', provider=American Express, " +
-                            "ownerName='Zoe Anderson', ownerAddress='street, 123 city country', " +
+                            "ownerName='Zoe Anderson', ownerAddress='street, 123 city, country', " +
                             "expiryDate='05/2030', securityCode='111'}";
                     assertEquals(expectedString, actual.toString());
                 }

@@ -19,7 +19,7 @@ class AddressTest {
                 () -> assertEquals("123", actual.getPostCode()),
                 () -> assertEquals("city", actual.getCity()),
                 () -> assertEquals("country", actual.getCountry()),
-                () -> assertEquals("street, 123 city country", actual.toString())
+                () -> assertEquals("street, 123 city, country", actual.toString())
         );
     }
 
@@ -29,10 +29,12 @@ class AddressTest {
             "street,,city,country",
             "street,123,,country",
             "street,123,city,",
+            ",,,",
             "'',123,city,country",
             "street,'',city,country",
             "street,123,'',country",
-            "street,123,city,''"
+            "street,123,city,''",
+            "'','','',''"
     })
     void shouldThrowExceptionOnNullOrEmptyValues(String street, String postCode, String city, String country) {
         assertThrows(IllegalArgumentException.class, () -> new Address(street, postCode, city, country));
