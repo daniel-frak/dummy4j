@@ -34,7 +34,7 @@ class CreditCardTest {
     }
 
     @ParameterizedTest
-    @CsvSource(emptyValue = "", value = {
+    @CsvSource({
             ",Zoe Anderson,05/2030,111",
             "123,,05/2030,111",
             "123,Zoe Anderson,,111",

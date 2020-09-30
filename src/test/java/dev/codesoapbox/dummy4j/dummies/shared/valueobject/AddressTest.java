@@ -24,7 +24,7 @@ class AddressTest {
     }
 
     @ParameterizedTest
-    @CsvSource(emptyValue = "", value = {
+    @CsvSource({
             ",23,city,country",
             "street,,city,country",
             "street,123,,country",
