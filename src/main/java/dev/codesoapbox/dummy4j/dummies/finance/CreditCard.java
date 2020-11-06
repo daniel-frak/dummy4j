@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  * A value object representing a credit card
  */
-final class CreditCard {
+public final class CreditCard {
 
     private final String number;
     private final CreditCardProvider provider;
@@ -108,7 +108,7 @@ final class CreditCard {
     public String toString() {
         return "CreditCard{" +
                 "number='" + number + '\'' +
-                ", provider=" + provider.getValue() +
+                ", provider=" + provider.getName() +
                 ", ownerName='" + ownerName + '\'' +
                 ", ownerAddress='" + ownerAddress + '\'' +
                 ", expiryDate='" + expiryDate + '\'' +

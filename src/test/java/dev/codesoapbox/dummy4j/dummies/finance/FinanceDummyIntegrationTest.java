@@ -93,9 +93,11 @@ class FinanceDummyIntegrationTest {
 
     @Test
     void shouldReturnCreditCardNumberForGivenProvider() {
-        String actual = dummy4j.finance().creditCardNumber(CreditCardProvider.VISA);
+        String actual = dummy4j.finance().creditCardNumberBuilder()
+                .withProvider(CreditCardProvider.VISA)
+                .build();
 
-        assertEquals("4150259182774861", actual);
+        assertEquals("4150 2591 8277 4861", actual);
     }
 
     @Test
@@ -117,6 +119,39 @@ class FinanceDummyIntegrationTest {
                 () -> assertNotNull(actual.getSecurityCode(), "Credit card expiry date is null"),
                 () -> assertFalse(actual.getSecurityCode().isEmpty(), "Credit card expiry date is null")
         );
+    }
+
+    @Test
+    void shouldReturnCreditCardForGivenProvider() {
+        Address address = new Address("10 Anderson Canyon", "12345-678", "North Zoeshire",
+                "Armenia");
+
+        CreditCard actual = dummy4j.finance().creditCardBuilder()
+                .withProvider(CreditCardProvider.VISA)
+                .build();
+
+        assertAll(
+                () -> assertNotNull(actual, "Credit card is null"),
+                () -> assertEquals("4150 2591 8277 4861", actual.getNumber(), "Invalid number"),
+                () -> assertFalse(actual.getNumber().isEmpty(), "Credit card number is empty"),
+                () -> assertNotNull(actual.getProvider(), "Credit card provider is null"),
+                () -> assertEquals("Zoe Anderson", actual.getOwnerName(), "Invalid credit card owner"),
+                () -> assertEquals(address, actual.getOwnerAddress(), "Invalid credit card address"),
+                () -> assertNotNull(actual.getExpiryDate(), "Credit card expiry date is null"),
+                () -> assertFalse(actual.getExpiryDate().isEmpty(), "Credit card expiry date is empty"),
+                () -> assertNotNull(actual.getSecurityCode(), "Credit card expiry date is null"),
+                () -> assertFalse(actual.getSecurityCode().isEmpty(), "Credit card expiry date is null")
+        );
+    }
+
+    @Test
+    void shouldReturnCreditCardForGivenProviderWithoutFormatting() {
+        CreditCard actual = dummy4j.finance().creditCardBuilder()
+                .withProvider(CreditCardProvider.VISA)
+                .clearNumberFormatting()
+                .build();
+
+        assertEquals("4150259182774861", actual.getNumber());
     }
 
     @Test

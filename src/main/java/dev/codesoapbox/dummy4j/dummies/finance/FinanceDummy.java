@@ -1,13 +1,8 @@
 package dev.codesoapbox.dummy4j.dummies.finance;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
-import dev.codesoapbox.dummy4j.dummies.AddressDummy;
 import dev.codesoapbox.dummy4j.dummies.shared.math.NumberValidator;
-import dev.codesoapbox.dummy4j.dummies.shared.string.Padding;
-import dev.codesoapbox.dummy4j.dummies.shared.valueobject.Address;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.Locale;
 
 /**
@@ -24,7 +19,6 @@ public class FinanceDummy {
     static final String CRYPTO_CURRENCY_CODE_KEY = "#{finance.cryptocurrency.code}";
     static final String CRYPTO_CURRENCY_NAME_KEY = "#{finance.cryptocurrency.name}";
     static final String CRYPTO_CURRENCY_SYMBOL_KEY = "#{finance.cryptocurrency.symbol}";
-    static final String PARTIAL_CREDIT_CARD_KEY = "#{finance.credit_card_without_check_digit.";
     static final String BANK_ACCOUNT_TYPE_KEY = "#{finance.bank_account.type}";
     static final String PARTIAL_ACCOUNT_NUMBER_KEY = "#{finance.bank_account.number_structure.";
     static final String PAYMENT_OPTION_KEY = "#{finance.bank_account.payment_option}";
@@ -33,9 +27,6 @@ public class FinanceDummy {
     static final String BITCOIN_ADDRESS_CHARACTERS_KEY = "#{finance.bank_account.bitcoin_address.characters}";
     static final int BITCOIN_ADDRESS_MIN_LENGTH = 26;
     static final int BITCOIN_ADDRESS_MAX_LENGTH = 35;
-    static final int MAX_DAYS_FOR_EXPIRY_DATE = 3650;
-    static final int MIN_SECURITY_CODE = 100;
-    static final int MAX_SECURITY_CODE = 999;
 
     /**
      * There is no standardized minimum Basic Bank Account Number length, currently Norway has the shortest - 11
@@ -44,13 +35,11 @@ public class FinanceDummy {
     private static final int MAX_ACCOUNT_LENGTH = 30;
 
     private final Dummy4j dummy4j;
-    private final LuhnFormula luhnFormula;
-    private final IbanFormula ibanFormula;
+    private final FinanceBuilderFactory financeBuilderFactory;
 
-    public FinanceDummy(Dummy4j dummy4j, LuhnFormula luhnFormula, IbanFormula ibanFormula) {
+    public FinanceDummy(Dummy4j dummy4j, FinanceBuilderFactory financeBuilderFactory) {
         this.dummy4j = dummy4j;
-        this.luhnFormula = luhnFormula;
-        this.ibanFormula = ibanFormula;
+        this.financeBuilderFactory = financeBuilderFactory;
     }
 
     /**
@@ -130,75 +119,65 @@ public class FinanceDummy {
      * E.g. {@code Visa}
      */
     public String creditCardProvider() {
-        return dummy4j.nextEnum(CreditCardProvider.class).getValue();
+        return dummy4j.nextEnum(CreditCardProvider.class).getName();
     }
 
     /**
      * Provides a random credit card number compliant with the ISO/IEC 7812 standard.
-     * E.g. {@code 4150259182774861}
+     * E.g. {@code 4150 2591 8277 4861}
+     * <p>
+     * The default format patterns and IIN ranges are based on data available on November 2020.
+     *
+     * @see <a href="https://baymard.com/checkout-usability/credit-card-patterns">
+     * Credit Card IIN Ranges & Spacing Patterns</a>
      */
     public String creditCardNumber() {
-        CreditCardProvider randomProvider = dummy4j.nextEnum(CreditCardProvider.class);
-        return creditCardNumber(randomProvider);
+        return financeBuilderFactory.createCreditCardNumberBuilder().build();
     }
 
     /**
-     * Provides a random credit card number compliant with the ISO/IEC 7812 standard and containing a correct prefix
-     * for the given provider.
-     * E.g. {@code 4150259182774861}
+     * Provides a builder for random credit card numbers compliant with the ISO/IEC 7812 standard that can be created
+     * according to customisable parameters.
+     * E.g. {@code creditCardNumberBuilder().clearNumberFormatting().build()} may generate {@code 4150259182774861}
+     * <p>
+     * The default format patterns and IIN ranges are based on data available on November 2020.
+     *
+     * @see <a href="https://baymard.com/checkout-usability/credit-card-patterns">
+     * Credit Card IIN Ranges & Spacing Patterns</a>
      */
-    public String creditCardNumber(CreditCardProvider provider) {
-        String key = getProviderKey(provider);
-        String incompleteNumber = dummy4j.expressionResolver().resolve(key);
-        return incompleteNumber + luhnFormula.getCheckDigit(incompleteNumber);
-    }
-
-    private String getProviderKey(CreditCardProvider provider) {
-        String providerKey = provider.getValue().toLowerCase(Locale.ENGLISH).replaceAll("\\s", "_");
-        return PARTIAL_CREDIT_CARD_KEY + providerKey + "}";
+    public CreditCardNumberBuilder creditCardNumberBuilder() {
+        return financeBuilderFactory.createCreditCardNumberBuilder();
     }
 
     /**
      * Returns a credit card with random data.
-     * E.g. {@code CreditCard{number='4150259182774861', provider=Visa, ownerName='Zoe Anderson',
+     * E.g. {@code CreditCard{number='4150 2591 8277 4861', provider=Visa, ownerName='Zoe Anderson',
      * ownerAddress='10 Amos Alley, 1234-55 North Austinshire, Canada', "expiryDate='05/2030', securityCode='111'}}
+     * <p>
+     * The default format patterns and IIN ranges are based on data available on November 2020.
      *
+     * @see <a href="https://baymard.com/checkout-usability/credit-card-patterns">
+     * Credit Card IIN Ranges & Spacing Patterns</a>
      * @see CreditCard
      */
     public CreditCard creditCard() {
-        CreditCardProvider randomProvider = dummy4j.nextEnum(CreditCardProvider.class);
-
-        return creditCard(randomProvider);
+        return financeBuilderFactory.createCreditCardBuilder().build();
     }
 
     /**
-     * Returns a credit card for the given provider.
-     * E.g. {@code CreditCard{number='4150259182774861', provider=Visa, ownerName='Zoe Anderson',
+     * Provides a builder for a random credit cards created according to customisable parameters.
+     * E.g. {@code creditCardBuilder().withProvider(CreditCardProvider.VISA).clearNumberFormatting().build()}
+     * may generate {@code CreditCard{number='4150259182774861', provider=Visa, ownerName='Zoe Anderson',
      * ownerAddress='10 Amos Alley, 1234-55 North Austinshire, Canada', "expiryDate='05/2030', securityCode='111'}}
+     * <p>
+     * The default format patterns and IIN ranges are based on data available on November 2020.
      *
+     * @see <a href="https://baymard.com/checkout-usability/credit-card-patterns">
+     * Credit Card IIN Ranges & Spacing Patterns</a>
      * @see CreditCard
      */
-    public CreditCard creditCard(CreditCardProvider provider) {
-        String number = creditCardNumber(provider);
-        String ownerName = dummy4j.name().firstName() + " " + dummy4j.name().lastName();
-        Address ownerAddress = generateAddress();
-        String expiryDate = generateExpiryDate();
-        String securityCode = String.valueOf(dummy4j.number().nextInt(MIN_SECURITY_CODE, MAX_SECURITY_CODE));
-
-        return new CreditCard(number, provider, ownerName, ownerAddress, expiryDate, securityCode);
-    }
-
-    private Address generateAddress() {
-        AddressDummy dummy = dummy4j.address();
-        return new Address(dummy.street(), dummy.postCode(), dummy.city(), dummy.country());
-    }
-
-    private String generateExpiryDate() {
-        LocalDate date = dummy4j.dateAndTime().future(MAX_DAYS_FOR_EXPIRY_DATE, ChronoUnit.DAYS).toLocalDate();
-        int month = date.getMonthValue();
-        int year = date.getYear();
-
-        return Padding.leftPad(String.valueOf(month), 2, '0') + "/" + year;
+    public CreditCardBuilder creditCardBuilder() {
+        return financeBuilderFactory.createCreditCardBuilder();
     }
 
     /**
@@ -245,7 +224,7 @@ public class FinanceDummy {
      * IBAN Registry</a>
      */
     public String iban() {
-        return new IbanBuilder(dummy4j, ibanFormula).build();
+        return financeBuilderFactory.createIbanBuilder().build();
     }
 
     /**
@@ -261,7 +240,7 @@ public class FinanceDummy {
      * IBAN Registry</a>
      */
     public IbanBuilder ibanBuilder() {
-        return new IbanBuilder(dummy4j, ibanFormula);
+        return financeBuilderFactory.createIbanBuilder();
     }
 
     /**

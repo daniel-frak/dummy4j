@@ -12,14 +12,14 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class FinanceDummyTest {
+
+    @Mock
+    IbanBuilder ibanBuilder;
 
     @Mock
     private Dummy4j dummy4j;
@@ -31,10 +31,13 @@ class FinanceDummyTest {
     private ExpressionResolver expressionResolver;
 
     @Mock
-    private LuhnFormula luhnFormula;
+    private FinanceBuilderFactory financeBuilderFactory;
 
     @Mock
-    private IbanFormula ibanFormula;
+    private CreditCardNumberBuilder creditCardNumberBuilder;
+
+    @Mock
+    private CreditCardBuilder creditCardBuilder;
 
     @Mock
     private LoremDummy loremDummy;
@@ -42,20 +45,11 @@ class FinanceDummyTest {
     @Mock
     private NationDummy nationDummy;
 
-    @Mock
-    private AddressDummy addressDummy;
-
-    @Mock
-    private NameDummy nameDummy;
-
-    @Mock
-    private DateAndTimeDummy dateAndTimeDummy;
-
     private FinanceDummy financeDummy;
 
     @BeforeEach
     void setUp() {
-        financeDummy = new FinanceDummy(dummy4j, luhnFormula, ibanFormula);
+        financeDummy = new FinanceDummy(dummy4j, financeBuilderFactory);
     }
 
     @Test
@@ -172,131 +166,64 @@ class FinanceDummyTest {
 
     @Test
     void shouldReturnCreditCardProvider() {
-        mockCreditCardProvider();
+        when(dummy4j.nextEnum(CreditCardProvider.class))
+                .thenReturn(CreditCardProvider.AMERICAN_EXPRESS);
 
         String actual = financeDummy.creditCardProvider();
 
-        assertEquals(CreditCardProvider.AMERICAN_EXPRESS.getValue(), actual);
-    }
-
-    private void mockCreditCardProvider() {
-        when(dummy4j.nextEnum(CreditCardProvider.class))
-                .thenReturn(CreditCardProvider.AMERICAN_EXPRESS);
+        assertEquals(CreditCardProvider.AMERICAN_EXPRESS.getName(), actual);
     }
 
     @Test
     void shouldReturnCreditCardNumber() {
-        mockCreditCardProvider();
-        mockCreditCardNumber();
+        when(financeBuilderFactory.createCreditCardNumberBuilder())
+                .thenReturn(creditCardNumberBuilder);
+        when(creditCardNumberBuilder.build())
+                .thenReturn("3412 345678 90127");
 
         String actual = financeDummy.creditCardNumber();
 
-        assertEquals("3412345678901237", actual);
-    }
-
-    private void mockCreditCardNumber() {
-        mockExpressionResolver();
-        when(expressionResolver.resolve(FinanceDummy.PARTIAL_CREDIT_CARD_KEY + "american_express}"))
-                .thenReturn("341234567890123");
-        when(luhnFormula.getCheckDigit("341234567890123"))
-                .thenReturn("7");
+        assertEquals("3412 345678 90127", actual);
     }
 
     @Test
-    void shouldReturnCreditCardNumberForGivenProvider() {
-        mockExpressionResolver();
-        when(expressionResolver.resolve(FinanceDummy.PARTIAL_CREDIT_CARD_KEY + "visa}"))
-                .thenReturn("415025918277486");
-        when(luhnFormula.getCheckDigit("415025918277486"))
-                .thenReturn("1");
+    void shouldReturnCreditCardNumberBuilder() {
+        when(financeBuilderFactory.createCreditCardNumberBuilder())
+                .thenReturn(creditCardNumberBuilder);
 
-        String actual = financeDummy.creditCardNumber(CreditCardProvider.VISA);
+        CreditCardNumberBuilder actual = financeDummy.creditCardNumberBuilder();
 
-        assertEquals("4150259182774861", actual);
+        assertNotNull(actual);
     }
 
     @Test
-    void shouldReturnCreditCardWithOneDigitMonthPadded() {
-        Address address = getAddress();
-        mockCreditCardData(address);
-        mockExpiryDate(5);
+    void shouldReturnCreditCard() {
+        CreditCard card = getCreditCard();
+        when(financeBuilderFactory.createCreditCardBuilder())
+                .thenReturn(creditCardBuilder);
+        when(creditCardBuilder.build())
+                .thenReturn(card);
 
         CreditCard actual = financeDummy.creditCard();
 
-        assertAll(
-                () -> assertEquals("3412345678901237", actual.getNumber()),
-                () -> assertEquals(CreditCardProvider.AMERICAN_EXPRESS, actual.getProvider()),
-                () -> assertEquals("Zoe Anderson", actual.getOwnerName()),
-                () -> assertEquals(address, actual.getOwnerAddress()),
-                () -> assertEquals("05/2030", actual.getExpiryDate()),
-                () -> assertEquals("111", actual.getSecurityCode()),
-                () -> {
-                    String expectedString = "CreditCard{number='3412345678901237', provider=American Express, " +
-                            "ownerName='Zoe Anderson', ownerAddress='street, 123 city, country', " +
-                            "expiryDate='05/2030', securityCode='111'}";
-                    assertEquals(expectedString, actual.toString());
-                }
-        );
+        assertEquals(card, actual);
     }
 
-    private Address getAddress() {
-        return new Address("street", "123", "city", "country");
-    }
+    private CreditCard getCreditCard() {
+        Address address = new Address("street", "123", "city", "country");
 
-    private void mockCreditCardData(Address address) {
-        mockNumberService();
-        mockCreditCardProvider();
-        mockCreditCardNumber();
-        mockOwnerName();
-        mockOwnerAddress(address);
-        mockSecurityCode();
-    }
-
-    private void mockOwnerName() {
-        when(dummy4j.name())
-                .thenReturn(nameDummy);
-        when(nameDummy.firstName())
-                .thenReturn("Zoe");
-        when(nameDummy.lastName())
-                .thenReturn("Anderson");
-    }
-
-    private void mockOwnerAddress(Address address) {
-        when(dummy4j.address())
-                .thenReturn(addressDummy);
-        when(addressDummy.street())
-                .thenReturn(address.getStreet());
-        when(addressDummy.postCode())
-                .thenReturn(address.getPostCode());
-        when(addressDummy.city())
-                .thenReturn(address.getCity());
-        when(addressDummy.country())
-                .thenReturn(address.getCountry());
-    }
-
-    private void mockExpiryDate(int month) {
-        when(dummy4j.dateAndTime())
-                .thenReturn(dateAndTimeDummy);
-        when(dateAndTimeDummy.future(FinanceDummy.MAX_DAYS_FOR_EXPIRY_DATE, ChronoUnit.DAYS))
-                .thenReturn(LocalDate.of(2030, month, 15).atStartOfDay());
-    }
-
-    private void mockSecurityCode() {
-        when(dummy4j.number())
-                .thenReturn(numberService);
-        when(numberService.nextInt(FinanceDummy.MIN_SECURITY_CODE, FinanceDummy.MAX_SECURITY_CODE))
-                .thenReturn(111);
+        return new CreditCard("3412 345678 90127", CreditCardProvider.AMERICAN_EXPRESS, "Zoe Anderson",
+                address, "05/2030", "111");
     }
 
     @Test
-    void shouldReturnCreditCardWithTwoDigitMonth() {
-        Address address = getAddress();
-        mockCreditCardData(address);
-        mockExpiryDate(10);
+    void shouldReturnCreditCarBuilder() {
+        when(financeBuilderFactory.createCreditCardBuilder())
+                .thenReturn(creditCardBuilder);
 
-        CreditCard actual = financeDummy.creditCard();
+        CreditCardBuilder actual = financeDummy.creditCardBuilder();
 
-        assertEquals("10/2030", actual.getExpiryDate());
+        assertNotNull(actual);
     }
 
     @Test
@@ -381,17 +308,10 @@ class FinanceDummyTest {
 
     @Test
     void shouldReturnIbanForRandomCountry() {
-        mockExpressionResolver();
-        mockLettersInAccountNumber();
-        CountrySupportingBankAccount country = CountrySupportingBankAccount.GERMANY;
-        when(dummy4j.nextEnum(CountrySupportingBankAccount.class))
-                .thenReturn(country);
-        String account = "123456789123456789";
-        when(expressionResolver.resolve(FinanceDummy.PARTIAL_ACCOUNT_NUMBER_KEY + country.getCode() + "}"))
-                .thenReturn(account);
-        when(ibanFormula.getCheckDigits(account, country.getCode()))
-                .thenReturn("00");
-        mockFinanceDummy();
+        when(financeBuilderFactory.createIbanBuilder())
+                .thenReturn(ibanBuilder);
+        when(ibanBuilder.build())
+                .thenReturn("DE00123456789123456789");
 
         String actual = financeDummy.iban();
 
@@ -399,32 +319,13 @@ class FinanceDummyTest {
     }
 
     @Test
-    void shouldBuildIbanForGivenCountry() {
-        mockExpressionResolver();
-        mockLettersInAccountNumber();
-        CountrySupportingBankAccount country = CountrySupportingBankAccount.GERMANY;
-        String account = "123456789123456789";
-        when(expressionResolver.resolve(FinanceDummy.PARTIAL_ACCOUNT_NUMBER_KEY + country.getCode() + "}"))
-                .thenReturn(account);
-        when(ibanFormula.getCheckDigits(account, country.getCode()))
-                .thenReturn("00");
-        mockFinanceDummy();
+    void shouldReturnIbanBuilder() {
+        when(financeBuilderFactory.createIbanBuilder())
+                .thenReturn(ibanBuilder);
 
-        String actual = financeDummy
-                .ibanBuilder()
-                .withCountry(country)
-                .build();
+        IbanBuilder actual = financeDummy.ibanBuilder();
 
-        assertEquals("DE00123456789123456789", actual);
-    }
-
-    /**
-     * IbanBuilder::build uses FinanceDummy::bankAccountNumber.
-     * Therefore, we have to mock dummy4j.finance call from IbanBuilder.
-     */
-    private void mockFinanceDummy() {
-        when(dummy4j.finance())
-                .thenReturn(financeDummy);
+        assertNotNull(actual);
     }
 
     @Test

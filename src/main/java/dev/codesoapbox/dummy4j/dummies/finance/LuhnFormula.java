@@ -10,7 +10,7 @@ public class LuhnFormula {
     /**
      * Returns a valid check digit calculated with the Luhn algorithm for the given number
      */
-    String getCheckDigit(String input) {
+    public String getCheckDigit(String input) {
         char[] sanitizedInput = removeInvalidCharacters(input);
         int sum = getSum(sanitizedInput);
 

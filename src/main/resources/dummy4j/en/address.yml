@@ -272,7 +272,7 @@ en:
       "#{name.last_name} #{address.street_suffix}"
     ]
     street: [
-      "#{building_number} #{street_name}"
+      "#{address.building_number} #{address.street_name}"
     ]
     building_number: [
       "#####",

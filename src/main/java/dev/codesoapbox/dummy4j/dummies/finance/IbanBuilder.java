@@ -12,7 +12,7 @@ import static java.util.Collections.singletonList;
 /**
  * Provides methods for generating a customized IBAN
  */
-public final class IbanBuilder {
+public class IbanBuilder {
 
     private final Dummy4j dummy4j;
     private final IbanFormula ibanFormula;
@@ -108,5 +108,13 @@ public final class IbanBuilder {
         }
 
         return joiner.toString();
+    }
+
+    @Override
+    public String toString() {
+        return "IbanBuilder{" +
+                "countries=" + countries +
+                ", format=" + format +
+                '}';
     }
 }

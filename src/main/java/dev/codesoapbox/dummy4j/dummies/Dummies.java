@@ -2,6 +2,7 @@ package dev.codesoapbox.dummy4j.dummies;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
 import dev.codesoapbox.dummy4j.dummies.color.ColorDummy;
+import dev.codesoapbox.dummy4j.dummies.finance.FinanceBuilderFactory;
 import dev.codesoapbox.dummy4j.dummies.finance.FinanceDummy;
 import dev.codesoapbox.dummy4j.dummies.finance.IbanFormula;
 import dev.codesoapbox.dummy4j.dummies.finance.LuhnFormula;
@@ -44,7 +45,7 @@ public class Dummies {
         medical = new MedicalDummy(dummy4j);
         natoPhoneticAlphabet = new NatoPhoneticAlphabetDummy(dummy4j);
         internet = new InternetDummy(dummy4j);
-        finance = new FinanceDummy(dummy4j, new LuhnFormula(), new IbanFormula());
+        finance = new FinanceDummy(dummy4j, new FinanceBuilderFactory(dummy4j, new IbanFormula(), new LuhnFormula()));
     }
 
     public NameDummy name() {
