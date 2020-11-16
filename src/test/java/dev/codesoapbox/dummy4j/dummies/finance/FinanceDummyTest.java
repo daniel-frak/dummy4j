@@ -3,16 +3,20 @@ package dev.codesoapbox.dummy4j.dummies.finance;
 import dev.codesoapbox.dummy4j.Dummy4j;
 import dev.codesoapbox.dummy4j.ExpressionResolver;
 import dev.codesoapbox.dummy4j.NumberService;
-import dev.codesoapbox.dummy4j.dummies.*;
-import dev.codesoapbox.dummy4j.dummies.shared.valueobject.Address;
-import dev.codesoapbox.dummy4j.exceptions.ValueOutOfRangeException;
+import dev.codesoapbox.dummy4j.dummies.NationDummy;
+import dev.codesoapbox.dummy4j.dummies.shared.Address;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Arrays;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -38,9 +42,6 @@ class FinanceDummyTest {
 
     @Mock
     private CreditCardBuilder creditCardBuilder;
-
-    @Mock
-    private LoremDummy loremDummy;
 
     @Mock
     private NationDummy nationDummy;
@@ -169,9 +170,9 @@ class FinanceDummyTest {
         when(dummy4j.nextEnum(CreditCardProvider.class))
                 .thenReturn(CreditCardProvider.AMERICAN_EXPRESS);
 
-        String actual = financeDummy.creditCardProvider();
+        CreditCardProvider actual = financeDummy.creditCardProvider();
 
-        assertEquals(CreditCardProvider.AMERICAN_EXPRESS.getName(), actual);
+        assertEquals(CreditCardProvider.AMERICAN_EXPRESS, actual);
     }
 
     @Test
@@ -228,7 +229,6 @@ class FinanceDummyTest {
 
     @Test
     void shouldReturnBicNumber() {
-        mockLoremDummy();
         mockBankCode();
         mockCountryCode();
         mockLocationCode();
@@ -239,14 +239,9 @@ class FinanceDummyTest {
         assertEquals("ABCDADEF123", actual);
     }
 
-    private void mockLoremDummy() {
-        when(dummy4j.lorem())
-                .thenReturn(loremDummy);
-    }
-
     private void mockBankCode() {
-        when(loremDummy.characters(4))
-                .thenReturn("ABCD");
+        when(dummy4j.listOf(eq(4), any()))
+                .thenReturn(Arrays.asList("A", "B", "C", "D"));
     }
 
     private void mockCountryCode() {
@@ -257,8 +252,8 @@ class FinanceDummyTest {
     }
 
     private void mockLocationCode() {
-        when(loremDummy.characters(2))
-                .thenReturn("EF");
+        when(dummy4j.listOf(eq(2), any()))
+                .thenReturn(Arrays.asList("E", "F"));
     }
 
     private void mockBranchCode() {
@@ -270,40 +265,15 @@ class FinanceDummyTest {
     @Test
     void shouldReturnBankAccountNumber() {
         mockExpressionResolver();
-        mockLettersInAccountNumber();
-        CountrySupportingBankAccount country = CountrySupportingBankAccount.GERMANY;
+        BankAccountCountry country = BankAccountCountry.GERMANY;
+        when(expressionResolver.resolve(FinanceDummy.BANK_ACCOUNT_LETTER_KEY))
+                .thenReturn("A");
         when(expressionResolver.resolve(FinanceDummy.PARTIAL_ACCOUNT_NUMBER_KEY + country.getCode() + "}"))
                 .thenReturn("12345678912345678_");
 
         String actual = financeDummy.bankAccountNumber(country);
 
         assertEquals("12345678912345678A", actual);
-    }
-
-    private void mockLettersInAccountNumber() {
-        mockLoremDummy();
-        when(loremDummy.character())
-                .thenReturn("a");
-    }
-
-    @Test
-    void shouldThrowExceptionOnTooShortAccount() {
-        mockExpressionResolver();
-        CountrySupportingBankAccount country = CountrySupportingBankAccount.GERMANY;
-        when(expressionResolver.resolve(FinanceDummy.PARTIAL_ACCOUNT_NUMBER_KEY + country.getCode() + "}"))
-                .thenReturn("123");
-
-        assertThrows(ValueOutOfRangeException.class, () -> financeDummy.bankAccountNumber(country));
-    }
-
-    @Test
-    void shouldThrowExceptionOnTooLongAccount() {
-        mockExpressionResolver();
-        CountrySupportingBankAccount country = CountrySupportingBankAccount.GERMANY;
-        when(expressionResolver.resolve(FinanceDummy.PARTIAL_ACCOUNT_NUMBER_KEY + country.getCode() + "}"))
-                .thenReturn("12345678901234567890123456789012345");
-
-        assertThrows(ValueOutOfRangeException.class, () -> financeDummy.bankAccountNumber(country));
     }
 
     @Test
@@ -369,7 +339,7 @@ class FinanceDummyTest {
         when(expressionResolver.resolve(FinanceDummy.BITCOIN_ADDRESS_CHARACTERS_KEY))
                 .thenReturn("a");
         mockNumberService();
-        when(numberService.nextInt(FinanceDummy.BITCOIN_ADDRESS_MIN_LENGTH,
+        when(numberService.nextInt(FinanceDummy.BITCOIN_ADDRESS_MIN_LENGTH - 3,
                 FinanceDummy.BITCOIN_ADDRESS_MAX_LENGTH - 3))
                 .thenReturn(23);
 

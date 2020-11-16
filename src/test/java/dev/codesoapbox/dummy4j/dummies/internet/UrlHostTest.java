@@ -21,10 +21,10 @@ class UrlHostTest {
 
     @ParameterizedTest
     @CsvSource({
-            "test, ",
-            " , com",
-            "test, ''",
-            "'', com"
+            "test,",
+            " ,com",
+            "test,''",
+            "'',com"
     })
     void shouldNotCreateInvalidHost(String rootDomain, String topLevelDomain) {
         assertThrows(IllegalArgumentException.class, () -> new UrlHost(rootDomain, topLevelDomain, false));

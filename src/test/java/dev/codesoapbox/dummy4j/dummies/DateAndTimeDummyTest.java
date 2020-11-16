@@ -98,8 +98,8 @@ class DateAndTimeDummyTest {
 
     @ParameterizedTest
     @CsvSource({
-            "1979-01-02, 0",
-            "1980-01-01, 364"
+            "1979-01-02,0",
+            "1980-01-01,364"
     })
     void shouldReturnBirthdayBetweenSameAges(String expectedDate, long random) {
         LocalDate expected = LocalDate.parse(expectedDate);
@@ -113,9 +113,9 @@ class DateAndTimeDummyTest {
 
     @ParameterizedTest
     @CsvSource({
-            "-10, 2",
-            "1, -2",
-            "-10, -2"
+            "-10,2",
+            "1,-2",
+            "-10,-2"
     })
     void shouldThrowExceptionIfAnyAgeFromRageIsNegative(int minAge, int maxAge) {
         assertThrows(IllegalArgumentException.class, () -> dateAndTimeDummy.birthday(minAge, maxAge));

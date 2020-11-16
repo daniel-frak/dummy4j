@@ -5,7 +5,7 @@ import dev.codesoapbox.dummy4j.NumberService;
 import dev.codesoapbox.dummy4j.dummies.AddressDummy;
 import dev.codesoapbox.dummy4j.dummies.DateAndTimeDummy;
 import dev.codesoapbox.dummy4j.dummies.NameDummy;
-import dev.codesoapbox.dummy4j.dummies.shared.valueobject.Address;
+import dev.codesoapbox.dummy4j.dummies.shared.Address;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

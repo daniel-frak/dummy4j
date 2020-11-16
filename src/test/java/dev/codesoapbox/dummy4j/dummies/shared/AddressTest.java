@@ -1,4 +1,4 @@
-package dev.codesoapbox.dummy4j.dummies.shared.valueobject;
+package dev.codesoapbox.dummy4j.dummies.shared;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;

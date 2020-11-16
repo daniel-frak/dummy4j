@@ -3,7 +3,7 @@ package dev.codesoapbox.dummy4j.dummies.finance;
 import dev.codesoapbox.dummy4j.Dummy4j;
 import dev.codesoapbox.dummy4j.dummies.AddressDummy;
 import dev.codesoapbox.dummy4j.dummies.shared.string.Padding;
-import dev.codesoapbox.dummy4j.dummies.shared.valueobject.Address;
+import dev.codesoapbox.dummy4j.dummies.shared.Address;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -24,16 +24,19 @@ public class CreditCardBuilder {
 
     public CreditCardBuilder withRandomProvider() {
         numberBuilder.withRandomProvider();
+
         return this;
     }
 
     public CreditCardBuilder withProvider(CreditCardProvider provider) {
         numberBuilder.withProvider(provider);
+
         return this;
     }
 
     public CreditCardBuilder clearNumberFormatting() {
         numberBuilder.clearFormatting();
+
         return this;
     }
 
@@ -48,9 +51,9 @@ public class CreditCardBuilder {
     }
 
     private Address generateAddress() {
-        AddressDummy dummy = dummy4j.address();
+        AddressDummy address = dummy4j.address();
 
-        return new Address(dummy.street(), dummy.postCode(), dummy.city(), dummy.country());
+        return new Address(address.street(), address.postCode(), address.city(), address.country());
     }
 
     private String generateExpiryDate() {

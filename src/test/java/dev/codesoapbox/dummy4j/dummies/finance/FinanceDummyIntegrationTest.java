@@ -1,7 +1,7 @@
 package dev.codesoapbox.dummy4j.dummies.finance;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
-import dev.codesoapbox.dummy4j.dummies.shared.valueobject.Address;
+import dev.codesoapbox.dummy4j.dummies.shared.Address;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -73,11 +73,11 @@ class FinanceDummyIntegrationTest {
 
     @Test
     void shouldReturnCreditCardProvider() {
-        String actual = dummy4j.finance().creditCardProvider();
+        CreditCardProvider actual = dummy4j.finance().creditCardProvider();
 
         assertAll(
                 () -> assertNotNull(actual, "Credit card provider is null"),
-                () -> assertFalse(actual.isEmpty(), "Credit card provider is empty")
+                () -> assertFalse(actual.getName().isEmpty(), "Credit card provider name is empty")
         );
     }
 
@@ -163,7 +163,7 @@ class FinanceDummyIntegrationTest {
 
     @Test
     void shouldReturnBankAccountNumberForAllSupportedCountries() {
-        for (CountrySupportingBankAccount code : CountrySupportingBankAccount.values()) {
+        for (BankAccountCountry code : BankAccountCountry.values()) {
             String actual = dummy4j.finance().bankAccountNumber(code);
 
             assertFalse(actual.isEmpty(), "Missing number for " + code);
@@ -183,8 +183,8 @@ class FinanceDummyIntegrationTest {
     @Test
     void shouldBuildIban() {
         String actual = dummy4j.finance().ibanBuilder()
-                .withCountry(CountrySupportingBankAccount.ALBANIA)
-                .format()
+                .withCountry(BankAccountCountry.ALBANIA)
+                .formatted()
                 .build();
 
         assertAll(

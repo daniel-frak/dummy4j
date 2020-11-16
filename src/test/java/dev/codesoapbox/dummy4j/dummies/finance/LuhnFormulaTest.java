@@ -1,9 +1,10 @@
 package dev.codesoapbox.dummy4j.dummies.finance;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LuhnFormulaTest {
 
@@ -14,17 +15,18 @@ class LuhnFormulaTest {
         luhnFormula = new LuhnFormula();
     }
 
-    @Test
-    void shouldReturnCorrectCheckDigit() {
-        assertAll(
-                () -> assertEquals("3", luhnFormula.getCheckDigit("455606909685229")),
-                () -> assertEquals("5", luhnFormula.getCheckDigit("455673758689985")),
-                () -> assertEquals("7", luhnFormula.getCheckDigit("453264032098369")),
-                () -> assertEquals("8", luhnFormula.getCheckDigit("485278910697922026")),
-                () -> assertEquals("0", luhnFormula.getCheckDigit("527702912077386")),
-                () -> assertEquals("0", luhnFormula.getCheckDigit("675931078456122")),
-                () -> assertEquals("1", luhnFormula.getCheckDigit("354369338731413")),
-                () -> assertEquals("0", luhnFormula.getCheckDigit("123"))
-        );
+    @ParameterizedTest
+    @CsvSource({
+            "455606909685229,3",
+            "455673758689985,5",
+            "453264032098369,7",
+            "485278910697922026,8",
+            "527702912077386,0",
+            "675931078456122,0",
+            "354369338731413,1",
+            "123,0"
+    })
+    void shouldReturnCorrectCheckDigit(String input, String expected) {
+        assertEquals(expected, luhnFormula.getCheckDigit(input));
     }
 }

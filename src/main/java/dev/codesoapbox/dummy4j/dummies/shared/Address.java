@@ -1,11 +1,12 @@
-package dev.codesoapbox.dummy4j.dummies.shared.valueobject;
+package dev.codesoapbox.dummy4j.dummies.shared;
 
 import dev.codesoapbox.dummy4j.dummies.shared.string.StringValidator;
 
-import java.util.*;
+import java.util.Objects;
+import java.util.StringJoiner;
 
 /**
- * A value object representing an address
+ * A value object representing a complete address
  *
  * @since SNAPSHOT
  */
@@ -25,7 +26,7 @@ public final class Address {
     }
 
     private void validateFields() {
-        List<String> missingFields = new ArrayList<>();
+        StringJoiner missingFields = new StringJoiner(", ");
 
         if (StringValidator.isNullOrEmpty(street)) {
             missingFields.add("street");
@@ -39,9 +40,8 @@ public final class Address {
         if (StringValidator.isNullOrEmpty(country)) {
             missingFields.add("country");
         }
-        if (!missingFields.isEmpty()) {
-            String fields = String.join(", ", missingFields);
-            throw new IllegalArgumentException("Missing values for the following fields: " + fields);
+        if (!missingFields.toString().isEmpty()) {
+            throw new IllegalArgumentException("Missing values for the following fields: " + missingFields.toString());
         }
     }
 

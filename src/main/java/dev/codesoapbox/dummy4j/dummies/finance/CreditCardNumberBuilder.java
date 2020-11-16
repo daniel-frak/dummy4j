@@ -24,16 +24,19 @@ public class CreditCardNumberBuilder {
 
     public CreditCardNumberBuilder withRandomProvider() {
         this.provider = null;
+
         return this;
     }
 
     public CreditCardNumberBuilder withProvider(CreditCardProvider provider) {
         this.provider = provider;
+
         return this;
     }
 
     public CreditCardNumberBuilder clearFormatting() {
         clearFormatting = true;
+
         return this;
     }
 

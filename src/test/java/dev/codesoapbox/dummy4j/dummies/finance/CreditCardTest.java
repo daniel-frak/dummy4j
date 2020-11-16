@@ -1,6 +1,6 @@
 package dev.codesoapbox.dummy4j.dummies.finance;
 
-import dev.codesoapbox.dummy4j.dummies.shared.valueobject.Address;
+import dev.codesoapbox.dummy4j.dummies.shared.Address;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

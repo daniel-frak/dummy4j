@@ -17,17 +17,21 @@ public final class Padding {
         if (input == null) {
             return null;
         }
+
         int difference = desiredLength - input.length();
+
         if (difference <= 0) {
             return input;
         }
+
         char[] padding = getPadding(padChar, difference);
+
         return String.valueOf(padding) + input;
     }
 
-    private static char[] getPadding(char padChar, int difference) {
-        char[] padding = new char[difference];
-        for (int i = 0; i < difference; i++) {
+    private static char[] getPadding(char padChar, int paddingLength) {
+        char[] padding = new char[paddingLength];
+        for (int i = 0; i < paddingLength; i++) {
             padding[i] = padChar;
         }
 

@@ -1,16 +1,20 @@
 package dev.codesoapbox.dummy4j.dummies.finance;
 
+import java.util.regex.Pattern;
+
 /**
- * This class provides methods implementing the Luhn algorithm
+ * This class provides a method to calculate the check digit using the Luhn algorithm
  *
  * @see <a href="https://en.wikipedia.org/wiki/Luhn_algorithm">Luhn algorithm definition</a>
  */
 public class LuhnFormula {
 
+    private static final Pattern NON_DIGIT_CHARS_PATTERN = Pattern.compile("[^\\d]");
+
     /**
      * Returns a valid check digit calculated with the Luhn algorithm for the given number
      */
-    public String getCheckDigit(String input) {
+    String getCheckDigit(String input) {
         char[] sanitizedInput = removeInvalidCharacters(input);
         int sum = getSum(sanitizedInput);
 
@@ -18,9 +22,7 @@ public class LuhnFormula {
     }
 
     private char[] removeInvalidCharacters(String input) {
-        String sanitized = input.replaceAll("[^\\d]", "");
-
-        return sanitized.toCharArray();
+        return NON_DIGIT_CHARS_PATTERN.matcher(input).replaceAll("").toCharArray();
     }
 
     private int getSum(char[] chars) {

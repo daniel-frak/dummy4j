@@ -96,11 +96,11 @@ class ConvenienceMethodsTest {
 
     @ParameterizedTest
     @CsvSource({
-            "1, true",
-            "9, true",
-            "10, true",
-            "11, ",
-            "20, "
+            "1,true",
+            "9,true",
+            "10,true",
+            "11,",
+            "20,"
     })
     void shouldSupplyRandomlyByChance(int randomInt, Boolean expected) {
         int howMany = 10;
@@ -113,11 +113,11 @@ class ConvenienceMethodsTest {
 
     @ParameterizedTest
     @CsvSource({
-            "1, true",
-            "9, true",
-            "10, true",
-            "11, false",
-            "20, false"
+            "1,true",
+            "9,true",
+            "10,true",
+            "11,false",
+            "20,false"
     })
     void shouldReturnBooleanRandomlyByChance(int randomInt, boolean expected) {
         int howMany = 10;
@@ -130,9 +130,9 @@ class ConvenienceMethodsTest {
 
     @ParameterizedTest
     @CsvSource({
-            "0, ONE",
-            "1, TWO",
-            "2, THREE"
+            "0,ONE",
+            "1,TWO",
+            "2,THREE"
     })
     void shouldGetRandomEnumValue(int index, String expected) {
         when(random.nextInt(2))

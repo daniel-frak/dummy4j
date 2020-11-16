@@ -1,11 +1,10 @@
 package dev.codesoapbox.dummy4j.dummies.finance;
 
+import dev.codesoapbox.dummy4j.dummies.shared.Address;
 import dev.codesoapbox.dummy4j.dummies.shared.string.StringValidator;
-import dev.codesoapbox.dummy4j.dummies.shared.valueobject.Address;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
+import java.util.StringJoiner;
 
 /**
  * A value object representing a credit card
@@ -31,7 +30,7 @@ public final class CreditCard {
     }
 
     private void validateFields() {
-        List<String> missingFields = new ArrayList<>();
+        StringJoiner missingFields = new StringJoiner(", ");
 
         if (StringValidator.isNullOrEmpty(number)) {
             missingFields.add("number");
@@ -51,9 +50,8 @@ public final class CreditCard {
         if (ownerAddress == null) {
             missingFields.add("owner address");
         }
-        if (!missingFields.isEmpty()) {
-            String fields = String.join(", ", missingFields);
-            throw new IllegalArgumentException("Missing values for the following fields: " + fields);
+        if (!missingFields.toString().isEmpty()) {
+            throw new IllegalArgumentException("Missing values for the following fields: " + missingFields.toString());
         }
     }
 
@@ -80,7 +78,6 @@ public final class CreditCard {
     public String getSecurityCode() {
         return securityCode;
     }
-
 
     @Override
     public boolean equals(Object o) {

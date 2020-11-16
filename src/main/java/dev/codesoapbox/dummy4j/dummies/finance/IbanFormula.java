@@ -26,7 +26,7 @@ public class IbanFormula {
     /**
      * Returns valid IBAN check digits generated for the given account number and country
      */
-    public String getCheckDigits(String accountNumber, String countryCode) {
+    String getCheckDigits(String accountNumber, String countryCode) {
         int modulus = getModulusForNumericValues(accountNumber + countryCode + CHECK_DIGIT_REPLACEMENT);
         int checkDigit = CHECK_SUM - modulus;
 

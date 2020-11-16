@@ -31,6 +31,7 @@ public class PriceBuilder {
     public PriceBuilder withCurrency(String customCurrency) {
         this.customCurrency = customCurrency;
         randomizeCurrency = false;
+
         return this;
     }
 
@@ -41,6 +42,7 @@ public class PriceBuilder {
     public PriceBuilder withRandomCurrency() {
         this.customCurrency = null;
         randomizeCurrency = true;
+
         return this;
     }
 
@@ -51,6 +53,7 @@ public class PriceBuilder {
     public PriceBuilder high() {
         this.min = LOWER_BOUNDARY_FOR_HIGH_PRICE;
         this.max = UPPER_BOUNDARY_FOR_HIGH_PRICE;
+
         return this;
     }
 
@@ -61,6 +64,7 @@ public class PriceBuilder {
     public PriceBuilder withinRange(float min, float max) {
         this.min = min;
         this.max = max;
+        
         return this;
     }
 

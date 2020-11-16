@@ -80,15 +80,10 @@ en:
         VA: "##################"
         VG: "____################"
         XK: "################"
-      type: [
-          "Deposit"
-      ]
-      payment_option: [
-          "Bank transfer"
-      ]
-      financial_operation: [
-          "Deposit"
-      ]
+      letter: "A"
+      type: "Deposit"
+      payment_option: "Bank transfer"
+      financial_operation: "Deposit"
       bitcoin_address:
         format: "bc1"
         characters: "X"

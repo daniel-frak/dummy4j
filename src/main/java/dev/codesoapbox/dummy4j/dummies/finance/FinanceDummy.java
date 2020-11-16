@@ -1,9 +1,9 @@
 package dev.codesoapbox.dummy4j.dummies.finance;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
-import dev.codesoapbox.dummy4j.dummies.shared.math.NumberValidator;
 
-import java.util.Locale;
+import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Provides methods for generating values related to finances
@@ -20,6 +20,8 @@ public class FinanceDummy {
     static final String CRYPTO_CURRENCY_NAME_KEY = "#{finance.cryptocurrency.name}";
     static final String CRYPTO_CURRENCY_SYMBOL_KEY = "#{finance.cryptocurrency.symbol}";
     static final String BANK_ACCOUNT_TYPE_KEY = "#{finance.bank_account.type}";
+    static final String BANK_ACCOUNT_LETTER_KEY = "#{finance.bank_account.letter}";
+    static final Pattern BANK_ACCOUNT_LETTER_PLACEHOLDER_PATTERN = Pattern.compile("_");
     static final String PARTIAL_ACCOUNT_NUMBER_KEY = "#{finance.bank_account.number_structure.";
     static final String PAYMENT_OPTION_KEY = "#{finance.bank_account.payment_option}";
     static final String FINANCIAL_OPERATION_KEY = "#{finance.bank_account.financial_operation}";
@@ -27,12 +29,6 @@ public class FinanceDummy {
     static final String BITCOIN_ADDRESS_CHARACTERS_KEY = "#{finance.bank_account.bitcoin_address.characters}";
     static final int BITCOIN_ADDRESS_MIN_LENGTH = 26;
     static final int BITCOIN_ADDRESS_MAX_LENGTH = 35;
-
-    /**
-     * There is no standardized minimum Basic Bank Account Number length, currently Norway has the shortest - 11
-     */
-    private static final int MIN_ACCOUNT_LENGTH = 11;
-    private static final int MAX_ACCOUNT_LENGTH = 30;
 
     private final Dummy4j dummy4j;
     private final FinanceBuilderFactory financeBuilderFactory;
@@ -59,7 +55,7 @@ public class FinanceDummy {
     }
 
     /**
-     * Provides a random currency code compliant with the ISO_4217 standard.
+     * Provides a random currency code compliant with the ISO 4217 standard.
      * E.g. {@code CHF}
      */
     public String currencyCode() {
@@ -67,7 +63,7 @@ public class FinanceDummy {
     }
 
     /**
-     * Provides a random currency numeric code compliant with the ISO_4217 standard.
+     * Provides a random currency numeric code compliant with the ISO 4217 standard.
      * E.g. {@code 971}
      */
     public String currencyNumericCode() {
@@ -75,7 +71,7 @@ public class FinanceDummy {
     }
 
     /**
-     * Provides a random currency name compliant with the ISO_4217 standard.
+     * Provides a random currency name compliant with the ISO 4217 standard.
      * E.g. {@code Armenian Dram}
      */
     public String currencyName() {
@@ -85,6 +81,9 @@ public class FinanceDummy {
     /**
      * Provides a random currency symbol.
      * E.g. {@code £}
+     *
+     * @see <a href="https://en.wikipedia.org/wiki/Currency_symbol#List_of_currency_symbols_currently_in_use">
+     * Symbols chosen from this list (November 2020)</a>
      */
     public String currencySymbol() {
         return dummy4j.expressionResolver().resolve(CURRENCY_SYMBOL_KEY);
@@ -115,11 +114,13 @@ public class FinanceDummy {
     }
 
     /**
-     * Provides a random credit card provider.
-     * E.g. {@code Visa}
+     * Provides a credit card provider chosen at random from the enum values.
+     * E.g. {@code creditCardProvider().getName()} may return {@code Visa}
+     *
+     * @see CreditCardProvider
      */
-    public String creditCardProvider() {
-        return dummy4j.nextEnum(CreditCardProvider.class).getName();
+    public CreditCardProvider creditCardProvider() {
+        return dummy4j.nextEnum(CreditCardProvider.class);
     }
 
     /**
@@ -186,42 +187,47 @@ public class FinanceDummy {
      * E.g. {@code RHBHPLPW123}
      */
     public String bic() {
-        String bankCode = dummy4j.lorem().characters(4).toUpperCase(Locale.ENGLISH);
+        String bankCode = getBankAccountLetters(4);
         String countryCode = dummy4j.nation().countryCode();
-        String locationCode = dummy4j.lorem().characters(2).toUpperCase(Locale.ENGLISH);
+        String locationCode = getBankAccountLetters(2);
         String branchCode = String.valueOf(dummy4j.number().nextInt(100, 999));
 
         return bankCode + countryCode + locationCode + branchCode;
     }
 
+    private String getBankAccountLetters(int howMany) {
+        List<String> characters = dummy4j.listOf(howMany,
+                () -> dummy4j.expressionResolver().resolve(BANK_ACCOUNT_LETTER_KEY));
+        StringBuilder code = new StringBuilder();
+
+        for (String s : characters) {
+            code.append(s);
+        }
+
+        return code.toString();
+    }
+
     /**
      * Provides a random bank account number for a given country.
-     * <p>
-     * The number constraints are based on the ISO 13616 IBAN Registry published by SWIFT, Release 88 – September 2020.
-     * E.g. {@code bankAccountNumber(CountrySupportingBankAccount.GREENLAND)} may generate {@code 30157608510356}
+     * E.g. {@code bankAccountNumber(BankAccountCountry.GREENLAND)} may generate {@code 30157608510356}
      *
-     * @see CountrySupportingBankAccount A list of countries for which a number can be generated
-     * @see <a href="https://www.swift.com/standards/data-standards/iban-international-bank-account-number">
-     * IBAN Registry</a>
+     * @see BankAccountCountry
      */
-    public String bankAccountNumber(CountrySupportingBankAccount country) {
+    public String bankAccountNumber(BankAccountCountry country) {
         String key = PARTIAL_ACCOUNT_NUMBER_KEY + country.getCode() + "}";
         String numbers = dummy4j.expressionResolver().resolve(key);
-        NumberValidator.inRange(numbers.length(), MIN_ACCOUNT_LENGTH, MAX_ACCOUNT_LENGTH);
 
-        return numbers.replace("_", dummy4j.lorem().character().toUpperCase(Locale.ENGLISH));
+        return BANK_ACCOUNT_LETTER_PLACEHOLDER_PATTERN.matcher(numbers)
+                .replaceAll(dummy4j.expressionResolver().resolve(BANK_ACCOUNT_LETTER_KEY));
     }
 
     /**
      * Provides a random IBAN number for a randomly chosen country.
      * <p>
-     * The number constraints are based on the ISO 13616 IBAN Registry published by SWIFT, Release 88 – September 2020.
      * The country code and check digits are correct while the bank ID, branch ID and account ID are random characters.
      * E.g. {@code GL2530157608510356}.
      *
-     * @see CountrySupportingBankAccount A list of countries for which a number can be generated
-     * @see <a href="https://www.swift.com/standards/data-standards/iban-international-bank-account-number">
-     * IBAN Registry</a>
+     * @see BankAccountCountry
      */
     public String iban() {
         return financeBuilderFactory.createIbanBuilder().build();
@@ -230,14 +236,11 @@ public class FinanceDummy {
     /**
      * Provides a builder for random IBAN numbers generated according to customisable parameters.
      * <p>
-     * The number constraints are based on the ISO 13616 IBAN Registry published by SWIFT, Release 88 – September 2020.
      * The country code and check digits are correct while the bank ID, branch ID and account ID are random characters.
-     * E.g. {@code ibanBuilder().withCountry(CountrySupportingBankAccount.GREENLAND).format().build()} may generate
+     * E.g. {@code ibanBuilder().withCountry(BankAccountCountry.GREENLAND).formatted().build()} may generate
      * {@code GL25 3015 7608 5103 56}.
      *
-     * @see CountrySupportingBankAccount A list of countries for which a number can be generated
-     * @see <a href="https://www.swift.com/standards/data-standards/iban-international-bank-account-number">
-     * IBAN Registry</a>
+     * @see BankAccountCountry
      */
     public IbanBuilder ibanBuilder() {
         return financeBuilderFactory.createIbanBuilder();
@@ -268,11 +271,11 @@ public class FinanceDummy {
     }
 
     /**
-     * Returns a random Bitcoin address that is 26-35 characters long and doesn't contain the uppercase letter "O",
-     * uppercase letter "I", lowercase letter "l", and the number "0".
+     * Returns a random Bitcoin address that is 26-35 characters long.
      * E.g. {@code bc1qarsrrr7xfkvy5643ydnw9re59gtzzwf5mdq}
      * <p>
-     * The generated address does not pass any real-life validation.
+     * While the generated address doesn't contain forbidden characters (uppercase letter "O", uppercase letter "I",
+     * lowercase letter "l", and the number "0") it won't pass any real-life validation.
      *
      * @see <a href="https://en.bitcoin.it/wiki/Address">Bitcoin address</a>
      */
@@ -284,14 +287,13 @@ public class FinanceDummy {
     }
 
     private String getBitcoinAddressChars(int formatLength) {
-        int amount = dummy4j.number().nextInt(BITCOIN_ADDRESS_MIN_LENGTH,
+        int length = dummy4j.number().nextInt(BITCOIN_ADDRESS_MIN_LENGTH - formatLength,
                 BITCOIN_ADDRESS_MAX_LENGTH - formatLength);
-        char[] characters = new char[amount];
+        StringBuilder builder = new StringBuilder();
 
-        for (int i = 0; i < amount; i++) {
-            characters[i] = dummy4j.expressionResolver().resolve(BITCOIN_ADDRESS_CHARACTERS_KEY).toCharArray()[0];
+        for (int i = 0; i < length; i++) {
+            builder.append(dummy4j.expressionResolver().resolve(BITCOIN_ADDRESS_CHARACTERS_KEY).toCharArray()[0]);
         }
-
-        return String.valueOf(characters);
+        return builder.toString();
     }
 }

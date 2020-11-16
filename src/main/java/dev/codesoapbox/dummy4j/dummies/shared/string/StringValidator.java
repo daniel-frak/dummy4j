@@ -14,6 +14,6 @@ public final class StringValidator {
      * Verifies whether the given String is equal to null or empty
      */
     public static boolean isNullOrEmpty(String value) {
-        return value == null || value.isEmpty();
+        return value == null || value.isEmpty() || value.trim().isEmpty();
     }
 }

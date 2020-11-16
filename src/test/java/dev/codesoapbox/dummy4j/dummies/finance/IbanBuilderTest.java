@@ -38,8 +38,8 @@ class IbanBuilderTest {
     @Test
     void shouldBuildIbanForRandomCountryByDefault() {
         mockFinanceDummy();
-        CountrySupportingBankAccount country = CountrySupportingBankAccount.GERMANY;
-        when(dummy4j.nextEnum(CountrySupportingBankAccount.class))
+        BankAccountCountry country = BankAccountCountry.GERMANY;
+        when(dummy4j.nextEnum(BankAccountCountry.class))
                 .thenReturn(country);
         String accountNumber = mockAccountNumber(country);
         when(ibanFormula.getCheckDigits(accountNumber, country.getCode()))
@@ -58,8 +58,8 @@ class IbanBuilderTest {
     @Test
     void shouldBuildIbanForRandomCountryAsSpecified() {
         mockFinanceDummy();
-        CountrySupportingBankAccount country = CountrySupportingBankAccount.GERMANY;
-        when(dummy4j.nextEnum(CountrySupportingBankAccount.class))
+        BankAccountCountry country = BankAccountCountry.GERMANY;
+        when(dummy4j.nextEnum(BankAccountCountry.class))
                 .thenReturn(country);
         String accountNumber = mockAccountNumber(country);
         when(ibanFormula.getCheckDigits(accountNumber, country.getCode()))
@@ -72,7 +72,7 @@ class IbanBuilderTest {
         assertEquals("DE5112345678901", actual);
     }
 
-    private String mockAccountNumber(CountrySupportingBankAccount country) {
+    private String mockAccountNumber(BankAccountCountry country) {
         String accountNumber = "12345678901";
         when(financeDummy.bankAccountNumber(country))
                 .thenReturn(accountNumber);
@@ -82,7 +82,7 @@ class IbanBuilderTest {
     @Test
     void shouldBuildIbanForGivenCountry() {
         mockFinanceDummy();
-        CountrySupportingBankAccount country = CountrySupportingBankAccount.GERMANY;
+        BankAccountCountry country = BankAccountCountry.GERMANY;
         String accountNumber = mockAccountNumber(country);
         when(ibanFormula.getCheckDigits(accountNumber, country.getCode()))
                 .thenReturn("51");
@@ -100,13 +100,13 @@ class IbanBuilderTest {
         mockNumberService();
         when(numberService.nextInt(1))
                 .thenReturn(0);
-        CountrySupportingBankAccount albania = CountrySupportingBankAccount.ALBANIA;
+        BankAccountCountry albania = BankAccountCountry.ALBANIA;
         String accountNumber = mockAccountNumber(albania);
         when(ibanFormula.getCheckDigits(accountNumber, albania.getCode()))
                 .thenReturn("57");
 
         String actual = builder
-                .withRandomCountry(albania, CountrySupportingBankAccount.MACEDONIA)
+                .withRandomCountry(albania, BankAccountCountry.MACEDONIA)
                 .build();
 
         assertEquals("AL5712345678901", actual);
@@ -120,13 +120,13 @@ class IbanBuilderTest {
     @Test
     void shouldAllowReusingBuilder() {
         mockFinanceDummy();
-        CountrySupportingBankAccount germany = CountrySupportingBankAccount.GERMANY;
+        BankAccountCountry germany = BankAccountCountry.GERMANY;
         String accountNumber = mockAccountNumber(germany);
         when(ibanFormula.getCheckDigits(accountNumber, germany.getCode()))
                 .thenReturn("51");
 
         String actual = builder
-                .withRandomCountry(CountrySupportingBankAccount.ALBANIA, CountrySupportingBankAccount.MACEDONIA)
+                .withRandomCountry(BankAccountCountry.ALBANIA, BankAccountCountry.MACEDONIA)
                 .withCountry(germany)
                 .build();
 
@@ -143,8 +143,8 @@ class IbanBuilderTest {
     })
     void shouldFormatIbanForRandomCountry(String accountNumber, String expected) {
         mockFinanceDummy();
-        CountrySupportingBankAccount country = CountrySupportingBankAccount.ALBANIA;
-        when(dummy4j.nextEnum(CountrySupportingBankAccount.class))
+        BankAccountCountry country = BankAccountCountry.ALBANIA;
+        when(dummy4j.nextEnum(BankAccountCountry.class))
                 .thenReturn(country);
         when(financeDummy.bankAccountNumber(country))
                 .thenReturn(accountNumber);
@@ -152,7 +152,7 @@ class IbanBuilderTest {
                 .thenReturn("57");
 
         String actual = builder
-                .format()
+                .formatted()
                 .build();
 
         assertEquals(expected, actual);
@@ -161,14 +161,14 @@ class IbanBuilderTest {
     @Test
     void shouldBuildFormattedIbanForGivenCountry() {
         mockFinanceDummy();
-        CountrySupportingBankAccount country = CountrySupportingBankAccount.GERMANY;
+        BankAccountCountry country = BankAccountCountry.GERMANY;
         String accountNumber = mockAccountNumber(country);
         when(ibanFormula.getCheckDigits(accountNumber, country.getCode()))
                 .thenReturn("51");
 
         String actual = builder
                 .withCountry(country)
-                .format()
+                .formatted()
                 .build();
 
         assertEquals("DE51 1234 5678 901", actual);
@@ -176,7 +176,7 @@ class IbanBuilderTest {
 
     @Test
     void shouldConvertBuilderToString() {
-        String expected = "IbanBuilder{countries=[], format=false}";
+        String expected = "IbanBuilder{countries=[], formatted=false}";
 
         String actual = builder.toString();
 
