@@ -17,7 +17,7 @@ public abstract class AbstractDummy4jBuilder<T extends AbstractDummy4jBuilder<T,
     protected List<String> locale;
     protected List<String> paths;
 
-    public AbstractDummy4jBuilder() {
+    protected AbstractDummy4jBuilder() {
     }
 
     public T seed(Long seed) {
