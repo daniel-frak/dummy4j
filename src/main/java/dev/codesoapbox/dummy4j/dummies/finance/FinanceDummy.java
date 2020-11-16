@@ -130,7 +130,7 @@ public class FinanceDummy {
      * The default format patterns and IIN ranges are based on data available on November 2020.
      *
      * @see <a href="https://baymard.com/checkout-usability/credit-card-patterns">
-     * Credit Card IIN Ranges & Spacing Patterns</a>
+     * Credit Card IIN Ranges and Spacing Patterns</a>
      */
     public String creditCardNumber() {
         return financeBuilderFactory.createCreditCardNumberBuilder().build();
@@ -144,7 +144,7 @@ public class FinanceDummy {
      * The default format patterns and IIN ranges are based on data available on November 2020.
      *
      * @see <a href="https://baymard.com/checkout-usability/credit-card-patterns">
-     * Credit Card IIN Ranges & Spacing Patterns</a>
+     * Credit Card IIN Ranges and Spacing Patterns</a>
      */
     public CreditCardNumberBuilder creditCardNumberBuilder() {
         return financeBuilderFactory.createCreditCardNumberBuilder();
@@ -158,7 +158,7 @@ public class FinanceDummy {
      * The default format patterns and IIN ranges are based on data available on November 2020.
      *
      * @see <a href="https://baymard.com/checkout-usability/credit-card-patterns">
-     * Credit Card IIN Ranges & Spacing Patterns</a>
+     * Credit Card IIN Ranges and Spacing Patterns</a>
      * @see CreditCard
      */
     public CreditCard creditCard() {
@@ -174,7 +174,7 @@ public class FinanceDummy {
      * The default format patterns and IIN ranges are based on data available on November 2020.
      *
      * @see <a href="https://baymard.com/checkout-usability/credit-card-patterns">
-     * Credit Card IIN Ranges & Spacing Patterns</a>
+     * Credit Card IIN Ranges and Spacing Patterns</a>
      * @see CreditCard
      */
     public CreditCardBuilder creditCardBuilder() {
