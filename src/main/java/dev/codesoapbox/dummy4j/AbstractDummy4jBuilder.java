@@ -46,14 +46,10 @@ public abstract class AbstractDummy4jBuilder<T extends AbstractDummy4jBuilder<T,
     }
 
     private List<String> varArgsToList(String... elements) {
-        if (theOnlyElementIsNull(elements)) {
+        if (elements.length == 1 && elements[0] == null) {
             return emptyList();
         }
         return Arrays.asList(elements);
-    }
-
-    private boolean theOnlyElementIsNull(String[] elements) {
-        return elements.length == 1 && elements[0] == null;
     }
 
     /**
