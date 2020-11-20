@@ -4,7 +4,9 @@ import dev.codesoapbox.dummy4j.Dummy4j;
 import dev.codesoapbox.dummy4j.dummies.shared.math.NumberFormatter;
 
 /**
- * Provides methods for generating random prices
+ * Provides methods for generating random prices according to customizable parameters
+ *
+ * @since SNAPSHOT
  */
 public class PriceBuilder {
 
@@ -36,7 +38,7 @@ public class PriceBuilder {
     }
 
     /**
-     * Sets the random currency that will be added to the generated price.
+     * Sets a random currency that will be added to the generated price.
      * E.g. {@code JPY 12.35}
      */
     public PriceBuilder withRandomCurrency() {
@@ -47,8 +49,8 @@ public class PriceBuilder {
     }
 
     /**
-     * Sets limits on a randomly generated price from 100 to 10,000
-     * E. g. {@code 1234.56}
+     * Sets limits on a randomly generated price from 100 to 10,000.
+     * E.g. {@code 1234.56}
      */
     public PriceBuilder high() {
         this.min = LOWER_BOUNDARY_FOR_HIGH_PRICE;
@@ -58,8 +60,8 @@ public class PriceBuilder {
     }
 
     /**
-     * Sets limits on a randomly generated price from {@code min} to {@code max}
-     * E. g. {@code 1234.56}
+     * Sets limits on a randomly generated price from {@code min} to {@code max}.
+     * E.g. {@code 1234.56}
      */
     public PriceBuilder withinRange(float min, float max) {
         this.min = min;

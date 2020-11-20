@@ -7,6 +7,8 @@ package dev.codesoapbox.dummy4j.dummies.finance;
  *
  * @see <a href="https://www.swift.com/standards/data-standards/iban-international-bank-account-number">
  * IBAN Registry</a>
+ *
+ * @since SNAPSHOT
  */
 public enum BankAccountCountry {
 
@@ -34,6 +36,10 @@ public enum BankAccountCountry {
         this.code = code;
     }
 
+    /**
+     * Returns a two-letter code that identifies the country.
+     * E.g. {@code NO} for Norway
+     */
     public String getCode() {
         return this.code;
     }

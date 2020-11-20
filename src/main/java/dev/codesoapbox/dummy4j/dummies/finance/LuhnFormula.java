@@ -3,9 +3,11 @@ package dev.codesoapbox.dummy4j.dummies.finance;
 import java.util.regex.Pattern;
 
 /**
- * This class provides a method to calculate the check digit using the Luhn algorithm
+ * Provides a method to calculate a check digit using the Luhn algorithm
  *
  * @see <a href="https://en.wikipedia.org/wiki/Luhn_algorithm">Luhn algorithm definition</a>
+ *
+ * @since SNAPSHOT
  */
 public class LuhnFormula {
 

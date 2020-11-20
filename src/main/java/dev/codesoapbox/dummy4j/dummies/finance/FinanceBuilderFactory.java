@@ -2,6 +2,11 @@ package dev.codesoapbox.dummy4j.dummies.finance;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
 
+/**
+ * Provides methods for instantiating builders used in the FinanceDummy class
+ *
+ * @since SNAPSHOT
+ */
 public class FinanceBuilderFactory {
 
     private final Dummy4j dummy4j;

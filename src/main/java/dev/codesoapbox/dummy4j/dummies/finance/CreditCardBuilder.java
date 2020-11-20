@@ -8,11 +8,16 @@ import dev.codesoapbox.dummy4j.dummies.shared.Address;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Provides methods for generating random credit cards according to customizable parameters
+ *
+ * @since SNAPSHOT
+ */
 public class CreditCardBuilder {
 
-    public static final int MAX_DAYS_FOR_EXPIRY_DATE = 3650;
-    public static final int MIN_SECURITY_CODE = 100;
-    public static final int MAX_SECURITY_CODE = 999;
+    static final int MAX_DAYS_FOR_EXPIRY_DATE = 3650;
+    static final int MIN_SECURITY_CODE = 100;
+    static final int MAX_SECURITY_CODE = 999;
 
     private final Dummy4j dummy4j;
     private final CreditCardNumberBuilder numberBuilder;
@@ -22,24 +27,36 @@ public class CreditCardBuilder {
         this.numberBuilder = numberBuilder;
     }
 
+    /**
+     * Sets a random provider for which the credit card number will be generated
+     */
     public CreditCardBuilder withRandomProvider() {
         numberBuilder.withRandomProvider();
 
         return this;
     }
 
+    /**
+     * Sets the provider for which the credit card number will be generated
+     */
     public CreditCardBuilder withProvider(CreditCardProvider provider) {
         numberBuilder.withProvider(provider);
 
         return this;
     }
 
+    /**
+     * Removes formatting from the generated credit card number - only digits will remain
+     */
     public CreditCardBuilder clearNumberFormatting() {
         numberBuilder.clearFormatting();
 
         return this;
     }
 
+    /**
+     * Generates a random credit card
+     */
     public CreditCard build() {
         String number = numberBuilder.build();
         String ownerName = dummy4j.name().firstName() + " " + dummy4j.name().lastName();

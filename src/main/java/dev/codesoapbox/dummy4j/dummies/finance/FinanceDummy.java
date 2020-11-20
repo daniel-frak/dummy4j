@@ -114,7 +114,7 @@ public class FinanceDummy {
     }
 
     /**
-     * Provides a credit card provider chosen at random from the enum values.
+     * Provides a credit card provider chosen at random from the {@code CreditCardProvider} enum values.
      * E.g. {@code creditCardProvider().getName()} may return {@code Visa}
      *
      * @see CreditCardProvider
@@ -184,7 +184,8 @@ public class FinanceDummy {
     /**
      * Provides a random, 11 characters long string, that can be used as a Business Identifier Code,
      * also called a SWIFT code.
-     * E.g. {@code RHBHPLPW123}
+     * E.g. {@code RHBHPLPW123}, where {@code RHBH} is a fake bank code, {@code PL} is a random country code, {@code PW}
+     * is a fake location code and {@code 123} is a fake branch code.
      */
     public String bic() {
         String bankCode = getBankAccountLetters(4);

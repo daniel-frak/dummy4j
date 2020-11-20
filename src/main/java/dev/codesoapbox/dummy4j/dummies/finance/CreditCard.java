@@ -8,6 +8,8 @@ import java.util.StringJoiner;
 
 /**
  * A value object representing a credit card
+ *
+ * @since SNAPSHOT
  */
 public final class CreditCard {
 
@@ -55,26 +57,52 @@ public final class CreditCard {
         }
     }
 
+    /**
+     * Returns the credit card number.
+     * E.g. {@code 4150 2591 8277 4861}
+     */
     public String getNumber() {
         return number;
     }
 
+    /**
+     * Returns the enum representing the credit card provider.
+     * E.g. {@code VISA}
+     *
+     * @see CreditCardProvider
+     */
     public CreditCardProvider getProvider() {
         return provider;
     }
 
+    /**
+     * Returns the credit card owner name.
+     * E.g. {@code Zoe Anderson}
+     */
     public String getOwnerName() {
         return ownerName;
     }
 
+    /**
+     * Returns the credit card owner address.
+     * E.g. {@code 10 Amos Alley, 1234-55 North Austinshire, Canada}
+     */
     public Address getOwnerAddress() {
         return ownerAddress;
     }
 
+    /**
+     * Returns the credit card owner expiry date.
+     * E.g. {@code 05/2030}
+     */
     public String getExpiryDate() {
         return expiryDate;
     }
 
+    /**
+     * Returns the credit card 3-digit security code.
+     * E.g. {@code 123}
+     */
     public String getSecurityCode() {
         return securityCode;
     }

@@ -4,6 +4,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Enum containing the supported card-issuing entities
+ *
+ * @since SNAPSHOT
+ */
 public enum CreditCardProvider {
 
     VISA("Visa",
@@ -37,10 +42,23 @@ public enum CreditCardProvider {
         this.iinRanges = iinRanges;
     }
 
+    /**
+     * Returns a name for the provider.
+     * E.g. {@code American Express}
+     */
     public String getName() {
         return this.name;
     }
 
+    /**
+     * Returns the list of available IIN ranges for the provider.
+     * E.g. {@code [IINRange{min=51, max=55}, IINRange{min=222100, max=272099}]} for MasterCard.
+     * <p>
+     * The available IIN ranges are based on the data available on November 2020.
+     *
+     * @see <a href="https://baymard.com/checkout-usability/credit-card-patterns">
+     * Credit Card IIN Ranges and Spacing Patterns</a>
+     */
     public List<IINRange> getIinRanges() {
         return iinRanges;
     }

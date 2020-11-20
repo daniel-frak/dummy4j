@@ -11,7 +11,9 @@ import java.util.regex.Pattern;
 import static java.util.Collections.singletonList;
 
 /**
- * Provides methods for generating a customized IBAN
+ * Provides methods for generating random IBANs according to customizable parameters
+ *
+ * @since SNAPSHOT
  */
 public class IbanBuilder {
 
@@ -74,7 +76,7 @@ public class IbanBuilder {
     }
 
     /**
-     * Returns a randomly generated IBAN
+     * Generates a random IBAN
      */
     public String build() {
         BankAccountCountry country = getCountry();
