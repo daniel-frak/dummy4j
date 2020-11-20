@@ -1,10 +1,10 @@
 en:
   finance:
     credit_card_without_check_digit:
-      visa: "4150 2591 8277 486"
-      visa_electron: "4026 2591 8277 486"
-      mastercard: "5303 9440 3141 969"
-      maestro: "5899 9994 40314"
-      american_express: "3749 027588 6891"
-      discover: "6011 2390 1915 332"
-      jcb: "3530 7897 3064 760"
+      visa: "#### #### #### ###"
+      visa_electron: "#### #### #### ###"
+      mastercard: "#### #### #### ###"
+      maestro: "#### #### #####"
+      american_express: "#### ###### ####"
+      discover: "#### #### #### ###"
+      jcb: "#### #### #### ###"

@@ -20,7 +20,7 @@ public class CreditCardNumberBuilder {
     private final LuhnFormula luhnFormula;
 
     private CreditCardProvider provider;
-    private boolean clearFormatting;
+    private boolean withoutFormatting;
 
     public CreditCardNumberBuilder(Dummy4j dummy4j, LuhnFormula luhnFormula) {
         this.dummy4j = dummy4j;
@@ -48,8 +48,8 @@ public class CreditCardNumberBuilder {
     /**
      * Removes formatting from the generated credit card number - only digits will remain
      */
-    public CreditCardNumberBuilder clearFormatting() {
-        clearFormatting = true;
+    public CreditCardNumberBuilder withoutFormatting() {
+        withoutFormatting = true;
 
         return this;
     }
@@ -69,7 +69,7 @@ public class CreditCardNumberBuilder {
         String uncheckedNumber = getNumberWithIIN();
         String number = uncheckedNumber + luhnFormula.getCheckDigit(uncheckedNumber);
 
-        if (!clearFormatting) {
+        if (!withoutFormatting) {
             return number;
         }
 
@@ -100,7 +100,7 @@ public class CreditCardNumberBuilder {
     public String toString() {
         return "CreditCardNumberBuilder{" +
                 "provider=" + provider +
-                ", clearFormatting=" + clearFormatting +
+                ", withoutFormatting=" + withoutFormatting +
                 '}';
     }
 }

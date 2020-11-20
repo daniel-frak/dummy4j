@@ -178,9 +178,14 @@ class CreditCardBuilderTest {
                 .thenReturn(CreditCardProvider.AMERICAN_EXPRESS);
 
         CreditCard actual = builder
-                .clearNumberFormatting()
+                .withoutNumberFormatting()
                 .build();
 
         assertEquals("341234567890127", actual.getNumber());
+    }
+
+    @Test
+    void shouldConvertToString() {
+        assertEquals("CreditCardBuilder{numberBuilder=numberBuilder}", builder.toString());
     }
 }

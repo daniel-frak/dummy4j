@@ -52,8 +52,9 @@ public final class CreditCard {
         if (ownerAddress == null) {
             missingFields.add("owner address");
         }
-        if (!missingFields.toString().isEmpty()) {
-            throw new IllegalArgumentException("Missing values for the following fields: " + missingFields.toString());
+        String fields = missingFields.toString();
+        if (!fields.isEmpty()) {
+            throw new IllegalArgumentException("Missing values for the following fields: " + fields);
         }
     }
 

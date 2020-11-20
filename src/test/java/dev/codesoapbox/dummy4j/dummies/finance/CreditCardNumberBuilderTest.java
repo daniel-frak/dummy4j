@@ -115,7 +115,7 @@ class CreditCardNumberBuilderTest {
         mockCreditCardNumber();
 
         String actual = builder
-                .clearFormatting()
+                .withoutFormatting()
                 .build();
 
         assertEquals("341234567890127", actual);
@@ -127,7 +127,7 @@ class CreditCardNumberBuilderTest {
         mockCreditCardNumber();
 
         String actual = builder
-                .clearFormatting()
+                .withoutFormatting()
                 .withRandomProvider()
                 .build();
 
@@ -136,7 +136,7 @@ class CreditCardNumberBuilderTest {
 
     @Test
     void shouldConvertBuilderToString() {
-        String expected = "CreditCardNumberBuilder{provider=null, clearFormatting=false}";
+        String expected = "CreditCardNumberBuilder{provider=null, withoutFormatting=false}";
 
         String actual = builder.toString();
 

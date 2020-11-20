@@ -7,8 +7,7 @@ final class Replace {
     private Replace() {
     }
 
-    public static String replaceCharactersConditionally(String source, String replacement,
-                                                        Predicate<Character> condition) {
+    static String replaceCharactersConditionally(String source, String replacement, Predicate<Character> condition) {
         if (source.length() < replacement.length()) {
             throw new IllegalArgumentException("Source must be long enough to allocate the replacement");
         }

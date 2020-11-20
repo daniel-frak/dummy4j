@@ -2,12 +2,12 @@ package dev.codesoapbox.dummy4j.dummies.finance;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.StringJoiner;
 import java.util.regex.Pattern;
 
+import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 
 /**
@@ -51,7 +51,7 @@ public class IbanBuilder {
      * If there are no arguments, a country is chosen at random from the {@code BankAccountCountry} enum.
      */
     public IbanBuilder withRandomCountry(BankAccountCountry... countries) {
-        this.countries = Arrays.asList(countries);
+        this.countries = asList(countries);
 
         return this;
     }

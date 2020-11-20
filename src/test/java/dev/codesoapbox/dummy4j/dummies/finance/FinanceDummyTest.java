@@ -229,19 +229,15 @@ class FinanceDummyTest {
 
     @Test
     void shouldReturnBicNumber() {
-        mockBankCode();
+        mockExpressionResolver();
+        when(dummy4j.expressionResolver().resolve(FinanceDummy.BANK_ACCOUNT_LETTER_KEY))
+                .thenReturn("X");
         mockCountryCode();
-        mockLocationCode();
         mockBranchCode();
 
         String actual = financeDummy.bic();
 
-        assertEquals("ABCDADEF123", actual);
-    }
-
-    private void mockBankCode() {
-        when(dummy4j.listOf(eq(4), any()))
-                .thenReturn(Arrays.asList("A", "B", "C", "D"));
+        assertEquals("XXXXADXX123", actual);
     }
 
     private void mockCountryCode() {
@@ -249,11 +245,6 @@ class FinanceDummyTest {
                 .thenReturn(nationDummy);
         when(nationDummy.countryCode())
                 .thenReturn("AD");
-    }
-
-    private void mockLocationCode() {
-        when(dummy4j.listOf(eq(2), any()))
-                .thenReturn(Arrays.asList("E", "F"));
     }
 
     private void mockBranchCode() {

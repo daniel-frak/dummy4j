@@ -4,13 +4,13 @@ import java.util.Objects;
 
 final class IINRange {
 
-    int min;
-    int max;
+    private int min;
+    private int max;
 
     private IINRange() {
     }
 
-    public static IINRange from(int min, int max) {
+    static IINRange from(int min, int max) {
         IINRange range = new IINRange();
         range.min = min;
         range.max = max;
@@ -18,11 +18,11 @@ final class IINRange {
         return range;
     }
 
-    public int getMin() {
+    int getMin() {
         return min;
     }
 
-    public int getMax() {
+    int getMax() {
         return max;
     }
 

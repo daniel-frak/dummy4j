@@ -5,9 +5,14 @@ import dev.codesoapbox.dummy4j.dummies.shared.Address;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class FinanceDummyIntegrationTest {
+
+    private final static Pattern BIC_PATTERN = Pattern.compile("AAAAADAA\\d{3}");
 
     private Dummy4j dummy4j;
 
@@ -97,7 +102,10 @@ class FinanceDummyIntegrationTest {
                 .withProvider(CreditCardProvider.VISA)
                 .build();
 
-        assertEquals("4150 2591 8277 4861", actual);
+        assertAll(
+                () -> assertNotNull(actual, "Credit card number is null"),
+                () -> assertFalse(actual.isEmpty(), "Credit card number is empty")
+        );
     }
 
     @Test
@@ -127,14 +135,14 @@ class FinanceDummyIntegrationTest {
                 "Armenia");
 
         CreditCard actual = dummy4j.finance().creditCardBuilder()
-                .withProvider(CreditCardProvider.VISA)
+                .withProvider(CreditCardProvider.JCB)
                 .build();
 
         assertAll(
                 () -> assertNotNull(actual, "Credit card is null"),
-                () -> assertEquals("4150 2591 8277 4861", actual.getNumber(), "Invalid number"),
+                () -> assertNotNull(actual.getNumber(), "Number is null"),
                 () -> assertFalse(actual.getNumber().isEmpty(), "Credit card number is empty"),
-                () -> assertNotNull(actual.getProvider(), "Credit card provider is null"),
+                () -> assertEquals(CreditCardProvider.JCB, actual.getProvider(), "Invalid provider"),
                 () -> assertEquals("Zoe Anderson", actual.getOwnerName(), "Invalid credit card owner"),
                 () -> assertEquals(address, actual.getOwnerAddress(), "Invalid credit card address"),
                 () -> assertNotNull(actual.getExpiryDate(), "Credit card expiry date is null"),
@@ -145,20 +153,11 @@ class FinanceDummyIntegrationTest {
     }
 
     @Test
-    void shouldReturnCreditCardForGivenProviderWithoutFormatting() {
-        CreditCard actual = dummy4j.finance().creditCardBuilder()
-                .withProvider(CreditCardProvider.VISA)
-                .clearNumberFormatting()
-                .build();
-
-        assertEquals("4150259182774861", actual.getNumber());
-    }
-
-    @Test
     void shouldReturnBicNumber() {
         String actual = dummy4j.finance().bic();
+        Matcher bicMatcher = BIC_PATTERN.matcher(actual);
 
-        assertTrue(actual.matches("AAAAADAA\\d{3}"));
+        assertTrue(bicMatcher.matches(), "Invalid bic");
     }
 
     @Test

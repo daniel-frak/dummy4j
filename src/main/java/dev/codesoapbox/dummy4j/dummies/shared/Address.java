@@ -40,8 +40,9 @@ public final class Address {
         if (StringValidator.isNullOrEmpty(country)) {
             missingFields.add("country");
         }
-        if (!missingFields.toString().isEmpty()) {
-            throw new IllegalArgumentException("Missing values for the following fields: " + missingFields.toString());
+        String fields = missingFields.toString();
+        if (!fields.isEmpty()) {
+            throw new IllegalArgumentException("Missing values for the following fields: " + fields);
         }
     }
 

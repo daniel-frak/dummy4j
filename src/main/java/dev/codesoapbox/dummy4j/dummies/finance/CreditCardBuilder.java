@@ -48,8 +48,8 @@ public class CreditCardBuilder {
     /**
      * Removes formatting from the generated credit card number - only digits will remain
      */
-    public CreditCardBuilder clearNumberFormatting() {
-        numberBuilder.clearFormatting();
+    public CreditCardBuilder withoutNumberFormatting() {
+        numberBuilder.withoutFormatting();
 
         return this;
     }
@@ -79,5 +79,12 @@ public class CreditCardBuilder {
         int year = date.getYear();
 
         return Padding.leftPad(String.valueOf(month), 2, '0') + "/" + year;
+    }
+
+    @Override
+    public String toString() {
+        return "CreditCardBuilder{" +
+                "numberBuilder=" + numberBuilder +
+                '}';
     }
 }

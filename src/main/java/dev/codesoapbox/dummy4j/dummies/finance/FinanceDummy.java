@@ -2,7 +2,6 @@ package dev.codesoapbox.dummy4j.dummies.finance;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
 
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -139,7 +138,7 @@ public class FinanceDummy {
     /**
      * Provides a builder for random credit card numbers compliant with the ISO/IEC 7812 standard that can be created
      * according to customisable parameters.
-     * E.g. {@code creditCardNumberBuilder().clearNumberFormatting().build()} may generate {@code 4150259182774861}
+     * E.g. {@code creditCardNumberBuilder().withoutFormatting().build()} may generate {@code 4150259182774861}
      * <p>
      * The default format patterns and IIN ranges are based on data available on November 2020.
      *
@@ -167,7 +166,7 @@ public class FinanceDummy {
 
     /**
      * Provides a builder for a random credit cards created according to customisable parameters.
-     * E.g. {@code creditCardBuilder().withProvider(CreditCardProvider.VISA).clearNumberFormatting().build()}
+     * E.g. {@code creditCardBuilder().withProvider(CreditCardProvider.VISA).withoutNumberFormatting().build()}
      * may generate {@code CreditCard{number='4150259182774861', provider=Visa, ownerName='Zoe Anderson',
      * ownerAddress='10 Amos Alley, 1234-55 North Austinshire, Canada', "expiryDate='05/2030', securityCode='111'}}
      * <p>
@@ -197,12 +196,9 @@ public class FinanceDummy {
     }
 
     private String getBankAccountLetters(int howMany) {
-        List<String> characters = dummy4j.listOf(howMany,
-                () -> dummy4j.expressionResolver().resolve(BANK_ACCOUNT_LETTER_KEY));
         StringBuilder code = new StringBuilder();
-
-        for (String s : characters) {
-            code.append(s);
+        for (int i = 0; i < howMany; i++) {
+            code.append(dummy4j.expressionResolver().resolve(BANK_ACCOUNT_LETTER_KEY));
         }
 
         return code.toString();
