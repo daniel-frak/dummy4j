@@ -34,10 +34,10 @@ class NumeralsDummyTest {
 
     @ParameterizedTest
     @CsvSource({
-            "1,I",
-            "354,CCCLIV",
-            "1422,MCDXXII",
-            "4999,MMMMCMXCIX"
+            "1, I",
+            "354, CCCLIV",
+            "1422, MCDXXII",
+            "4999, MMMMCMXCIX"
     })
     void shouldGenerateRoman(int arabic, String expected) {
         when(dummy4j.number())

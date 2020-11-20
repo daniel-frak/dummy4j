@@ -25,15 +25,15 @@ class AddressTest {
 
     @ParameterizedTest
     @CsvSource({
-            ",23,city,country",
-            "street,,city,country",
-            "street,123,,country",
-            "street,123,city,",
+            ", 23, city, country",
+            "street,, city, country",
+            "street, 123,, country",
+            "street, 123, city,",
             ",,,",
-            "'',123,city,country",
-            "street,'',city,country",
-            "street,123,'',country",
-            "street,123,city,''",
+            "'', 123, city, country",
+            "street, '', city, country",
+            "street, 123, '', country",
+            "street, 123, city, ''",
             "'','','',''"
     })
     void shouldThrowExceptionOnNullOrEmptyValues(String street, String postCode, String city, String country) {

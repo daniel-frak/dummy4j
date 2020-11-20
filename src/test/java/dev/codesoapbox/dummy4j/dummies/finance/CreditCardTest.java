@@ -35,15 +35,15 @@ class CreditCardTest {
 
     @ParameterizedTest
     @CsvSource({
-            ",Zoe Anderson,05/2030,111",
-            "123,,05/2030,111",
-            "123,Zoe Anderson,,111",
-            "123,Zoe Anderson,05/2030,",
+            ",Zoe Anderson, 05/2030, 111",
+            "123,, 05/2030, 111",
+            "123, Zoe Anderson,, 111",
+            "123, Zoe Anderson, 05/2030,",
             ",,,",
-            "'',Zoe Anderson,05/2030,111",
-            "123,'',05/2030,111",
-            "123,Zoe Anderson,'',111",
-            "123,Zoe Anderson,05/2030,''",
+            "'', Zoe Anderson, 05/2030, 111",
+            "123 ,'', 05/2030, 111",
+            "123, Zoe Anderson, '', 111",
+            "123, Zoe Anderson, 05/2030, ''",
             "'','','',''"
     })
     void shouldThrowExceptionOnNullStringValues(String number, String owner, String expiryDate, String securityCode) {

@@ -84,9 +84,9 @@ class RandomServiceTest {
 
     @ParameterizedTest
     @CsvSource({
-            "-15,5",
-            "15,-5",
-            "15,5"
+            "-15, 5",
+            "15, -5",
+            "15, 5"
     })
     void shouldThrowExceptionOnInvalidBoundsForRandomInteger(int lowerBound, int upperBound) {
         assertThrows(IllegalArgumentException.class,
@@ -154,9 +154,9 @@ class RandomServiceTest {
 
     @ParameterizedTest
     @CsvSource({
-            "-15,5",
-            "15,-5",
-            "15,5"
+            "-15, 5",
+            "15, -5",
+            "15, 5"
     })
     void shouldThrowExceptionOnInvalidBoundsForRandomLong(long lowerBound, long upperBound) {
         assertThrows(IllegalArgumentException.class,
@@ -220,9 +220,9 @@ class RandomServiceTest {
 
     @ParameterizedTest
     @CsvSource({
-            "-15,5",
-            "15,-5",
-            "15,5"
+            "-15, 5",
+            "15, -5",
+            "15, 5"
     })
     void shouldThrowExceptionOnInvalidBoundsForRandomDouble(double lowerBound, double upperBound) {
         assertThrows(IllegalArgumentException.class,
@@ -277,9 +277,9 @@ class RandomServiceTest {
 
     @ParameterizedTest
     @CsvSource({
-            "-15,5",
-            "15,-5",
-            "15,5"
+            "-15, 5",
+            "15, -5",
+            "15, 5"
     })
     void shouldThrowExceptionOnInvalidBoundsForRandomFloat(float lowerBound, float upperBound) {
         assertThrows(IllegalArgumentException.class,
