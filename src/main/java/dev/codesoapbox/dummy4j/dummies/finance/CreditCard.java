@@ -20,7 +20,7 @@ public final class CreditCard {
     private final String expiryDate;
     private final String securityCode;
 
-    public CreditCard(String number, CreditCardProvider provider, String ownerName, Address ownerAddress,
+    CreditCard(String number, CreditCardProvider provider, String ownerName, Address ownerAddress,
                       String expiryDate, String securityCode) {
         this.number = number;
         this.provider = provider;

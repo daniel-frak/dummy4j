@@ -6,9 +6,10 @@ import dev.codesoapbox.dummy4j.exceptions.UrlCouldNotBeCreatedException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.StringJoiner;
+
+import static java.util.Collections.singletonList;
 
 /**
  * Generates randomized urls.
@@ -88,7 +89,7 @@ public final class UrlBuilder {
 
     private final Dummy4j dummy4j;
 
-    private List<UrlProtocol> possibleProtocols = Collections.singletonList(UrlProtocol.HTTPS);
+    private List<UrlProtocol> possibleProtocols = singletonList(UrlProtocol.HTTPS);
     private int howManyParams = 0;
     private boolean withFilePath;
     private boolean withoutWwwPrefix;
@@ -105,7 +106,7 @@ public final class UrlBuilder {
      * Sets the protocol for the generated url
      */
     public UrlBuilder withProtocol(UrlProtocol protocol) {
-        this.possibleProtocols = Collections.singletonList(protocol);
+        this.possibleProtocols = singletonList(protocol);
         return this;
     }
 

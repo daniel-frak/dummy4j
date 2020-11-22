@@ -1,8 +1,9 @@
 package dev.codesoapbox.dummy4j.dummies.finance;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+
+import static java.util.Collections.singletonList;
 
 /**
  * Enum containing the supported card-issuing entities
@@ -11,8 +12,7 @@ import java.util.List;
  */
 public enum CreditCardProvider {
 
-    VISA("Visa",
-            Collections.singletonList(IINRange.from(4, 4))),
+    VISA("Visa", singletonList(IINRange.from(4, 4))),
 
     VISA_ELECTRON("Visa Electron", Arrays.asList(IINRange.from(4026, 4026), IINRange.from(417500, 417500),
             IINRange.from(4405, 4405), IINRange.from(4508, 4508), IINRange.from(4844, 4844), IINRange.from(4913, 4913),
@@ -31,11 +31,10 @@ public enum CreditCardProvider {
             Arrays.asList(IINRange.from(6011, 6011), IINRange.from(622126, 622925), IINRange.from(644, 649),
                     IINRange.from(65, 65))),
 
-    JCB("JCB",
-            Collections.singletonList(IINRange.from(3528, 3589)));
+    JCB("JCB", singletonList(IINRange.from(3528, 3589)));
 
-    private String name;
-    private List<IINRange> iinRanges;
+    private final String name;
+    private final List<IINRange> iinRanges;
 
     CreditCardProvider(String name, List<IINRange> iinRanges) {
         this.name = name;

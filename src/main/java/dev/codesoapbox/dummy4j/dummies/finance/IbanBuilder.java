@@ -2,12 +2,12 @@ package dev.codesoapbox.dummy4j.dummies.finance;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.StringJoiner;
 import java.util.regex.Pattern;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 
 /**
@@ -38,7 +38,7 @@ public class IbanBuilder {
     private final Dummy4j dummy4j;
     private final IbanFormula ibanFormula;
 
-    private List<BankAccountCountry> countries = Collections.emptyList();
+    private List<BankAccountCountry> countries = emptyList();
     private boolean formatted;
 
     public IbanBuilder(Dummy4j dummy4j, IbanFormula ibanFormula) {
