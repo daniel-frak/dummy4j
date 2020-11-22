@@ -1,8 +1,8 @@
 package dev.codesoapbox.dummy4j;
 
-import java.util.Arrays;
 import java.util.List;
 
+import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 
 /**
@@ -32,11 +32,6 @@ public abstract class AbstractDummy4jBuilder<T extends AbstractDummy4jBuilder<T,
         return self();
     }
 
-    public T paths(List<String> paths) {
-        self().paths = paths;
-        return self();
-    }
-
     /**
      * @since SNAPSHOT
      */
@@ -49,7 +44,13 @@ public abstract class AbstractDummy4jBuilder<T extends AbstractDummy4jBuilder<T,
         if (elements.length == 1 && elements[0] == null) {
             return emptyList();
         }
-        return Arrays.asList(elements);
+
+        return asList(elements);
+    }
+
+    public T paths(List<String> paths) {
+        self().paths = paths;
+        return self();
     }
 
     /**

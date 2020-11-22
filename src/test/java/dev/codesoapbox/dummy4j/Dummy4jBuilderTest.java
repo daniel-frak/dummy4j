@@ -92,7 +92,7 @@ class Dummy4jBuilderTest {
             "dummy4j, nonExistingLocale",
             "nonExistingPath, nonExistingLocale"
     })
-    void shouldThrowExceptionWhenPathOrLocaleDontExist(String path, String locale) {
+    void shouldThrowExceptionWhenPathOrLocaleDoesNotExist(String path, String locale) {
         Dummy4jBuilder fromList = new Dummy4jBuilder()
                 .paths(singletonList(path))
                 .locale(singletonList(locale));
