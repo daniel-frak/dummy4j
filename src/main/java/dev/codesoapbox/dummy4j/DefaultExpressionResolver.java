@@ -3,7 +3,7 @@ package dev.codesoapbox.dummy4j;
 import com.google.common.collect.Maps;
 import dev.codesoapbox.dummy4j.definitions.LocalizedDummyDefinitions;
 import dev.codesoapbox.dummy4j.definitions.providers.DefinitionProvider;
-import dev.codesoapbox.dummy4j.exceptions.MissingLocaleException;
+import dev.codesoapbox.dummy4j.exceptions.MissingLocaleDefinitionsException;
 
 import java.util.List;
 import java.util.Map;
@@ -38,7 +38,7 @@ public class DefaultExpressionResolver implements ExpressionResolver {
 
         locales.forEach(locale -> {
             if (!localizedDefinitions.containsKey(locale)) {
-                throw new MissingLocaleException(locale);
+                throw new MissingLocaleDefinitionsException(locale);
             }
         });
     }

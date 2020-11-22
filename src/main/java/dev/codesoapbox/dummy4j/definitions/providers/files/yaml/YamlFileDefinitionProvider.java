@@ -31,11 +31,11 @@ public class YamlFileDefinitionProvider implements DefinitionProvider {
         this.paths = paths;
     }
 
-    public static YamlFileDefinitionProvider standard() {
-        return withPaths(singletonList(DEFAULT_PATH));
-    }
-
     public static YamlFileDefinitionProvider withPaths(List<String> paths) {
+        if(paths == null || paths.isEmpty()) {
+            paths = singletonList(DEFAULT_PATH);
+        }
+
         return new YamlFileDefinitionProvider(YamlFileLoader.standard(), new MapMerger(), paths);
     }
 
