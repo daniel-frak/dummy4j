@@ -56,6 +56,7 @@ While you can easily add your own dummy data definitions, the following are avai
 * [Medical](https://javadoc.io/doc/dev.codesoapbox/dummy4j/latest/dev/codesoapbox/dummy4j/dummies/MedicalDummy.html) *(since 0.4.0)*
 * [Nato Phonetic Alphabet](https://javadoc.io/doc/dev.codesoapbox/dummy4j/latest/dev/codesoapbox/dummy4j/dummies/NatoPhoneticAlphabetDummy.html) *(since 0.4.0)*
 * [Internet](https://javadoc.io/doc/dev.codesoapbox/dummy4j/latest/dev/codesoapbox/dummy4j/dummies/internet/InternetDummy.html) *(since 0.5.0)*
+* Finance *(since SNAPSHOT)*
 
 # API stability notice
 

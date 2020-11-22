@@ -3,6 +3,7 @@ package dev.codesoapbox.dummy4j;
 import dev.codesoapbox.dummy4j.definitions.UniqueValues;
 import dev.codesoapbox.dummy4j.dummies.*;
 import dev.codesoapbox.dummy4j.dummies.color.ColorDummy;
+import dev.codesoapbox.dummy4j.dummies.finance.FinanceDummy;
 import dev.codesoapbox.dummy4j.dummies.internet.InternetDummy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -243,5 +244,13 @@ class Dummy4jTest {
         when(dummies.internet())
                 .thenReturn(internetDummy);
         assertEquals(internetDummy, dummy4j.internet());
+    }
+    
+    @Test
+    void shouldGetFinanceDummy() {
+        FinanceDummy financeDummy = mock(FinanceDummy.class);
+        when(dummies.finance())
+                .thenReturn(financeDummy);
+        assertEquals(financeDummy, dummy4j.finance());
     }
 }

@@ -15,3 +15,6 @@ Below are given notable sources from which data was gathered or used as inspirat
 * https://biolres.biomedcentral.com
 * https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 * https://en.wikipedia.org/wiki/List_of_healthcare_occupations
+* https://en.wikipedia.org/wiki/Payment_card_number
+* https://www.swift.com/standards/data-standards/iban-international-bank-account-number
+* https://en.wikipedia.org/wiki/Bank_account#Types_of_accounts

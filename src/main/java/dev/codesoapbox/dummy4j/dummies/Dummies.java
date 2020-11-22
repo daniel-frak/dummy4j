@@ -2,6 +2,10 @@ package dev.codesoapbox.dummy4j.dummies;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
 import dev.codesoapbox.dummy4j.dummies.color.ColorDummy;
+import dev.codesoapbox.dummy4j.dummies.finance.FinanceBuilderFactory;
+import dev.codesoapbox.dummy4j.dummies.finance.FinanceDummy;
+import dev.codesoapbox.dummy4j.dummies.finance.IbanFormula;
+import dev.codesoapbox.dummy4j.dummies.finance.LuhnFormula;
 import dev.codesoapbox.dummy4j.dummies.internet.InternetDummy;
 
 import java.time.Clock;
@@ -23,6 +27,7 @@ public class Dummies {
     private final MedicalDummy medical;
     private final NatoPhoneticAlphabetDummy natoPhoneticAlphabet;
     private final InternetDummy internet;
+    private final FinanceDummy finance;
 
     public Dummies(Dummy4j dummy4j) {
         name = new NameDummy(dummy4j);
@@ -40,6 +45,7 @@ public class Dummies {
         medical = new MedicalDummy(dummy4j);
         natoPhoneticAlphabet = new NatoPhoneticAlphabetDummy(dummy4j);
         internet = new InternetDummy(dummy4j);
+        finance = new FinanceDummy(dummy4j, new FinanceBuilderFactory(dummy4j, new IbanFormula(), new LuhnFormula()));
     }
 
     public NameDummy name() {
@@ -130,5 +136,12 @@ public class Dummies {
      */
     public InternetDummy internet() {
         return internet;
+    }
+
+    /**
+     * @since SNAPSHOT
+     */
+    public FinanceDummy finance() {
+        return finance;
     }
 }

@@ -99,8 +99,8 @@ class ConvenienceMethodsTest {
             "1, true",
             "9, true",
             "10, true",
-            "11, ",
-            "20, "
+            "11,",
+            "20,"
     })
     void shouldSupplyRandomlyByChance(int randomInt, Boolean expected) {
         int howMany = 10;

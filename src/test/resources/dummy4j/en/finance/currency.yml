@@ -1,0 +1,11 @@
+en:
+  finance:
+    currency:
+      code: "EUR"
+      name: "Bulgarian Lev"
+      symbol: "£"
+      numeric_code: "971"
+    cryptocurrency:
+      code: "BTC"
+      name: "Bitcoin"
+      symbol: "ɱ"

@@ -4,6 +4,7 @@ import dev.codesoapbox.dummy4j.definitions.UniqueValues;
 import dev.codesoapbox.dummy4j.definitions.providers.files.yaml.YamlFileDefinitionProvider;
 import dev.codesoapbox.dummy4j.dummies.*;
 import dev.codesoapbox.dummy4j.dummies.color.ColorDummy;
+import dev.codesoapbox.dummy4j.dummies.finance.FinanceDummy;
 import dev.codesoapbox.dummy4j.dummies.internet.InternetDummy;
 
 import java.util.List;
@@ -352,5 +353,14 @@ public class Dummy4j {
      */
     public InternetDummy internet() {
         return dummies.internet();
+    }
+
+    /**
+     * Provides methods for generating values related to finances
+     *
+     * @since SNAPSHOT
+     */
+    public FinanceDummy finance() {
+        return dummies.finance();
     }
 }
