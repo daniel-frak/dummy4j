@@ -8,7 +8,7 @@ package dev.codesoapbox.dummy4j.dummies.finance;
  * @see <a href="https://www.swift.com/standards/data-standards/iban-international-bank-account-number">
  * IBAN Registry</a>
  *
- * @since SNAPSHOT
+ * @since 0.6.0
  */
 public enum BankAccountCountry {
 

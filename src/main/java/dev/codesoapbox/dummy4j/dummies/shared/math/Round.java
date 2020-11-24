@@ -3,7 +3,7 @@ package dev.codesoapbox.dummy4j.dummies.shared.math;
 /**
  * Provides convenience methods for rounding
  *
- * @since SNAPSHOT
+ * @since 0.6.0
  */
 public final class Round {
 

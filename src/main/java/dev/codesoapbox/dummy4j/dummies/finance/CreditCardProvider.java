@@ -8,7 +8,7 @@ import static java.util.Collections.singletonList;
 /**
  * Enum containing the supported card-issuing entities
  *
- * @since SNAPSHOT
+ * @since 0.6.0
  */
 public enum CreditCardProvider {
 

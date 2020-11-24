@@ -11,7 +11,7 @@ import java.time.temporal.ChronoUnit;
 /**
  * Provides methods for generating random credit cards according to customizable parameters
  *
- * @since SNAPSHOT
+ * @since 0.6.0
  */
 public class CreditCardBuilder {
 

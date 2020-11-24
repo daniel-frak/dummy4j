@@ -93,7 +93,7 @@ public class Dummy4j {
     /**
      * Returns the seed used for random number generation
      *
-     * @since SNAPSHOT
+     * @since 0.6.0
      */
     public Long getSeed() {
         return randomService.getSeed();
@@ -347,7 +347,7 @@ public class Dummy4j {
     /**
      * Provides methods for generating values related to finances
      *
-     * @since SNAPSHOT
+     * @since 0.6.0
      */
     public FinanceDummy finance() {
         return dummies.finance();

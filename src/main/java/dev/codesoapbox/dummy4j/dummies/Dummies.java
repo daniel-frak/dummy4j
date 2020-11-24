@@ -139,7 +139,7 @@ public class Dummies {
     }
 
     /**
-     * @since SNAPSHOT
+     * @since 0.6.0
      */
     public FinanceDummy finance() {
         return finance;

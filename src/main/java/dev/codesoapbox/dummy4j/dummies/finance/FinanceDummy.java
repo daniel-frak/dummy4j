@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 /**
  * Provides methods for generating values related to finances
  *
- * @since SNAPSHOT
+ * @since 0.6.0
  */
 public class FinanceDummy {
 

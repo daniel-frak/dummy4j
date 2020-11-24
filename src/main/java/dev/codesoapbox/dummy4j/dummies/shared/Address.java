@@ -8,7 +8,7 @@ import java.util.StringJoiner;
 /**
  * A value object representing a complete address
  *
- * @since SNAPSHOT
+ * @since 0.6.0
  */
 public final class Address {
 

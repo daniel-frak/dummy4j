@@ -1,7 +1,7 @@
 package dev.codesoapbox.dummy4j.exceptions;
 
 /**
- * @since SNAPSHOT
+ * @since 0.6.0
  */
 public class MissingLocaleDefinitionsException extends RuntimeException {
 

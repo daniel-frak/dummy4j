@@ -6,7 +6,7 @@ import dev.codesoapbox.dummy4j.dummies.shared.math.NumberFormatter;
 /**
  * Provides methods for generating random prices according to customizable parameters
  *
- * @since SNAPSHOT
+ * @since 0.6.0
  */
 public class PriceBuilder {
 

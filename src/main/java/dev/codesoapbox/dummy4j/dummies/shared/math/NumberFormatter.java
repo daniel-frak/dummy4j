@@ -5,7 +5,7 @@ import java.text.DecimalFormat;
 /**
  * Provides convenience methods for number formatting
  *
- * @since SNAPSHOT
+ * @since 0.6.0
  */
 public final class NumberFormatter {
 

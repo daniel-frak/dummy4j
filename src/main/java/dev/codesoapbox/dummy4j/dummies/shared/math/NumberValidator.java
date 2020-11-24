@@ -5,7 +5,7 @@ import dev.codesoapbox.dummy4j.exceptions.ValueOutOfRangeException;
 /**
  * Provides convenience methods for validating numbers
  *
- * @since SNAPSHOT
+ * @since 0.6.0
  */
 public final class NumberValidator {
 

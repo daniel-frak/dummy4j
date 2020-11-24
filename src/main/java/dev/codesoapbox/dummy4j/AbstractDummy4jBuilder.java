@@ -33,7 +33,7 @@ public abstract class AbstractDummy4jBuilder<T extends AbstractDummy4jBuilder<T,
     }
 
     /**
-     * @since SNAPSHOT
+     * @since 0.6.0
      */
     public T locale(String... locale) {
         self().locale = varArgsToList(locale);
@@ -54,7 +54,7 @@ public abstract class AbstractDummy4jBuilder<T extends AbstractDummy4jBuilder<T,
     }
 
     /**
-     * @since SNAPSHOT
+     * @since 0.6.0
      */
     public T paths(String... paths) {
         self().paths = varArgsToList(paths);

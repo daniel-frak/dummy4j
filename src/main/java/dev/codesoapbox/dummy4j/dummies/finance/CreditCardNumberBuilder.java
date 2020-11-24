@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 /**
  * Provides methods for generating random credit card numbers according to customizable parameters
  *
- * @since SNAPSHOT
+ * @since 0.6.0
  */
 public class CreditCardNumberBuilder {
 

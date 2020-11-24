@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
  *
  * @see <a href="https://en.wikipedia.org/wiki/Luhn_algorithm">Luhn algorithm definition</a>
  *
- * @since SNAPSHOT
+ * @since 0.6.0
  */
 public class LuhnFormula {
 

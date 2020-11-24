@@ -13,7 +13,7 @@ import static java.util.Collections.singletonList;
 /**
  * Provides methods for generating random IBANs according to customizable parameters
  *
- * @since SNAPSHOT
+ * @since 0.6.0
  */
 public class IbanBuilder {
 

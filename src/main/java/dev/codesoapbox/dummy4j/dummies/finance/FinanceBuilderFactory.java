@@ -5,7 +5,7 @@ import dev.codesoapbox.dummy4j.Dummy4j;
 /**
  * Provides methods for instantiating builders used in the FinanceDummy class
  *
- * @since SNAPSHOT
+ * @since 0.6.0
  */
 public class FinanceBuilderFactory {
 

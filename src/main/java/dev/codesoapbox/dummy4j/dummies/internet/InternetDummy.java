@@ -82,7 +82,7 @@ public class InternetDummy {
      * The username will not contain  whitespaces, quotes, backslashes and non-ASCII characters.
      * E.g. {@code zoe-anderson}
      *
-     * @since SNAPSHOT
+     * @since 0.6.0
      */
     public String username() {
         String firstName = dummy4j.name().firstName().toLowerCase(Locale.ENGLISH);

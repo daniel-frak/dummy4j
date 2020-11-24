@@ -3,7 +3,7 @@ package dev.codesoapbox.dummy4j.dummies.shared.string;
 /**
  * Provides convenience methods for padding strings
  *
- * @since SNAPSHOT
+ * @since 0.6.0
  */
 public final class Padding {
 

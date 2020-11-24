@@ -13,7 +13,7 @@ import dev.codesoapbox.dummy4j.dummies.shared.string.Padding;
  * IBAN formats by country</a>
  * @see <a href="https://en.wikipedia.org/wiki/ISO/IEC_7064">ISO/IEC 7064</a>
  *
- * @since SNAPSHOT
+ * @since 0.6.0
  */
 public class IbanFormula {
 
