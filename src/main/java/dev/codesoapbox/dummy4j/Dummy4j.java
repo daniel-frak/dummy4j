@@ -91,6 +91,15 @@ public class Dummy4j {
     }
 
     /**
+     * Returns the seed used for random number generation
+     *
+     * @since SNAPSHOT
+     */
+    public Long getSeed() {
+        return randomService.getSeed();
+    }
+
+    /**
      * @return a random boolean value
      */
     public boolean nextBoolean() {

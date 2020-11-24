@@ -62,6 +62,14 @@ class Dummy4jTest {
     }
 
     @Test
+    void shouldReturnSeed() {
+        when(randomService.getSeed())
+                .thenReturn(123L);
+
+        assertEquals(123L, dummy4j.getSeed());
+    }
+
+    @Test
     void shouldReturnRandomBoolean() {
         when(randomService.nextBoolean())
                 .thenReturn(true)
