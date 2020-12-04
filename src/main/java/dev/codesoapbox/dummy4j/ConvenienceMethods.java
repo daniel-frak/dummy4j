@@ -53,11 +53,16 @@ public class ConvenienceMethods {
      * Returns a random element from an array
      *
      * @param array the array to pick from
-     * @param <T> the type of object to return
+     * @param <T>   the type of object to return
      * @return a random element
      */
     @SafeVarargs
     public final <T> T of(T... array) {
+        if (array.length == 0) {
+            return null;
+        } else if (array.length == 1) {
+            return array[0];
+        }
         return array[random.nextInt(array.length - 1)];
     }
 
@@ -65,10 +70,15 @@ public class ConvenienceMethods {
      * Returns a random element from a list
      *
      * @param list the list to pick from
-     * @param <T> the type of object to return
+     * @param <T>  the type of object to return
      * @return a random element
      */
     public <T> T of(List<T> list) {
+        if (list == null || list.isEmpty()) {
+            return null;
+        } else if (list.size() == 1) {
+            return list.get(0);
+        }
         return list.get(random.nextInt(list.size() - 1));
     }
 
@@ -81,6 +91,11 @@ public class ConvenienceMethods {
      */
     @SuppressWarnings("unchecked")
     public <T> T of(Set<T> set) {
+        if (set == null || set.isEmpty()) {
+            return null;
+        } else if (set.size() == 1) {
+            return (T) set.toArray()[0];
+        }
         return (T) set.toArray()[random.nextInt(set.size() - 1)];
     }
 
@@ -88,11 +103,16 @@ public class ConvenienceMethods {
      * Returns a value from a random supplier.
      *
      * @param suppliers value suppliers to pick from
-     * @param <T> the type of value to return
+     * @param <T>       the type of value to return
      * @return a value from a random supplier
      */
     @SafeVarargs
     public final <T> T of(Supplier<T>... suppliers) {
+        if (suppliers == null || suppliers.length == 0) {
+            return null;
+        } else if (suppliers.length == 1) {
+            return suppliers[0].get();
+        }
         return suppliers[random.nextInt(0, suppliers.length - 1)].get();
     }
 
@@ -103,7 +123,6 @@ public class ConvenienceMethods {
      * 50% of the time when the method is invoked.
      *
      * @return supplied {@code T} or null
-     *
      * @since 0.5.0
      */
     public <T> T chance(int howMany, int in, Supplier<T> supplier) {
@@ -121,7 +140,6 @@ public class ConvenienceMethods {
      * 50% of the time when the method is invoked.
      *
      * @return {@code boolean}
-     *
      * @since 0.5.0
      */
     public boolean chance(int howMany, int in) {
