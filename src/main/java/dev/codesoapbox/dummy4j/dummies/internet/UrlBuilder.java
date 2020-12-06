@@ -38,51 +38,15 @@ public final class UrlBuilder {
      */
     public static final int DEFAULT_PORT = -1;
 
-    /**
-     * Points to a list of possible top level domains
-     */
-    public static final String DEFAULT_TOP_LEVEL_DOMAIN_KEY = "#{internet.top_level_domain}";
-
-    /**
-     * Points to a list of popular top level domains
-     */
-    public static final String POPULAR_TOP_LEVEL_DOMAIN_KEY = "#{internet.popular_top_level_domain}";
-
-    /**
-     * Points to a list of country top level domains
-     */
-    public static final String COUNTRY_TOP_LEVEL_DOMAIN_KEY = "#{internet.country_top_level_domain}";
-
-    /**
-     * Points to a list of generic top level domains
-     */
-    public static final String GENERIC_TOP_LEVEL_DOMAIN_KEY = "#{internet.generic_top_level_domain}";
-
-    /**
-     * Points to a list of random words that are used as domains
-     */
-    public static final String ROOT_DOMAIN_KEY = "#{internet.root_domain}";
-
-    /**
-     * Points to a list of random words that are used as parameter names
-     */
-    public static final String PARAM_KEY = "#{internet.param}";
-
-    /**
-     * Points to a list of random words that are used as parameter values
-     */
-    public static final String PARAM_VALUE_KEY = "#{internet.param_value}";
-
-    /**
-     * Represents the chance of generating a string value for a query param
-     */
-    public static final int CHANCE_OF_PARAM_VALUE_AS_STRING = 4;
-
-    /**
-     * Represents the {@code in} value for the chance method
-     */
-    public static final int CHANCE_IN_PARAM_VALUE_AS_STRING = 6;
-
+    static final int CHANCE_OF_PARAM_VALUE_AS_STRING = 4;
+    static final int CHANCE_IN_PARAM_VALUE_AS_STRING = 6;
+    static final String DEFAULT_TOP_LEVEL_DOMAIN_KEY = "#{internet.top_level_domain}";
+    static final String POPULAR_TOP_LEVEL_DOMAIN_KEY = "#{internet.popular_top_level_domain}";
+    static final String COUNTRY_TOP_LEVEL_DOMAIN_KEY = "#{internet.country_top_level_domain}";
+    static final String GENERIC_TOP_LEVEL_DOMAIN_KEY = "#{internet.generic_top_level_domain}";
+    static final String ROOT_DOMAIN_KEY = "#{internet.root_domain}";
+    static final String PARAM_KEY = "#{internet.param}";
+    static final String PARAM_VALUE_KEY = "#{internet.param_value}";
     private static final String FILE_EXTENSION = ".html";
     private static final String PATH_DELIMITER = "/";
     private static final int FILE_NAME_LENGTH = 10;
