@@ -6,6 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
@@ -80,7 +81,7 @@ class ConvenienceMethodsTest {
         String[] array = {};
 
         assertNull(convenienceMethods.of(array));
-        verify(random, never()).nextInt(0);
+        verify(random, never()).nextInt(Mockito.anyInt());
     }
 
     @Test
@@ -106,13 +107,13 @@ class ConvenienceMethodsTest {
         List<String> list = emptyList();
 
         assertNull(convenienceMethods.of(list));
-        verify(random, never()).nextInt(0);
+        verify(random, never()).nextInt(Mockito.anyInt());
     }
 
     @Test
     void shouldReturnNullIfListIsNull() {
         assertNull(convenienceMethods.of((List<?>) null));
-        verify(random, never()).nextInt(0);
+        verify(random, never()).nextInt(Mockito.anyInt());
     }
 
     @Test
@@ -138,13 +139,13 @@ class ConvenienceMethodsTest {
         Set<String> set = emptySet();
 
         assertNull(convenienceMethods.of(set));
-        verify(random, never()).nextInt(0);
+        verify(random, never()).nextInt(Mockito.anyInt());
     }
 
     @Test
     void shouldReturnNullIfSetIsNull() {
         assertNull(convenienceMethods.of((Set<?>) null));
-        verify(random, never()).nextInt(0);
+        verify(random, never()).nextInt(Mockito.anyInt());
     }
 
     @Test
@@ -173,7 +174,7 @@ class ConvenienceMethodsTest {
         Object result = convenienceMethods.of(suppliersArray);
 
         assertNull(result);
-        verify(random, never()).nextInt(0);
+        verify(random, never()).nextInt(Mockito.anyInt(), Mockito.anyInt());
     }
 
     @Test
@@ -181,13 +182,13 @@ class ConvenienceMethodsTest {
         Supplier<Object>[] suppliersArray = null;
 
         assertNull(convenienceMethods.of(suppliersArray));
-        verify(random, never()).nextInt(0);
+        verify(random, never()).nextInt(Mockito.anyInt(), Mockito.anyInt());
     }
 
     @Test
     void shouldReturnNullIfSupplierArrayMissing() {
         assertNull(convenienceMethods.of());
-        verify(random, never()).nextInt(0);
+        verify(random, never()).nextInt(Mockito.anyInt(), Mockito.anyInt());
     }
 
     @ParameterizedTest
