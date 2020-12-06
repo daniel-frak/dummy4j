@@ -181,7 +181,7 @@ public class FinanceDummy {
     }
 
     /**
-     * Provides a random, 11 characters long string, that can be used as a Business Identifier Code,
+     * Provides a random 11 character long string which can be used as a Business Identifier Code,
      * also called a SWIFT code.
      * E.g. {@code RHBHPLPW123}, where {@code RHBH} is a fake bank code, {@code PL} is a random country code, {@code PW}
      * is a fake location code and {@code 123} is a fake branch code.

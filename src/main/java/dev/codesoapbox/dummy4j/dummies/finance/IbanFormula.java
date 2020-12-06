@@ -23,7 +23,7 @@ public class IbanFormula {
     private static final int MIN_NUMERIC_CHAR = 10;
     private static final int ONE_PLACE = 10;
     private static final int TWO_PLACES = 100;
-    private static final int MAX_FOR_EIGHT_DIGITS = 99999999;
+    private static final int MAX_FOR_EIGHT_DIGITS = 99_999_999;
 
     /**
      * Returns valid IBAN check digits generated for the given account number and country
