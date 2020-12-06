@@ -150,7 +150,7 @@ class ConvenienceMethodsTest {
 
     @Test
     void shouldSupplyFromRandomSupplier() {
-        when(random.nextInt(0, 2))
+        when(random.nextInt(2))
                 .thenReturn(1);
 
         int result = convenienceMethods.of(() -> 1, () -> 2, () -> 3);
@@ -174,7 +174,7 @@ class ConvenienceMethodsTest {
         Object result = convenienceMethods.of(suppliersArray);
 
         assertNull(result);
-        verify(random, never()).nextInt(Mockito.anyInt(), Mockito.anyInt());
+        verify(random, never()).nextInt(Mockito.anyInt());
     }
 
     @Test
@@ -182,13 +182,13 @@ class ConvenienceMethodsTest {
         Supplier<Object>[] suppliersArray = null;
 
         assertNull(convenienceMethods.of(suppliersArray));
-        verify(random, never()).nextInt(Mockito.anyInt(), Mockito.anyInt());
+        verify(random, never()).nextInt(Mockito.anyInt());
     }
 
     @Test
     void shouldReturnNullIfSupplierArrayMissing() {
         assertNull(convenienceMethods.of());
-        verify(random, never()).nextInt(Mockito.anyInt(), Mockito.anyInt());
+        verify(random, never()).nextInt(Mockito.anyInt());
     }
 
     @ParameterizedTest

@@ -13,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.net.URL;
 
+import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
@@ -44,6 +45,8 @@ class InternetDummyTest {
     @Test
     void shouldReturnDefaultUrl() {
         mockSimpleUrl();
+        when(dummy4j.of(singletonList(UrlProtocol.HTTPS)))
+                .thenReturn(UrlProtocol.HTTPS);
 
         URL actual = internetDummy.url();
 
@@ -53,6 +56,8 @@ class InternetDummyTest {
     @Test
     void shouldBuildSimpleUrl() {
         mockSimpleUrl();
+        when(dummy4j.of(singletonList(UrlProtocol.HTTPS)))
+                .thenReturn(UrlProtocol.HTTPS);
 
         URL actual = internetDummy.urlBuilder().build();
 

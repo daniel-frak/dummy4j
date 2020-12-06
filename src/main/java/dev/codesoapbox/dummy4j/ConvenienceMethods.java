@@ -113,7 +113,7 @@ public class ConvenienceMethods {
         } else if (suppliers.length == 1) {
             return suppliers[0].get();
         }
-        return suppliers[random.nextInt(0, suppliers.length - 1)].get();
+        return suppliers[random.nextInt(suppliers.length - 1)].get();
     }
 
     /**

@@ -12,7 +12,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 
+import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
@@ -44,6 +47,7 @@ class UrlBuilderTest {
     @Test
     void shouldReturnSimpleUrl() {
         mockDomain();
+        mockDefaultProtocol();
 
         URL actual = builder.build();
 
@@ -57,6 +61,12 @@ class UrlBuilderTest {
                 () -> assertTrue(actual.getPath().isEmpty()),
                 () -> assertNotNull(actual.toURI())
         );
+    }
+
+    private void mockDefaultProtocol() {
+        List<UrlProtocol> possibleProtocols = singletonList(UrlProtocol.HTTPS);
+        when(dummy4j.of(possibleProtocols))
+                .thenReturn(UrlProtocol.HTTPS);
     }
 
     private void mockDomain() {
@@ -80,6 +90,7 @@ class UrlBuilderTest {
     @Test
     void shouldNotAddExtraCharsWhenMinLengthSatisfied() {
         mockDomain();
+        mockDefaultProtocol();
         int minLength = 20;
 
         URL actual = builder
@@ -93,6 +104,7 @@ class UrlBuilderTest {
     @Test
     void shouldReturnUrlWithoutHostPrefix() {
         mockDomain();
+        mockDefaultProtocol();
 
         URL actual = builder
                 .withoutWwwPrefix()
@@ -107,6 +119,7 @@ class UrlBuilderTest {
     @Test
     void shouldReturnUrlWithGivenPort() {
         mockDomain();
+        mockDefaultProtocol();
 
         URL actual = builder
                 .withPort(12)
@@ -121,6 +134,7 @@ class UrlBuilderTest {
     @Test
     void shouldReturnUrlWithRandomPort() {
         mockDomain();
+        mockDefaultProtocol();
         mockNumberService();
         when(numberService.nextInt(UrlBuilder.MIN_PORT, UrlBuilder.MAX_PORT))
                 .thenReturn(9999);
@@ -143,6 +157,7 @@ class UrlBuilderTest {
     @Test
     void shouldReturnUrlWithFile() {
         mockDomain();
+        mockDefaultProtocol();
         mockLoremDummy();
         when(loremDummy.characters(10))
                 .thenReturn(FILENAME);
@@ -161,6 +176,7 @@ class UrlBuilderTest {
     @Test
     void shouldReturnUrlWithFileAndMinLength() {
         mockDomain();
+        mockDefaultProtocol();
         mockLoremDummy();
         when(loremDummy.characters(6))
                 .thenReturn("aaaaaa");
@@ -184,6 +200,7 @@ class UrlBuilderTest {
     @Test
     void shouldReturnUrlWithWordsInQueryParam() {
         mockDomain();
+        mockDefaultProtocol();
         mockQueryParam();
         mockQueryParamStringValue();
         when(dummy4j.chance(UrlBuilder.CHANCE_OF_PARAM_VALUE_AS_STRING, UrlBuilder.CHANCE_IN_PARAM_VALUE_AS_STRING))
@@ -204,6 +221,7 @@ class UrlBuilderTest {
     @Test
     void shouldReturnUrlWithDigitsInQueryParam() {
         mockDomain();
+        mockDefaultProtocol();
         mockQueryParam();
         mockQueryParamDigitValue();
 
@@ -238,6 +256,7 @@ class UrlBuilderTest {
     @Test
     void shouldReturnUrlWithMultipleQueryParams() {
         mockDomain();
+        mockDefaultProtocol();
         mockQueryParam();
         mockQueryParamStringValue();
         when(dummy4j.chance(UrlBuilder.CHANCE_OF_PARAM_VALUE_AS_STRING, UrlBuilder.CHANCE_IN_PARAM_VALUE_AS_STRING))
@@ -256,6 +275,7 @@ class UrlBuilderTest {
     @Test
     void shouldReturnUrlWithQueryParamAndMinLength() {
         mockDomain();
+        mockDefaultProtocol();
         mockQueryParam();
         mockQueryParamStringValue();
         mockLoremDummy();
@@ -280,6 +300,7 @@ class UrlBuilderTest {
     @Test
     void shouldReturnUrlWithMultipleQueryParamsAndFile() {
         mockDomain();
+        mockDefaultProtocol();
         mockQueryParam();
         mockQueryParamStringValue();
         mockLoremDummy();
@@ -335,6 +356,7 @@ class UrlBuilderTest {
     @Test
     void shouldReturnUrlWithSpecifiedProtocol() {
         mockDomain();
+        mockDefaultProtocol();
 
         URL actual = builder
                 .withProtocol(UrlProtocol.HTTPS)
@@ -349,6 +371,7 @@ class UrlBuilderTest {
     @Test
     void shouldReturnUrlWithSpecifiedProtocolAndMinimumLength() {
         mockDomain();
+        mockDefaultProtocol();
         mockLoremDummy();
         when(loremDummy.characters(2))
                 .thenReturn("aa");
@@ -370,6 +393,7 @@ class UrlBuilderTest {
     @Test
     void shouldReturnUrlWithSpecifiedProtocolWithoutWwwPrefixWithWithRandomPortQueryParamsAndFileAndMinLength() {
         mockDomain();
+        mockDefaultProtocol();
         mockQueryParam();
         mockQueryParamStringValue();
         mockNumberService();
@@ -407,6 +431,7 @@ class UrlBuilderTest {
     @Test
     void shouldThrowExceptionOnInvalidUrl() {
         mockDomain();
+        mockDefaultProtocol();
 
         UrlBuilder actual = builder
                 .withPort(-2);
@@ -418,6 +443,8 @@ class UrlBuilderTest {
     void shouldReturnUrlForAllProtocolTypes() {
         mockDomain();
         for (UrlProtocol protocol : UrlProtocol.values()) {
+            when(dummy4j.of(singletonList(protocol)))
+                    .thenReturn(protocol);
             URL url = builder.withProtocol(protocol).build();
 
             assertEquals(protocol.getValue(), url.getProtocol());
@@ -438,9 +465,9 @@ class UrlBuilderTest {
     @Test
     void shouldReturnUrlWithRandomProtocolChosenFromGivenList() {
         mockDomain();
-        mockNumberService();
-        when(dummy4j.number().nextInt(1))
-                .thenReturn(1);
+        List<UrlProtocol> possibleProtocols = Arrays.asList(UrlProtocol.HTTPS, UrlProtocol.FTP);
+        when(dummy4j.of(possibleProtocols))
+                .thenReturn(UrlProtocol.FTP);
 
         URL actual = builder.withRandomProtocol(UrlProtocol.HTTPS, UrlProtocol.FTP).build();
 
@@ -449,6 +476,7 @@ class UrlBuilderTest {
 
     @Test
     void shouldReturnUrlWithPopularDomain() {
+        mockDefaultProtocol();
         mockExpressionResolver();
         when(expressionResolver.resolve(UrlBuilder.ROOT_DOMAIN_KEY))
                 .thenReturn("test");
@@ -462,6 +490,7 @@ class UrlBuilderTest {
 
     @Test
     void shouldReturnUrlWithCountryDomain() {
+        mockDefaultProtocol();
         mockExpressionResolver();
         when(expressionResolver.resolve(UrlBuilder.ROOT_DOMAIN_KEY))
                 .thenReturn("test");
@@ -475,6 +504,7 @@ class UrlBuilderTest {
 
     @Test
     void shouldReturnUrlWithGenericDomain() {
+        mockDefaultProtocol();
         mockExpressionResolver();
         when(expressionResolver.resolve(UrlBuilder.ROOT_DOMAIN_KEY))
                 .thenReturn("test");
@@ -489,6 +519,7 @@ class UrlBuilderTest {
     @Test
     void shouldNotAddQueryParamsWhenRequiredAmountIsZero() {
         mockDomain();
+        mockDefaultProtocol();
 
         URL actual = builder.withQueryParams(0).build();
 
@@ -501,6 +532,7 @@ class UrlBuilderTest {
     @Test
     void shouldNotAddQueryParamsWhenLatestRequiredAmountIsZero() {
         mockDomain();
+        mockDefaultProtocol();
 
         URL actual = builder.withQueryParams(2)
                 .withQueryParams(0)
@@ -516,6 +548,7 @@ class UrlBuilderTest {
 
     @Test
     void shouldReturnUrlWithCustomTopLevelDomain() {
+        mockDefaultProtocol();
         mockExpressionResolver();
         when(expressionResolver.resolve(UrlBuilder.ROOT_DOMAIN_KEY))
                 .thenReturn("test");
