@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class DateAndTimeDummyTest {
 
-    private final static LocalDate LOCAL_DATE = LocalDate.of(2000, Month.JANUARY, 1);
+    private static final LocalDate LOCAL_DATE = LocalDate.of(2000, Month.JANUARY, 1);
 
     private final Clock clock = Clock.fixed(LOCAL_DATE.atStartOfDay(ZoneId.of("GMT")).toInstant(), ZoneId.of("GMT"));
 
