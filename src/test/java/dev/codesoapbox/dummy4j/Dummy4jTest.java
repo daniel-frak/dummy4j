@@ -11,12 +11,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
 
+import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -83,7 +83,7 @@ class Dummy4jTest {
 
     @Test
     void shouldGenerateRandomList() {
-        List<String> expected = Arrays.asList("1", "2");
+        List<String> expected = asList("1", "2");
         Supplier<String> supplier = () -> "test";
         when(convenienceMethods.listOf(4, supplier))
                 .thenReturn(expected);
@@ -118,7 +118,7 @@ class Dummy4jTest {
 
     @Test
     void shouldReturnRandomElementFromList() {
-        List<String> list = Arrays.asList("1", "2");
+        List<String> list = asList("1", "2");
         String expected = "test";
         when(convenienceMethods.of(list))
                 .thenReturn(expected);
@@ -128,7 +128,7 @@ class Dummy4jTest {
 
     @Test
     void shouldReturnRandomElementFromSet() {
-        Set<String> set = new HashSet<>(Arrays.asList("1", "2"));
+        Set<String> set = new HashSet<>(asList("1", "2"));
         String expected = "test";
         when(convenienceMethods.of(set))
                 .thenReturn(expected);
@@ -245,7 +245,7 @@ class Dummy4jTest {
                 .thenReturn(natoPhoneticAlphabetDummy);
         assertEquals(natoPhoneticAlphabetDummy, dummy4j.natoPhoneticAlphabet());
     }
-    
+
     @Test
     void shouldGetInternetDummy() {
         InternetDummy internetDummy = mock(InternetDummy.class);
@@ -253,7 +253,7 @@ class Dummy4jTest {
                 .thenReturn(internetDummy);
         assertEquals(internetDummy, dummy4j.internet());
     }
-    
+
     @Test
     void shouldGetFinanceDummy() {
         FinanceDummy financeDummy = mock(FinanceDummy.class);

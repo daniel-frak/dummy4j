@@ -5,11 +5,11 @@ import dev.codesoapbox.dummy4j.exceptions.UrlCouldNotBeCreatedException;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.StringJoiner;
 
+import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 
 /**
@@ -80,7 +80,7 @@ public final class UrlBuilder {
      * If there are no arguments, a protocol is chosen at random from the {@code UrlProtocol} enum.
      */
     public UrlBuilder withRandomProtocol(UrlProtocol... protocols) {
-        this.possibleProtocols = Arrays.asList(protocols);
+        this.possibleProtocols = asList(protocols);
         return this;
     }
 

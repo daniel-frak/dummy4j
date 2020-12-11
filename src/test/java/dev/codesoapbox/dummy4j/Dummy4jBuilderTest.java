@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.Arrays;
-
+import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.*;
@@ -110,7 +109,7 @@ class Dummy4jBuilderTest {
     @Test
     void shouldBuildWhenSomeOfTheProvidedPathsAreNull() {
         Dummy4j fromList = new Dummy4jBuilder()
-                .paths(Arrays.asList("dummy4j", null))
+                .paths(asList("dummy4j", null))
                 .locale(singletonList("en"))
                 .build();
 
@@ -128,7 +127,7 @@ class Dummy4jBuilderTest {
     @Test
     void shouldBuildWhenSomeOfTheProvidedPathsAreNonExisting() {
         Dummy4j fromList = new Dummy4jBuilder()
-                .paths(Arrays.asList("dummy4j", "nonExistingPath"))
+                .paths(asList("dummy4j", "nonExistingPath"))
                 .locale(singletonList("en"))
                 .build();
 
@@ -147,7 +146,7 @@ class Dummy4jBuilderTest {
     void shouldThrowExceptionWhenSomeOfTheProvidedLocaleAreNull() {
         Dummy4jBuilder fromList = new Dummy4jBuilder()
                 .paths(singletonList("dummy4j"))
-                .locale(Arrays.asList("en", null));
+                .locale(asList("en", null));
 
         Dummy4jBuilder fromVarArgs = new Dummy4jBuilder()
                 .paths("dummy4j")
@@ -163,7 +162,7 @@ class Dummy4jBuilderTest {
     void shouldThrowExceptionWhenSomeOfTheProvidedLocaleAreNonExisting() {
         Dummy4jBuilder fromList = new Dummy4jBuilder()
                 .paths(singletonList("dummy4j"))
-                .locale(Arrays.asList("en", "nonExistingLocale"));
+                .locale(asList("en", "nonExistingLocale"));
 
         Dummy4jBuilder fromVarArgs = new Dummy4jBuilder()
                 .paths("dummy4j")
