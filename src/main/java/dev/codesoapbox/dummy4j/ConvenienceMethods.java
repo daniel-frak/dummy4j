@@ -54,7 +54,7 @@ public class ConvenienceMethods {
      *
      * @param array the array to pick from
      * @param <T>   the type of object to return
-     * @return a random element
+     * @return a random element from the array or NULL if the array is empty
      */
     @SafeVarargs
     public final <T> T of(T... array) {
@@ -71,7 +71,7 @@ public class ConvenienceMethods {
      *
      * @param list the list to pick from
      * @param <T>  the type of object to return
-     * @return a random element
+     * @return a random element from the list or NULL if the list is NULL or empty
      */
     public <T> T of(List<T> list) {
         if (list == null || list.isEmpty()) {
@@ -87,7 +87,7 @@ public class ConvenienceMethods {
      *
      * @param set the list to pick from
      * @param <T> the type of object to return
-     * @return a random element
+     * @return a random element from the set or NULL if the set is NULL or empty
      */
     @SuppressWarnings("unchecked")
     public <T> T of(Set<T> set) {
@@ -104,7 +104,7 @@ public class ConvenienceMethods {
      *
      * @param suppliers value suppliers to pick from
      * @param <T>       the type of value to return
-     * @return a value from a random supplier
+     * @return a value from a random supplier or NULL if an empty array or NULL was given as an argument
      */
     @SafeVarargs
     public final <T> T of(Supplier<T>... suppliers) {

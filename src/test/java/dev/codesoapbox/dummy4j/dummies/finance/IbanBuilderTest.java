@@ -9,8 +9,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Arrays;
-
+import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -102,7 +101,7 @@ class IbanBuilderTest {
         String accountNumber = mockAccountNumber(albania);
         when(ibanFormula.getCheckDigits(accountNumber, albania.getCode()))
                 .thenReturn("57");
-        when(dummy4j.of(Arrays.asList(albania, BankAccountCountry.MACEDONIA)))
+        when(dummy4j.of(asList(albania, BankAccountCountry.MACEDONIA)))
                 .thenReturn(albania);
 
         String actual = builder
