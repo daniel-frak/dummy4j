@@ -3,6 +3,7 @@ package dev.codesoapbox.dummy4j.dummies.finance;
 import dev.codesoapbox.dummy4j.Dummy4j;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.StringJoiner;
 import java.util.regex.Pattern;
 
@@ -79,23 +80,13 @@ public class IbanBuilder {
      * Generates a random IBAN
      */
     public String build() {
-        BankAccountCountry country = getCountry();
+        BankAccountCountry country = Optional.ofNullable(dummy4j.of(countries))
+                .orElse(dummy4j.nextEnum(BankAccountCountry.class));
         String account = dummy4j.finance().bankAccountNumber(country);
         String countryCode = country.getCode();
         String iban = countryCode + ibanFormula.getCheckDigits(account, countryCode) + account;
 
         return format(iban);
-    }
-
-    private BankAccountCountry getCountry() {
-        if (countries.isEmpty()) {
-            return dummy4j.nextEnum(BankAccountCountry.class);
-        } else if (countries.size() == 1) {
-            return countries.get(0);
-        } else {
-            int randomIndex = dummy4j.number().nextInt(countries.size() - 1);
-            return countries.get(randomIndex);
-        }
     }
 
     private String format(String iban) {

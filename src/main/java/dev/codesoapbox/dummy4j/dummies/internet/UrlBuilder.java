@@ -7,6 +7,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.StringJoiner;
 
 import static java.util.Collections.singletonList;
@@ -208,7 +209,8 @@ public final class UrlBuilder {
      * @see URL
      */
     public URL build() {
-        UrlProtocol protocol = getProtocol();
+        UrlProtocol protocol = Optional.ofNullable(dummy4j.of(possibleProtocols))
+                .orElse(dummy4j.nextEnum(UrlProtocol.class));
         UrlHost host = getUrlHost();
         String filePathAndQueryParams = getFilePath();
 
@@ -217,17 +219,6 @@ public final class UrlBuilder {
         }
 
         return buildUrlWithProperLength(protocol, host, filePathAndQueryParams);
-    }
-
-    private UrlProtocol getProtocol() {
-        if (possibleProtocols.isEmpty()) {
-            return dummy4j.nextEnum(UrlProtocol.class);
-        } else if (possibleProtocols.size() == 1) {
-            return possibleProtocols.get(0);
-        } else {
-            int randomIndex = dummy4j.number().nextInt(possibleProtocols.size() - 1);
-            return possibleProtocols.get(randomIndex);
-        }
     }
 
     private UrlHost getUrlHost() {

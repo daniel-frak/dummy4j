@@ -1,7 +1,6 @@
 package dev.codesoapbox.dummy4j.dummies.finance;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
-import dev.codesoapbox.dummy4j.NumberService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,6 +9,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
@@ -24,9 +25,6 @@ class IbanBuilderTest {
 
     @Mock
     private IbanFormula ibanFormula;
-
-    @Mock
-    private NumberService numberService;
 
     private IbanBuilder builder;
 
@@ -86,6 +84,8 @@ class IbanBuilderTest {
         String accountNumber = mockAccountNumber(country);
         when(ibanFormula.getCheckDigits(accountNumber, country.getCode()))
                 .thenReturn("51");
+        when(dummy4j.of(singletonList(country)))
+                .thenReturn(country);
 
         String actual = builder
                 .withCountry(country)
@@ -97,24 +97,18 @@ class IbanBuilderTest {
     @Test
     void shouldBuildIbanForGivenCountries() {
         mockFinanceDummy();
-        mockNumberService();
-        when(numberService.nextInt(1))
-                .thenReturn(0);
         BankAccountCountry albania = BankAccountCountry.ALBANIA;
         String accountNumber = mockAccountNumber(albania);
         when(ibanFormula.getCheckDigits(accountNumber, albania.getCode()))
                 .thenReturn("57");
+        when(dummy4j.of(asList(albania, BankAccountCountry.MACEDONIA)))
+                .thenReturn(albania);
 
         String actual = builder
                 .withRandomCountry(albania, BankAccountCountry.MACEDONIA)
                 .build();
 
         assertEquals("AL5712345678901", actual);
-    }
-
-    private void mockNumberService() {
-        when(dummy4j.number())
-                .thenReturn(numberService);
     }
 
     @Test
@@ -124,6 +118,8 @@ class IbanBuilderTest {
         String accountNumber = mockAccountNumber(germany);
         when(ibanFormula.getCheckDigits(accountNumber, germany.getCode()))
                 .thenReturn("51");
+        when(dummy4j.of(singletonList(germany)))
+                .thenReturn(germany);
 
         String actual = builder
                 .withRandomCountry(BankAccountCountry.ALBANIA, BankAccountCountry.MACEDONIA)
@@ -165,6 +161,8 @@ class IbanBuilderTest {
         String accountNumber = mockAccountNumber(country);
         when(ibanFormula.getCheckDigits(accountNumber, country.getCode()))
                 .thenReturn("51");
+        when(dummy4j.of(singletonList(country)))
+                .thenReturn(country);
 
         String actual = builder
                 .withCountry(country)
