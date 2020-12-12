@@ -1,8 +1,8 @@
 package dev.codesoapbox.dummy4j.dummies.finance;
 
-import java.util.Arrays;
 import java.util.List;
 
+import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 
 /**
@@ -14,22 +14,21 @@ public enum CreditCardProvider {
 
     VISA("Visa", singletonList(IINRange.from(4, 4))),
 
-    VISA_ELECTRON("Visa Electron", Arrays.asList(IINRange.from(4026, 4026), IINRange.from(417_500, 417_500),
+    VISA_ELECTRON("Visa Electron", asList(IINRange.from(4026, 4026), IINRange.from(417_500, 417_500),
             IINRange.from(4405, 4405), IINRange.from(4508, 4508), IINRange.from(4844, 4844), IINRange.from(4913, 4913),
             IINRange.from(4917, 4917))),
 
     MASTER_CARD("MasterCard",
-            Arrays.asList(IINRange.from(51, 55), IINRange.from(222_100, 272_099))),
+            asList(IINRange.from(51, 55), IINRange.from(222_100, 272_099))),
 
     MAESTRO("Maestro",
-            Arrays.asList(IINRange.from(500_000, 509_999), IINRange.from(560_000, 589_999),
-                    IINRange.from(600_000, 699_999))),
+            asList(IINRange.from(500_000, 509_999), IINRange.from(560_000, 589_999), IINRange.from(600_000, 699_999))),
 
     AMERICAN_EXPRESS("American Express",
-            Arrays.asList(IINRange.from(34, 34), IINRange.from(37, 37))),
+            asList(IINRange.from(34, 34), IINRange.from(37, 37))),
 
     DISCOVER("Discover",
-            Arrays.asList(IINRange.from(6011, 6011), IINRange.from(622_126, 622_925), IINRange.from(644, 649),
+            asList(IINRange.from(6011, 6011), IINRange.from(622_126, 622_925), IINRange.from(644, 649),
                     IINRange.from(65, 65))),
 
     JCB("JCB", singletonList(IINRange.from(3528, 3589)));

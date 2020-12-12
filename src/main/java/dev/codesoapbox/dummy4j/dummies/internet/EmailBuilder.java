@@ -3,10 +3,10 @@ package dev.codesoapbox.dummy4j.dummies.internet;
 import dev.codesoapbox.dummy4j.Dummy4j;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
+import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 
 /**
@@ -105,7 +105,7 @@ public class EmailBuilder {
      */
     public EmailBuilder withSubAddresses(String... customSubAddresses) {
         randomizeSubAddress = false;
-        this.customSubAddresses = Arrays.asList(customSubAddresses);
+        this.customSubAddresses = asList(customSubAddresses);
         return this;
     }
 

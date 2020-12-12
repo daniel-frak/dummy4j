@@ -9,11 +9,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -65,7 +65,7 @@ class YamlFileDefinitionProviderTest {
         mergedMap.put("en", mergedSubMap);
         mergedMap.put("pl", mergedSubMap);
 
-        List<LocalizedDummyDefinitions> expectedDummyDefinitions = Arrays.asList(
+        List<LocalizedDummyDefinitions> expectedDummyDefinitions = asList(
                 new LocalizedDummyDefinitionsMap("en", mergedSubMap),
                 new LocalizedDummyDefinitionsMap("pl", mergedSubMap)
         );

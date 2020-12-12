@@ -9,7 +9,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,7 +36,7 @@ class ConvenienceMethodsTest {
 
     @Test
     void shouldGenerateRandomList() {
-        List<Integer> expectedResult = Arrays.asList(1, 2, 3, 4, 5);
+        List<Integer> expectedResult = asList(1, 2, 3, 4, 5);
 
         AtomicInteger i = new AtomicInteger();
         List<Integer> result = convenienceMethods.listOf(5, i::incrementAndGet);

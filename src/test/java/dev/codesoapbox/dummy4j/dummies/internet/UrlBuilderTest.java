@@ -12,9 +12,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.net.URL;
-import java.util.Arrays;
 import java.util.List;
 
+import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -465,7 +465,7 @@ class UrlBuilderTest {
     @Test
     void shouldReturnUrlWithRandomProtocolChosenFromGivenList() {
         mockDomain();
-        List<UrlProtocol> possibleProtocols = Arrays.asList(UrlProtocol.HTTPS, UrlProtocol.FTP);
+        List<UrlProtocol> possibleProtocols = asList(UrlProtocol.HTTPS, UrlProtocol.FTP);
         when(dummy4j.of(possibleProtocols))
                 .thenReturn(UrlProtocol.FTP);
 
