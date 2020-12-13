@@ -2,8 +2,14 @@ package dev.codesoapbox.dummy4j.dummies.finance;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
 
+import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.regex.Pattern;
+
+import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.singletonList;
 
 /**
  * Provides methods for generating random credit card numbers according to customizable parameters
@@ -19,8 +25,8 @@ public class CreditCardNumberBuilder {
     private final Dummy4j dummy4j;
     private final LuhnFormula luhnFormula;
 
-    private CreditCardProvider provider;
     private boolean withoutFormatting;
+    private List<CreditCardProvider> providers = emptyList();
 
     public CreditCardNumberBuilder(Dummy4j dummy4j, LuhnFormula luhnFormula) {
         this.dummy4j = dummy4j;
@@ -28,19 +34,33 @@ public class CreditCardNumberBuilder {
     }
 
     /**
-     * Sets a random provider for which the number will be generated
+     * Sets the provider for which the number will be generated
      */
-    public CreditCardNumberBuilder withRandomProvider() {
-        this.provider = null;
+    public CreditCardNumberBuilder withProvider(CreditCardProvider provider) {
+        providers = singletonList(provider);
 
         return this;
     }
 
     /**
-     * Sets the provider for which the number will be generated
+     * Sets a provider for which the number will be generated to one that is chosen at random
+     * from the {@code CreditCardProvider} enum, which is the default behavior for this builder
      */
-    public CreditCardNumberBuilder withProvider(CreditCardProvider provider) {
-        this.provider = provider;
+    public CreditCardNumberBuilder withRandomProvider() {
+        providers = emptyList();
+
+        return this;
+    }
+
+    /**
+     * Sets the provider for which the number will be generated to one that is randomly chosen from provided arguments.
+     * If there are no arguments, a provider is chosen at random from the {@code CreditCardProvider} enum,
+     * which is the default behavior for this builder
+     *
+     * @since SNAPSHOT
+     */
+    public CreditCardNumberBuilder withRandomProvider(CreditCardProvider... providers) {
+        this.providers = asList(providers);
 
         return this;
     }
@@ -54,18 +74,10 @@ public class CreditCardNumberBuilder {
         return this;
     }
 
-    CreditCardProvider getProvider() {
-        return provider;
-    }
-
     /**
      * Generates a random credit card number
      */
     public String build() {
-        if (provider == null) {
-            provider = dummy4j.nextEnum(CreditCardProvider.class);
-        }
-
         String uncheckedNumber = getNumberWithIIN();
         String number = uncheckedNumber + luhnFormula.getCheckDigit(uncheckedNumber);
 
@@ -77,12 +89,14 @@ public class CreditCardNumberBuilder {
     }
 
     private String getNumberWithIIN() {
-        String resolvedDefinition = dummy4j.expressionResolver().resolve(getProviderKey());
+        CreditCardProvider provider = Optional.ofNullable(dummy4j.of(providers))
+                .orElse(dummy4j.nextEnum(CreditCardProvider.class));
+        String resolvedDefinition = dummy4j.expressionResolver().resolve(getProviderKey(provider));
 
-        return Replace.replaceCharactersConditionally(resolvedDefinition, getIIN(), Character::isDigit);
+        return Replace.replaceCharactersConditionally(resolvedDefinition, getIIN(provider), Character::isDigit);
     }
 
-    private String getProviderKey() {
+    private String getProviderKey(CreditCardProvider provider) {
         String providerNameInLowerCase = provider.getName().toLowerCase(Locale.ENGLISH);
         String providerKey = SANITIZE_DEFINITION_KEY_PATTERN.matcher(providerNameInLowerCase)
                 .replaceAll("_");
@@ -90,7 +104,7 @@ public class CreditCardNumberBuilder {
         return PARTIAL_CREDIT_CARD_KEY + providerKey + "}";
     }
 
-    private String getIIN() {
+    private String getIIN(CreditCardProvider provider) {
         IINRange range = dummy4j.of(provider.getIinRanges());
 
         return String.valueOf(dummy4j.number().nextInt(range.getMin(), range.getMax()));
@@ -99,7 +113,7 @@ public class CreditCardNumberBuilder {
     @Override
     public String toString() {
         return "CreditCardNumberBuilder{" +
-                "provider=" + provider +
+                "providers=" + providers +
                 ", withoutFormatting=" + withoutFormatting +
                 '}';
     }

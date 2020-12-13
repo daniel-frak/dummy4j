@@ -9,6 +9,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
@@ -54,6 +57,8 @@ class CreditCardNumberBuilderTest {
     }
 
     private void mockCreditCardProvider() {
+        when(dummy4j.of(emptyList()))
+                .thenReturn(null);
         when(dummy4j.nextEnum(CreditCardProvider.class))
                 .thenReturn(CreditCardProvider.AMERICAN_EXPRESS);
     }
@@ -90,8 +95,25 @@ class CreditCardNumberBuilderTest {
     @Test
     void shouldGenerateCreditCardNumberWithProvider() {
         mockCreditCardNumber();
+        when(dummy4j.of(singletonList(CreditCardProvider.AMERICAN_EXPRESS)))
+                .thenReturn(CreditCardProvider.AMERICAN_EXPRESS);
 
-        String actual = builder.withProvider(CreditCardProvider.AMERICAN_EXPRESS).build();
+        String actual = builder
+                .withProvider(CreditCardProvider.AMERICAN_EXPRESS)
+                .build();
+
+        assertEquals("3412 345678 90127", actual);
+    }
+
+    @Test
+    void shouldGenerateCreditCardNumberWithProviderChosenFromGivenArguments() {
+        mockCreditCardNumber();
+        when(dummy4j.of(asList(CreditCardProvider.AMERICAN_EXPRESS, CreditCardProvider.VISA)))
+                .thenReturn(CreditCardProvider.AMERICAN_EXPRESS);
+
+        String actual = builder
+                .withRandomProvider(CreditCardProvider.AMERICAN_EXPRESS, CreditCardProvider.VISA)
+                .build();
 
         assertEquals("3412 345678 90127", actual);
     }
@@ -136,7 +158,7 @@ class CreditCardNumberBuilderTest {
 
     @Test
     void shouldConvertBuilderToString() {
-        String expected = "CreditCardNumberBuilder{provider=null, withoutFormatting=false}";
+        String expected = "CreditCardNumberBuilder{providers=[], withoutFormatting=false}";
 
         String actual = builder.toString();
 
@@ -148,6 +170,8 @@ class CreditCardNumberBuilderTest {
         mockNumberService();
         mockExpressionResolver();
         mockIINRange();
+        when(dummy4j.of(singletonList(CreditCardProvider.MASTER_CARD)))
+                .thenReturn(CreditCardProvider.MASTER_CARD);
         when(expressionResolver.resolve(CreditCardNumberBuilder.PARTIAL_CREDIT_CARD_KEY + "mastercard}"))
                 .thenReturn("0012 3456 7890 123");
         when(luhnFormula.getCheckDigit("2720 9956 7890 123"))

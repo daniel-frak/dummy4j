@@ -15,6 +15,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -51,6 +54,8 @@ class CreditCardBuilderTest {
     void shouldReturnCreditCardWithOneDigitMonthPadded() {
         Address address = getAddress();
         mockCreditCardData(address, 5);
+        when(dummy4j.nextEnum(CreditCardProvider.class))
+                .thenReturn(CreditCardProvider.AMERICAN_EXPRESS);
         mockNumber();
 
         CreditCard actual = builder.build();
@@ -121,16 +126,18 @@ class CreditCardBuilderTest {
     }
 
     private void mockNumber() {
+        when(numberBuilder.withProvider(CreditCardProvider.AMERICAN_EXPRESS)).
+                thenReturn(numberBuilder);
         when(numberBuilder.build()).
                 thenReturn("3412 345678 90127");
-        when(numberBuilder.getProvider())
-                .thenReturn(CreditCardProvider.AMERICAN_EXPRESS);
     }
 
     @Test
     void shouldReturnCreditCardWithTwoDigitMonth() {
         Address address = getAddress();
         mockCreditCardData(address, 10);
+        when(dummy4j.nextEnum(CreditCardProvider.class))
+                .thenReturn(CreditCardProvider.AMERICAN_EXPRESS);
         mockNumber();
 
         CreditCard actual = builder.build();
@@ -142,6 +149,8 @@ class CreditCardBuilderTest {
     void shouldReturnCreditCardForProvider() {
         Address address = getAddress();
         mockCreditCardData(address, 5);
+        when(dummy4j.of(singletonList(CreditCardProvider.AMERICAN_EXPRESS)))
+                .thenReturn(CreditCardProvider.AMERICAN_EXPRESS);
         mockNumber();
 
         CreditCard actual = builder
@@ -155,14 +164,35 @@ class CreditCardBuilderTest {
     void shouldReturnCreditCardForRandomProvider() {
         Address address = getAddress();
         mockCreditCardData(address, 5);
+        when(dummy4j.of(emptyList()))
+                .thenReturn(null);
+        when(dummy4j.nextEnum(CreditCardProvider.class))
+                .thenReturn(CreditCardProvider.VISA);
+        when(numberBuilder.withProvider(CreditCardProvider.VISA)).
+                thenReturn(numberBuilder);
         when(numberBuilder.build()).
                 thenReturn("3412 345678 90127");
-        when(numberBuilder.getProvider())
-                .thenReturn(CreditCardProvider.VISA);
 
         CreditCard actual = builder
-                .withProvider(CreditCardProvider.AMERICAN_EXPRESS)
                 .withRandomProvider()
+                .build();
+
+        assertEquals(CreditCardProvider.VISA, actual.getProvider());
+    }
+
+    @Test
+    void shouldReturnCreditCardForProviderChosenFromProvidedArguments() {
+        Address address = getAddress();
+        mockCreditCardData(address, 5);
+        when(dummy4j.of(asList(CreditCardProvider.AMERICAN_EXPRESS, CreditCardProvider.VISA)))
+                .thenReturn(CreditCardProvider.VISA);
+        when(numberBuilder.withProvider(CreditCardProvider.VISA)).
+                thenReturn(numberBuilder);
+        when(numberBuilder.build()).
+                thenReturn("3412 345678 90127");
+
+        CreditCard actual = builder
+                .withRandomProvider(CreditCardProvider.AMERICAN_EXPRESS, CreditCardProvider.VISA)
                 .build();
 
         assertEquals(CreditCardProvider.VISA, actual.getProvider());
@@ -172,10 +202,12 @@ class CreditCardBuilderTest {
     void shouldReturnCreditCardNumberWithoutFormatting() {
         Address address = getAddress();
         mockCreditCardData(address, 5);
+        when(dummy4j.nextEnum(CreditCardProvider.class))
+                .thenReturn(CreditCardProvider.AMERICAN_EXPRESS);
+        when(numberBuilder.withProvider(CreditCardProvider.AMERICAN_EXPRESS)).
+                thenReturn(numberBuilder);
         when(numberBuilder.build()).
                 thenReturn("341234567890127");
-        when(numberBuilder.getProvider())
-                .thenReturn(CreditCardProvider.AMERICAN_EXPRESS);
 
         CreditCard actual = builder
                 .withoutNumberFormatting()
@@ -186,6 +218,6 @@ class CreditCardBuilderTest {
 
     @Test
     void shouldConvertToString() {
-        assertEquals("CreditCardBuilder{numberBuilder=numberBuilder}", builder.toString());
+        assertEquals("CreditCardBuilder{numberBuilder=numberBuilder, providers=[]}", builder.toString());
     }
 }

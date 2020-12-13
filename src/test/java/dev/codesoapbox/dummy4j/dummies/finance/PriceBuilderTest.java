@@ -9,8 +9,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class PriceBuilderTest {
@@ -54,6 +56,8 @@ class PriceBuilderTest {
     @Test
     void shouldBuildPriceWithGivenCurrency() {
         mockNextFloat();
+        when(dummy4j.of(singletonList("USD")))
+                .thenReturn("USD");
 
         String actual = builder
                 .withCurrency("USD")
@@ -63,7 +67,7 @@ class PriceBuilderTest {
     }
 
     @Test
-    void shouldBuildPriceWithRandomCurrency() {
+    void shouldBuildPriceWithCurrencyChoseAtRandomFromDefinitions() {
         mockNextFloat();
         mockExpressionResolver();
         mockRandomCurrency();
@@ -83,6 +87,32 @@ class PriceBuilderTest {
     private void mockRandomCurrency() {
         when(expressionResolver.resolve(FinanceDummy.CURRENCY_CODE_KEY))
                 .thenReturn("EUR");
+    }
+
+    @Test
+    void shouldBuildPriceWithCurrencyChoseAtRandomFromProvidedArguments() {
+        mockNextFloat();
+        when(dummy4j.of(asList("JPY", "PLN", "USD")))
+                .thenReturn("JPY");
+
+        String actual = builder
+                .withRandomCurrency("JPY", "PLN", "USD")
+                .build();
+
+        assertEquals("JPY 12.35", actual);
+        verify(expressionResolver, never()).resolve(FinanceDummy.CURRENCY_CODE_KEY);
+    }
+
+    @Test
+    void shouldBuildPriceWithoutCurrency() {
+        mockNextFloat();
+
+        String actual = builder
+                .withoutCurrency()
+                .build();
+
+        assertEquals("12.35", actual);
+        verify(expressionResolver, never()).resolve(FinanceDummy.CURRENCY_CODE_KEY);
     }
 
     @Test
