@@ -35,7 +35,12 @@ public class PriceBuilder {
 
     /**
      * Sets the currency that will be added to the generated price.
-     * E.g. {@code EUR 12.35}
+     * E.g. {@code EUR 12.35}.
+     * <p>
+     * The currency code will be placed before the amount.
+     *
+     * @see <a href="https://en.wikipedia.org/wiki/ISO_4217#Position_of_ISO_4217_code_in_amounts">
+     * Position of ISO 4217 code in amounts</a>
      */
     public PriceBuilder withCurrency(String customCurrency) {
         currencies = singletonList(customCurrency);
@@ -46,7 +51,12 @@ public class PriceBuilder {
 
     /**
      * Sets a random currency that will be added to the generated price.
-     * E.g. {@code JPY 12.35}
+     * E.g. {@code JPY 12.35}.
+     * <p>
+     * The currency code will be placed before the amount.
+     *
+     * @see <a href="https://en.wikipedia.org/wiki/ISO_4217#Position_of_ISO_4217_code_in_amounts">
+     * Position of ISO 4217 code in amounts</a>
      */
     public PriceBuilder withRandomCurrency() {
         currencyFromDefinitions = true;
@@ -57,8 +67,12 @@ public class PriceBuilder {
 
     /**
      * Sets a currency that will be added to the generated price to one that is randomly chosen from provided arguments.
-     * E.g. {@code JPY 12.35}
+     * E.g. {@code JPY 12.35}.
+     * <p>
+     * The currency code will be placed before the amount.
      *
+     * @see <a href="https://en.wikipedia.org/wiki/ISO_4217#Position_of_ISO_4217_code_in_amounts">
+     * Position of ISO 4217 code in amounts</a>
      * @since SNAPSHOT
      */
     public PriceBuilder withRandomCurrency(String... currencies) {
