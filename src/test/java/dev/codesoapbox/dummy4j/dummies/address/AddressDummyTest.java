@@ -1,4 +1,4 @@
-package dev.codesoapbox.dummy4j.dummies;
+package dev.codesoapbox.dummy4j.dummies.address;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
 import dev.codesoapbox.dummy4j.ExpressionResolver;
@@ -8,7 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -71,5 +71,21 @@ class AddressDummyTest {
                 .thenReturn("es");
 
         assertEquals("es", addressDummy.countryCode());
+    }
+
+    @Test
+    void fullAddress() {
+        when(expressionResolver.resolve("#{address.street}"))
+                .thenReturn("5 Street");
+        when(expressionResolver.resolve("#{address.postcode}"))
+                .thenReturn("11");
+        when(expressionResolver.resolve("#{address.city}"))
+                .thenReturn("City");
+        when(expressionResolver.resolve("#{nation.country}"))
+                .thenReturn("Country");
+
+        Address expected = new Address("5 Street", "11", "City", "Country");
+
+        assertEquals(expected, addressDummy.full());
     }
 }

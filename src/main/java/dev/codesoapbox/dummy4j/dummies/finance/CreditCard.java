@@ -1,6 +1,6 @@
 package dev.codesoapbox.dummy4j.dummies.finance;
 
-import dev.codesoapbox.dummy4j.dummies.shared.Address;
+import dev.codesoapbox.dummy4j.dummies.address.Address;
 import dev.codesoapbox.dummy4j.dummies.shared.string.StringValidator;
 
 import java.util.Objects;

@@ -2,10 +2,10 @@ package dev.codesoapbox.dummy4j.dummies.finance;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
 import dev.codesoapbox.dummy4j.NumberService;
-import dev.codesoapbox.dummy4j.dummies.AddressDummy;
 import dev.codesoapbox.dummy4j.dummies.DateAndTimeDummy;
 import dev.codesoapbox.dummy4j.dummies.NameDummy;
-import dev.codesoapbox.dummy4j.dummies.shared.Address;
+import dev.codesoapbox.dummy4j.dummies.address.Address;
+import dev.codesoapbox.dummy4j.dummies.address.AddressDummy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,8 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -94,14 +93,8 @@ class CreditCardBuilderTest {
     private void mockOwnerAddress(Address address) {
         when(dummy4j.address())
                 .thenReturn(addressDummy);
-        when(addressDummy.street())
-                .thenReturn(address.getStreet());
-        when(addressDummy.postCode())
-                .thenReturn(address.getPostCode());
-        when(addressDummy.city())
-                .thenReturn(address.getCity());
-        when(addressDummy.country())
-                .thenReturn(address.getCountry());
+        when(addressDummy.full())
+                .thenReturn(address);
     }
 
     private void mockExpiryDate(int month) {
