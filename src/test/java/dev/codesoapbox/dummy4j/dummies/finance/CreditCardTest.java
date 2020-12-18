@@ -1,6 +1,6 @@
 package dev.codesoapbox.dummy4j.dummies.finance;
 
-import dev.codesoapbox.dummy4j.dummies.shared.Address;
+import dev.codesoapbox.dummy4j.dummies.address.Address;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,7 +12,7 @@ class CreditCardTest {
 
     @Test
     void shouldReturnCreditCard() {
-        Address address = new Address("street", "123", "city", "country");
+        Address address = getAddress();
 
         CreditCard actual = new CreditCard("123", CreditCardProvider.AMERICAN_EXPRESS, "Zoe Anderson",
                 address, "05/2030", "111");
@@ -33,6 +33,10 @@ class CreditCardTest {
         );
     }
 
+    private Address getAddress() {
+        return new Address("street", "123", "city", "country");
+    }
+
     @ParameterizedTest
     @CsvSource({
             ",Zoe Anderson, 05/2030, 111",
@@ -47,14 +51,14 @@ class CreditCardTest {
             "'','','',''"
     })
     void shouldThrowExceptionOnNullStringValues(String number, String owner, String expiryDate, String securityCode) {
-        Address address = new Address("street", "123", "city", "country");
+        Address address = getAddress();
         assertThrows(IllegalArgumentException.class, () ->
                 new CreditCard(number, CreditCardProvider.VISA, owner, address, expiryDate, securityCode));
     }
 
     @Test
     void shouldThrowExceptionOnNullObjectValues() {
-        Address address = new Address("street", "123", "city", "country");
+        Address address = getAddress();
 
         assertThrows(IllegalArgumentException.class, () ->
                 new CreditCard("3", null, "Z", address, "2", "1"));

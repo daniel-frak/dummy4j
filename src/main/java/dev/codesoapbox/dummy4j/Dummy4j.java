@@ -3,6 +3,7 @@ package dev.codesoapbox.dummy4j;
 import dev.codesoapbox.dummy4j.definitions.UniqueValues;
 import dev.codesoapbox.dummy4j.definitions.providers.files.yaml.YamlFileDefinitionProvider;
 import dev.codesoapbox.dummy4j.dummies.*;
+import dev.codesoapbox.dummy4j.dummies.address.AddressDummy;
 import dev.codesoapbox.dummy4j.dummies.color.ColorDummy;
 import dev.codesoapbox.dummy4j.dummies.finance.FinanceDummy;
 import dev.codesoapbox.dummy4j.dummies.internet.InternetDummy;

@@ -1,4 +1,4 @@
-package dev.codesoapbox.dummy4j.dummies.shared;
+package dev.codesoapbox.dummy4j.dummies.address;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
