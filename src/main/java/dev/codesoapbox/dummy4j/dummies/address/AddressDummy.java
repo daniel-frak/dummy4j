@@ -1,4 +1,4 @@
-package dev.codesoapbox.dummy4j.dummies;
+package dev.codesoapbox.dummy4j.dummies.address;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
 
@@ -46,5 +46,14 @@ public class AddressDummy {
      */
     public String countryCode() {
         return dummy4j.expressionResolver().resolve("#{nation.country_code}");
+    }
+
+    /**
+     * Provides a complete random address
+     *
+     * @since SNAPSHOT
+     */
+    public Address full() {
+        return new Address(street(), postCode(), city(), country());
     }
 }

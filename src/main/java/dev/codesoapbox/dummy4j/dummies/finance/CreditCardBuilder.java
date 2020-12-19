@@ -1,8 +1,7 @@
 package dev.codesoapbox.dummy4j.dummies.finance;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
-import dev.codesoapbox.dummy4j.dummies.AddressDummy;
-import dev.codesoapbox.dummy4j.dummies.shared.Address;
+import dev.codesoapbox.dummy4j.dummies.address.Address;
 import dev.codesoapbox.dummy4j.dummies.shared.string.Padding;
 
 import java.time.LocalDate;
@@ -85,17 +84,11 @@ public class CreditCardBuilder {
                 .orElse(dummy4j.nextEnum(CreditCardProvider.class));
         String number = numberBuilder.withProvider(provider).build();
         String ownerName = dummy4j.name().firstName() + " " + dummy4j.name().lastName();
-        Address ownerAddress = generateAddress();
+        Address ownerAddress = dummy4j.address().full();
         String expiryDate = generateExpiryDate();
         String securityCode = String.valueOf(dummy4j.number().nextInt(MIN_SECURITY_CODE, MAX_SECURITY_CODE));
 
         return new CreditCard(number, provider, ownerName, ownerAddress, expiryDate, securityCode);
-    }
-
-    private Address generateAddress() {
-        AddressDummy address = dummy4j.address();
-
-        return new Address(address.street(), address.postCode(), address.city(), address.country());
     }
 
     private String generateExpiryDate() {

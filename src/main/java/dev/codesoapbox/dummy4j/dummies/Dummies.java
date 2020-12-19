@@ -1,6 +1,7 @@
 package dev.codesoapbox.dummy4j.dummies;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
+import dev.codesoapbox.dummy4j.dummies.address.AddressDummy;
 import dev.codesoapbox.dummy4j.dummies.color.ColorDummy;
 import dev.codesoapbox.dummy4j.dummies.finance.FinanceBuilderFactory;
 import dev.codesoapbox.dummy4j.dummies.finance.FinanceDummy;
