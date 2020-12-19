@@ -44,7 +44,9 @@ public class CreditCardNumberBuilder {
 
     /**
      * Sets a provider for which the number will be generated to one that is chosen at random
-     * from the {@code CreditCardProvider} enum, which is the default behavior for this builder
+     * from the {@code CreditCardProvider} enum.
+     * <p>
+     * This is the default behavior for this builder.
      */
     public CreditCardNumberBuilder withRandomProvider() {
         providers = emptyList();
@@ -54,8 +56,7 @@ public class CreditCardNumberBuilder {
 
     /**
      * Sets the provider for which the number will be generated to one that is randomly chosen from provided arguments.
-     * If there are no arguments, a provider is chosen at random from the {@code CreditCardProvider} enum,
-     * which is the default behavior for this builder
+     * If there are no arguments, a provider is chosen at random from the {@code CreditCardProvider} enum.
      *
      * @since SNAPSHOT
      */

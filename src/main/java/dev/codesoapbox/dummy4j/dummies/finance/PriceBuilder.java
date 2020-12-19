@@ -83,8 +83,10 @@ public class PriceBuilder {
     }
 
     /**
-     * The price will be generated without any currency which is the default behaviour of this builder.
-     * E.g. {@code 12.35}
+     * The price will be generated without any currency.
+     * E.g. {@code 12.35}.
+     * <p>
+     * This is the default behavior for this builder.
      *
      * @since SNAPSHOT
      */

@@ -67,7 +67,7 @@ class PriceBuilderTest {
     }
 
     @Test
-    void shouldBuildPriceWithCurrencyChoseAtRandomFromDefinitions() {
+    void shouldBuildPriceWithCurrencyChosenAtRandomFromDefinitions() {
         mockNextFloat();
         mockExpressionResolver();
         mockRandomCurrency();
@@ -90,7 +90,7 @@ class PriceBuilderTest {
     }
 
     @Test
-    void shouldBuildPriceWithCurrencyChoseAtRandomFromProvidedArguments() {
+    void shouldBuildPriceWithCurrencyChosenAtRandomFromProvidedArguments() {
         mockNextFloat();
         when(dummy4j.of(asList("JPY", "PLN", "USD")))
                 .thenReturn("JPY");

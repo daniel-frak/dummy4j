@@ -48,7 +48,9 @@ public class IbanBuilder {
     }
 
     /**
-     * Sets a random country for the generated IBAN, which is the default behavior for this builder
+     * Sets a random country for the generated IBAN.
+     * <p>
+     * This is the default behavior for this builder.
      *
      * @see BankAccountCountry
      * @since SNAPSHOT
