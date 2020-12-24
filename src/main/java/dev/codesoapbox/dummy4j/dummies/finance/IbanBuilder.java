@@ -48,8 +48,23 @@ public class IbanBuilder {
     }
 
     /**
-     * Sets the country for the generated IBAN to one that is randomly chosen from provided arguments.
-     * If there are no arguments, a country is chosen at random from the {@code BankAccountCountry} enum.
+     * Sets a random country for the generated IBAN.
+     * <p>
+     * This is the default behavior for this builder.
+     *
+     * @see BankAccountCountry
+     * @since SNAPSHOT
+     */
+    public IbanBuilder withRandomCountry() {
+        this.countries = emptyList();
+
+        return this;
+    }
+
+    /**
+     * Sets the country for the generated IBAN to one that is randomly chosen from provided arguments
+     *
+     * @see BankAccountCountry
      */
     public IbanBuilder withRandomCountry(BankAccountCountry... countries) {
         this.countries = asList(countries);
@@ -59,6 +74,8 @@ public class IbanBuilder {
 
     /**
      * Sets the IBAN country
+     *
+     * @see BankAccountCountry
      */
     public IbanBuilder withCountry(BankAccountCountry country) {
         countries = singletonList(country);

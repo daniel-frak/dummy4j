@@ -3,6 +3,13 @@ package dev.codesoapbox.dummy4j.dummies.finance;
 import dev.codesoapbox.dummy4j.Dummy4j;
 import dev.codesoapbox.dummy4j.dummies.shared.math.NumberFormatter;
 
+import java.util.List;
+import java.util.Optional;
+
+import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.singletonList;
+
 /**
  * Provides methods for generating random prices according to customizable parameters
  *
@@ -17,8 +24,8 @@ public class PriceBuilder {
 
     private final Dummy4j dummy4j;
 
-    private String customCurrency;
-    private boolean randomizeCurrency;
+    private boolean currencyFromDefinitions;
+    private List<String> currencies = emptyList();
     private float min = LOWER_BOUNDARY;
     private float max = UPPER_BOUNDARY;
 
@@ -28,22 +35,64 @@ public class PriceBuilder {
 
     /**
      * Sets the currency that will be added to the generated price.
-     * E.g. {@code EUR 12.35}
+     * E.g. {@code EUR 12.35}.
+     * <p>
+     * The currency code will be placed before the amount.
+     *
+     * @see <a href="https://en.wikipedia.org/wiki/ISO_4217#Position_of_ISO_4217_code_in_amounts">
+     * Position of ISO 4217 code in amounts</a>
      */
     public PriceBuilder withCurrency(String customCurrency) {
-        this.customCurrency = customCurrency;
-        randomizeCurrency = false;
+        currencies = singletonList(customCurrency);
+        currencyFromDefinitions = false;
 
         return this;
     }
 
     /**
      * Sets a random currency that will be added to the generated price.
-     * E.g. {@code JPY 12.35}
+     * E.g. {@code JPY 12.35}.
+     * <p>
+     * The currency code will be placed before the amount.
+     *
+     * @see <a href="https://en.wikipedia.org/wiki/ISO_4217#Position_of_ISO_4217_code_in_amounts">
+     * Position of ISO 4217 code in amounts</a>
      */
     public PriceBuilder withRandomCurrency() {
-        this.customCurrency = null;
-        randomizeCurrency = true;
+        currencyFromDefinitions = true;
+        currencies = emptyList();
+
+        return this;
+    }
+
+    /**
+     * Sets a currency that will be added to the generated price to one that is randomly chosen from provided arguments.
+     * E.g. {@code JPY 12.35}.
+     * <p>
+     * The currency code will be placed before the amount.
+     *
+     * @see <a href="https://en.wikipedia.org/wiki/ISO_4217#Position_of_ISO_4217_code_in_amounts">
+     * Position of ISO 4217 code in amounts</a>
+     * @since SNAPSHOT
+     */
+    public PriceBuilder withRandomCurrency(String... currencies) {
+        this.currencies = asList(currencies);
+        currencyFromDefinitions = false;
+
+        return this;
+    }
+
+    /**
+     * The price will be generated without any currency.
+     * E.g. {@code 12.35}.
+     * <p>
+     * This is the default behavior for this builder.
+     *
+     * @since SNAPSHOT
+     */
+    public PriceBuilder withoutCurrency() {
+        currencies = emptyList();
+        currencyFromDefinitions = false;
 
         return this;
     }
@@ -66,7 +115,7 @@ public class PriceBuilder {
     public PriceBuilder withinRange(float min, float max) {
         this.min = min;
         this.max = max;
-        
+
         return this;
     }
 
@@ -84,14 +133,11 @@ public class PriceBuilder {
     }
 
     private String getCurrency() {
-        if (randomizeCurrency) {
+        if (currencyFromDefinitions) {
             return dummy4j.expressionResolver().resolve(FinanceDummy.CURRENCY_CODE_KEY);
         }
-        if (customCurrency != null) {
-            return customCurrency;
-        }
-
-        return "";
+        return Optional.ofNullable(dummy4j.of(currencies))
+                .orElse("");
     }
 
     private String getAmount() {

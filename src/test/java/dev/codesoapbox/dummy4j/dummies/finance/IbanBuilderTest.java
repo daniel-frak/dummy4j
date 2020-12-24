@@ -112,7 +112,7 @@ class IbanBuilderTest {
     }
 
     @Test
-    void shouldAllowReusingBuilder() {
+    void shouldAllowReusingBuilderButChangeCountry() {
         mockFinanceDummy();
         BankAccountCountry germany = BankAccountCountry.GERMANY;
         String accountNumber = mockAccountNumber(germany);
@@ -124,6 +124,25 @@ class IbanBuilderTest {
         String actual = builder
                 .withRandomCountry(BankAccountCountry.ALBANIA, BankAccountCountry.MACEDONIA)
                 .withCountry(germany)
+                .build();
+
+
+        assertEquals("DE5112345678901", actual);
+    }
+
+    @Test
+    void shouldAllowReusingBuilderButResetCountry() {
+        mockFinanceDummy();
+        BankAccountCountry country = BankAccountCountry.GERMANY;
+        when(dummy4j.nextEnum(BankAccountCountry.class))
+                .thenReturn(country);
+        String accountNumber = mockAccountNumber(country);
+        when(ibanFormula.getCheckDigits(accountNumber, country.getCode()))
+                .thenReturn("51");
+
+        String actual = builder
+                .withRandomCountry(BankAccountCountry.ALBANIA, BankAccountCountry.MACEDONIA)
+                .withRandomCountry()
                 .build();
 
 
