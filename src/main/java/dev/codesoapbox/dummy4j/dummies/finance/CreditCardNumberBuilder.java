@@ -20,7 +20,14 @@ public class CreditCardNumberBuilder {
 
     static final String PARTIAL_CREDIT_CARD_KEY = "#{finance.credit_card_without_check_digit.";
     static final Pattern SANITIZE_NUMBER_PATTERN = Pattern.compile("[^\\d]");
-    static final Pattern SANITIZE_DEFINITION_KEY_PATTERN = Pattern.compile("\\s");
+
+    /**
+     * The pattern uses Unicode properties to cover more cases.
+     *
+     * @see <a href="https://stackoverflow.com/questions/56653323/s-doesnt-actually-capture-all-whitespace-characters/
+     * 56654027#56654027">Capture all whitespace characters (StackOverflow)</a>
+     */
+    static final Pattern SANITIZE_DEFINITION_KEY_PATTERN = Pattern.compile("\\s", Pattern.UNICODE_CHARACTER_CLASS);
 
     private final Dummy4j dummy4j;
     private final LuhnFormula luhnFormula;
