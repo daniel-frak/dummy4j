@@ -1,0 +1,19 @@
+en:
+  identifier:
+    isbn:
+      prefix: [
+          "978"
+      ]
+      separator: [
+          "-"
+      ]
+    ismn:
+      separator: [
+          "-"
+      ]
+    device:
+      tac:
+        reporting_body: [
+            "01"
+        ]
+

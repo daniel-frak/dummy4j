@@ -1,5 +1,6 @@
 package dev.codesoapbox.dummy4j.dummies.shared.math;
 
+import dev.codesoapbox.dummy4j.exceptions.InvalidRangeException;
 import dev.codesoapbox.dummy4j.exceptions.ValueOutOfRangeException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,5 +22,11 @@ class NumberValidatorTest {
                 () -> NumberValidator.inRange(360.01F, -360F, 360F));
         assertThrows(ValueOutOfRangeException.class,
                 () -> NumberValidator.inRange(-360.01F, -360F, 360F));
+    }
+
+    @Test
+    void shouldThrowExceptionWhenRangeIsInvalid() {
+        assertThrows(InvalidRangeException.class,
+                () -> NumberValidator.inRange(10, 20, 1));
     }
 }

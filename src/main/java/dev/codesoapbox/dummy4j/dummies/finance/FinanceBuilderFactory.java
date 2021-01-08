@@ -1,6 +1,7 @@
 package dev.codesoapbox.dummy4j.dummies.finance;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
+import dev.codesoapbox.dummy4j.dummies.shared.checkdigitformulas.LuhnFormula;
 
 /**
  * Provides methods for instantiating builders used in the FinanceDummy class

@@ -8,6 +8,7 @@ import dev.codesoapbox.dummy4j.dummies.*;
 import dev.codesoapbox.dummy4j.dummies.address.AddressDummy;
 import dev.codesoapbox.dummy4j.dummies.color.ColorDummy;
 import dev.codesoapbox.dummy4j.dummies.finance.FinanceDummy;
+import dev.codesoapbox.dummy4j.dummies.identifier.IdentifierDummy;
 import dev.codesoapbox.dummy4j.dummies.internet.InternetDummy;
 
 import java.util.List;

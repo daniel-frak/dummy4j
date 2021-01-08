@@ -1,6 +1,7 @@
 package dev.codesoapbox.dummy4j.dummies.finance;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
+import dev.codesoapbox.dummy4j.dummies.shared.checkdigitformulas.LuhnFormula;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

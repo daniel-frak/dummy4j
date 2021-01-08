@@ -18,3 +18,7 @@ Below are given notable sources from which data was gathered or used as inspirat
 * https://en.wikipedia.org/wiki/Payment_card_number
 * https://www.swift.com/standards/data-standards/iban-international-bank-account-number
 * https://en.wikipedia.org/wiki/Bank_account#Types_of_accounts
+* https://en.wikipedia.org/wiki/List_of_GS1_country_codes
+* https://www.isbn-international.org/range_file_generation
+* https://www.ismn-international.org/files/Web_ISMN_Users_Manual_2016.pdf
+* https://en.wikipedia.org/wiki/Reporting_Body_Identifier

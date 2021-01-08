@@ -1,4 +1,4 @@
-package dev.codesoapbox.dummy4j.dummies.internet;
+package dev.codesoapbox.dummy4j.dummies.shared.string;
 
 import org.junit.jupiter.api.Test;
 

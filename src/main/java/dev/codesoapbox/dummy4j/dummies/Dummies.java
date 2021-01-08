@@ -5,6 +5,8 @@ import dev.codesoapbox.dummy4j.dummies.address.AddressDummy;
 import dev.codesoapbox.dummy4j.dummies.color.ColorDummy;
 import dev.codesoapbox.dummy4j.dummies.finance.FinanceBuilderFactory;
 import dev.codesoapbox.dummy4j.dummies.finance.FinanceDummy;
+import dev.codesoapbox.dummy4j.dummies.identifier.IdentifierDummy;
+import dev.codesoapbox.dummy4j.dummies.identifier.internationalnumber.InternationalStandardNumberFactory;
 import dev.codesoapbox.dummy4j.dummies.internet.InternetDummy;
 
 import java.time.Clock;
@@ -34,7 +36,7 @@ public class Dummies {
         address = new AddressDummy(dummy4j);
         lorem = new LoremDummy(dummy4j);
         dateAndTime = new DateAndTimeDummy(dummy4j, Clock.systemDefaultZone());
-        identifier = new IdentifierDummy(dummy4j);
+        identifier = new IdentifierDummy(dummy4j, InternationalStandardNumberFactory.newInstance(dummy4j));
         education = new EducationDummy(dummy4j);
         book = new BookDummy(dummy4j);
         researchPaper = new ResearchPaperDummy(dummy4j);
