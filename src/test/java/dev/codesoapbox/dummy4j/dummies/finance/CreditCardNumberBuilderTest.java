@@ -88,7 +88,7 @@ class CreditCardNumberBuilderTest {
     }
 
     private void mockCheckDigit() {
-        when(luhnFormula.getCheckDigit("3412 345678 9012"))
+        when(luhnFormula.generateCheckDigit("3412 345678 9012"))
                 .thenReturn("7");
     }
 
@@ -174,7 +174,7 @@ class CreditCardNumberBuilderTest {
                 .thenReturn(CreditCardProvider.MASTER_CARD);
         when(expressionResolver.resolve(CreditCardNumberBuilder.PARTIAL_CREDIT_CARD_KEY + "mastercard}"))
                 .thenReturn("0012 3456 7890 123");
-        when(luhnFormula.getCheckDigit("2720 9956 7890 123"))
+        when(luhnFormula.generateCheckDigit("2720 9956 7890 123"))
                 .thenReturn("7");
 
         String actual = builder

@@ -16,11 +16,11 @@ public class LuhnFormula {
     /**
      * Returns a valid check digit calculated with the Luhn algorithm for the given number
      */
-    String getCheckDigit(String input) {
+    String generateCheckDigit(String input) {
         char[] sanitizedInput = removeInvalidCharacters(input);
         int sum = getSum(sanitizedInput);
 
-        return String.valueOf(getCheckDigit(sum));
+        return String.valueOf(generateCheckDigit(sum));
     }
 
     private char[] removeInvalidCharacters(String input) {
@@ -67,7 +67,7 @@ public class LuhnFormula {
         return value - 9;
     }
 
-    private int getCheckDigit(int sum) {
+    private int generateCheckDigit(int sum) {
         int modulo = sum % 10;
 
         if (modulo == 0) {

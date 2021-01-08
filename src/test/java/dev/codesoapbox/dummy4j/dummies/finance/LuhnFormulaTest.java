@@ -27,6 +27,6 @@ class LuhnFormulaTest {
             "123, 0"
     })
     void shouldReturnCorrectCheckDigit(String input, String expected) {
-        assertEquals(expected, luhnFormula.getCheckDigit(input));
+        assertEquals(expected, luhnFormula.generateCheckDigit(input));
     }
 }

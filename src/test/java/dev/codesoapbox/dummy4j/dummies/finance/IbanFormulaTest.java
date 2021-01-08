@@ -111,7 +111,7 @@ class IbanFormulaTest {
             "1212012345678906, XK, 05"           // Kosovo
     })
     void shouldReturnCheckDigits(String accountNumber, String countryCode, String expected) {
-        String digits = formula.getCheckDigits(accountNumber, countryCode);
+        String digits = formula.generateCheckDigits(accountNumber, countryCode);
 
         assertEquals(expected, digits);
     }
