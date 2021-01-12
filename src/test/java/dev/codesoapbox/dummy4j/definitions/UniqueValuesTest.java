@@ -85,4 +85,34 @@ class UniqueValuesTest {
             });
         });
     }
+
+    @Test
+    void ofShouldProvideUniqueValues() {
+        List<String> allValues = Arrays.asList("a", "a", "b");
+        List<String> expectedResult = Arrays.asList("a", "b");
+        Iterator<String> iterator = allValues.iterator();
+
+        List<String> result = uniqueValues.of(iterator::next, value -> {
+            List<String> list = new ArrayList<>();
+            list.add(value.get());
+            list.add(value.get());
+            return list;
+        });
+
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    void ofShouldThrowExceptionAfterMaxRetriesReached() {
+        int maxRetries = 1;
+        uniqueValues.setMaxRetries(maxRetries);
+
+        assertThrows(UniqueValueRetryLimitExceededException.class, () -> {
+            List<String> result = uniqueValues.of(() -> "value", value -> {
+                value.get();
+                value.get();
+                return null;
+            });
+        });
+    }
 }

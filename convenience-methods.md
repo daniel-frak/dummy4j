@@ -19,7 +19,19 @@ String thisValueMightBeNull = dummy4j.chance(1, 3, () -> "hello");
 ```    
 
 In the above code, there is a one-in-three chance that the value will contain `"hello"` and a two-in-three chance that
-it will be `null`. 
+it will be `null`.
+
+# Random element from an array, collection or array of suppliers (since 0.5.0)
+
+The `of(...)` methods return a random element from a given array, collection or an array of suppliers.
+
+```java
+String elementFromArray = dummy.of(new String[]{ "one", "two", "three" });
+
+String elementFromCollection = dummy.of(Arrays.asList("one", "two", "three"));
+
+String nameOrCity = dummy.of(() -> dummy.name().fullName(), () -> dummy.address().city());
+```
 
 # Globally unique values *(experimental) (since 0.1.2)*
 
@@ -34,11 +46,23 @@ for (int i = 0; i < 10; i++) {
 ```
 
 The above will print 10 names, all of which will be unique within the `fullNameGroup` uniqueness group.
+The uniqueness is guaranteed for the entire lifetime of a Dummy4j instance.
 
-Note that this is an experimental feature and its API may be subject to change.
+*Note that this is an experimental feature and its API may be subject to change.*
 
-# Locally unique values *(experimental)* (since SNAPSHOT)
+# Collections of locally unique values *(experimental)* (since SNAPSHOT)
 
+It is possible to generate locally unique values by wrapping a call with the `dummy.unique().of(...)` method:
+```java
+List<String> names = dummy.unique().of(() -> dummy.name().fullName(), name -> dummy.listOf(10, name));
+System.out.println(names);
+```
+
+The above will print 10 names, all of which will be unique within their list.
+
+*Note that this is an experimental feature and its API may be subject to change.*
+
+# Locally unique values within a code block *(experimental)* (since SNAPSHOT)
 It is possible to generate locally unique values by wrapping a code block with the `dummy.unique().within(...)` method:
 
 ```java
@@ -51,7 +75,7 @@ dummy.unique().within(() -> dummy.name().fullName(), name -> {
 
 The above will print 10 names, all of which will be unique within the wrapped consumer code block.
 
-Note that this is an experimental feature and its API may be subject to change.
+*Note that this is an experimental feature and its API may be subject to change.*
 
 # Generating collections (since 0.4.0)
 
@@ -68,16 +92,4 @@ You can generate a random enum value by providing an enum class.
 
 ```java
 MyEnum randomEnum = dummy.nextEnum(MyEnum.class);
-```
-
-# Random element from an array, collection or array of suppliers (since 0.5.0)
-
-The `of(...)` methods return a random element from a given array, collection or an array of suppliers.
-
-```java
-String elementFromArray = dummy.of(new String[]{ "one", "two", "three" });
-
-String elementFromCollection = dummy.of(Arrays.asList("one", "two", "three"));
-
-String nameOrCity = dummy.of(() -> dummy.name().fullName(), () -> dummy.address().city());
 ```

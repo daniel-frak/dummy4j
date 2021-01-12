@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
@@ -93,7 +94,31 @@ public class UniqueValues {
      */
     public <T> void within(Supplier<T> supplier, Consumer<Supplier<T>> within) {
         Set<Object> usedValuesForMethod = new HashSet<>();
-
         within.accept(() -> provideUnique(null, supplier, usedValuesForMethod));
+    }
+
+    /**
+     * Allows for the creation of collections of unique values.
+     * <p>
+     * Values supplied within the collector function are guaranteed to be unique.
+     * <p>
+     * <b>The unique values will be referenced in memory only until the execution of {@code collector} is completed.</b>
+     * <p></p>
+     * E.g. the following code:
+     * <pre>{@code
+     * List<String> colors = dummy.unique().of(() -> dummy.color().basicName(), color -> dummy.listOf(2, color));
+     * }</pre>
+     * will guarantee that the values of {@code color} will always be unique within the context of their list.
+     *
+     * @param supplier the value supplier
+     * @param collector   the collector within which the supplied values will be unique
+     * @param <T>      the type of value to return
+     * @throws UniqueValueRetryLimitExceededException if retry limit is exceeded
+     * @since SNAPSHOT
+     */
+    public <T, E> E of(Supplier<T> supplier, Function<Supplier<T>, E> collector) {
+        Set<Object> usedValuesForMethod = new HashSet<>();
+
+        return collector.apply(() -> provideUnique(null, supplier, usedValuesForMethod));
     }
 }

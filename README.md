@@ -141,6 +141,8 @@ dummy.unique().within(() -> dummy.name().fullName(), name -> {
     // These names will only be unique within the context of this consumer
     List<String> tenLocallyUniqueNames = dummy.listOf(10, name);
 });
+
+List<String> tenLocallyUniqueNames = dummy.unique().of(() -> dummy.name().fullName(), name -> dummy.listOf(10, name));
 ```
 
 ## Goals and contributing
