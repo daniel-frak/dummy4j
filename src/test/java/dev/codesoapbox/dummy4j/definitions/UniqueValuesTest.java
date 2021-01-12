@@ -4,8 +4,7 @@ import dev.codesoapbox.dummy4j.exceptions.UniqueValueRetryLimitExceededException
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -20,7 +19,7 @@ class UniqueValuesTest {
     }
 
     @Test
-    void shouldThrowExceptionAfterMaxRetriesReached() {
+    void valueShouldThrowExceptionAfterMaxRetriesReached() {
         Deque<String> stack = new ArrayDeque<>();
         stack.add("abc");
         stack.add("abc");
@@ -38,7 +37,7 @@ class UniqueValuesTest {
     }
 
     @Test
-    void shouldReturnValueAfterCollision() {
+    void valueShouldReturnValueAfterCollision() {
         Deque<String> stack = new ArrayDeque<>();
         stack.add("abc");
         stack.add("abc");
@@ -55,7 +54,35 @@ class UniqueValuesTest {
     }
 
     @Test
-    void shouldReturnValue() {
+    void valueShouldReturnValue() {
         assertEquals("value", uniqueValues.value("group", () -> "value"));
+    }
+
+    @Test
+    void withinShouldProvideUniqueValues() {
+        List<String> allValues = Arrays.asList("a", "a", "b");
+        List<String> expectedResult = Arrays.asList("a", "b");
+        Iterator<String> iterator = allValues.iterator();
+
+        List<String> result = new ArrayList<>();
+        uniqueValues.within(iterator::next, value -> {
+            result.add(value.get());
+            result.add(value.get());
+        });
+
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
+    void withinShouldThrowExceptionAfterMaxRetriesReached() {
+        int maxRetries = 1;
+        uniqueValues.setMaxRetries(maxRetries);
+
+        assertThrows(UniqueValueRetryLimitExceededException.class, () -> {
+            uniqueValues.within(() -> "value", value -> {
+                value.get();
+                value.get();
+            });
+        });
     }
 }

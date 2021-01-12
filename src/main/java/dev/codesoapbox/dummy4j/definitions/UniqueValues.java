@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 /**
@@ -35,16 +36,29 @@ public class UniqueValues {
     /**
      * Invokes supplier until it returns a value unique within {@code uniquenessGroup} or the max retry limit is
      * reached.
+     * <p>
+     * <b>The unique values will be referenced in memory for the lifetime of Dummy4j.</b>
+     * <p></p>
+     * E.g. the following code:
+     * <pre>{@code
+     * String color1 = dummy4j.unique().value("colors", () -> dummy4j.color().basicName());
+     * String color2 = dummy4j.unique().value("colors", () -> dummy4j.color().basicName());
+     * }</pre>
+     * will guarantee that the values of {@code color1} and {@code color2} will always be different from each other.
      *
      * @param uniquenessGroup id of the group within which the generated value should be unique
-     * @param supplier the value supplier
-     * @param <T> the type of value to return
+     * @param supplier        the value supplier
+     * @param <T>             the type of value to return
      * @return a unique value
      * @throws UniqueValueRetryLimitExceededException if retry limit is exceeded
      */
     public <T> T value(String uniquenessGroup, Supplier<T> supplier) {
         Set<Object> usedValuesForMethod = usedValues.computeIfAbsent(uniquenessGroup, k -> new HashSet<>());
 
+        return provideUnique(uniquenessGroup, supplier, usedValuesForMethod);
+    }
+
+    private <T> T provideUnique(String uniquenessGroup, Supplier<T> supplier, Set<Object> usedValuesForMethod) {
         for (int i = 0; i <= maxRetries; i++) {
             T result = supplier.get();
             if (!usedValuesForMethod.contains(result)) {
@@ -55,5 +69,31 @@ public class UniqueValues {
         }
 
         throw new UniqueValueRetryLimitExceededException(maxRetries, uniquenessGroup);
+    }
+
+    /**
+     * Guarantees supplied values to be unique within the context of the consumer's code.
+     * <p>
+     * <b>The unique values will be referenced in memory only until the execution of {@code within} is completed.</b>
+     * <p></p>
+     * E.g. the following code:
+     * <pre>{@code
+     * dummy.unique().within(() -> dummy.color().basicName(), color -> {
+     *             String color1 = color.get();
+     *             String color2 = color.get();
+     *         });
+     * }</pre>
+     * will guarantee that the values of {@code color1} and {@code color2} will always be different from each other.
+     *
+     * @param supplier the value supplier
+     * @param within   the code within which the supplied values will be unique
+     * @param <T>      the type of value to return
+     * @throws UniqueValueRetryLimitExceededException if retry limit is exceeded
+     * @since SNAPSHOT
+     */
+    public <T> void within(Supplier<T> supplier, Consumer<Supplier<T>> within) {
+        Set<Object> usedValuesForMethod = new HashSet<>();
+
+        within.accept(() -> provideUnique(null, supplier, usedValuesForMethod));
     }
 }

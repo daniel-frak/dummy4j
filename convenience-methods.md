@@ -21,9 +21,9 @@ String thisValueMightBeNull = dummy4j.chance(1, 3, () -> "hello");
 In the above code, there is a one-in-three chance that the value will contain `"hello"` and a two-in-three chance that
 it will be `null`. 
 
-# Unique values *(experimental) (since 0.1.2)*
+# Globally unique values *(experimental) (since 0.1.2)*
 
-It is possible to generate unique values by wrapping a call with the `dummy.unique().value(...)` method:
+It is possible to generate globally unique values by wrapping a call with the `dummy.unique().value(...)` method:
 
 ```java
 for (int i = 0; i < 10; i++) {
@@ -35,7 +35,23 @@ for (int i = 0; i < 10; i++) {
 
 The above will print 10 names, all of which will be unique within the `fullNameGroup` uniqueness group.
 
-Note that this is an experimental feature and its API may be subject to change if it proves to not be useful enough.
+Note that this is an experimental feature and its API may be subject to change.
+
+# Locally unique values *(experimental)* (since SNAPSHOT)
+
+It is possible to generate locally unique values by wrapping a code block with the `dummy.unique().within(...)` method:
+
+```java
+dummy.unique().within(() -> dummy.name().fullName(), name -> {
+    for (int i = 0; i < 10; i++) {
+        System.out.println(name.get());
+    }
+});
+```
+
+The above will print 10 names, all of which will be unique within the wrapped consumer code block.
+
+Note that this is an experimental feature and its API may be subject to change.
 
 # Generating collections (since 0.4.0)
 
