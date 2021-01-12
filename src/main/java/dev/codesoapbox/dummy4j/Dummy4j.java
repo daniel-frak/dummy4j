@@ -1,5 +1,6 @@
 package dev.codesoapbox.dummy4j;
 
+import dev.codesoapbox.dummy4j.annotations.Experimental;
 import dev.codesoapbox.dummy4j.definitions.UniqueValues;
 import dev.codesoapbox.dummy4j.definitions.providers.files.yaml.YamlFileDefinitionProvider;
 import dev.codesoapbox.dummy4j.dummies.*;
@@ -80,6 +81,7 @@ public class Dummy4j {
      *
      * @since 0.1.2
      */
+    @Experimental
     public UniqueValues unique() {
         return uniqueValues;
     }
