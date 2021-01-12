@@ -2,7 +2,15 @@ en:
   scifi:
     spaceship:
       name: [
-        "Rocinante", "Daedalus", "Intrepid", "Odyssey", "Avalon", "Axiom", "Conquistador", "Endurance",
-        "Excalibur", "Normandy", "Retribution", "Vanguard", "Valkyrie", "Milano", "Nostromo", "Serenity",
-        "Voyager", "Infinity", "Elysium"
+          "Rocinante", "Daedalus", "Intrepid", "Odyssey", "Avalon", "Axiom", "Conquistador", "Endurance",
+          "Excalibur", "Normandy", "Retribution", "Vanguard", "Valkyrie", "Milano", "Nostromo", "Serenity",
+          "Voyager", "Infinity", "Elysium", "Discovery", "Cataclysm", "Gibraltar", "Euphoria", "Nomad", "Valiant",
+          "Promise", "Prometheus", "Razorback", "Durandal", "Spectre", "Atlantis", "Endeavour", "Trident", "Tempest",
+          "Defiant", "Persephone", "Temptress", "First Light", "Venture", "Pioneer", "Sovereign", "Inquirer",
+          "Opportunity", "Raven", "Indomitable", "Destiny", "Nebuchadnezzar", "Maelstrom", "Greyhound", "Nautilus",
+          "Explorer", "Serenity", "Penance", "Athena", "Hammerhead", "Fenrir", "Pilgrim", "Galileo", "Revenge",
+          "Long Shot", "Providence", "Artemis",
+          "#{name.last_name}'s Revenge",
+          "King #{name.male_first_name}",
+          "Queen #{name.female_first_name}"
       ]
