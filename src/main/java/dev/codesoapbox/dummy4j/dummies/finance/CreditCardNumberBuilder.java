@@ -87,7 +87,7 @@ public class CreditCardNumberBuilder {
      */
     public String build() {
         String uncheckedNumber = getNumberWithIIN();
-        String number = uncheckedNumber + luhnFormula.getCheckDigit(uncheckedNumber);
+        String number = uncheckedNumber + luhnFormula.generateCheckDigit(uncheckedNumber);
 
         if (!withoutFormatting) {
             return number;

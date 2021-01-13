@@ -40,7 +40,7 @@ class IbanBuilderTest {
         when(dummy4j.nextEnum(BankAccountCountry.class))
                 .thenReturn(country);
         String accountNumber = mockAccountNumber(country);
-        when(ibanFormula.getCheckDigits(accountNumber, country.getCode()))
+        when(ibanFormula.generateCheckDigits(accountNumber, country.getCode()))
                 .thenReturn("51");
 
         String actual = builder.build();
@@ -60,7 +60,7 @@ class IbanBuilderTest {
         when(dummy4j.nextEnum(BankAccountCountry.class))
                 .thenReturn(country);
         String accountNumber = mockAccountNumber(country);
-        when(ibanFormula.getCheckDigits(accountNumber, country.getCode()))
+        when(ibanFormula.generateCheckDigits(accountNumber, country.getCode()))
                 .thenReturn("51");
 
         String actual = builder
@@ -82,7 +82,7 @@ class IbanBuilderTest {
         mockFinanceDummy();
         BankAccountCountry country = BankAccountCountry.GERMANY;
         String accountNumber = mockAccountNumber(country);
-        when(ibanFormula.getCheckDigits(accountNumber, country.getCode()))
+        when(ibanFormula.generateCheckDigits(accountNumber, country.getCode()))
                 .thenReturn("51");
         when(dummy4j.of(singletonList(country)))
                 .thenReturn(country);
@@ -99,7 +99,7 @@ class IbanBuilderTest {
         mockFinanceDummy();
         BankAccountCountry albania = BankAccountCountry.ALBANIA;
         String accountNumber = mockAccountNumber(albania);
-        when(ibanFormula.getCheckDigits(accountNumber, albania.getCode()))
+        when(ibanFormula.generateCheckDigits(accountNumber, albania.getCode()))
                 .thenReturn("57");
         when(dummy4j.of(asList(albania, BankAccountCountry.MACEDONIA)))
                 .thenReturn(albania);
@@ -116,7 +116,7 @@ class IbanBuilderTest {
         mockFinanceDummy();
         BankAccountCountry germany = BankAccountCountry.GERMANY;
         String accountNumber = mockAccountNumber(germany);
-        when(ibanFormula.getCheckDigits(accountNumber, germany.getCode()))
+        when(ibanFormula.generateCheckDigits(accountNumber, germany.getCode()))
                 .thenReturn("51");
         when(dummy4j.of(singletonList(germany)))
                 .thenReturn(germany);
@@ -137,7 +137,7 @@ class IbanBuilderTest {
         when(dummy4j.nextEnum(BankAccountCountry.class))
                 .thenReturn(country);
         String accountNumber = mockAccountNumber(country);
-        when(ibanFormula.getCheckDigits(accountNumber, country.getCode()))
+        when(ibanFormula.generateCheckDigits(accountNumber, country.getCode()))
                 .thenReturn("51");
 
         String actual = builder
@@ -163,7 +163,7 @@ class IbanBuilderTest {
                 .thenReturn(country);
         when(financeDummy.bankAccountNumber(country))
                 .thenReturn(accountNumber);
-        when(ibanFormula.getCheckDigits(accountNumber, country.getCode()))
+        when(ibanFormula.generateCheckDigits(accountNumber, country.getCode()))
                 .thenReturn("57");
 
         String actual = builder
@@ -178,7 +178,7 @@ class IbanBuilderTest {
         mockFinanceDummy();
         BankAccountCountry country = BankAccountCountry.GERMANY;
         String accountNumber = mockAccountNumber(country);
-        when(ibanFormula.getCheckDigits(accountNumber, country.getCode()))
+        when(ibanFormula.generateCheckDigits(accountNumber, country.getCode()))
                 .thenReturn("51");
         when(dummy4j.of(singletonList(country)))
                 .thenReturn(country);
