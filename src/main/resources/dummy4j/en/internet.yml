@@ -27,7 +27,7 @@ en:
         "#{lorem.word}"
     ]
     password_special_char: [
-        "!", "@", "#", "$", "%", "^", "&", "*", "-", "_", "?"
+        "!", "@", "\\#", "$", "%", "^", "&", "*", "-", "_", "?"
     ]
     email_domain: [
         "gmail.com", "yahoo.com", "protonmail.com", "hotmail.com", "aol.com", "outlook.com"
