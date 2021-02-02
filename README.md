@@ -142,7 +142,8 @@ dummy.unique().within(() -> dummy.name().fullName(), name -> {
     List<String> tenLocallyUniqueNames = dummy.listOf(10, name);
 });
 
-List<String> tenLocallyUniqueNames = dummy.unique().of(() -> dummy.name().fullName(), name -> dummy.listOf(10, name));
+List<String> tenLocallyUniqueNames = dummy.unique().of(() -> dummy.name().fullName(), 
+                name -> dummy.listOf(10, name));
 ```
 
 ## Goals and contributing
