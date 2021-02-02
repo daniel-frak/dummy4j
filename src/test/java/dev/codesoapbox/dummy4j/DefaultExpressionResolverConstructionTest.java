@@ -18,7 +18,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class ExpressionResolverConstructionTest {
+class DefaultExpressionResolverConstructionTest {
 
     @Mock
     private RandomService randomService;

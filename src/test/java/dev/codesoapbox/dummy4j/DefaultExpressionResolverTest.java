@@ -6,6 +6,8 @@ import dev.codesoapbox.dummy4j.definitions.providers.DefinitionProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -16,11 +18,10 @@ import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class ExpressionResolverTest {
+class DefaultExpressionResolverTest {
 
     @Mock
     private DefinitionProvider definitionProvider;
@@ -28,7 +29,7 @@ class ExpressionResolverTest {
     @Mock
     private RandomService randomService;
 
-    private ExpressionResolver expressionResolver;
+    private DefaultExpressionResolver expressionResolver;
 
     @BeforeEach
     void setUp() {
@@ -93,6 +94,18 @@ class ExpressionResolverTest {
                 .thenReturn(9, 1, 2, 3, 4, 5);
         String result = expressionResolver.resolve("#-##-###");
         assertEquals("9-12-345", result);
+    }
+
+    @CsvSource({
+            "\\#, #",
+            "\\#-\\##-\\#\\##, #-#9-##9"
+    })
+    @ParameterizedTest
+    void shouldNotResolveEscapedHashSymbol(String input, String output) {
+        lenient().when(randomService.nextInt(9))
+                .thenReturn(9);
+        String result = expressionResolver.resolve(input);
+        assertEquals(output, result);
     }
 
     @Test

@@ -20,8 +20,9 @@ import static java.util.Collections.singletonList;
  */
 public class DefaultExpressionResolver implements ExpressionResolver {
 
+    private static final String ESCAPE_PREFIX = "\\\\?";
     private static final Pattern VARIABLE_PATTERN = Pattern.compile("#\\{(.*?)}");
-    private static final Pattern DIGIT_PATTERN = Pattern.compile("#(?!\\{)");
+    private static final Pattern DIGIT_PATTERN = Pattern.compile(ESCAPE_PREFIX + "#(?!\\{)");
 
     protected final RandomService randomService;
     protected final List<String> locales;
@@ -75,7 +76,11 @@ public class DefaultExpressionResolver implements ExpressionResolver {
     private String replace(String expression, Matcher expressionMatcher, Supplier<String> replacementSupplier) {
         final StringBuffer b = new StringBuffer(expression.length());
         while (expressionMatcher.find()) {
-            expressionMatcher.appendReplacement(b, Matcher.quoteReplacement(replacementSupplier.get()));
+            if(expressionMatcher.group().charAt(0) == '\\') {
+                expressionMatcher.appendReplacement(b, expressionMatcher.group().substring(1));
+            } else {
+                expressionMatcher.appendReplacement(b, Matcher.quoteReplacement(replacementSupplier.get()));
+            }
         }
         expressionMatcher.appendTail(b);
 
