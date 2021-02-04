@@ -46,6 +46,9 @@ public class LocalizedDummyDefinitionsMap implements LocalizedDummyDefinitions {
         if (result instanceof String) {
             return singletonList((String) result);
         }
+        if (result instanceof Number) {
+            return singletonList(String.valueOf(result));
+        }
         if (result instanceof List) {
             return (List<String>) result;
         }

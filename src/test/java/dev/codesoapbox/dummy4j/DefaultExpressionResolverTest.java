@@ -53,6 +53,8 @@ class DefaultExpressionResolverTest {
         Map<String, Object> rootMap = new HashMap<>();
         rootMap.put("something", nestedMap);
 
+        rootMap.put("test_number", 1);
+
         return rootMap;
     }
 
@@ -118,5 +120,11 @@ class DefaultExpressionResolverTest {
     void shouldResolveSpecialChars() {
         String result = expressionResolver.resolve("#{something.special}");
         assertEquals("$ $$ $ $$ \\abc", result);
+    }
+
+    @Test
+    void shouldResolveNumber() {
+        String result = expressionResolver.resolve("#{test_number}");
+        assertEquals("1", result);
     }
 }
