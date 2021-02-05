@@ -5,9 +5,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class UniqueValuesTest {
 
@@ -59,6 +63,43 @@ class UniqueValuesTest {
     }
 
     @Test
+    void valueShouldBeThreadSafe() throws InterruptedException {
+        uniqueValues.setMaxRetries(1);
+        int numOfThreads = 50;
+        int numOfAttempts = 10;
+
+        for (int attempt = 0; attempt < numOfAttempts; attempt++) {
+            uniqueValues = new UniqueValues();
+            AtomicInteger successes = new AtomicInteger();
+            AtomicInteger fails = new AtomicInteger();
+            final CountDownLatch latch = new CountDownLatch(1);
+
+            ExecutorService executor = Executors.newFixedThreadPool(numOfThreads);
+            for (int i = 0; i < numOfThreads; ++i) {
+                Runnable runner = () -> {
+                    try {
+                        latch.await();
+                        uniqueValues.value("group", () -> "value");
+                        successes.incrementAndGet();
+                    } catch (InterruptedException | UniqueValueRetryLimitExceededException e) {
+                        fails.incrementAndGet();
+                    }
+                };
+                executor.submit(runner);
+            }
+
+            latch.countDown();
+            executor.shutdown();
+            if (!executor.awaitTermination(1, TimeUnit.SECONDS)) {
+                fail("Executor timed out");
+            }
+
+            assertEquals(1, successes.get());
+            assertEquals(numOfThreads - 1, fails.get());
+        }
+    }
+
+    @Test
     void withinShouldProvideUniqueValues() {
         List<String> allValues = Arrays.asList("a", "a", "b");
         List<String> expectedResult = Arrays.asList("a", "b");
@@ -78,12 +119,11 @@ class UniqueValuesTest {
         int maxRetries = 1;
         uniqueValues.setMaxRetries(maxRetries);
 
-        assertThrows(UniqueValueRetryLimitExceededException.class, () -> {
-            uniqueValues.within(() -> "value", value -> {
-                value.get();
-                value.get();
-            });
-        });
+        assertThrows(UniqueValueRetryLimitExceededException.class,
+                () -> uniqueValues.within(() -> "value", value -> {
+                    value.get();
+                    value.get();
+                }));
     }
 
     @Test
@@ -107,12 +147,11 @@ class UniqueValuesTest {
         int maxRetries = 1;
         uniqueValues.setMaxRetries(maxRetries);
 
-        assertThrows(UniqueValueRetryLimitExceededException.class, () -> {
-            List<String> result = uniqueValues.of(() -> "value", value -> {
-                value.get();
-                value.get();
-                return null;
-            });
-        });
+        assertThrows(UniqueValueRetryLimitExceededException.class,
+                () -> uniqueValues.of(() -> "value", value -> {
+                    value.get();
+                    value.get();
+                    return null;
+                }));
     }
 }

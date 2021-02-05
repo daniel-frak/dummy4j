@@ -3,10 +3,10 @@ package dev.codesoapbox.dummy4j.definitions;
 import dev.codesoapbox.dummy4j.annotations.Experimental;
 import dev.codesoapbox.dummy4j.exceptions.UniqueValueRetryLimitExceededException;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -23,7 +23,7 @@ public class UniqueValues {
     private int maxRetries;
 
     public UniqueValues() {
-        this.usedValues = new HashMap<>();
+        this.usedValues = new ConcurrentHashMap<>();
         this.maxRetries = 10_000;
     }
 
@@ -54,12 +54,18 @@ public class UniqueValues {
      * @throws UniqueValueRetryLimitExceededException if retry limit is exceeded
      */
     public <T> T value(String uniquenessGroup, Supplier<T> supplier) {
-        Set<Object> usedValuesForMethod = usedValues.computeIfAbsent(uniquenessGroup, k -> new HashSet<>());
+        Set<Object> usedValuesForMethod =
+                usedValues.computeIfAbsent(uniquenessGroup, k -> ConcurrentHashMap.newKeySet());
 
         return provideUnique(uniquenessGroup, supplier, usedValuesForMethod);
     }
 
-    private <T> T provideUnique(String uniquenessGroup, Supplier<T> supplier, Set<Object> usedValuesForMethod) {
+    /*
+     * This method is synchronized because otherwise (in multi-threaded environments) 'contains' might return
+     * false more than once for single key, leading to non-unique values being provided.
+     */
+    private synchronized <T> T provideUnique(String uniquenessGroup, Supplier<T> supplier,
+                                             Set<Object> usedValuesForMethod) {
         for (int i = 0; i <= maxRetries; i++) {
             T result = supplier.get();
             if (!usedValuesForMethod.contains(result)) {
@@ -110,9 +116,9 @@ public class UniqueValues {
      * }</pre>
      * will guarantee that the values of {@code color} will always be unique within the context of their list.
      *
-     * @param supplier the value supplier
-     * @param collector   the collector within which the supplied values will be unique
-     * @param <T>      the type of value to return
+     * @param supplier  the value supplier
+     * @param collector the collector within which the supplied values will be unique
+     * @param <T>       the type of value to return
      * @throws UniqueValueRetryLimitExceededException if retry limit is exceeded
      * @since 0.7.0
      */
