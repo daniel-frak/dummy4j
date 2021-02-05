@@ -50,7 +50,7 @@ The uniqueness is guaranteed for the entire lifetime of a Dummy4j instance.
 
 *Note that this is an experimental feature and its API may be subject to change.*
 
-# Collections of locally unique values *(experimental)* (since SNAPSHOT)
+# Collections of locally unique values *(experimental)* (since 0.7.0)
 
 It is possible to generate locally unique values by wrapping a call with the `dummy.unique().of(...)` method:
 ```java
@@ -62,7 +62,7 @@ The above will print 10 names, all of which will be unique within their list.
 
 *Note that this is an experimental feature and its API may be subject to change.*
 
-# Locally unique values within a code block *(experimental)* (since SNAPSHOT)
+# Locally unique values within a code block *(experimental)* (since 0.7.0)
 It is possible to generate locally unique values by wrapping a code block with the `dummy.unique().within(...)` method:
 
 ```java

@@ -90,7 +90,7 @@ public class UniqueValues {
      * @param within   the code within which the supplied values will be unique
      * @param <T>      the type of value to return
      * @throws UniqueValueRetryLimitExceededException if retry limit is exceeded
-     * @since SNAPSHOT
+     * @since 0.7.0
      */
     public <T> void within(Supplier<T> supplier, Consumer<Supplier<T>> within) {
         Set<Object> usedValuesForMethod = new HashSet<>();
@@ -114,7 +114,7 @@ public class UniqueValues {
      * @param collector   the collector within which the supplied values will be unique
      * @param <T>      the type of value to return
      * @throws UniqueValueRetryLimitExceededException if retry limit is exceeded
-     * @since SNAPSHOT
+     * @since 0.7.0
      */
     public <T, E> E of(Supplier<T> supplier, Function<Supplier<T>, E> collector) {
         Set<Object> usedValuesForMethod = new HashSet<>();

@@ -65,7 +65,7 @@ public class CreditCardNumberBuilder {
      * Sets the provider for which the number will be generated to one that is randomly chosen from provided arguments.
      * If there are no arguments, a provider is chosen at random from the {@code CreditCardProvider} enum.
      *
-     * @since SNAPSHOT
+     * @since 0.7.0
      */
     public CreditCardNumberBuilder withRandomProvider(CreditCardProvider... providers) {
         this.providers = asList(providers);

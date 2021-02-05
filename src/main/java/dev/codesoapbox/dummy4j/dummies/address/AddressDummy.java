@@ -51,7 +51,7 @@ public class AddressDummy {
     /**
      * Provides a complete random address
      *
-     * @since SNAPSHOT
+     * @since 0.7.0
      */
     public Address full() {
         return new Address(street(), postCode(), city(), country());

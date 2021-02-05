@@ -73,7 +73,7 @@ public class PriceBuilder {
      *
      * @see <a href="https://en.wikipedia.org/wiki/ISO_4217#Position_of_ISO_4217_code_in_amounts">
      * Position of ISO 4217 code in amounts</a>
-     * @since SNAPSHOT
+     * @since 0.7.0
      */
     public PriceBuilder withRandomCurrency(String... currencies) {
         this.currencies = asList(currencies);
@@ -88,7 +88,7 @@ public class PriceBuilder {
      * <p>
      * This is the default behavior for this builder.
      *
-     * @since SNAPSHOT
+     * @since 0.7.0
      */
     public PriceBuilder withoutCurrency() {
         currencies = emptyList();

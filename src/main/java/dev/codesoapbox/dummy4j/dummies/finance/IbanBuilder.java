@@ -53,7 +53,7 @@ public class IbanBuilder {
      * This is the default behavior for this builder.
      *
      * @see BankAccountCountry
-     * @since SNAPSHOT
+     * @since 0.7.0
      */
     public IbanBuilder withRandomCountry() {
         this.countries = emptyList();
