@@ -55,6 +55,11 @@ Dummy4j can resolve expressions, which are a mix of the aforementioned placehold
 The parser will first try to resolve the key in the locale which is first on the list. Failing that, it will keep
 going down the list until it resolves it or returns NULL.
 
+It is also possible to resolve nested expressions, e.g.:
+`#{key1.#{key2}}`.
+In that case, the expression `#{key2}` will be resolved first and its result will be used to resolve
+the root expression.
+
 ## Providing custom files
 
 Let's say you have created the following definitions file:
