@@ -89,25 +89,16 @@ class LocalizedDummyDefinitionsMapTest {
 
     @Test
     void shouldGetKeysFor() {
-        Set<String> expected = new HashSet<>();
-        expected.add("deeper");
-        expected.add("evenDeeper");
-
-        assertEquals(expected, dummyDefinitions.getKeysFor("something"));
+        assertEquals(Arrays.asList("evenDeeper", "deeper"), dummyDefinitions.resolve("something"));
     }
 
     @Test
     void shouldGetKeysForNested() {
-        assertEquals(singleton("thanThat"), dummyDefinitions.getKeysFor("something.evenDeeper"));
+        assertEquals(singletonList("thanThat"), dummyDefinitions.resolve("something.evenDeeper"));
     }
 
     @Test
     void getKeysOfShouldReturnEmptySetWhenKeyIsNotFound() {
-        assertEquals(emptySet(), dummyDefinitions.getKeysFor("thisDoesntExist"));
-    }
-
-    @Test
-    void getKeysOfShouldReturnEmptySetWhenKeyIsAValue() {
-        assertEquals(emptySet(), dummyDefinitions.getKeysFor("test_number"));
+        assertEquals(emptyList(), dummyDefinitions.resolve("thisDoesntExist"));
     }
 }

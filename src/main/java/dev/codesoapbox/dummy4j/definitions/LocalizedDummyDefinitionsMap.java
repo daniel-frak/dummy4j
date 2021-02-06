@@ -41,8 +41,7 @@ public final class LocalizedDummyDefinitionsMap implements LocalizedDummyDefinit
     @SuppressWarnings("unchecked")
     private List<String> resolveResult(String[] keys, Object result) {
         if (result instanceof Map) {
-            String[] keysWithoutRoot = Arrays.copyOfRange(keys, 1, keys.length);
-            return resolve((Map<String, Object>) result, keysWithoutRoot);
+            return resolveMap(keys, (Map<String, Object>) result);
         }
 
         if (result instanceof List) {
@@ -50,6 +49,14 @@ public final class LocalizedDummyDefinitionsMap implements LocalizedDummyDefinit
         }
 
         return singletonList(String.valueOf(result));
+    }
+
+    private List<String> resolveMap(String[] keys, Map<String, Object> result) {
+        if(keys.length == 1) {
+            return new ArrayList<>(result.keySet());
+        }
+        String[] keysWithoutRoot = Arrays.copyOfRange(keys, 1, keys.length);
+        return resolve(result, keysWithoutRoot);
     }
 
     @SuppressWarnings("unchecked")
@@ -61,35 +68,6 @@ public final class LocalizedDummyDefinitionsMap implements LocalizedDummyDefinit
         return result.stream()
                 .map(String::valueOf)
                 .collect(toList());
-    }
-
-    @Override
-    public Set<String> getKeysFor(String path) {
-        String[] keys = path.split("\\.");
-
-        return getKeysFor(map, keys);
-    }
-
-    private Set<String> getKeysFor(Map<String, Object> subMap, String[] keys) {
-        if (!subMap.containsKey(keys[0])) {
-            return emptySet();
-        }
-
-        return getKeysForResult(keys, subMap.get(keys[0]));
-    }
-
-    @SuppressWarnings("unchecked")
-    private Set<String> getKeysForResult(String[] keys, Object result) {
-        if (!(result instanceof Map)) {
-            return emptySet();
-        }
-
-        if(keys.length == 1) {
-            return ((Map<String, Object>) result).keySet();
-        }
-
-        String[] keysWithoutRoot = Arrays.copyOfRange(keys, 1, keys.length);
-        return getKeysFor((Map<String, Object>) result, keysWithoutRoot);
     }
 
     @Override

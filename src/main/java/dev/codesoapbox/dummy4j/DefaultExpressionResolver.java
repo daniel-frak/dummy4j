@@ -60,7 +60,7 @@ public final class DefaultExpressionResolver implements ExpressionResolver {
     @Override
     public Set<String> getKeysFor(String path) {
         return locales.stream()
-                .map(l -> localizedDefinitions.get(l).getKeysFor(path))
+                .map(l -> localizedDefinitions.get(l).resolve(path))
                 .flatMap(Collection::stream)
                 .collect(toSet());
     }
