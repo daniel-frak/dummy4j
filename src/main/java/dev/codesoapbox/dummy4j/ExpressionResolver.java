@@ -18,6 +18,10 @@ public interface ExpressionResolver {
      * Placeholders which have no definitions will be removed.
      * The method first looks into the locale which was passed as first in the list and then goes to the next
      * ones in order if a key could not be resolved.
+     * <p>
+     * It is possible to resolve nested expressions like "{@code #{key1.#{key2}}}" (since SNAPSHOT).
+     * In that case, the expression "{@code #{key2}}" will be resolved first and its result will be used to resolve
+     * the root expression.
      *
      * @param expression the expression to evaluate
      * @return a resolved random expression

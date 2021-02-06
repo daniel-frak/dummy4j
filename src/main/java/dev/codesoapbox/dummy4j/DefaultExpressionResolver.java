@@ -24,7 +24,7 @@ import static java.util.stream.Collectors.toSet;
 public final class DefaultExpressionResolver implements ExpressionResolver {
 
     private static final String ESCAPE_PREFIX = "\\\\?";
-    private static final Pattern VARIABLE_PATTERN = Pattern.compile("#\\{(.*?)}");
+    private static final Pattern VARIABLE_PATTERN = Pattern.compile("#\\{((?:(?!#\\{|}).)*)}");
     private static final Pattern DIGIT_PATTERN = Pattern.compile(ESCAPE_PREFIX + "#(?!\\{)");
 
     final RandomService randomService;

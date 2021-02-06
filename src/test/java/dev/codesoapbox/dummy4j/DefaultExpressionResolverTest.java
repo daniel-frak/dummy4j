@@ -56,6 +56,7 @@ class DefaultExpressionResolverTest {
 
         Map<String, Object> rootMap = new HashMap<>();
         rootMap.put("something", nestedMap);
+        rootMap.put("somethingKey", "deep");
 
         return rootMap;
     }
@@ -129,9 +130,15 @@ class DefaultExpressionResolverTest {
     }
 
     @Test
-    void shouldResolveExpressionWithinExpression() {
+    void shouldResolveExpressionWhichResolvesToExpression() {
         String result = expressionResolver.resolve("#{something.advanced}");
         assertEquals("value123", result);
+    }
+
+    @Test
+    void shouldResolveNestedExpression() {
+        String result = expressionResolver.resolve("#{something.#{somethingKey}}");
+        assertEquals("value", result);
     }
 
     @Test
