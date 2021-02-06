@@ -7,6 +7,7 @@ import java.util.Objects;
 
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
+import static java.util.stream.Collectors.toList;
 
 /**
  * Stores localized dummy data definitions as a Java Map
@@ -43,17 +44,27 @@ public class LocalizedDummyDefinitionsMap implements LocalizedDummyDefinitions {
 
     @SuppressWarnings("unchecked")
     private List<String> resolveResult(String[] keys, Object result) {
-        if (result instanceof String) {
-            return singletonList((String) result);
+        if (result instanceof Map) {
+            String[] keysWithoutRoot = Arrays.copyOfRange(keys, 1, keys.length);
+            return resolve((Map<String, Object>) result, keysWithoutRoot);
         }
-        if (result instanceof Number) {
-            return singletonList(String.valueOf(result));
-        }
+
         if (result instanceof List) {
+            return toStringList((List<?>) result);
+        }
+
+        return singletonList(String.valueOf(result));
+    }
+
+    @SuppressWarnings("unchecked")
+    private List<String> toStringList(List<?> result) {
+        if (result.isEmpty()) {
             return (List<String>) result;
         }
 
-        return resolve((Map<String, Object>) result, Arrays.copyOfRange(keys, 1, keys.length));
+        return result.stream()
+                .map(String::valueOf)
+                .collect(toList());
     }
 
     @Override

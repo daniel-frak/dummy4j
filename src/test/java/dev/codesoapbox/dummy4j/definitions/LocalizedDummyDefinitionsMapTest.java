@@ -4,11 +4,12 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import static java.util.Collections.emptyList;
-import static java.util.Collections.singletonList;
+import static java.util.Collections.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LocalizedDummyDefinitionsMapTest {
@@ -22,6 +23,10 @@ class LocalizedDummyDefinitionsMapTest {
 
         final Map<String, Object> map = new HashMap<>();
         map.put("something", nestedMap);
+        map.put("test_number", 1);
+        map.put("test_float_number", 1.4);
+        map.put("test_number_list", Arrays.asList(1, 2));
+        map.put("test_mixed_list", Arrays.asList("1", 2));
 
         dummyDefinitions = new LocalizedDummyDefinitionsMap("en", map);
     }
@@ -55,5 +60,29 @@ class LocalizedDummyDefinitionsMapTest {
         HashMap<String, Object> map = new HashMap<>();
         map.put("key", "val");
         return new LocalizedDummyDefinitionsMap("en", map);
+    }
+
+    @Test
+    void shouldResolveNumber() {
+        List<String> result = dummyDefinitions.resolve("test_number");
+        assertEquals(singletonList("1"), result);
+    }
+
+    @Test
+    void shouldResolveFloatingPointNumber() {
+        List<String> result = dummyDefinitions.resolve("test_float_number");
+        assertEquals(singletonList("1.4"), result);
+    }
+
+    @Test
+    void shouldResolveNumberList() {
+        List<String> result = dummyDefinitions.resolve("test_number_list");
+        assertEquals(Arrays.asList("1", "2"), result);
+    }
+
+    @Test
+    void shouldResolveMixedList() {
+        List<String> result = dummyDefinitions.resolve("test_mixed_list");
+        assertEquals(Arrays.asList("1", "2"), result);
     }
 }
