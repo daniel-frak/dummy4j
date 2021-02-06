@@ -142,6 +142,14 @@ class DefaultExpressionResolverTest {
     }
 
     @Test
+    void shouldNotResolveEscapedHashSymbolWhenResolvingNestedExpression() {
+        lenient().when(randomService.nextInt(9))
+                .thenReturn(9);
+        String result = expressionResolver.resolve("\\##{something.#{somethingKey}}");
+        assertEquals("#value", result);
+    }
+
+    @Test
     void shouldResolveSpecialChars() {
         String result = expressionResolver.resolve("#{something.special}");
         assertEquals("$ $$ $ $$ \\abc", result);
