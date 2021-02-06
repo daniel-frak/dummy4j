@@ -1,6 +1,7 @@
 package dev.codesoapbox.dummy4j.definitions;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * A collection of resolvable dummy data definitions for a given locale.
@@ -13,10 +14,19 @@ public interface LocalizedDummyDefinitions {
     String getLocale();
 
     /**
-     * Return a list of all possible values for a given key.
+     * Returns a list of all possible values for a given path.
      *
-     * @param key the key to resolve
-     * @return a list of all values assigned to the key
+     * @param path the path to resolve
+     * @return a list of all values assigned to the path
      */
-    List<String> resolve(String key);
+    List<String> resolve(String path);
+
+    /**
+     * Returns a list of all keys contained directly within a given path.
+     *
+     * @param path the path whose sub-keys should be returned
+     * @return a list of keys
+     * @since SNAPSHOT
+     */
+    Set<String> getKeysFor(String path);
 }

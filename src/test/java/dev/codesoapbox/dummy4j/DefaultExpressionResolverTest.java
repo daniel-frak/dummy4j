@@ -11,8 +11,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
@@ -33,22 +32,37 @@ class DefaultExpressionResolverTest {
 
     @BeforeEach
     void setUp() {
-        String locale = "en";
+        String localeEn = "en";
+        String localeFr = "fr";
 
-        LocalizedDummyDefinitions dummyDefinitions = new LocalizedDummyDefinitionsMap(locale, buildDefinitionMap());
+        LocalizedDummyDefinitions dummyDefinitionsEn =
+                new LocalizedDummyDefinitionsMap(localeEn, buildDefinitionMapEn());
+        LocalizedDummyDefinitions dummyDefinitionsFr =
+                new LocalizedDummyDefinitionsMap(localeFr, buildDefinitionMapFr());
         when(definitionProvider.get())
-                .thenReturn(singletonList(dummyDefinitions));
+                .thenReturn(Arrays.asList(dummyDefinitionsEn, dummyDefinitionsFr));
 
-        expressionResolver = new DefaultExpressionResolver(singletonList(locale), randomService, definitionProvider);
+        expressionResolver = new DefaultExpressionResolver(Arrays.asList(localeEn, localeFr), randomService,
+                definitionProvider);
     }
 
-    private Map<String, Object> buildDefinitionMap() {
+    private Map<String, Object> buildDefinitionMapEn() {
         Map<String, Object> nestedMap = new HashMap<>();
         nestedMap.put("deep", "value");
         nestedMap.put("advanced", "#{something.deep}123");
         nestedMap.put("empty", emptyList());
         nestedMap.put("special", "$ $$ #{something.special_nested}");
         nestedMap.put("special_nested", "$ $$ \\abc");
+
+        Map<String, Object> rootMap = new HashMap<>();
+        rootMap.put("something", nestedMap);
+
+        return rootMap;
+    }
+
+    private Map<String, Object> buildDefinitionMapFr() {
+        Map<String, Object> nestedMap = new HashMap<>();
+        nestedMap.put("frenchAddition", "value");
 
         Map<String, Object> rootMap = new HashMap<>();
         rootMap.put("something", nestedMap);
@@ -89,6 +103,12 @@ class DefaultExpressionResolverTest {
     }
 
     @Test
+    void shouldResolveKeyWithSecondaryLocaleIfNotFoundInPrimary() {
+        String result = expressionResolver.resolve("#{something.frenchAddition}");
+        assertEquals("value", result);
+    }
+
+    @Test
     void shouldResolveExpressionWithDigits() {
         when(randomService.nextInt(9))
                 .thenReturn(9, 1, 2, 3, 4, 5);
@@ -118,5 +138,20 @@ class DefaultExpressionResolverTest {
     void shouldResolveSpecialChars() {
         String result = expressionResolver.resolve("#{something.special}");
         assertEquals("$ $$ $ $$ \\abc", result);
+    }
+
+    @Test
+    void shouldGetKeysFor() {
+        Set<String> expected = new HashSet<>();
+        expected.add("special");
+        expected.add("deep");
+        expected.add("advanced");
+        expected.add("empty");
+        expected.add("special_nested");
+        expected.add("frenchAddition");
+
+        Set<String> result = expressionResolver.getKeysFor("something");
+
+        assertEquals(expected, result);
     }
 }

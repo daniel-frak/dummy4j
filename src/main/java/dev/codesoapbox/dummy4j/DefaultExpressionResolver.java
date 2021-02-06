@@ -5,13 +5,16 @@ import dev.codesoapbox.dummy4j.definitions.LocalizedDummyDefinitions;
 import dev.codesoapbox.dummy4j.definitions.providers.DefinitionProvider;
 import dev.codesoapbox.dummy4j.exceptions.MissingLocaleDefinitionsException;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static java.util.Collections.singletonList;
+import static java.util.stream.Collectors.toSet;
 
 /**
  * A default implementation of the expression resolver
@@ -54,6 +57,14 @@ public final class DefaultExpressionResolver implements ExpressionResolver {
         return resolve(result);
     }
 
+    @Override
+    public Set<String> getKeysFor(String path) {
+        return locales.stream()
+                .map(l -> localizedDefinitions.get(l).getKeysFor(path))
+                .flatMap(Collection::stream)
+                .collect(toSet());
+    }
+
     private String resolveAllKeysAndDigits(String expression) {
         final String expressionWithResolvedKeys = replaceKeyPlaceholders(expression);
         return replaceDigitPlaceholders(expressionWithResolvedKeys);
@@ -76,7 +87,7 @@ public final class DefaultExpressionResolver implements ExpressionResolver {
     private String replace(String expression, Matcher expressionMatcher, Supplier<String> replacementSupplier) {
         final StringBuffer b = new StringBuffer(expression.length());
         while (expressionMatcher.find()) {
-            if(expressionMatcher.group().charAt(0) == '\\') {
+            if (expressionMatcher.group().charAt(0) == '\\') {
                 expressionMatcher.appendReplacement(b, expressionMatcher.group().substring(1));
             } else {
                 expressionMatcher.appendReplacement(b, Matcher.quoteReplacement(replacementSupplier.get()));

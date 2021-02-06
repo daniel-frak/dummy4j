@@ -1,12 +1,8 @@
 package dev.codesoapbox.dummy4j.definitions;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
-import static java.util.Collections.emptyList;
-import static java.util.Collections.singletonList;
+import static java.util.Collections.*;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -28,8 +24,8 @@ public final class LocalizedDummyDefinitionsMap implements LocalizedDummyDefinit
     }
 
     @Override
-    public List<String> resolve(String key) {
-        String[] keys = key.split("\\.");
+    public List<String> resolve(String path) {
+        String[] keys = path.split("\\.");
 
         return resolve(map, keys);
     }
@@ -65,6 +61,35 @@ public final class LocalizedDummyDefinitionsMap implements LocalizedDummyDefinit
         return result.stream()
                 .map(String::valueOf)
                 .collect(toList());
+    }
+
+    @Override
+    public Set<String> getKeysFor(String path) {
+        String[] keys = path.split("\\.");
+
+        return getKeysFor(map, keys);
+    }
+
+    private Set<String> getKeysFor(Map<String, Object> subMap, String[] keys) {
+        if (!subMap.containsKey(keys[0])) {
+            return emptySet();
+        }
+
+        return getKeysForResult(keys, subMap.get(keys[0]));
+    }
+
+    @SuppressWarnings("unchecked")
+    private Set<String> getKeysForResult(String[] keys, Object result) {
+        if (!(result instanceof Map)) {
+            return emptySet();
+        }
+
+        if(keys.length == 1) {
+            return ((Map<String, Object>) result).keySet();
+        }
+
+        String[] keysWithoutRoot = Arrays.copyOfRange(keys, 1, keys.length);
+        return getKeysFor((Map<String, Object>) result, keysWithoutRoot);
     }
 
     @Override

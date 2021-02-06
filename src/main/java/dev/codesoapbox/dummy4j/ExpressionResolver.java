@@ -1,5 +1,7 @@
 package dev.codesoapbox.dummy4j;
 
+import java.util.Set;
+
 /**
  * @since 0.5.0
  */
@@ -21,4 +23,17 @@ public interface ExpressionResolver {
      * @return a resolved random expression
      */
     String resolve(String expression);
+
+    /**
+     * Returns a list of all keys contained directly within a given path.
+     * <p>
+     * The keys returned will be a superset of keys in every locale.
+     * <p>
+     * This method does not support expressions.
+     *
+     * @param path the path whose sub-keys should be returned
+     * @return a list of keys
+     * @since SNAPSHOT
+     */
+    Set<String> getKeysFor(String path);
 }
