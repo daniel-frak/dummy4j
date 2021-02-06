@@ -49,12 +49,13 @@ public final class DefaultExpressionResolver implements ExpressionResolver {
 
     @Override
     public String resolve(String expression) {
-        final String result = resolveAllKeysAndDigits(expression);
+        final String expressionWithResolvedKeys = replaceKeyPlaceholders(expression);
 
-        if (!VARIABLE_PATTERN.matcher(result).find()) {
-            return result;
+        if (!VARIABLE_PATTERN.matcher(expressionWithResolvedKeys).find()) {
+            return replaceDigitPlaceholders(expressionWithResolvedKeys);
         }
-        return resolve(result);
+
+        return resolve(expressionWithResolvedKeys);
     }
 
     @Override
@@ -63,11 +64,6 @@ public final class DefaultExpressionResolver implements ExpressionResolver {
                 .map(l -> localizedDefinitions.get(l).resolve(path))
                 .flatMap(Collection::stream)
                 .collect(toSet());
-    }
-
-    private String resolveAllKeysAndDigits(String expression) {
-        final String expressionWithResolvedKeys = replaceKeyPlaceholders(expression);
-        return replaceDigitPlaceholders(expressionWithResolvedKeys);
     }
 
     private String replaceKeyPlaceholders(String expression) {
