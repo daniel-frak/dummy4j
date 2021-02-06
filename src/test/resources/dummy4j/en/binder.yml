@@ -1,0 +1,16 @@
+en:
+  operating_system:
+    win:
+      name:
+        - Windows
+      version:
+        - Vista
+        - 7
+        - 8
+        - 10
+    android:
+      name :
+        - Android
+      version:
+        - Pie
+        - Lollilop
