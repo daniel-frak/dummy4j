@@ -13,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.*;
 
+import static java.util.Arrays.*;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -40,9 +41,9 @@ class DefaultExpressionResolverTest {
         LocalizedDummyDefinitions dummyDefinitionsFr =
                 new LocalizedDummyDefinitionsMap(localeFr, buildDefinitionMapFr());
         when(definitionProvider.get())
-                .thenReturn(Arrays.asList(dummyDefinitionsEn, dummyDefinitionsFr));
+                .thenReturn(asList(dummyDefinitionsEn, dummyDefinitionsFr));
 
-        expressionResolver = new DefaultExpressionResolver(Arrays.asList(localeEn, localeFr), randomService,
+        expressionResolver = new DefaultExpressionResolver(asList(localeEn, localeFr), randomService,
                 definitionProvider);
     }
 
