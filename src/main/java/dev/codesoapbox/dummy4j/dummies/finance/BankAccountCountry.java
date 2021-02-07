@@ -30,7 +30,7 @@ public enum BankAccountCountry {
     TUNISIA("TN"), TURKEY("TR"), UKRAINE("UA"), VATICAN_CITY_STATE("VA"),
     VIRGIN_ISLAND("VG"), KOSOVO("XK");
 
-    private String code;
+    private final String code;
 
     BankAccountCountry(String code) {
         this.code = code;
