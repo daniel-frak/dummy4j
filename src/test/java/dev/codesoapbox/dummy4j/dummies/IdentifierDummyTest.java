@@ -1,15 +1,15 @@
 package dev.codesoapbox.dummy4j.dummies;
 
-import dev.codesoapbox.dummy4j.DefaultRandomService;
 import dev.codesoapbox.dummy4j.Dummy4j;
 import dev.codesoapbox.dummy4j.NumberService;
+import dev.codesoapbox.dummy4j.RandomService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -28,7 +28,7 @@ class IdentifierDummyTest {
 
     @Test
     void shouldGetRandomUuid() {
-        NumberService numberService = mock(DefaultRandomService.class);
+        NumberService numberService = mock(RandomService.class);
         when(dummy4j.number())
                 .thenReturn(numberService);
         when(numberService.nextLong())
