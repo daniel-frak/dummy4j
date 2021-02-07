@@ -43,7 +43,8 @@ If you choose to, you can place all of your definitions in one file. You can als
 
 The parser recognizes two placeholders:
 * `#{key.path}` - will resolve to a random value from the list of data definitions using the provided key path; The
- resolved value may itself be an expression
+ resolved value may itself be an expression. If the path resolves to a list of keys (instead of values),
+ a random one of them will be returned.
 * `#` - will resolve to a random digit between 0 and 9 
 
 Dummy4j can resolve expressions, which are a mix of the aforementioned placeholders and other characters
@@ -52,13 +53,14 @@ Dummy4j can resolve expressions, which are a mix of the aforementioned placehold
 * `#{name.male_first_name} #{name.last_name}`
 * `##-###`
 
-The parser will first try to resolve the key in the locale which is first on the list. Failing that, it will keep
+The parser will first try to resolve the path in the locale which is first on the list. Failing that, it will keep
 going down the list until it resolves it or returns NULL.
 
 It is also possible to resolve nested expressions, e.g.:
 `#{key1.#{key2}}`.
-In that case, the expression `#{key2}` will be resolved first and its result will be used to resolve
-the root expression.
+In that case, the placeholder `#{key2}` will be resolved first and its result will be used to resolve
+the root placeholder. This can be especially useful for picking a random key
+(`#{key1.#{key1}}` will resolve a random key from `key1`).
 
 ## Providing custom files
 
