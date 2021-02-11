@@ -17,6 +17,7 @@ import static java.util.Arrays.*;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -106,7 +107,7 @@ class DefaultExpressionResolverTest {
     }
 
     @Test
-    void shouldResolveKeyWithSecondaryLocaleIfNotFoundInPrimary() {
+    void shouldResolveValueWithSecondaryLocaleIfNotFoundInPrimary() {
         String result = expressionResolver.resolve("#{something.frenchAddition}");
         assertEquals("value", result);
     }
@@ -155,5 +156,14 @@ class DefaultExpressionResolverTest {
     void shouldResolveSpecialChars() {
         String result = expressionResolver.resolve("#{something.special}");
         assertEquals("$ $$ $ $$ \\abc", result);
+    }
+
+    @Test
+    void shouldResolveKeyFromEveryLocale() {
+        Set<String> result = new HashSet<>();
+        for (int i = 0; i < 100; i++) {
+            result.add(expressionResolver.resolve("#{something}"));
+        }
+        assertTrue(result.contains("frenchAddition"));
     }
 }
