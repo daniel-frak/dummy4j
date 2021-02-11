@@ -5,16 +5,13 @@ import dev.codesoapbox.dummy4j.definitions.LocalizedDummyDefinitions;
 import dev.codesoapbox.dummy4j.definitions.providers.DefinitionProvider;
 import dev.codesoapbox.dummy4j.exceptions.MissingLocaleDefinitionsException;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static java.util.Collections.singletonList;
-import static java.util.stream.Collectors.toSet;
 
 /**
  * A default implementation of the expression resolver
@@ -56,14 +53,6 @@ public final class DefaultExpressionResolver implements ExpressionResolver {
         }
 
         return resolve(expressionWithResolvedKeys);
-    }
-
-    @Override
-    public Set<String> listValues(String path) {
-        return locales.stream()
-                .map(l -> localizedDefinitions.get(l).resolve(path))
-                .flatMap(Collection::stream)
-                .collect(toSet());
     }
 
     private String replaceKeyPlaceholders(String expression) {

@@ -156,30 +156,4 @@ class DefaultExpressionResolverTest {
         String result = expressionResolver.resolve("#{something.special}");
         assertEquals("$ $$ $ $$ \\abc", result);
     }
-
-    @Test
-    void listValuesShouldGetKeysForPath() {
-        Set<String> expected = new HashSet<>();
-        expected.add("special");
-        expected.add("deep");
-        expected.add("advanced");
-        expected.add("empty");
-        expected.add("special_nested");
-        expected.add("frenchAddition");
-
-        Set<String> result = expressionResolver.listValues("something");
-
-        assertEquals(expected, result);
-    }
-
-    @Test
-    void listValuesShouldGetValuesForPathWithoutResolvingThem() {
-        Set<String> expected = new HashSet<>();
-        expected.add("1");
-        expected.add("#{something.special}");
-
-        Set<String> result = expressionResolver.listValues("list");
-
-        assertEquals(expected, result);
-    }
 }
