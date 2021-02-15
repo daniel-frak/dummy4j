@@ -12,12 +12,12 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static java.util.Arrays.*;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -60,6 +60,7 @@ class DefaultExpressionResolverTest {
         rootMap.put("something", nestedMap);
         rootMap.put("somethingKey", "deep");
         rootMap.put("list", Arrays.asList("1", "#{something.special}"));
+        rootMap.put("shared", singletonList("1"));
 
         return rootMap;
     }
@@ -70,18 +71,19 @@ class DefaultExpressionResolverTest {
 
         Map<String, Object> rootMap = new HashMap<>();
         rootMap.put("something", nestedMap);
+        rootMap.put("shared", singletonList("2"));
 
         return rootMap;
     }
 
     @Test
-    void shouldResolveKey() {
+    void shouldResolveSingleValuePlaceholder() {
         String result = expressionResolver.resolve("#{something.deep}");
         assertEquals("value", result);
     }
 
     @Test
-    void shouldReturnEmptyStringWhenUnableToResolveKey() {
+    void shouldReturnEmptyStringWhenUnableToResolvePlaceholder() {
         LocalizedDummyDefinitions dummyDefinitions = mock(LocalizedDummyDefinitions.class);
         when(definitionProvider.get())
                 .thenReturn(singletonList(dummyDefinitions));
@@ -95,7 +97,7 @@ class DefaultExpressionResolverTest {
     }
 
     @Test
-    void shouldReturnEmptyStringWhenKeyIsEmpty() {
+    void shouldReturnEmptyStringWhenResolvedPathIsEmpty() {
         String result = expressionResolver.resolve("#{something.empty}");
         assertEquals("", result);
     }
@@ -107,7 +109,7 @@ class DefaultExpressionResolverTest {
     }
 
     @Test
-    void shouldResolveValueWithSecondaryLocaleIfNotFoundInPrimary() {
+    void shouldResolveSingleValuePlaceholderWithSecondaryLocaleIfNotFoundInPrimary() {
         String result = expressionResolver.resolve("#{something.frenchAddition}");
         assertEquals("value", result);
     }
@@ -133,14 +135,32 @@ class DefaultExpressionResolverTest {
     }
 
     @Test
-    void shouldResolveExpressionWhichResolvesToExpression() {
+    void shouldResolvePlaceholderWhichResolvesToExpression() {
         String result = expressionResolver.resolve("#{something.advanced}");
         assertEquals("value123", result);
     }
 
     @Test
-    void shouldResolveNestedExpression() {
+    void shouldResolveSingleLocalePlaceholderWithinSingleLocalePlaceholder() {
         String result = expressionResolver.resolve("#{something.#{somethingKey}}");
+        assertEquals("value", result);
+    }
+
+    @Test
+    void shouldResolveMultiLocalePlaceholderWithinSingleLocalePlaceholder() {
+        String result = expressionResolver.resolve("#{something.#{{somethingKey}}}");
+        assertEquals("value", result);
+    }
+
+    @Test
+    void shouldResolveSingleLocalePlaceholderWithinMultiLocalePlaceholder() {
+        String result = expressionResolver.resolve("#{{something.#{somethingKey}}}");
+        assertEquals("value", result);
+    }
+
+    @Test
+    void shouldResolveMultiLocalePlaceholderWithinMultiLocalePlaceholder() {
+        String result = expressionResolver.resolve("#{{something.#{{somethingKey}}}}");
         assertEquals("value", result);
     }
 
@@ -159,11 +179,44 @@ class DefaultExpressionResolverTest {
     }
 
     @Test
-    void shouldResolveKeyFromEveryLocale() {
+    void shouldResolveMultiLocalePlaceholder() {
+        Set<String> expected = new HashSet<>();
+        expected.add("1");
+        expected.add("2");
+
         Set<String> result = new HashSet<>();
-        for (int i = 0; i < 100; i++) {
-            result.add(expressionResolver.resolve("#{something}"));
+
+        mockRandomServiceForFullRange();
+
+        for (int i = 0; i < 10; i++) {
+            result.add(expressionResolver.resolve("#{{shared}}"));
         }
-        assertTrue(result.contains("frenchAddition"));
+        assertEquals(expected, result);
+    }
+
+    private void mockRandomServiceForFullRange() {
+        AtomicInteger counter = new AtomicInteger();
+        doAnswer(inv -> {
+            int value = counter.getAndIncrement();
+            if(value < (int) inv.getArgument(0)) {
+                return value;
+            }
+            return inv.getArgument(0);
+        }).when(randomService).nextInt(anyInt());
+    }
+
+    @Test
+    void shouldResolveSingleLocalePlaceholder() {
+        Set<String> expected = new HashSet<>();
+        expected.add("1");
+
+        Set<String> result = new HashSet<>();
+
+        mockRandomServiceForFullRange();
+
+        for (int i = 0; i < 10; i++) {
+            result.add(expressionResolver.resolve("#{shared}"));
+        }
+        assertEquals(expected, result);
     }
 }

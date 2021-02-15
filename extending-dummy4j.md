@@ -41,14 +41,16 @@ If you choose to, you can place all of your definitions in one file. You can als
 
 ## Parser
 
-The parser recognizes two placeholders:
+The parser recognizes three placeholders:
 * `#{key.path}` - will resolve to a random value from the list of data definitions using the provided key path; The
  resolved value may itself be an expression. If the path resolves to a list of keys (instead of values),
- a random one of them will be returned.
+ a random one of them will be returned. 
+ The value will always be taken from a single locale (the first one which contains values for the path).
+* `#{{key.path}}` (since SNAPSHOT) - like above, but will return a random value from the superset of all locales' 
+ values.
 * `#` - will resolve to a random digit between 0 and 9 
 
-Dummy4j can resolve expressions, which are a mix of the aforementioned placeholders and other characters
-, e.g.:
+Dummy4j can resolve expressions, which are a mix of the aforementioned placeholders and other characters, e.g.:
 
 * `#{name.male_first_name} #{name.last_name}`
 * `##-###`
