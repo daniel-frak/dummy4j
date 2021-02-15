@@ -83,16 +83,30 @@ class DefaultExpressionResolverTest {
     }
 
     @Test
-    void shouldReturnEmptyStringWhenUnableToResolvePlaceholder() {
+    void shouldReturnEmptyStringWhenUnableToResolveSingleLocalePlaceholder() {
         LocalizedDummyDefinitions dummyDefinitions = mock(LocalizedDummyDefinitions.class);
         when(definitionProvider.get())
                 .thenReturn(singletonList(dummyDefinitions));
         when(dummyDefinitions.resolve(any()))
-                .thenReturn(null);
+                .thenReturn(emptyList());
         when(dummyDefinitions.getLocale())
                 .thenReturn("en");
         expressionResolver = new DefaultExpressionResolver(singletonList("en"), randomService, definitionProvider);
         String result = expressionResolver.resolve("#{something.notexisting}");
+        assertEquals("", result);
+    }
+
+    @Test
+    void shouldReturnEmptyStringWhenUnableToResolveMultiLocalePlaceholder() {
+        LocalizedDummyDefinitions dummyDefinitions = mock(LocalizedDummyDefinitions.class);
+        when(definitionProvider.get())
+                .thenReturn(singletonList(dummyDefinitions));
+        when(dummyDefinitions.resolve(any()))
+                .thenReturn(emptyList());
+        when(dummyDefinitions.getLocale())
+                .thenReturn("en");
+        expressionResolver = new DefaultExpressionResolver(singletonList("en"), randomService, definitionProvider);
+        String result = expressionResolver.resolve("#{{something.notexisting}}");
         assertEquals("", result);
     }
 
