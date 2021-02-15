@@ -8,6 +8,7 @@ import dev.codesoapbox.dummy4j.exceptions.MissingLocaleDefinitionsException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -90,6 +91,7 @@ public final class DefaultExpressionResolver implements ExpressionResolver {
     private String resolvePathWithinAllLocales(String path) {
         List<String> result = locales.stream()
                 .map(locale -> localizedDefinitions.get(locale).resolve(path))
+                .filter(Objects::nonNull)
                 .flatMap(Collection::stream)
                 .distinct()
                 .collect(toList());

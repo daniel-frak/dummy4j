@@ -84,27 +84,28 @@ class DefaultExpressionResolverTest {
 
     @Test
     void shouldReturnEmptyStringWhenUnableToResolveSingleLocalePlaceholder() {
-        LocalizedDummyDefinitions dummyDefinitions = mock(LocalizedDummyDefinitions.class);
+        LocalizedDummyDefinitions dummyDefinitions = mockLocalizedDefinitions("en", emptyList());
         when(definitionProvider.get())
                 .thenReturn(singletonList(dummyDefinitions));
-        when(dummyDefinitions.resolve(any()))
-                .thenReturn(emptyList());
-        when(dummyDefinitions.getLocale())
-                .thenReturn("en");
         expressionResolver = new DefaultExpressionResolver(singletonList("en"), randomService, definitionProvider);
         String result = expressionResolver.resolve("#{something.notexisting}");
         assertEquals("", result);
     }
 
+    private LocalizedDummyDefinitions mockLocalizedDefinitions(String localeCode, List<String> result) {
+        LocalizedDummyDefinitions dummyDefinitions = mock(LocalizedDummyDefinitions.class);
+        when(dummyDefinitions.resolve(any()))
+                .thenReturn(result);
+        when(dummyDefinitions.getLocale())
+                .thenReturn(localeCode);
+        return dummyDefinitions;
+    }
+
     @Test
     void shouldReturnEmptyStringWhenUnableToResolveMultiLocalePlaceholder() {
-        LocalizedDummyDefinitions dummyDefinitions = mock(LocalizedDummyDefinitions.class);
+        LocalizedDummyDefinitions dummyDefinitions = mockLocalizedDefinitions("en", emptyList());
         when(definitionProvider.get())
                 .thenReturn(singletonList(dummyDefinitions));
-        when(dummyDefinitions.resolve(any()))
-                .thenReturn(emptyList());
-        when(dummyDefinitions.getLocale())
-                .thenReturn("en");
         expressionResolver = new DefaultExpressionResolver(singletonList("en"), randomService, definitionProvider);
         String result = expressionResolver.resolve("#{{something.notexisting}}");
         assertEquals("", result);
@@ -125,6 +126,18 @@ class DefaultExpressionResolverTest {
     @Test
     void shouldResolveSingleValuePlaceholderWithSecondaryLocaleIfNotFoundInPrimary() {
         String result = expressionResolver.resolve("#{something.frenchAddition}");
+        assertEquals("value", result);
+    }
+
+    @Test
+    void shouldResolveSingleValuePlaceholderWithSecondaryLocaleIfPrimaryDefinitionsReturnNull() {
+        LocalizedDummyDefinitions enDefinitions = mockLocalizedDefinitions("en", null);
+        LocalizedDummyDefinitions frDefinitions = mockLocalizedDefinitions("fr", singletonList("value"));
+        when(definitionProvider.get())
+                .thenReturn(asList(enDefinitions, frDefinitions));
+        expressionResolver = new DefaultExpressionResolver(asList("en", "fr"), randomService, definitionProvider);
+
+        String result = expressionResolver.resolve("#{path.to.key}");
         assertEquals("value", result);
     }
 
@@ -217,6 +230,30 @@ class DefaultExpressionResolverTest {
             }
             return inv.getArgument(0);
         }).when(randomService).nextInt(anyInt());
+    }
+
+    @Test
+    void shouldResolveMultiLocalePlaceholderWhenSomeDefinitionsReturnNull() {
+        LocalizedDummyDefinitions enDefinitions = mockLocalizedDefinitions("en", null);
+        LocalizedDummyDefinitions frDefinitions = mockLocalizedDefinitions("fr", singletonList("value"));
+        when(definitionProvider.get())
+                .thenReturn(asList(enDefinitions, frDefinitions));
+        expressionResolver = new DefaultExpressionResolver(asList("en", "fr"), randomService, definitionProvider);
+
+        String result = expressionResolver.resolve("#{{path.to.key}}");
+        assertEquals("value", result);
+    }
+
+    @Test
+    void shouldReturnEmptyStringWhenResolvingMultiLocalePlaceholderAndAllDefinitionsReturnNull() {
+        LocalizedDummyDefinitions enDefinitions = mockLocalizedDefinitions("en", null);
+        LocalizedDummyDefinitions frDefinitions = mockLocalizedDefinitions("fr", null);
+        when(definitionProvider.get())
+                .thenReturn(asList(enDefinitions, frDefinitions));
+        expressionResolver = new DefaultExpressionResolver(asList("en", "fr"), randomService, definitionProvider);
+
+        String result = expressionResolver.resolve("#{{path.to.key}}");
+        assertEquals("", result);
     }
 
     @Test
