@@ -13,13 +13,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UniqueValuesTest {
+class DefaultUniqueValuesTest {
 
-    private UniqueValues uniqueValues;
+    private DefaultUniqueValues uniqueValues;
 
     @BeforeEach
     void setUp() {
-        uniqueValues = new UniqueValues();
+        uniqueValues = new DefaultUniqueValues();
     }
 
     @Test
@@ -69,7 +69,7 @@ class UniqueValuesTest {
         int numOfAttempts = 10;
 
         for (int attempt = 0; attempt < numOfAttempts; attempt++) {
-            uniqueValues = new UniqueValues();
+            uniqueValues = new DefaultUniqueValues();
             AtomicInteger successes = new AtomicInteger();
             AtomicInteger fails = new AtomicInteger();
             final CountDownLatch latch = new CountDownLatch(1);

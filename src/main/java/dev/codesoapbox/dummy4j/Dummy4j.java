@@ -1,6 +1,7 @@
 package dev.codesoapbox.dummy4j;
 
 import dev.codesoapbox.dummy4j.annotations.Experimental;
+import dev.codesoapbox.dummy4j.definitions.DefaultUniqueValues;
 import dev.codesoapbox.dummy4j.definitions.UniqueValues;
 import dev.codesoapbox.dummy4j.definitions.providers.files.yaml.YamlFileDefinitionProvider;
 import dev.codesoapbox.dummy4j.dummies.*;
@@ -50,12 +51,12 @@ public class Dummy4j {
         this.expressionResolver = new DefaultExpressionResolver(locales, this.randomService, definitionProvider);
 
         this.dummies = new Dummies(this);
-        this.uniqueValues = new UniqueValues();
+        this.uniqueValues = new DefaultUniqueValues();
         this.convenienceMethods = new ConvenienceMethods(randomService);
     }
 
     public Dummy4j(ExpressionResolver expressionResolver, RandomService randomService) {
-        this(expressionResolver, randomService, Dummies::new, new UniqueValues(),
+        this(expressionResolver, randomService, Dummies::new, new DefaultUniqueValues(),
                 new ConvenienceMethods(randomService));
     }
 

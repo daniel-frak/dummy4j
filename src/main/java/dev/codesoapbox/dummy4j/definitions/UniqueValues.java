@@ -1,12 +1,7 @@
 package dev.codesoapbox.dummy4j.definitions;
 
-import dev.codesoapbox.dummy4j.annotations.Experimental;
 import dev.codesoapbox.dummy4j.exceptions.UniqueValueRetryLimitExceededException;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -14,25 +9,14 @@ import java.util.function.Supplier;
 /**
  * Produces unique values
  *
- * @since 0.1.2
+ * @since SNAPSHOT
  */
-@Experimental
-public class UniqueValues {
-
-    private final Map<String, Set<Object>> usedValues;
-    private int maxRetries;
-
-    public UniqueValues() {
-        this.usedValues = new ConcurrentHashMap<>();
-        this.maxRetries = 10_000;
-    }
+public interface UniqueValues {
 
     /**
      * @param maxRetries how many times a random value may be generated during one invocation
      */
-    public void setMaxRetries(int maxRetries) {
-        this.maxRetries = maxRetries;
-    }
+    void setMaxRetries(int maxRetries);
 
     /**
      * Invokes supplier until it returns a value unique within {@code uniquenessGroup} or the max retry limit is
@@ -53,30 +37,7 @@ public class UniqueValues {
      * @return a unique value
      * @throws UniqueValueRetryLimitExceededException if retry limit is exceeded
      */
-    public <T> T value(String uniquenessGroup, Supplier<T> supplier) {
-        Set<Object> usedValuesForMethod =
-                usedValues.computeIfAbsent(uniquenessGroup, k -> ConcurrentHashMap.newKeySet());
-
-        return provideUnique(uniquenessGroup, supplier, usedValuesForMethod);
-    }
-
-    /*
-     * This method is synchronized because otherwise (in multi-threaded environments) 'contains' might return
-     * false more than once for single key, leading to non-unique values being provided.
-     */
-    private synchronized <T> T provideUnique(String uniquenessGroup, Supplier<T> supplier,
-                                             Set<Object> usedValuesForMethod) {
-        for (int i = 0; i <= maxRetries; i++) {
-            T result = supplier.get();
-            if (!usedValuesForMethod.contains(result)) {
-                usedValuesForMethod.add(result);
-
-                return result;
-            }
-        }
-
-        throw new UniqueValueRetryLimitExceededException(maxRetries, uniquenessGroup);
-    }
+    <T> T value(String uniquenessGroup, Supplier<T> supplier);
 
     /**
      * Guarantees supplied values to be unique within the context of the consumer's code.
@@ -96,12 +57,8 @@ public class UniqueValues {
      * @param within   the code within which the supplied values will be unique
      * @param <T>      the type of value to return
      * @throws UniqueValueRetryLimitExceededException if retry limit is exceeded
-     * @since 0.7.0
      */
-    public <T> void within(Supplier<T> supplier, Consumer<Supplier<T>> within) {
-        Set<Object> usedValuesForMethod = new HashSet<>();
-        within.accept(() -> provideUnique(null, supplier, usedValuesForMethod));
-    }
+    <T> void within(Supplier<T> supplier, Consumer<Supplier<T>> within);
 
     /**
      * Allows for the creation of collections of unique values.
@@ -120,11 +77,6 @@ public class UniqueValues {
      * @param collector the collector within which the supplied values will be unique
      * @param <T>       the type of value to return
      * @throws UniqueValueRetryLimitExceededException if retry limit is exceeded
-     * @since 0.7.0
      */
-    public <T, E> E of(Supplier<T> supplier, Function<Supplier<T>, E> collector) {
-        Set<Object> usedValuesForMethod = new HashSet<>();
-
-        return collector.apply(() -> provideUnique(null, supplier, usedValuesForMethod));
-    }
+    <T, E> E of(Supplier<T> supplier, Function<Supplier<T>, E> collector);
 }
