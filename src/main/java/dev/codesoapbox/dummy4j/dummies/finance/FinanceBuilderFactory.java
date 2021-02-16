@@ -13,10 +13,14 @@ public class FinanceBuilderFactory {
     private final IbanFormula ibanFormula;
     private final LuhnFormula luhnFormula;
 
-    public FinanceBuilderFactory(Dummy4j dummy4j, IbanFormula ibanFormula, LuhnFormula luhnFormula) {
+    FinanceBuilderFactory(Dummy4j dummy4j, IbanFormula ibanFormula, LuhnFormula luhnFormula) {
         this.dummy4j = dummy4j;
         this.ibanFormula = ibanFormula;
         this.luhnFormula = luhnFormula;
+    }
+
+    public static FinanceBuilderFactory newInstance(Dummy4j dummy4j) {
+        return new FinanceBuilderFactory(dummy4j, new IbanFormula(), new LuhnFormula());
     }
 
     IbanBuilder createIbanBuilder() {

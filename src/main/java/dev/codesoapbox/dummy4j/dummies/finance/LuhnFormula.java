@@ -6,10 +6,9 @@ import java.util.regex.Pattern;
  * Provides a method to calculate a check digit using the Luhn algorithm
  *
  * @see <a href="https://en.wikipedia.org/wiki/Luhn_algorithm">Luhn algorithm definition</a>
- *
  * @since 0.6.0
  */
-public class LuhnFormula {
+class LuhnFormula {
 
     private static final Pattern NON_DIGIT_CHARS_PATTERN = Pattern.compile("[^\\d]");
 

@@ -15,7 +15,7 @@ import dev.codesoapbox.dummy4j.dummies.shared.string.Padding;
  *
  * @since 0.6.0
  */
-public class IbanFormula {
+class IbanFormula {
 
     private static final int MOD = 97;
     private static final int CHECK_SUM = 98;
