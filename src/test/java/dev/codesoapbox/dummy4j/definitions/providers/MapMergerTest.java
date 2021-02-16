@@ -1,6 +1,5 @@
-package dev.codesoapbox.dummy4j.definitions.providers.files.yaml;
+package dev.codesoapbox.dummy4j.definitions.providers;
 
-import dev.codesoapbox.dummy4j.definitions.providers.MapMerger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

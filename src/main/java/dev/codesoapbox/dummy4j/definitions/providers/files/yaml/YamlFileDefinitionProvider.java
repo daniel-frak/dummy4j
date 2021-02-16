@@ -15,7 +15,7 @@ import static java.util.Collections.singletonList;
  * Provides definitions by loading all files as Maps, merging them into one big Map and then splitting them by locale
  * as {@code LocalizedDummyDefinitionsMap} instances
  */
-public class YamlFileDefinitionProvider implements DefinitionProvider {
+public final class YamlFileDefinitionProvider implements DefinitionProvider {
 
     private static final String DEFAULT_PATH = "dummy4j";
 

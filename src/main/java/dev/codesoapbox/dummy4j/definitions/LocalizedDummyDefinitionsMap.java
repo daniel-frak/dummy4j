@@ -12,7 +12,7 @@ import static java.util.stream.Collectors.toList;
 /**
  * Stores localized dummy data definitions as a Java Map
  */
-public class LocalizedDummyDefinitionsMap implements LocalizedDummyDefinitions {
+public final class LocalizedDummyDefinitionsMap implements LocalizedDummyDefinitions {
 
     private final String locale;
     private final Map<String, Object> map;

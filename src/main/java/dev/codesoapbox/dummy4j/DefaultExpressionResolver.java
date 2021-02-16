@@ -18,7 +18,7 @@ import static java.util.Collections.singletonList;
  *
  * @since 0.5.0
  */
-public class DefaultExpressionResolver implements ExpressionResolver {
+public final class DefaultExpressionResolver implements ExpressionResolver {
 
     private static final String ESCAPE_PREFIX = "\\\\?";
     private static final Pattern VARIABLE_PATTERN = Pattern.compile("#\\{(.*?)}");

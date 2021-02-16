@@ -8,7 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  * @since 0.5.0
  */
-public class DefaultRandomService implements RandomService {
+public final class DefaultRandomService implements RandomService {
 
     private static final String UPPER_BOUND_MUST_BE_POSITIVE = "Upper bound must be positive or zero";
     private static final String LOWER_BOUND_MUST_BE_POSITIVE = "Lower bound must be positive or zero";

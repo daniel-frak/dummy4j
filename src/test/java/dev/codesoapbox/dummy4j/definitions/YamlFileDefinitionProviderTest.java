@@ -22,11 +22,14 @@ import static org.mockito.Mockito.*;
 class YamlFileDefinitionProviderTest {
 
     private final List<String> paths = singletonList("dummy4j");
+
+    private YamlFileDefinitionProvider yamlFileDefinitionProvider;
+
     @Mock
     private YamlFileLoader yamlFileLoader;
+
     @Mock
     private MapMerger mapMerger;
-    private YamlFileDefinitionProvider yamlFileDefinitionProvider;
 
     @BeforeEach
     void setUp() {

@@ -15,7 +15,7 @@ import java.util.function.Supplier;
  * @since SNAPSHOT
  */
 @Experimental
-public class DefaultUniqueValues implements UniqueValues {
+public final class DefaultUniqueValues implements UniqueValues {
 
     private final Map<String, Set<Object>> usedValues;
     private int maxRetries;
