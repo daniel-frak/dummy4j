@@ -20,7 +20,7 @@ import static java.util.stream.Collectors.toList;
 /**
  * Loads .yml files from resources
  */
-public class YamlFileLoader {
+class YamlFileLoader {
 
     private static final Logger LOG = Logger.getLogger(YamlFileLoader.class.getSimpleName());
     private static final Pattern FILE_PATTERN = Pattern.compile(".*\\.yml");
@@ -32,13 +32,13 @@ public class YamlFileLoader {
     private final Reflections reflections;
     private final ResourceStreamProvider resourceStreamProvider;
 
-    public YamlFileLoader(Yaml yaml, Reflections reflections, ResourceStreamProvider resourceStreamProvider) {
+    YamlFileLoader(Yaml yaml, Reflections reflections, ResourceStreamProvider resourceStreamProvider) {
         this.yaml = yaml;
         this.reflections = reflections;
         this.resourceStreamProvider = resourceStreamProvider;
     }
 
-    public static YamlFileLoader standard() {
+    static YamlFileLoader standard() {
         Reflections reflections = new Reflections(new ConfigurationBuilder().setScanners(new ResourcesScanner())
                 .setUrls(ClasspathHelper.forJavaClassPath()));
         return new YamlFileLoader(new Yaml(), reflections, new ResourceStreamProvider());
@@ -50,7 +50,7 @@ public class YamlFileLoader {
      * @param paths the paths to load from, relative to the resources folder
      * @return a list of maps, each representing a single .yml file
      */
-    public List<Map<String, Object>> loadYamlFiles(List<String> paths) {
+    List<Map<String, Object>> loadYamlFiles(List<String> paths) {
         Set<String> resources = reflections.getResources(FILE_PATTERN);
 
         LOG.log(Level.FINE, "Loading definitions from: {0}", resources);

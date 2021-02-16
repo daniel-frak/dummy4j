@@ -1,5 +1,7 @@
-package dev.codesoapbox.dummy4j.definitions;
+package dev.codesoapbox.dummy4j.definitions.providers.files.yaml;
 
+import dev.codesoapbox.dummy4j.definitions.LocalizedDummyDefinitions;
+import dev.codesoapbox.dummy4j.definitions.LocalizedDummyDefinitionsMap;
 import dev.codesoapbox.dummy4j.definitions.providers.MapMerger;
 import dev.codesoapbox.dummy4j.definitions.providers.files.yaml.YamlFileDefinitionProvider;
 import dev.codesoapbox.dummy4j.definitions.providers.files.yaml.YamlFileLoader;
