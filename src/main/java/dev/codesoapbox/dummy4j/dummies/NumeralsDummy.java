@@ -11,7 +11,7 @@ import java.util.TreeMap;
  */
 public class NumeralsDummy {
 
-    protected static final int ROMAN_NUMERAL_MAX = 4999;
+    static final int ROMAN_NUMERAL_MAX = 4999;
 
     private static final String ROMAN_NUMERAL_MAX_EXCEEDED = "Roman numeral may not be greater than "
             + ROMAN_NUMERAL_MAX;

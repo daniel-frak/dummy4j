@@ -13,9 +13,9 @@ import java.util.Objects;
  */
 public class HSL {
 
-    protected final float hue;
-    protected final float saturation;
-    protected final float lightness;
+    final float hue;
+    final float saturation;
+    final float lightness;
 
     public HSL(float hue, float saturation, float lightness) {
         validate(hue, saturation, lightness);

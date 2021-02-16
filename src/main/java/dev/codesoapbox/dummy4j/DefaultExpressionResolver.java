@@ -24,9 +24,9 @@ public final class DefaultExpressionResolver implements ExpressionResolver {
     private static final Pattern VARIABLE_PATTERN = Pattern.compile("#\\{(.*?)}");
     private static final Pattern DIGIT_PATTERN = Pattern.compile(ESCAPE_PREFIX + "#(?!\\{)");
 
-    protected final RandomService randomService;
-    protected final List<String> locales;
-    protected final Map<String, LocalizedDummyDefinitions> localizedDefinitions;
+    final RandomService randomService;
+    final List<String> locales;
+    final Map<String, LocalizedDummyDefinitions> localizedDefinitions;
 
     public DefaultExpressionResolver(List<String> locales, RandomService randomService,
                                      DefinitionProvider definitionProvider) {
