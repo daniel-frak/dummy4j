@@ -210,7 +210,7 @@ public final class UrlBuilder {
      */
     public URL build() {
         UrlProtocol protocol = Optional.ofNullable(dummy4j.of(possibleProtocols))
-                .orElse(dummy4j.nextEnum(UrlProtocol.class));
+                .orElseGet(() -> dummy4j.nextEnum(UrlProtocol.class));
         UrlHost host = getUrlHost();
         String filePathAndQueryParams = getFilePath();
 

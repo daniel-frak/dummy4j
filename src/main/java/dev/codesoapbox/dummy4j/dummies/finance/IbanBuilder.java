@@ -98,7 +98,7 @@ public class IbanBuilder {
      */
     public String build() {
         BankAccountCountry country = Optional.ofNullable(dummy4j.of(countries))
-                .orElse(dummy4j.nextEnum(BankAccountCountry.class));
+                .orElseGet(() -> dummy4j.nextEnum(BankAccountCountry.class));
         String account = dummy4j.finance().bankAccountNumber(country);
         String countryCode = country.getCode();
         String iban = countryCode + ibanFormula.generateCheckDigits(account, countryCode) + account;

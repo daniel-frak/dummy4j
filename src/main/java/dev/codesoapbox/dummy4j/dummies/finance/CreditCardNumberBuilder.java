@@ -98,7 +98,7 @@ public class CreditCardNumberBuilder {
 
     private String getNumberWithIIN() {
         CreditCardProvider provider = Optional.ofNullable(dummy4j.of(providers))
-                .orElse(dummy4j.nextEnum(CreditCardProvider.class));
+                .orElseGet(() -> dummy4j.nextEnum(CreditCardProvider.class));
         String resolvedDefinition = dummy4j.expressionResolver().resolve(getProviderKey(provider));
 
         return Replace.replaceCharactersConditionally(resolvedDefinition, getIIN(provider), Character::isDigit);

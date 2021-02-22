@@ -81,7 +81,7 @@ public class CreditCardBuilder {
      */
     public CreditCard build() {
         CreditCardProvider provider = Optional.ofNullable(dummy4j.of(providers))
-                .orElse(dummy4j.nextEnum(CreditCardProvider.class));
+                .orElseGet(() -> dummy4j.nextEnum(CreditCardProvider.class));
         String number = numberBuilder.withProvider(provider).build();
         String ownerName = dummy4j.name().firstName() + " " + dummy4j.name().lastName();
         Address ownerAddress = dummy4j.address().full();
