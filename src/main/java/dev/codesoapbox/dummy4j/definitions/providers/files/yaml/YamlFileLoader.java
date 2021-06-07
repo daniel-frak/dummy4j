@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
+import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -24,6 +25,7 @@ class YamlFileLoader {
 
     private static final Logger LOG = Logger.getLogger(YamlFileLoader.class.getName());
     private static final Pattern FILE_PATTERN = Pattern.compile(".*\\.yml");
+    private static final List<String> RESOURCES_PREFIXES = singletonList("BOOT-INF/classes/");
 
     /**
      * Note that Yaml isn't thread safe!
@@ -40,7 +42,8 @@ class YamlFileLoader {
 
     static YamlFileLoader standard() {
         Reflections reflections = new Reflections(new ConfigurationBuilder().setScanners(new ResourcesScanner())
-                .setUrls(ClasspathHelper.forJavaClassPath()));
+                .setUrls(ClasspathHelper.forJavaClassPath())
+                .addUrls(ClasspathHelper.forClassLoader()));
         return new YamlFileLoader(new Yaml(), reflections, new ResourceStreamProvider());
     }
 
@@ -69,12 +72,20 @@ class YamlFileLoader {
     private boolean isInAllowedPath(String resource, List<String> paths) {
         boolean isInAllowedPath = false;
         for (String path : paths) {
-            if (resource.startsWith(path)) {
+            if (startsWith(resource, path)) {
                 isInAllowedPath = true;
                 break;
             }
         }
 
         return isInAllowedPath;
+    }
+
+    private boolean startsWith(String resource, String path) {
+        if(resource.startsWith(path)) {
+            return true;
+        }
+        return RESOURCES_PREFIXES.stream()
+                .anyMatch(p -> resource.startsWith(p + path));
     }
 }
