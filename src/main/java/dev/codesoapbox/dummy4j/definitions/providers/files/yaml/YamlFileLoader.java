@@ -25,7 +25,9 @@ class YamlFileLoader {
 
     private static final Logger LOG = Logger.getLogger(YamlFileLoader.class.getName());
     private static final Pattern FILE_PATTERN = Pattern.compile(".*\\.yml");
-    private static final List<String> RESOURCES_PREFIXES = singletonList("BOOT-INF/classes/");
+    private static final List<Pattern> RESOURCES_PREFIX_PATTERNS = singletonList(
+            Pattern.compile("^BOOT-INF/classes/")
+    );
 
     /**
      * Note that Yaml isn't thread safe!
@@ -56,12 +58,21 @@ class YamlFileLoader {
     List<Map<String, Object>> loadYamlFiles(List<String> paths) {
         Set<String> resources = reflections.getResources(FILE_PATTERN);
 
-        LOG.log(Level.FINE, "Loading definitions from: {0}", resources);
+        LOG.log(Level.FINE, "Loading definitions from files: {0}", resources);
 
         return resources.stream()
+                .map(this::removeResourcePrefixes)
+                .distinct()
                 .filter(r -> isInAllowedPath(r, paths))
                 .map(this::loadResourceAsMap)
                 .collect(toList());
+    }
+
+    private String removeResourcePrefixes(String resourcePath) {
+        for (Pattern pattern : RESOURCES_PREFIX_PATTERNS) {
+            resourcePath = pattern.matcher(resourcePath).replaceFirst(resourcePath);
+        }
+        return resourcePath;
     }
 
     private Map<String, Object> loadResourceAsMap(String r) {
@@ -69,23 +80,12 @@ class YamlFileLoader {
         return yaml.load(inputStream);
     }
 
-    private boolean isInAllowedPath(String resource, List<String> paths) {
-        boolean isInAllowedPath = false;
+    private boolean isInAllowedPath(String resourcePath, List<String> paths) {
         for (String path : paths) {
-            if (startsWith(resource, path)) {
-                isInAllowedPath = true;
-                break;
+            if (resourcePath.startsWith(path)) {
+                return true;
             }
         }
-
-        return isInAllowedPath;
-    }
-
-    private boolean startsWith(String resource, String path) {
-        if(resource.startsWith(path)) {
-            return true;
-        }
-        return RESOURCES_PREFIXES.stream()
-                .anyMatch(p -> resource.startsWith(p + path));
+        return false;
     }
 }
