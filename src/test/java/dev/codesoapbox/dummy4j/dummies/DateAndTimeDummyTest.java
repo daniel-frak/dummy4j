@@ -21,7 +21,7 @@ class DateAndTimeDummyTest {
 
     private static final LocalDate LOCAL_DATE = LocalDate.of(2000, Month.JANUARY, 1);
 
-    private final Clock clock = Clock.fixed(LOCAL_DATE.atStartOfDay(ZoneId.of("GMT")).toInstant(), ZoneId.of("GMT"));
+    private final Clock clock = Clock.fixed(LOCAL_DATE.atStartOfDay(ZoneId.of("UTC")).toInstant(), ZoneId.of("UTC"));
 
     private DateAndTimeDummy dateAndTimeDummy;
 
