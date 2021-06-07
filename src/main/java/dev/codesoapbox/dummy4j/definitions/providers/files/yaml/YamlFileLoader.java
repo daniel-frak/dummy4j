@@ -22,7 +22,7 @@ import static java.util.stream.Collectors.toList;
  */
 class YamlFileLoader {
 
-    private static final Logger LOG = Logger.getLogger(YamlFileLoader.class.getSimpleName());
+    private static final Logger LOG = Logger.getLogger(YamlFileLoader.class.getName());
     private static final Pattern FILE_PATTERN = Pattern.compile(".*\\.yml");
 
     /**
