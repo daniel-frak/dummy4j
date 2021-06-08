@@ -45,12 +45,12 @@ The parser recognizes three placeholders:
 * `#{key.path}` (single-locale placeholder) - will resolve to a random value from the list of data definitions using
  the provided key path; The resolved value may itself be an expression. If the path resolves to a list of keys
  (instead of values), a random one of them will be returned.
- The value will always be taken from a single locale (the first one which contains values for the path, unless the
+ The value will always be taken from a single locale - the first one which contains values for the path, unless the
  placeholder is part of a nested expression in which case it will always resolve only to its parent expression's 
- locale).
+ locale. The parent expression's locale is the locale of the first placeholder that was resolved within it.
 * `#{{key.path}}` (multi-locale placeholder, since SNAPSHOT) - like above, but will return a random value from the
   superset of all locales' values, regardless of whether it is part of a nested expression.
-* `#` (number) - will resolve to a random digit between 0 and 9
+* `#` (digit) - will resolve to a random digit between 0 and 9
 
 Dummy4j can resolve expressions, which are a mix of the aforementioned placeholders and other characters, e.g.:
 

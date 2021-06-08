@@ -13,6 +13,7 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -32,6 +33,11 @@ public class DefaultExpressionResolverForMultipleLanguagesTest {
     private static final String MIXED_FLAVOURS = String.format("#{%s.%s} - #{%s.%s}", FLAVOUR, FRUIT, FLAVOUR, SPICY);
     private static final String MIXED_FLAVOURS_MULTI = String.format("#{{%s.%s}} - #{{%s.%s}}",
             FLAVOUR, FRUIT, FLAVOUR, SPICY);
+    private static final String SUBKEY = "subkey";
+    private static final String KEYS_FR = "keys_fr";
+    private static final String TEMPERATURE = "temperature";
+    private static final String HOT = "hot";
+    private static final String COLD = "cold";
 
     @Mock
     private DefinitionProvider definitionProvider;
@@ -62,6 +68,10 @@ public class DefaultExpressionResolverForMultipleLanguagesTest {
         Map<String, Object> rootMap = new HashMap<>();
         rootMap.put(FLAVOUR, flavours);
 
+        Map<String, Object> subKeyMap = new HashMap<>();
+        subKeyMap.put(TEMPERATURE, singletonList(HOT));
+        rootMap.put(SUBKEY, subKeyMap);
+
         return rootMap;
     }
 
@@ -75,7 +85,40 @@ public class DefaultExpressionResolverForMultipleLanguagesTest {
         Map<String, Object> rootMap = new HashMap<>();
         rootMap.put(FLAVOUR, flavours);
 
+        rootMap.put(KEYS_FR, TEMPERATURE);
+
+        Map<String, Object> subKeyMap = new HashMap<>();
+        subKeyMap.put(TEMPERATURE, singletonList(COLD));
+        rootMap.put(SUBKEY, subKeyMap);
+
         return rootMap;
+    }
+
+    @Test
+    void shouldResolveTwoSubExpressionsInSameLocale() {
+        Set<String> expected = new HashSet<>();
+        expected.add(COLD + " + " + COLD);
+
+        Set<String> result = new HashSet<>();
+
+        for (int i = 0; i < 10; i++) {
+            result.add(expressionResolver.resolve("#{" + SUBKEY + ".#{" + KEYS_FR + "}}" +
+                    " + #{" + SUBKEY + "." + TEMPERATURE + "}"));
+        }
+        assertEquals(expected, result);
+    }
+
+    @Test
+    void shouldResolveSubExpressionInSingleLocaleExpressionKeepingOriginalLocale() {
+        Set<String> expected = new HashSet<>();
+        expected.add(COLD);
+
+        Set<String> result = new HashSet<>();
+
+        for (int i = 0; i < 10; i++) {
+            result.add(expressionResolver.resolve("#{" + SUBKEY + ".#{" + KEYS_FR + "}}"));
+        }
+        assertEquals(expected, result);
     }
 
     @Test

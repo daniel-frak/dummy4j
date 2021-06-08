@@ -10,7 +10,10 @@ public interface ExpressionResolver {
      * {@code #{name.male_first_name} #{name.last_name} }
      * <p>
      * Single-locale placeholders are defined as {@code #{definition.path}}.
-     * They resolve to a random value from a single locale.
+     * They resolve to a random value from a single locale - the first one which contains values for the path, unless
+     * the placeholder is part of a nested expression in which case it will always resolve only to its parent
+     * expression's locale. The parent expression's locale is the locale of the first placeholder that was resolved
+     * within it.
      * <p>
      * Multi-locale placeholders (since SNAPSHOT) are defined as {@code #{{definition.path}}}.
      * They resolve to a random value from a superset of all locales' values.
