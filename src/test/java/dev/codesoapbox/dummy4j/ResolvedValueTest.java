@@ -4,6 +4,7 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ResolvedValueTest {
 
@@ -16,6 +17,26 @@ class ResolvedValueTest {
 
         assertEquals(locale, result.getLocale());
         assertEquals(value, result.getValue());
+    }
+
+    @Test
+    void ofShouldThrowExceptionIfLocaleIsNull() {
+        String locale = null;
+        String value = "someValue";
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> ResolvedValue.of(locale, value));
+        assertEquals("Locale cannot be null", exception.getMessage());
+    }
+
+    @Test
+    void ofShouldThrowExceptionIfValueIsNull() {
+        String locale = "en";
+        String value = null;
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> ResolvedValue.of(locale, value));
+        assertEquals("Value cannot be null", exception.getMessage());
     }
 
     @Test
