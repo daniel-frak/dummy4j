@@ -233,8 +233,8 @@ class DefaultExpressionResolverTest {
     }
 
     @Test
-    void shouldResolveMultiLocalePlaceholderWhenSomeDefinitionsReturnNull() {
-        LocalizedDummyDefinitions enDefinitions = mockLocalizedDefinitions("en", null);
+    void shouldResolveMultiLocalePlaceholderWhenSomeDefinitionsReturnEmpty() {
+        LocalizedDummyDefinitions enDefinitions = mockLocalizedDefinitions("en", emptyList());
         LocalizedDummyDefinitions frDefinitions = mockLocalizedDefinitions("fr", singletonList("value"));
         when(definitionProvider.get())
                 .thenReturn(asList(enDefinitions, frDefinitions));
@@ -245,9 +245,9 @@ class DefaultExpressionResolverTest {
     }
 
     @Test
-    void shouldReturnEmptyStringWhenResolvingMultiLocalePlaceholderAndAllDefinitionsReturnNull() {
-        LocalizedDummyDefinitions enDefinitions = mockLocalizedDefinitions("en", null);
-        LocalizedDummyDefinitions frDefinitions = mockLocalizedDefinitions("fr", null);
+    void shouldReturnEmptyStringWhenResolvingMultiLocalePlaceholderAndAllDefinitionsReturnEmpty() {
+        LocalizedDummyDefinitions enDefinitions = mockLocalizedDefinitions("en", emptyList());
+        LocalizedDummyDefinitions frDefinitions = mockLocalizedDefinitions("fr", emptyList());
         when(definitionProvider.get())
                 .thenReturn(asList(enDefinitions, frDefinitions));
         expressionResolver = new DefaultExpressionResolver(asList("en", "fr"), randomService, definitionProvider);
