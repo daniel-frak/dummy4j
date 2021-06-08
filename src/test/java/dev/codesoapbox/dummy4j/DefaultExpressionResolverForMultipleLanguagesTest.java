@@ -21,7 +21,7 @@ import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class DefaultExpressionResolverForMultipleLanguagesTest {
+class DefaultExpressionResolverForMultipleLanguagesTest {
 
     private static final String EN = "en";
     private static final String FR = "fr";
