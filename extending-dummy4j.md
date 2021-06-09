@@ -39,9 +39,9 @@ files of the same name within the same path may override each other.
 
 If you choose to, you can place all of your definitions in one file. You can also spread them out over several files.
 
-## Parser
+## Expression resolver
 
-The parser recognizes three placeholders:
+The expression resolver recognizes three placeholders:
 * `#{path.to.key}` (single-locale placeholder) - will resolve to a random value from the list of data definitions using
  the provided key path; The resolved value may itself be an expression. If the path resolves to a list of keys
  (instead of values), a random one of them will be returned.
@@ -57,8 +57,8 @@ Dummy4j can resolve expressions, which are a mix of the aforementioned placehold
 * `#{name.male_first_name} #{name.last_name}`
 * `##-###`
 
-The parser will first try to resolve the path in the locale which is first on the list. Failing that, it will keep
-going down the list until it resolves it or returns NULL.
+The expression resolver will first try to resolve the path in the locale which is first on the list. Failing that,
+it will keep going down the list until it resolves it or returns NULL.
 
 It is also possible to resolve nested expressions, e.g.:
 `#{key1.#{key2}}`.
