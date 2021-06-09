@@ -121,8 +121,8 @@ public final class DefaultExpressionResolver implements ExpressionResolver {
 
     /**
      * Resolves a single path to a random value from a single locale.
-     * If originalLocale is empty, the method first looks into the primary locale and then goes to the next ones
-     * in order if a path could not be resolved.
+     * If originalLocale is empty, the method first looks into the primary locale and then goes to the next ones,
+     * preserving order, if a path could not be resolved.
      * If originalLocale is not empty, the method looks only into that locale.
      * Note that this method does not perform any parsing and thus will not resolve values which themselves are
      * expressions.
