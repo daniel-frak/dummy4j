@@ -20,7 +20,7 @@ public interface ExpressionResolver {
      * <p>
      * Digits are defined simply as {@code #}.
      * <p>
-     * Placeholders which don't resolve to anything will be removed.
+     * Placeholders which don't resolve to anything will be removed from the expression.
      * <p>
      * Since SNAPSHOT:
      * <p>
