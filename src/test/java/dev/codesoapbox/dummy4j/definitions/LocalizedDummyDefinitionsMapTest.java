@@ -101,4 +101,16 @@ class LocalizedDummyDefinitionsMapTest {
     void getKeysOfShouldReturnEmptySetWhenKeyIsNotFound() {
         assertEquals(emptyList(), dummyDefinitions.resolve("thisDoesntExist"));
     }
+
+    @Test
+    void shouldReturnNestedKeysWhenHigherKeyEndsWithDot() {
+        List<String> result = dummyDefinitions.resolve("something.");
+        assertEquals(Arrays.asList("evenDeeper", "deeper"), result);
+    }
+
+    @Test
+    void shouldReturnValueKeysWhenLastKeyEndsWithDot() {
+        List<String> result = dummyDefinitions.resolve("something.evenDeeper.thanThat.");
+        assertEquals(singletonList("actualValue"), result);
+    }
 }
