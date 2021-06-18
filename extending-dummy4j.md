@@ -43,7 +43,7 @@ If you choose to, you can place all of your definitions in one file. You can als
 
 The expression resolver recognizes three placeholders:
 * `#{path.to.key}` (single-locale placeholder) - will resolve to a random value from the list of data definitions using
- the provided key path; The resolved value may itself be an expression. If the path resolves to a list of keys
+ the provided key path; the resolved value may itself be an expression. If the path resolves to a list of keys
  (instead of values), a random one of them will be returned.
  The value will always be taken from a single locale - the first one which contains values for the path, unless the
  placeholder is part of a nested expression in which case it will always resolve only to its parent expression's 
