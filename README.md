@@ -146,8 +146,10 @@ List<String> tenLocallyUniqueNames = dummy.unique().of(() -> dummy.name().fullNa
                 name -> dummy.listOf(10, name));
 
 // This resolves an expression, finding the appropriate values in yml files.
-// Normally, this should be hidden away under a custom method (e.g. customDummy.maleAndFemaleNames()).
-String resolvedExpression = dummy4j.expressionResolver().resolve("#{name.male_first_name}, #{name.female_first_name}");
+// Normally, this should be hidden away under a custom method
+// (e.g. customDummy.maleAndFemaleNames()).
+String resolvedExpression = dummy4j.expressionResolver()
+        .resolve("#{name.male_first_name}, #{name.female_first_name}");
 ```
 
 ## Goals and contributing
