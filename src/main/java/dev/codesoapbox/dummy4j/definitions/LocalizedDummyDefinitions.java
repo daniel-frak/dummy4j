@@ -15,7 +15,7 @@ public interface LocalizedDummyDefinitions {
     /**
      * Returns a list of all possible values for a given path.
      * <p>
-     * Since SNAPSHOT:
+     * Since 0.8.0:
      * <p>
      * If the path exists but does not resolve to a value or list of values, returns a list
      * of all keys contained directly within it.

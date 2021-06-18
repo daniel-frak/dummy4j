@@ -9,7 +9,7 @@ import java.util.function.Supplier;
 /**
  * Produces unique values
  *
- * @since SNAPSHOT
+ * @since 0.8.0
  */
 public interface UniqueValues {
 

@@ -48,7 +48,7 @@ The expression resolver recognizes three placeholders:
  The value will always be taken from a single locale - the first one which contains values for the path, unless the
  placeholder is part of a nested expression in which case it will always resolve only to its parent expression's 
  locale. The parent expression's locale is the locale of the first placeholder that was resolved within it.
-* `#{{path.to.key}}` (multi-locale placeholder, since SNAPSHOT) - like above, but will return a random value from the
+* `#{{path.to.key}}` (multi-locale placeholder, since 0.8.0) - like above, but will return a random value from the
   superset of all locales' values, regardless of whether it is part of a nested expression.
 * `#` (digit) - will resolve to a random digit between 0 and 9
 

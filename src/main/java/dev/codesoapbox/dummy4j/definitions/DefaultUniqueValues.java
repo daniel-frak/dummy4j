@@ -12,7 +12,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
- * @since SNAPSHOT
+ * @since 0.8.0
  */
 @Experimental
 public final class DefaultUniqueValues implements UniqueValues {
