@@ -7,11 +7,12 @@ import dev.codesoapbox.dummy4j.exceptions.MissingLocaleDefinitionsException;
 
 import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static java.util.Collections.singletonList;
+import static java.util.stream.Collectors.toList;
 
 /**
  * A default implementation of the expression resolver
@@ -21,7 +22,8 @@ import static java.util.Collections.singletonList;
 public final class DefaultExpressionResolver implements ExpressionResolver {
 
     private static final String ESCAPE_PREFIX = "\\\\?";
-    private static final Pattern VARIABLE_PATTERN = Pattern.compile("#\\{(.*?)}");
+    private static final Pattern MULTI_LOCALE_VARIABLE_PATTERN = Pattern.compile("#\\{{2}((?:(?!#\\{|}).)*)}{2}");
+    private static final Pattern SINGLE_LOCALE_VARIABLE_PATTERN = Pattern.compile("#\\{(?!\\{)((?:(?!#\\{|}).)*)}");
     private static final Pattern DIGIT_PATTERN = Pattern.compile(ESCAPE_PREFIX + "#(?!\\{)");
 
     final RandomService randomService;
@@ -46,67 +48,111 @@ public final class DefaultExpressionResolver implements ExpressionResolver {
 
     @Override
     public String resolve(String expression) {
-        final String result = resolveAllKeysAndDigits(expression);
+        ResolvedValue resolvedValue = ResolvedValue.of("", expression);
+        do {
+            resolvedValue = replaceMultiLocalePlaceholders(resolvedValue);
+            resolvedValue = replaceSingleLocalePlaceholders(resolvedValue);
+        } while (MULTI_LOCALE_VARIABLE_PATTERN.matcher(resolvedValue.getValue()).find()
+                || SINGLE_LOCALE_VARIABLE_PATTERN.matcher(resolvedValue.getValue()).find());
 
-        if (!VARIABLE_PATTERN.matcher(result).find()) {
-            return result;
-        }
-        return resolve(result);
+        return replaceDigitPlaceholders(resolvedValue).getValue();
     }
 
-    private String resolveAllKeysAndDigits(String expression) {
-        final String expressionWithResolvedKeys = replaceKeyPlaceholders(expression);
-        return replaceDigitPlaceholders(expressionWithResolvedKeys);
+    private ResolvedValue replaceMultiLocalePlaceholders(ResolvedValue resolvedValue) {
+        String expression = resolvedValue.getValue();
+        final Matcher expressionMatcher = MULTI_LOCALE_VARIABLE_PATTERN.matcher(expression);
+
+        return replace(resolvedValue, expressionMatcher,
+                locale -> resolvePathWithinAllLocales(expressionMatcher.group(1)));
     }
 
-    private String replaceKeyPlaceholders(String expression) {
-        final Matcher expressionMatcher = VARIABLE_PATTERN.matcher(expression);
-
-        return replace(expression, expressionMatcher,
-                () -> resolveKey(expressionMatcher.group(1)));
-    }
-
-    private String replaceDigitPlaceholders(String expressionWithResolvedKeys) {
-        final Matcher digitMatcher = DIGIT_PATTERN.matcher(expressionWithResolvedKeys);
-
-        return replace(expressionWithResolvedKeys, digitMatcher,
-                () -> String.valueOf(randomService.nextInt(9)));
-    }
-
-    private String replace(String expression, Matcher expressionMatcher, Supplier<String> replacementSupplier) {
+    private ResolvedValue replace(ResolvedValue resolvedValue, Matcher expressionMatcher,
+                                  Function<String, ResolvedValue> replacementSupplier) {
+        String expression = resolvedValue.getValue();
+        String locale = resolvedValue.getLocale();
         final StringBuffer b = new StringBuffer(expression.length());
         while (expressionMatcher.find()) {
-            if(expressionMatcher.group().charAt(0) == '\\') {
+            if (expressionMatcher.group().charAt(0) == '\\') {
                 expressionMatcher.appendReplacement(b, expressionMatcher.group().substring(1));
             } else {
-                expressionMatcher.appendReplacement(b, Matcher.quoteReplacement(replacementSupplier.get()));
+                ResolvedValue newValue = replacementSupplier.apply(locale);
+                locale = newValue.getLocale();
+                expressionMatcher.appendReplacement(b, Matcher.quoteReplacement
+                        (newValue.getValue()));
             }
         }
         expressionMatcher.appendTail(b);
 
-        return b.toString();
+        return ResolvedValue.of(locale, b.toString());
     }
 
     /**
-     * Resolves a single key to a random value.
+     * Resolves a single path to a random value from a superset of all locale values.
      * Note that this method does not perform any parsing and thus will not resolve values which themselves are
      * expressions.
      *
-     * @param key the key to resolved
-     * @return a random value based on the key
+     * @param path the path to resolved
+     * @return a random value based on the path
      */
-    private String resolveKey(String key) {
-        for (String locale : locales) {
-            List<String> result = localizedDefinitions.get(locale).resolve(key);
-            if (result != null && !result.isEmpty()) {
-                return getRandom(result);
-            }
+    private ResolvedValue resolvePathWithinAllLocales(String path) {
+        List<ResolvedValue> result = locales.stream()
+                .flatMap(locale -> localizedDefinitions.get(locale).resolve(path).stream()
+                        .map(v -> ResolvedValue.of(locale, v)))
+                .collect(toList());
+
+        if (!result.isEmpty()) {
+            return getRandom(result);
         }
-        return "";
+        return ResolvedValue.of("", "");
     }
 
-    private String getRandom(List<String> result) {
+    private ResolvedValue getRandom(List<ResolvedValue> result) {
         int i = randomService.nextInt(result.size() - 1);
         return result.get(i);
+    }
+
+    private ResolvedValue replaceSingleLocalePlaceholders(ResolvedValue resolvedValue) {
+        String expression = resolvedValue.getValue();
+        final Matcher expressionMatcher = SINGLE_LOCALE_VARIABLE_PATTERN.matcher(expression);
+
+        return replace(resolvedValue, expressionMatcher,
+                locale -> resolvePathWithinSingleLocale(expressionMatcher.group(1), locale));
+    }
+
+    /**
+     * Resolves a single path to a random value from a single locale.
+     * If originalLocale is empty, the method first looks into the primary locale and then goes to the next ones,
+     * preserving order, if a path could not be resolved.
+     * If originalLocale is not empty, the method looks only into that locale.
+     * Note that this method does not perform any parsing and thus will not resolve values which themselves are
+     * expressions.
+     *
+     * @param path the path to resolved
+     * @return a random value based on the path
+     */
+    private ResolvedValue resolvePathWithinSingleLocale(String path, String originalLocale) {
+        for (String locale : locales) {
+            if (!originalLocale.isEmpty() && !originalLocale.equals(locale)) {
+                continue;
+            }
+            List<String> result = localizedDefinitions.get(locale).resolve(path);
+            if (result != null && !result.isEmpty()) {
+                return ResolvedValue.of(locale, getRandomString(result));
+            }
+        }
+        return ResolvedValue.of("", "");
+    }
+
+    private String getRandomString(List<String> result) {
+        int i = randomService.nextInt(result.size() - 1);
+        return result.get(i);
+    }
+
+    private ResolvedValue replaceDigitPlaceholders(ResolvedValue resolvedValue) {
+        String expressionWithResolvedKeys = resolvedValue.getValue();
+        final Matcher digitMatcher = DIGIT_PATTERN.matcher(expressionWithResolvedKeys);
+
+        return replace(resolvedValue, digitMatcher,
+                locale -> ResolvedValue.of(locale, String.valueOf(randomService.nextInt(9))));
     }
 }

@@ -13,10 +13,15 @@ public interface LocalizedDummyDefinitions {
     String getLocale();
 
     /**
-     * Return a list of all possible values for a given key.
+     * Returns a list of all possible values for a given path.
+     * <p>
+     * Since SNAPSHOT:
+     * <p>
+     * If the path exists but does not resolve to a value or list of values, returns a list
+     * of all keys contained directly within it.
      *
-     * @param key the key to resolve
-     * @return a list of all values assigned to the key
+     * @param path the path to resolve
+     * @return a list of all values assigned to the path or a list of all keys contained within it
      */
-    List<String> resolve(String key);
+    List<String> resolve(String path);
 }

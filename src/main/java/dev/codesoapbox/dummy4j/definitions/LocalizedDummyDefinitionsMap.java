@@ -1,12 +1,8 @@
 package dev.codesoapbox.dummy4j.definitions;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
-import static java.util.Collections.emptyList;
-import static java.util.Collections.singletonList;
+import static java.util.Collections.*;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -28,8 +24,8 @@ public final class LocalizedDummyDefinitionsMap implements LocalizedDummyDefinit
     }
 
     @Override
-    public List<String> resolve(String key) {
-        String[] keys = key.split("\\.");
+    public List<String> resolve(String path) {
+        String[] keys = path.split("\\.");
 
         return resolve(map, keys);
     }
@@ -45,8 +41,7 @@ public final class LocalizedDummyDefinitionsMap implements LocalizedDummyDefinit
     @SuppressWarnings("unchecked")
     private List<String> resolveResult(String[] keys, Object result) {
         if (result instanceof Map) {
-            String[] keysWithoutRoot = Arrays.copyOfRange(keys, 1, keys.length);
-            return resolve((Map<String, Object>) result, keysWithoutRoot);
+            return resolveMap(keys, (Map<String, Object>) result);
         }
 
         if (result instanceof List) {
@@ -54,6 +49,14 @@ public final class LocalizedDummyDefinitionsMap implements LocalizedDummyDefinit
         }
 
         return singletonList(String.valueOf(result));
+    }
+
+    private List<String> resolveMap(String[] keys, Map<String, Object> result) {
+        if(keys.length == 1) {
+            return new ArrayList<>(result.keySet());
+        }
+        String[] keysWithoutRoot = Arrays.copyOfRange(keys, 1, keys.length);
+        return resolve(result, keysWithoutRoot);
     }
 
     @SuppressWarnings("unchecked")

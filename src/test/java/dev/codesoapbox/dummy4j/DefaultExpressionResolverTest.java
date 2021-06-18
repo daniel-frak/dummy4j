@@ -11,12 +11,13 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
+import static java.util.Arrays.*;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -33,16 +34,21 @@ class DefaultExpressionResolverTest {
 
     @BeforeEach
     void setUp() {
-        String locale = "en";
+        String localeEn = "en";
+        String localeFr = "fr";
 
-        LocalizedDummyDefinitions dummyDefinitions = new LocalizedDummyDefinitionsMap(locale, buildDefinitionMap());
+        LocalizedDummyDefinitions dummyDefinitionsEn =
+                new LocalizedDummyDefinitionsMap(localeEn, buildDefinitionMapEn());
+        LocalizedDummyDefinitions dummyDefinitionsFr =
+                new LocalizedDummyDefinitionsMap(localeFr, buildDefinitionMapFr());
         when(definitionProvider.get())
-                .thenReturn(singletonList(dummyDefinitions));
+                .thenReturn(asList(dummyDefinitionsEn, dummyDefinitionsFr));
 
-        expressionResolver = new DefaultExpressionResolver(singletonList(locale), randomService, definitionProvider);
+        expressionResolver = new DefaultExpressionResolver(asList(localeEn, localeFr), randomService,
+                definitionProvider);
     }
 
-    private Map<String, Object> buildDefinitionMap() {
+    private Map<String, Object> buildDefinitionMapEn() {
         Map<String, Object> nestedMap = new HashMap<>();
         nestedMap.put("deep", "value");
         nestedMap.put("advanced", "#{something.deep}123");
@@ -52,32 +58,61 @@ class DefaultExpressionResolverTest {
 
         Map<String, Object> rootMap = new HashMap<>();
         rootMap.put("something", nestedMap);
+        rootMap.put("somethingKey", "deep");
+        rootMap.put("list", Arrays.asList("1", "#{something.special}"));
+        rootMap.put("shared", singletonList("1"));
+
+        return rootMap;
+    }
+
+    private Map<String, Object> buildDefinitionMapFr() {
+        Map<String, Object> nestedMap = new HashMap<>();
+        nestedMap.put("frenchAddition", "value");
+
+        Map<String, Object> rootMap = new HashMap<>();
+        rootMap.put("something", nestedMap);
+        rootMap.put("shared", singletonList("2"));
 
         return rootMap;
     }
 
     @Test
-    void shouldResolveKey() {
+    void shouldResolveSingleValuePlaceholder() {
         String result = expressionResolver.resolve("#{something.deep}");
         assertEquals("value", result);
     }
 
     @Test
-    void shouldReturnEmptyStringWhenUnableToResolveKey() {
-        LocalizedDummyDefinitions dummyDefinitions = mock(LocalizedDummyDefinitions.class);
+    void shouldReturnEmptyStringWhenUnableToResolveSingleLocalePlaceholder() {
+        LocalizedDummyDefinitions dummyDefinitions = mockLocalizedDefinitions("en", emptyList());
         when(definitionProvider.get())
                 .thenReturn(singletonList(dummyDefinitions));
-        when(dummyDefinitions.resolve(any()))
-                .thenReturn(null);
-        when(dummyDefinitions.getLocale())
-                .thenReturn("en");
         expressionResolver = new DefaultExpressionResolver(singletonList("en"), randomService, definitionProvider);
         String result = expressionResolver.resolve("#{something.notexisting}");
         assertEquals("", result);
     }
 
+    private LocalizedDummyDefinitions mockLocalizedDefinitions(String localeCode, List<String> result) {
+        LocalizedDummyDefinitions dummyDefinitions = mock(LocalizedDummyDefinitions.class);
+        when(dummyDefinitions.resolve(any()))
+                .thenReturn(result);
+        when(dummyDefinitions.getLocale())
+                .thenReturn(localeCode);
+        return dummyDefinitions;
+    }
+
     @Test
-    void shouldReturnEmptyStringWhenKeyIsEmpty() {
+    void shouldReturnEmptyStringWhenUnableToResolveMultiLocalePlaceholder() {
+        LocalizedDummyDefinitions dummyDefinitions = mockLocalizedDefinitions("en", emptyList());
+        when(definitionProvider.get())
+                .thenReturn(singletonList(dummyDefinitions));
+        expressionResolver = new DefaultExpressionResolver(singletonList("en"), randomService, definitionProvider);
+        String result = expressionResolver.resolve("#{{something.notexisting}}");
+        assertEquals("", result);
+    }
+
+    @Test
+    void shouldReturnEmptyStringWhenResolvedPathIsEmpty() {
         String result = expressionResolver.resolve("#{something.empty}");
         assertEquals("", result);
     }
@@ -86,6 +121,24 @@ class DefaultExpressionResolverTest {
     void shouldResolveExpression() {
         String result = expressionResolver.resolve("#{something.deep}-#{something.deep}");
         assertEquals("value-value", result);
+    }
+
+    @Test
+    void shouldResolveSingleValuePlaceholderWithSecondaryLocaleIfNotFoundInPrimary() {
+        String result = expressionResolver.resolve("#{something.frenchAddition}");
+        assertEquals("value", result);
+    }
+
+    @Test
+    void shouldResolveSingleValuePlaceholderWithSecondaryLocaleIfPrimaryDefinitionsReturnNull() {
+        LocalizedDummyDefinitions enDefinitions = mockLocalizedDefinitions("en", null);
+        LocalizedDummyDefinitions frDefinitions = mockLocalizedDefinitions("fr", singletonList("value"));
+        when(definitionProvider.get())
+                .thenReturn(asList(enDefinitions, frDefinitions));
+        expressionResolver = new DefaultExpressionResolver(asList("en", "fr"), randomService, definitionProvider);
+
+        String result = expressionResolver.resolve("#{path.to.key}");
+        assertEquals("value", result);
     }
 
     @Test
@@ -109,14 +162,112 @@ class DefaultExpressionResolverTest {
     }
 
     @Test
-    void shouldResolveExpressionWithinExpression() {
+    void shouldResolvePlaceholderWhichResolvesToExpression() {
         String result = expressionResolver.resolve("#{something.advanced}");
         assertEquals("value123", result);
+    }
+
+    @Test
+    void shouldResolveSingleLocalePlaceholderWithinSingleLocalePlaceholder() {
+        String result = expressionResolver.resolve("#{something.#{somethingKey}}");
+        assertEquals("value", result);
+    }
+
+    @Test
+    void shouldResolveMultiLocalePlaceholderWithinSingleLocalePlaceholder() {
+        String result = expressionResolver.resolve("#{something.#{{somethingKey}}}");
+        assertEquals("value", result);
+    }
+
+    @Test
+    void shouldResolveSingleLocalePlaceholderWithinMultiLocalePlaceholder() {
+        String result = expressionResolver.resolve("#{{something.#{somethingKey}}}");
+        assertEquals("value", result);
+    }
+
+    @Test
+    void shouldResolveMultiLocalePlaceholderWithinMultiLocalePlaceholder() {
+        String result = expressionResolver.resolve("#{{something.#{{somethingKey}}}}");
+        assertEquals("value", result);
+    }
+
+    @Test
+    void shouldNotResolveEscapedHashSymbolWhenResolvingNestedExpression() {
+        lenient().when(randomService.nextInt(9))
+                .thenReturn(9);
+        String result = expressionResolver.resolve("\\##{something.#{somethingKey}}");
+        assertEquals("#value", result);
     }
 
     @Test
     void shouldResolveSpecialChars() {
         String result = expressionResolver.resolve("#{something.special}");
         assertEquals("$ $$ $ $$ \\abc", result);
+    }
+
+    @Test
+    void shouldResolveMultiLocalePlaceholder() {
+        Set<String> expected = new HashSet<>();
+        expected.add("1");
+        expected.add("2");
+
+        Set<String> result = new HashSet<>();
+
+        mockRandomServiceForFullRange();
+
+        for (int i = 0; i < 10; i++) {
+            result.add(expressionResolver.resolve("#{{shared}}"));
+        }
+        assertEquals(expected, result);
+    }
+
+    private void mockRandomServiceForFullRange() {
+        AtomicInteger counter = new AtomicInteger();
+        doAnswer(inv -> {
+            int value = counter.getAndIncrement();
+            if(value < (int) inv.getArgument(0)) {
+                return value;
+            }
+            return inv.getArgument(0);
+        }).when(randomService).nextInt(anyInt());
+    }
+
+    @Test
+    void shouldResolveMultiLocalePlaceholderWhenSomeDefinitionsReturnEmpty() {
+        LocalizedDummyDefinitions enDefinitions = mockLocalizedDefinitions("en", emptyList());
+        LocalizedDummyDefinitions frDefinitions = mockLocalizedDefinitions("fr", singletonList("value"));
+        when(definitionProvider.get())
+                .thenReturn(asList(enDefinitions, frDefinitions));
+        expressionResolver = new DefaultExpressionResolver(asList("en", "fr"), randomService, definitionProvider);
+
+        String result = expressionResolver.resolve("#{{path.to.key}}");
+        assertEquals("value", result);
+    }
+
+    @Test
+    void shouldReturnEmptyStringWhenResolvingMultiLocalePlaceholderAndAllDefinitionsReturnEmpty() {
+        LocalizedDummyDefinitions enDefinitions = mockLocalizedDefinitions("en", emptyList());
+        LocalizedDummyDefinitions frDefinitions = mockLocalizedDefinitions("fr", emptyList());
+        when(definitionProvider.get())
+                .thenReturn(asList(enDefinitions, frDefinitions));
+        expressionResolver = new DefaultExpressionResolver(asList("en", "fr"), randomService, definitionProvider);
+
+        String result = expressionResolver.resolve("#{{path.to.key}}");
+        assertEquals("", result);
+    }
+
+    @Test
+    void shouldResolveSingleLocalePlaceholder() {
+        Set<String> expected = new HashSet<>();
+        expected.add("1");
+
+        Set<String> result = new HashSet<>();
+
+        mockRandomServiceForFullRange();
+
+        for (int i = 0; i < 10; i++) {
+            result.add(expressionResolver.resolve("#{shared}"));
+        }
+        assertEquals(expected, result);
     }
 }

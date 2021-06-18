@@ -4,10 +4,7 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static java.util.Collections.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,6 +17,10 @@ class LocalizedDummyDefinitionsMapTest {
     void setUp() {
         final Map<String, Object> nestedMap = new HashMap<>();
         nestedMap.put("deeper", "actualValue");
+
+        final Map<String, Object> doublyNestedMap = new HashMap<>();
+        doublyNestedMap.put("thanThat", "actualValue");
+        nestedMap.put("evenDeeper", doublyNestedMap);
 
         final Map<String, Object> map = new HashMap<>();
         map.put("something", nestedMap);
@@ -84,5 +85,32 @@ class LocalizedDummyDefinitionsMapTest {
     void shouldResolveMixedList() {
         List<String> result = dummyDefinitions.resolve("test_mixed_list");
         assertEquals(Arrays.asList("1", "2"), result);
+    }
+
+    @Test
+    void shouldGetKeysFor() {
+        assertEquals(Arrays.asList("evenDeeper", "deeper"), dummyDefinitions.resolve("something"));
+    }
+
+    @Test
+    void shouldGetKeysForNested() {
+        assertEquals(singletonList("thanThat"), dummyDefinitions.resolve("something.evenDeeper"));
+    }
+
+    @Test
+    void getKeysOfShouldReturnEmptySetWhenKeyIsNotFound() {
+        assertEquals(emptyList(), dummyDefinitions.resolve("thisDoesntExist"));
+    }
+
+    @Test
+    void shouldReturnNestedKeysWhenHigherKeyEndsWithDot() {
+        List<String> result = dummyDefinitions.resolve("something.");
+        assertEquals(Arrays.asList("evenDeeper", "deeper"), result);
+    }
+
+    @Test
+    void shouldReturnValueKeysWhenLastKeyEndsWithDot() {
+        List<String> result = dummyDefinitions.resolve("something.evenDeeper.thanThat.");
+        assertEquals(singletonList("actualValue"), result);
     }
 }
