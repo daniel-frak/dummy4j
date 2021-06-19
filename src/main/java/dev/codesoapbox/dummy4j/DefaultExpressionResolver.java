@@ -8,6 +8,8 @@ import dev.codesoapbox.dummy4j.exceptions.MissingLocaleDefinitionsException;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,6 +27,7 @@ public final class DefaultExpressionResolver implements ExpressionResolver {
     private static final Pattern MULTI_LOCALE_VARIABLE_PATTERN = Pattern.compile("#\\{{2}((?:(?!#\\{|}).)*)}{2}");
     private static final Pattern SINGLE_LOCALE_VARIABLE_PATTERN = Pattern.compile("#\\{(?!\\{)((?:(?!#\\{|}).)*)}");
     private static final Pattern DIGIT_PATTERN = Pattern.compile(ESCAPE_PREFIX + "#(?!\\{)");
+    private static final Logger LOG = Logger.getLogger(DefaultExpressionResolver.class.getName());
 
     final RandomService randomService;
     final List<String> locales;
@@ -103,6 +106,8 @@ public final class DefaultExpressionResolver implements ExpressionResolver {
         if (!result.isEmpty()) {
             return getRandom(result);
         }
+        LOG.log(Level.FINE, "Could not resolve path: {0} in any locale", path);
+
         return ResolvedValue.of("", "");
     }
 
@@ -140,6 +145,12 @@ public final class DefaultExpressionResolver implements ExpressionResolver {
                 return ResolvedValue.of(locale, getRandomString(result));
             }
         }
+        if (!"".equals(originalLocale)) {
+            LOG.log(Level.FINE, "Could not resolve path: {0} for locale: {1}", new Object[]{path, originalLocale});
+        } else {
+            LOG.log(Level.FINE, "Could not resolve path: {0} in any locale", path);
+        }
+
         return ResolvedValue.of("", "");
     }
 
