@@ -45,4 +45,12 @@ class ResolvedValueTest {
                 .withNonnullFields("locale", "value")
                 .verify();
     }
+
+    @Test
+    void shouldConvertToString() {
+        String expected = "ResolvedValue{locale='en', value='value'}";
+        ResolvedValue actual = ResolvedValue.of("en", "value");
+
+        assertEquals(expected, actual.toString());
+    }
 }

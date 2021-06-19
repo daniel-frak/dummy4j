@@ -47,4 +47,12 @@ public final class ResolvedValue {
     public int hashCode() {
         return Objects.hash(locale, value);
     }
+
+    @Override
+    public String toString() {
+        return "ResolvedValue{" +
+                "locale='" + locale + '\'' +
+                ", value='" + value + '\'' +
+                '}';
+    }
 }
