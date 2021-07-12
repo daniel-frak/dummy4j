@@ -1,7 +1,5 @@
 package dev.codesoapbox.dummy4j;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Supplier;
@@ -160,17 +158,16 @@ public final class DefaultRandomService implements RandomService {
             return "";
         }
 
-        List<String> list = listOf(howMany,
-                () -> String.valueOf(nextInt(0, 9)));
-
-        return String.join("", list);
+        return generateDigits(howMany, () -> String.valueOf(nextInt(0, 9)));
     }
 
-    private <T> List<T> listOf(int count, Supplier<T> supplier) {
-        List<T> list = new ArrayList<>();
+    private <T> String generateDigits(int count, Supplier<T> supplier) {
+        StringBuilder digits = new StringBuilder();
+
         for (int i = 0; i < count; i++) {
-            list.add(supplier.get());
+            digits.append(supplier.get());
         }
-        return list;
+
+        return digits.toString();
     }
 }

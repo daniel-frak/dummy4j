@@ -73,6 +73,7 @@ public class IdentifierDummy {
      * E.g. {@code isbnBuilder().withType(IsbnType.ISBN_10).withoutSeparator().build()} may generate
      * {@code 9706077057}
      *
+     * @see IdentifierDummy#isbn()
      * @since SNAPSHOT
      */
     public IsbnBuilder isbnBuilder() {
@@ -97,6 +98,7 @@ public class IdentifierDummy {
      * E.g. {@code ismnBuilder().withRegistrant("003").withSeparator("-").build()} may generate
      * {@code 979-0-003-76925-7}
      *
+     * @see IdentifierDummy#ismn()
      * @since SNAPSHOT
      */
     public IsmnBuilder ismnBuilder() {
@@ -120,6 +122,7 @@ public class IdentifierDummy {
      * Provides a builder for a random International Standard Name Identifier.
      * E.g. {@code isniBuilder().asUrl().build()} may generate {@code https://isni.org/isni/2520242885976955}
      *
+     * @see IdentifierDummy#isni()
      * @since SNAPSHOT
      */
     public IsniBuilder isniBuilder() {
@@ -143,6 +146,7 @@ public class IdentifierDummy {
      * Provides a builder for a random Open Researcher and Contributor ID.
      * E.g. {@code orcidBuilder().asUrl().build()} may generate {@code https://orcid.org/9784-7648-0678-9594}
      *
+     * @see IdentifierDummy#orcid()
      * @since SNAPSHOT
      */
     public OrcidBuilder orcidBuilder() {
