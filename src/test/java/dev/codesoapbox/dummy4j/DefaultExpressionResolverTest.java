@@ -118,6 +118,12 @@ class DefaultExpressionResolverTest {
     }
 
     @Test
+    void shouldReturnPartiallyResolvedExpression() {
+        String result = expressionResolver.resolve("#{something.deep}-#{something.notexisting}");
+        assertEquals("value-", result);
+    }
+
+    @Test
     void shouldResolveExpression() {
         String result = expressionResolver.resolve("#{something.deep}-#{something.deep}");
         assertEquals("value-value", result);
