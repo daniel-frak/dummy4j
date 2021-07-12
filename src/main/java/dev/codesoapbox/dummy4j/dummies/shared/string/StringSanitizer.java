@@ -1,4 +1,4 @@
-package dev.codesoapbox.dummy4j.dummies.internet;
+package dev.codesoapbox.dummy4j.dummies.shared.string;
 
 import java.text.Normalizer;
 import java.util.regex.Pattern;
@@ -6,17 +6,16 @@ import java.util.regex.Pattern;
 /**
  * Provides methods for normalizing strings and removing unwanted characters from them
  *
- * @since 0.5.0
+ * @since SNAPSHOT
  */
-final class StringSanitizer {
+public final class StringSanitizer {
 
     /**
      * Pattern that matches non ASCII characters, whitespaces, backslashes and quotes.
      * <p>
      * The pattern uses Unicode properties to cover more cases.
      *
-     * @see <a href="https://stackoverflow.com/questions/56653323/s-doesnt-actually-capture-all-whitespace-characters/
-     * 56654027#56654027">Capture all whitespace characters (StackOverflow)</a>
+     * @see <a href="https://stackoverflow.com/questions/56653323/s-doesnt-actually-capture-all-whitespace-characters/56654027#56654027">Capture all whitespace characters (StackOverflow)</a>
      */
     public static final Pattern SANITIZE_EMAIL_PATTERN = Pattern.compile("[^\\p{ASCII}]+|[\\s\\\\\"]+",
             Pattern.UNICODE_CHARACTER_CLASS);

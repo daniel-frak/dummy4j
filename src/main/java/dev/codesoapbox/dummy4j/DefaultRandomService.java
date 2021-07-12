@@ -2,6 +2,7 @@ package dev.codesoapbox.dummy4j;
 
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Supplier;
 
 /**
  * A default implementation of RandomService
@@ -150,5 +151,23 @@ public final class DefaultRandomService implements RandomService {
         }
 
         return (random.nextFloat() * (upperBound - lowerBound)) + lowerBound;
+    }
+
+    public String digits(int howMany) {
+        if (howMany <= 0) {
+            return "";
+        }
+
+        return generateDigits(howMany, () -> String.valueOf(nextInt(0, 9)));
+    }
+
+    private <T> String generateDigits(int count, Supplier<T> supplier) {
+        StringBuilder digits = new StringBuilder();
+
+        for (int i = 0; i < count; i++) {
+            digits.append(supplier.get());
+        }
+
+        return digits.toString();
     }
 }

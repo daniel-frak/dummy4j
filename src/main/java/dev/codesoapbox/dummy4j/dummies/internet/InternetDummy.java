@@ -1,6 +1,7 @@
 package dev.codesoapbox.dummy4j.dummies.internet;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
+import dev.codesoapbox.dummy4j.dummies.shared.string.StringSanitizer;
 import dev.codesoapbox.dummy4j.exceptions.UrlCouldNotBeCreatedException;
 
 import java.net.URL;

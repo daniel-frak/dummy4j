@@ -1,11 +1,10 @@
 package dev.codesoapbox.dummy4j.dummies.finance;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
+import dev.codesoapbox.dummy4j.dummies.shared.string.StringFormatter;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.StringJoiner;
-import java.util.regex.Pattern;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
@@ -18,23 +17,8 @@ import static java.util.Collections.singletonList;
  */
 public class IbanBuilder {
 
-    /**
-     * The {@code (?<=\G.{4})} pattern explanation:
-     * <p>
-     * <ul>
-     *   <li>
-     *     {@code (?<=...)} - positive lookbehind, ensures that the given pattern will match, ending at the current
-     *     position in the expression. The pattern must have a fixed width. Does not consume any characters.
-     *   </li>
-     *   <li>
-     *     {@code \G} - takes position at the end of the previous match or the start of the string for the first match.
-     *   </li>
-     *   <li>
-     *     {@code .{4}} - matches any character exactly 4 times.
-     *   </li>
-     * </ul>
-     */
-    private static final Pattern SPLIT_EVERY_FOUR_CHARS_PATTERN = Pattern.compile("(?<=\\G.{4})");
+    private static final String SEPARATOR = " ";
+    private static final int NUMBER_OF_CHARS_PER_GROUP = 4;
 
     private final Dummy4j dummy4j;
     private final IbanFormula ibanFormula;
@@ -111,18 +95,7 @@ public class IbanBuilder {
             return iban;
         }
 
-        return splitEveryFourCharacters(iban);
-    }
-
-    private String splitEveryFourCharacters(String input) {
-        String[] parts = SPLIT_EVERY_FOUR_CHARS_PATTERN.split(input);
-        StringJoiner joiner = new StringJoiner(" ");
-
-        for (String p : parts) {
-            joiner.add(p);
-        }
-
-        return joiner.toString();
+        return StringFormatter.insertEveryNthCharacter(iban, SEPARATOR, NUMBER_OF_CHARS_PER_GROUP);
     }
 
     @Override

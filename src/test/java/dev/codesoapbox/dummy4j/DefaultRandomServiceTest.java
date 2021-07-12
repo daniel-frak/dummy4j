@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -14,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class RandomServiceTest {
+class DefaultRandomServiceTest {
 
     private RandomService randomService;
 
@@ -302,5 +303,23 @@ class RandomServiceTest {
                 () -> assertEquals(10F, randomService.nextFloat(10F, 10F)),
                 () -> assertEquals(Float.MAX_VALUE, randomService.nextFloat(Float.MAX_VALUE, Float.MAX_VALUE))
         );
+    }
+
+    @Test
+    void shouldGenerateStringOfDigits() {
+        when(random.nextInt(10))
+                .thenReturn(1);
+
+        String actual = randomService.digits(5);
+
+        assertEquals("11111", actual);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, -1})
+    void shouldReturnEmptyString(int howMany) {
+        String actual = randomService.digits(howMany);
+
+        assertEquals("", actual);
     }
 }

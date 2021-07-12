@@ -1,4 +1,4 @@
-package dev.codesoapbox.dummy4j.dummies.finance;
+package dev.codesoapbox.dummy4j.dummies.shared.checkdigitformulas;
 
 import java.util.regex.Pattern;
 
@@ -8,14 +8,14 @@ import java.util.regex.Pattern;
  * @see <a href="https://en.wikipedia.org/wiki/Luhn_algorithm">Luhn algorithm definition</a>
  * @since 0.6.0
  */
-class LuhnFormula {
+public class LuhnFormula {
 
     private static final Pattern NON_DIGIT_CHARS_PATTERN = Pattern.compile("[^\\d]");
 
     /**
      * Returns a valid check digit calculated with the Luhn algorithm for the given number
      */
-    String generateCheckDigit(String input) {
+    public String generateCheckDigit(String input) {
         char[] sanitizedInput = removeInvalidCharacters(input);
         int sum = getSum(sanitizedInput);
 

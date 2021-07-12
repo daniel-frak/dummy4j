@@ -76,4 +76,13 @@ public interface NumberService {
      * Generates a random float between {@code lowerBound} and {@code upperBound} (inclusive)
      */
     float nextFloat(float lowerBound, float upperBound);
+
+    /**
+     * Generates a string with a given length composed of random digits.
+     * <p>
+     * Returns empty string if {@code howMany} is equal or smaller than 0.
+     *
+     * @since SNAPSHOT
+     */
+    String digits(int howMany);
 }

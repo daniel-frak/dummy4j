@@ -1,6 +1,7 @@
 package dev.codesoapbox.dummy4j.dummies.finance;
 
 import dev.codesoapbox.dummy4j.Dummy4j;
+import dev.codesoapbox.dummy4j.dummies.shared.checkdigitformulas.LuhnFormula;
 
 import java.util.List;
 import java.util.Locale;
@@ -24,8 +25,7 @@ public class CreditCardNumberBuilder {
     /**
      * The pattern uses Unicode properties to cover more cases.
      *
-     * @see <a href="https://stackoverflow.com/questions/56653323/s-doesnt-actually-capture-all-whitespace-characters/
-     * 56654027#56654027">Capture all whitespace characters (StackOverflow)</a>
+     * @see <a href="https://stackoverflow.com/questions/56653323/s-doesnt-actually-capture-all-whitespace-characters/56654027#56654027">Capture all whitespace characters (StackOverflow)</a>
      */
     static final Pattern SANITIZE_DEFINITION_KEY_PATTERN = Pattern.compile("\\s", Pattern.UNICODE_CHARACTER_CLASS);
 

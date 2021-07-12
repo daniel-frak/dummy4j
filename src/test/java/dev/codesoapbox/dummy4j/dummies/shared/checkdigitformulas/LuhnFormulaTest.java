@@ -1,4 +1,4 @@
-package dev.codesoapbox.dummy4j.dummies.finance;
+package dev.codesoapbox.dummy4j.dummies.shared.checkdigitformulas;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
