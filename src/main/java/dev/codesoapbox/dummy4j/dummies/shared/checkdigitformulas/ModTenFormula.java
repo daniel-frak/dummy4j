@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
  *
  * @see <a href="https://en.wikipedia.org/wiki/International_Article_Number#Check_digit">EAN check digit calculation</a>
  * @see <a href="https://www.gs1.org/services/how-calculate-check-digit-manually">Calculate a check digit manually</a>
- * @since SNAPSHOT
+ * @since 0.9.0
  */
 public class ModTenFormula {
 

@@ -7,7 +7,7 @@ import dev.codesoapbox.dummy4j.dummies.shared.checkdigitformulas.ModElevenDashTw
 /**
  * This class serves as a provider of name identifiers for IdentifierDummy
  *
- * @since SNAPSHOT
+ * @since 0.9.0
  */
 public class BasicIsniProvider {
 

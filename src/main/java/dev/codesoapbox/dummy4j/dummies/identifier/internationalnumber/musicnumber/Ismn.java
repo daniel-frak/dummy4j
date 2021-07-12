@@ -7,7 +7,7 @@ import java.util.StringJoiner;
  * International Standard Music Number is a thirteen-character identifier for written or printed forms of music
  *
  * @see <a href="https://en.wikipedia.org/wiki/International_Standard_Music_Number">What is an ISMN</a>
- * @since SNAPSHOT
+ * @since 0.9.0
  */
 public final class Ismn {
 

@@ -8,7 +8,7 @@ import dev.codesoapbox.dummy4j.dummies.shared.checkdigitformulas.ModTenFormula;
 /**
  * This class serves as a provider of check digit formulas for IdentifierDummy
  *
- * @since SNAPSHOT
+ * @since 0.9.0
  */
 public class InternationalNumberCheckDigitFormulaProvider {
 

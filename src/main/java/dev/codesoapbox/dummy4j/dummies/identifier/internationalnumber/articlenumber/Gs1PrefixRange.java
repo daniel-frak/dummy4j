@@ -4,7 +4,7 @@ package dev.codesoapbox.dummy4j.dummies.identifier.internationalnumber.articlenu
  * Enum containing some of the supported GS1 prefix ranges
  *
  * @see <a href="https://en.wikipedia.org/wiki/List_of_GS1_country_codes">List of GS1 country codes</a>
- * @since SNAPSHOT
+ * @since 0.9.0
  */
 public enum Gs1PrefixRange {
 

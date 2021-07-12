@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  * This class serves as a provider of GS1-128 codes for IdentifierDummy
  *
  * @see <a href="https://en.wikipedia.org/wiki/GS1-128">GS1-128</a>
- * @since SNAPSHOT
+ * @since 0.9.0
  */
 public class Gs1Dash128Factory {
 

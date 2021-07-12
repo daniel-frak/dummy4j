@@ -5,7 +5,7 @@ import java.util.function.IntPredicate;
 /**
  * Provides a method to replace {@code 10} with {@code X} in some check digit formulas
  *
- * @since SNAPSHOT
+ * @since 0.9.0
  */
 public final class CheckDigit10AsXFormatter {
 

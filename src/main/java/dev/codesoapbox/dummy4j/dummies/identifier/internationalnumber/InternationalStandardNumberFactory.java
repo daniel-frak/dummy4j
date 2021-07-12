@@ -15,7 +15,7 @@ import dev.codesoapbox.dummy4j.dummies.shared.checkdigitformulas.ModTenFormula;
 /**
  * This class serves as a provider of international standard identifiers for IdentifierDummy
  *
- * @since SNAPSHOT
+ * @since 0.9.0
  */
 public class InternationalStandardNumberFactory {
 

@@ -3,7 +3,7 @@ package dev.codesoapbox.dummy4j.dummies.shared.string;
 /**
  * Provides convenience methods for formatting strings
  *
- * @since SNAPSHOT
+ * @since 0.9.0
  */
 public final class StringFormatter {
 

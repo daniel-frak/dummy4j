@@ -5,7 +5,7 @@ import dev.codesoapbox.dummy4j.dummies.shared.string.StringFormatter;
 /**
  * Provides methods for generating a random ORCID according to customizable parameters
  *
- * @since SNAPSHOT
+ * @since 0.9.0
  */
 public class OrcidBuilder {
 

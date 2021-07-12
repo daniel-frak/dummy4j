@@ -7,7 +7,7 @@ import dev.codesoapbox.dummy4j.dummies.shared.checkdigitformulas.ModElevenFormul
 /**
  * The reason for this class is to provide ISSN numbers
  *
- * @since SNAPSHOT
+ * @since 0.9.0
  */
 public class IssnFactory {
 

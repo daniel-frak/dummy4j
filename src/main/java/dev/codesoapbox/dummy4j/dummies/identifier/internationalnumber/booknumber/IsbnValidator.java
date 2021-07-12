@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 /**
  * The reason for this class is to provide basic validation for ISBN parts
  *
- * @since SNAPSHOT
+ * @since 0.9.0
  */
 public class IsbnValidator {
 

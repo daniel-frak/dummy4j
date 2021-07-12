@@ -7,7 +7,7 @@ import dev.codesoapbox.dummy4j.exceptions.IvalidIsniParameterException;
 /**
  * Provides methods for generating a random ISNI according to customizable parameters
  *
- * @since SNAPSHOT
+ * @since 0.9.0
  */
 public class IsniBuilder {
 

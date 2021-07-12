@@ -3,7 +3,7 @@ package dev.codesoapbox.dummy4j.dummies.identifier.internationalnumber.booknumbe
 /**
  * Enum containing the supported types of ISBN
  *
- * @since SNAPSHOT
+ * @since 0.9.0
  */
 public enum IsbnType {
     ISBN_10(false),

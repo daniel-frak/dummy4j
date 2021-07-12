@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 /**
  * Provides methods for normalizing strings and removing unwanted characters from them
  *
- * @since SNAPSHOT
+ * @since 0.9.0
  */
 public final class StringSanitizer {
 

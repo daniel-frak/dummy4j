@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
  *
  * @see <a href="https://support.orcid.org/hc/en-us/articles/360006897674-Structure-of-the-ORCID-Identifier">
  * ORCID check digit calculation</a>
- * @since SNAPSHOT
+ * @since 0.9.0
  */
 public class ModElevenDashTwoFormula {
 

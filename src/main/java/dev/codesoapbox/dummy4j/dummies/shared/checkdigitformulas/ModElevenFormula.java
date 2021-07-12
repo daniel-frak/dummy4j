@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
  * @see <a href="https://en.wikipedia.org/wiki/International_Standard_Serial_Number#Code_format">ISSN Code format</a>
  * @see <a href="https://en.wikipedia.org/wiki/International_Standard_Book_Number#ISBN-10_check_digit_calculation">
  * ISBN 10 check digit calculation</a>
- * @since SNAPSHOT
+ * @since 0.9.0
  */
 public class ModElevenFormula {
 

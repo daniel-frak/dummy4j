@@ -49,7 +49,7 @@ public class IdentifierDummy {
      * and on all media–print and electronic.
      *
      * @see <a href="https://www.issn.org/understanding-the-issn/what-is-an-issn/">What is an ISSN</a>
-     * @since SNAPSHOT
+     * @since 0.9.0
      */
     public String issn() {
         return internationalStandardNumberFactory.createIssn();
@@ -62,7 +62,7 @@ public class IdentifierDummy {
      * ISBN is a numeric commercial book identifier.
      *
      * @see <a href="https://en.wikipedia.org/wiki/International_Standard_Book_Number">What is an ISBN</a>
-     * @since SNAPSHOT
+     * @since 0.9.0
      */
     public Isbn isbn() {
         return internationalStandardNumberFactory.createIsbnBuilder().build();
@@ -74,7 +74,7 @@ public class IdentifierDummy {
      * {@code 9706077057}
      *
      * @see IdentifierDummy#isbn()
-     * @since SNAPSHOT
+     * @since 0.9.0
      */
     public IsbnBuilder isbnBuilder() {
         return internationalStandardNumberFactory.createIsbnBuilder();
@@ -87,7 +87,7 @@ public class IdentifierDummy {
      * ISMN is a thirteen-character identifier for written or printed forms of music.
      *
      * @see <a href="https://en.wikipedia.org/wiki/International_Standard_Music_Number">What is an ISMN</a>
-     * @since SNAPSHOT
+     * @since 0.9.0
      */
     public Ismn ismn() {
         return internationalStandardNumberFactory.createIsmnBuilder().build();
@@ -99,7 +99,7 @@ public class IdentifierDummy {
      * {@code 979-0-003-76925-7}
      *
      * @see IdentifierDummy#ismn()
-     * @since SNAPSHOT
+     * @since 0.9.0
      */
     public IsmnBuilder ismnBuilder() {
         return internationalStandardNumberFactory.createIsmnBuilder();
@@ -112,7 +112,7 @@ public class IdentifierDummy {
      * ISNI is an identifier system for the public identities of contributors to media content.
      *
      * @see <a href="https://en.wikipedia.org/wiki/International_Standard_Name_Identifier">What is an ISNI</a>
-     * @since SNAPSHOT
+     * @since 0.9.0
      */
     public String isni() {
         return internationalStandardNumberFactory.createIsniBuilder().build();
@@ -123,7 +123,7 @@ public class IdentifierDummy {
      * E.g. {@code isniBuilder().asUrl().build()} may generate {@code https://isni.org/isni/2520242885976955}
      *
      * @see IdentifierDummy#isni()
-     * @since SNAPSHOT
+     * @since 0.9.0
      */
     public IsniBuilder isniBuilder() {
         return internationalStandardNumberFactory.createIsniBuilder();
@@ -136,7 +136,7 @@ public class IdentifierDummy {
      * ORCID uniquely identifies authors and contributors of scholarly communication.
      *
      * @see <a href="https://en.wikipedia.org/wiki/ORCID">What is an ORCID</a>
-     * @since SNAPSHOT
+     * @since 0.9.0
      */
     public String orcid() {
         return internationalStandardNumberFactory.createOrcidBuilder().build();
@@ -147,7 +147,7 @@ public class IdentifierDummy {
      * E.g. {@code orcidBuilder().asUrl().build()} may generate {@code https://orcid.org/9784-7648-0678-9594}
      *
      * @see IdentifierDummy#orcid()
-     * @since SNAPSHOT
+     * @since 0.9.0
      */
     public OrcidBuilder orcidBuilder() {
         return internationalStandardNumberFactory.createOrcidBuilder();
@@ -159,7 +159,7 @@ public class IdentifierDummy {
      * This method is functionally equivalent to IdentifierDummy::gtin8()
      *
      * @see IdentifierDummy#gtin8()
-     * @since SNAPSHOT
+     * @since 0.9.0
      */
     public String ean8() {
         return gtin8();
@@ -173,7 +173,7 @@ public class IdentifierDummy {
      * onto the package would be difficult.
      *
      * @see <a href="https://en.wikipedia.org/wiki/Global_Trade_Item_Number">Global Trade Item Numbers</a>
-     * @since SNAPSHOT
+     * @since 0.9.0
      */
     public String gtin8() {
         return internationalStandardNumberFactory.createGtin8Builder().build();
@@ -185,7 +185,7 @@ public class IdentifierDummy {
      * This method is functionally equivalent to IdentifierDummy::gtin8Builder()
      *
      * @see IdentifierDummy#gtin8Builder()
-     * @since SNAPSHOT
+     * @since 0.9.0
      */
     public Gtin8Builder ean8Builder() {
         return gtin8Builder();
@@ -196,7 +196,7 @@ public class IdentifierDummy {
      * E.g. {@code gtin8Builder().withGs1PrefixRange(Gs1PrefixRange.ARGENTINA).build()} may generate {@code 77867292}
      *
      * @see IdentifierDummy#gtin8()
-     * @since SNAPSHOT
+     * @since 0.9.0
      */
     public Gtin8Builder gtin8Builder() {
         return internationalStandardNumberFactory.createGtin8Builder();
@@ -208,7 +208,7 @@ public class IdentifierDummy {
      * This method is functionally equivalent to IdentifierDummy::gtin13()
      *
      * @see IdentifierDummy#gtin13()
-     * @since SNAPSHOT
+     * @since 0.9.0
      */
     public String ean13() {
         return gtin13();
@@ -221,7 +221,7 @@ public class IdentifierDummy {
      * GTIN-13 is used in global trade to identify a product type, its packaging configuration and manufacturer.
      *
      * @see <a href="https://en.wikipedia.org/wiki/Global_Trade_Item_Number">Global Trade Item Numbers</a>
-     * @since SNAPSHOT
+     * @since 0.9.0
      */
     public String gtin13() {
         return internationalStandardNumberFactory.createGtin13Builder().build();
@@ -233,7 +233,7 @@ public class IdentifierDummy {
      * This method is functionally equivalent to IdentifierDummy::gtin13Builder()
      *
      * @see IdentifierDummy#gtin13Builder()
-     * @since SNAPSHOT
+     * @since 0.9.0
      */
     public Gtin13Builder ean13Builder() {
         return gtin13Builder();
@@ -245,7 +245,7 @@ public class IdentifierDummy {
      * {@code 5716640724599}
      *
      * @see IdentifierDummy#gtin13()
-     * @since SNAPSHOT
+     * @since 0.9.0
      */
     public Gtin13Builder gtin13Builder() {
         return internationalStandardNumberFactory.createGtin13Builder();
@@ -257,7 +257,7 @@ public class IdentifierDummy {
      * This method is functionally equivalent to IdentifierDummy::gtin14()
      *
      * @see IdentifierDummy#gtin14()
-     * @since SNAPSHOT
+     * @since 0.9.0
      */
     public String ean14() {
         return gtin14();
@@ -270,7 +270,7 @@ public class IdentifierDummy {
      * GTIN-14 is used to identify trade items at various packaging levels.
      *
      * @see <a href="https://www.gtin.info/">Global Trade Item Numbers</a>
-     * @since SNAPSHOT
+     * @since 0.9.0
      */
     public String gtin14() {
         return internationalStandardNumberFactory.createGtin14Builder().build();
@@ -282,7 +282,7 @@ public class IdentifierDummy {
      * This method is functionally equivalent to IdentifierDummy::gtin14Builder()
      *
      * @see IdentifierDummy#gtin14Builder()
-     * @since SNAPSHOT
+     * @since 0.9.0
      */
     public Gtin14Builder ean14Builder() {
         return gtin14Builder();
@@ -293,7 +293,7 @@ public class IdentifierDummy {
      * E.g. {@code gtin14Builder().withApplicationIdentifier().build()} may generate {@code (01)44668535249994}
      *
      * @see IdentifierDummy#gtin14()
-     * @since SNAPSHOT
+     * @since 0.9.0
      */
     public Gtin14Builder gtin14Builder() {
         return internationalStandardNumberFactory.createGtin14Builder();
@@ -308,7 +308,7 @@ public class IdentifierDummy {
      *
      * @see <a href="https://www.barcode.graphics/gtin-12/">UPC (GTIN-12)</a>
      * @see <a href="https://www.gtin.info/upc/">UPC Symbols</a>
-     * @since SNAPSHOT
+     * @since 0.9.0
      */
     public String gtin12() {
         return internationalStandardNumberFactory.createUpc();
@@ -322,7 +322,7 @@ public class IdentifierDummy {
      *
      * @see IdentifierDummy#gtin12()
      * @see <a href="https://en.wikipedia.org/wiki/Universal_Product_Code">Universal Product Code</a>
-     * @since SNAPSHOT
+     * @since 0.9.0
      */
     public String upc() {
         return internationalStandardNumberFactory.createUpc();
@@ -337,7 +337,7 @@ public class IdentifierDummy {
      * @see <a href="https://en.wikipedia.org/wiki/GS1-128">GS1-128</a>
      * @see <a href="https://en.wikipedia.org/wiki/GS1-128#Full_list_of_Application_Identifiers">
      * Full list of Application Identifiers</a>
-     * @since SNAPSHOT
+     * @since 0.9.0
      */
     public String gs1Dash128() {
         return internationalStandardNumberFactory.createGs1Dash128();
@@ -352,7 +352,7 @@ public class IdentifierDummy {
      * @see <a href="https://en.wikipedia.org/wiki/Serial_shipping_container_code">Serial shipping container code</a>
      * @see <a href="https://www.gs1-128.info/sscc-18/">SSCC-18 Barcodes</a>
      * @see <a href="https://www.gs1.org/standards/id-keys/sscc/">GS1 standard for SSCC</a>
-     * @since SNAPSHOT
+     * @since 0.9.0
      */
     public String sscc() {
         return internationalStandardNumberFactory.createSscc();
@@ -366,7 +366,7 @@ public class IdentifierDummy {
      *
      * @see <a href="https://en.wikipedia.org/wiki/Amazon_Standard_Identification_Number">
      * Amazon Standard Identification Number</a>
-     * @since SNAPSHOT
+     * @since 0.9.0
      */
     public String asin() {
         return "B00" + getAsinAlphaNumericPart();
@@ -387,7 +387,7 @@ public class IdentifierDummy {
      * TAC identifies a particular model (and often revision) of wireless telephones.
      *
      * @see <a href="https://en.wikipedia.org/wiki/Type_Allocation_Code">Type Allocation Code</a>
-     * @since SNAPSHOT
+     * @since 0.9.0
      */
     public String tac() {
         return internationalStandardNumberFactory.createTac();
@@ -401,7 +401,7 @@ public class IdentifierDummy {
      *
      * @see <a href="https://en.wikipedia.org/wiki/International_Mobile_Equipment_Identity">
      * International Mobile Equipment Identity</a>
-     * @since SNAPSHOT
+     * @since 0.9.0
      */
     public String imei() {
         return internationalStandardNumberFactory.createImei();
@@ -416,7 +416,7 @@ public class IdentifierDummy {
      *
      * @see <a href="https://en.wikipedia.org/wiki/International_Mobile_Equipment_Identity">
      * International Mobile Equipment Identity</a>
-     * @since SNAPSHOT
+     * @since 0.9.0
      */
     public String imeisv() {
         return internationalStandardNumberFactory.createImeisv();

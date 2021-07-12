@@ -11,7 +11,7 @@ import dev.codesoapbox.dummy4j.dummies.shared.string.Padding;
  *
  * @see <a href="https://en.wikipedia.org/wiki/Universal_Product_Code">Universal Product Code</a>
  * @see <a href="https://www.barcode.graphics/gtin-12/">GTiN-12</a>
- * @since SNAPSHOT
+ * @since 0.9.0
  */
 public class UpcFactory {
 

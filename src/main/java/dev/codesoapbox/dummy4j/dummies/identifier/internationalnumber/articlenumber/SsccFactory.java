@@ -7,7 +7,7 @@ import dev.codesoapbox.dummy4j.dummies.shared.checkdigitformulas.ModTenFormula;
  * This class serves as a provider of Serial Shipping Container Codes for IdentifierDummy
  *
  * @see <a href="https://www.gs1-128.info/sscc-18/">Serial Shipping Container Code</a>
- * @since SNAPSHOT
+ * @since 0.9.0
  */
 public class SsccFactory {
 

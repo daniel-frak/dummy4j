@@ -10,7 +10,7 @@ import java.util.StringJoiner;
  *
  * @see <a href="https://en.wikipedia.org/wiki/International_Standard_Book_Number">
  * International Standard Book Number</a>
- * @since SNAPSHOT
+ * @since 0.9.0
  */
 public final class Isbn {
 

@@ -82,7 +82,7 @@ public interface NumberService {
      * <p>
      * Returns empty string if {@code howMany} is equal or smaller than 0.
      *
-     * @since SNAPSHOT
+     * @since 0.9.0
      */
     String digits(int howMany);
 }

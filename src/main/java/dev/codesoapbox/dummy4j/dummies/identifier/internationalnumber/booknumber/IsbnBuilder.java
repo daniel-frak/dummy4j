@@ -17,7 +17,7 @@ import static java.util.Collections.singletonList;
 /**
  * Provides methods for generating a random ISBN according to customizable parameters
  *
- * @since SNAPSHOT
+ * @since 0.9.0
  */
 public class IsbnBuilder {
 
