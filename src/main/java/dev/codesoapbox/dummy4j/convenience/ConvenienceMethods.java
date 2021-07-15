@@ -1,4 +1,7 @@
-package dev.codesoapbox.dummy4j;
+package dev.codesoapbox.dummy4j.convenience;
+
+import dev.codesoapbox.dummy4j.Dummy4j;
+import dev.codesoapbox.dummy4j.RandomService;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -12,9 +15,16 @@ import java.util.function.Supplier;
 public class ConvenienceMethods {
 
     private final RandomService random;
+    private final MethodFinder methodFinder;
 
     public ConvenienceMethods(RandomService random) {
         this.random = random;
+        this.methodFinder = new MethodFinder(Dummy4j.class, new MethodPathLoader());
+    }
+
+    ConvenienceMethods(RandomService random, MethodFinder methodFinder) {
+        this.random = random;
+        this.methodFinder = methodFinder;
     }
 
     /**
@@ -152,5 +162,16 @@ public class ConvenienceMethods {
     public <T extends Enum<?>> T nextEnum(Class<T> clazz) {
         int x = random.nextInt(clazz.getEnumConstants().length - 1);
         return clazz.getEnumConstants()[x];
+    }
+
+    /**
+     * Finds all methods containing a search string in their name.
+     * Helpful when a specific method is needed but its placement is unknown.
+     *
+     * @param value a string to search for
+     * @return a message containing all found methods containing the search string
+     */
+    public String find(String value) {
+        return methodFinder.find(value);
     }
 }

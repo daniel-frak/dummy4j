@@ -151,6 +151,9 @@ List<String> tenLocallyUniqueNames = dummy.unique().of(() -> dummy.name().fullNa
 // (e.g. customDummy.maleAndFemaleNames()).
 String resolvedExpression = dummy4j.expressionResolver()
         .resolve("#{name.male_first_name}, #{name.female_first_name}");
+
+// This finds and lists all methods containing the word "title": 
+String searchResult = dummy4j.find("title");
 ```
 
 ## Goals and contributing

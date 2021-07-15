@@ -1,5 +1,7 @@
-package dev.codesoapbox.dummy4j;
+package dev.codesoapbox.dummy4j.convenience;
 
+import dev.codesoapbox.dummy4j.RandomService;
+import dev.codesoapbox.dummy4j.TestEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,9 +31,12 @@ class ConvenienceMethodsTest {
     @Mock
     private RandomService random;
 
+    @Mock
+    private MethodFinder methodFinder;
+
     @BeforeEach
     void setUp() {
-        convenienceMethods = new ConvenienceMethods(random);
+        convenienceMethods = new ConvenienceMethods(random, methodFinder);
     }
 
     @Test
@@ -236,7 +241,13 @@ class ConvenienceMethodsTest {
         assertEquals(TestEnum.valueOf(expected), convenienceMethods.nextEnum(TestEnum.class));
     }
 
-    public enum TestEnum {
-        ONE, TWO, THREE
+    @Test
+    void shouldFind() {
+        String testValue = "testValue";
+        String expectedResult = "testResult";
+        when(methodFinder.find(testValue))
+                .thenReturn(expectedResult);
+
+        assertEquals(expectedResult, convenienceMethods.find(testValue));
     }
 }
