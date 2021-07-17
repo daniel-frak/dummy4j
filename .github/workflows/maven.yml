@@ -3,7 +3,7 @@ name: Build and analyze
 on:
   push:
     branches: [ "*", "**" ]
-  pull_request_target:
+  pull_request:
     branches: [ master ]
 
 jobs:
@@ -33,5 +33,5 @@ jobs:
     - name: Build and analyze
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_TOKEN: "dfc3a63c86e79fe71dd4dccbd583f36089fd5371"
       run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -P code-coverage -P sonar-cloud --file pom.xml
