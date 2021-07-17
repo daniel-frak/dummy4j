@@ -421,4 +421,12 @@ public class IdentifierDummy {
     public String imeisv() {
         return internationalStandardNumberFactory.createImeisv();
     }
+
+
+    public String superLongMethodNameToMakeSonarQubeCodeSmellWarnignaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa() {
+        String notUsed = "test";
+        String imeisv = internationalStandardNumberFactory.createImeisv();
+
+        return imeisv;
+    }
 }
