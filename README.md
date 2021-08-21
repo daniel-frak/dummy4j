@@ -2,6 +2,7 @@
 
 ![Code Soapbox logo](readme-images/logo.png)
 
+![Maven Central](https://img.shields.io/maven-central/v/dev.codesoapbox/dummy4j?label=Maven)
 ![Build](https://github.com/daniel-frak/dummy4j/workflows/Build/badge.svg)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dummy4j&metric=alert_status)](https://sonarcloud.io/dashboard?id=dummy4j)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=dummy4j&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=dummy4j)
