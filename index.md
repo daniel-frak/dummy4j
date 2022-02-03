@@ -8,6 +8,8 @@ Dummy4j is an easy to use dummy data generator library for Java, designed for ex
 
 Dummy4j can be used in all projects using Java 8+.
 
+[View project on GitHub](https://github.com/daniel-frak/dummy4j)
+
 # Contents
 {:.no_toc}
 
@@ -23,7 +25,7 @@ Add the following dependency to your `pom.xml`:
 <dependency>
   <groupId>dev.codesoapbox</groupId>
   <artifactId>dummy4j</artifactId>
-  <version>0.7.2</version>
+  <version>0.9.0</version>
 </dependency>
 ```
 
