@@ -4,6 +4,7 @@ import dev.codesoapbox.dummy4j.definitions.UniqueValues;
 import dev.codesoapbox.dummy4j.dummies.*;
 import dev.codesoapbox.dummy4j.dummies.address.AddressDummy;
 import dev.codesoapbox.dummy4j.dummies.color.ColorDummy;
+import dev.codesoapbox.dummy4j.dummies.business.BusinessDummy;
 import dev.codesoapbox.dummy4j.dummies.finance.FinanceDummy;
 import dev.codesoapbox.dummy4j.dummies.identifier.IdentifierDummy;
 import dev.codesoapbox.dummy4j.dummies.internet.InternetDummy;
@@ -262,5 +263,13 @@ class Dummy4jTest {
         when(dummies.finance())
                 .thenReturn(financeDummy);
         assertEquals(financeDummy, dummy4j.finance());
+    }
+
+    @Test
+    void shouldGetBusinessDummy() {
+        BusinessDummy businessDummy = mock(BusinessDummy.class);
+        when(dummies.business())
+                .thenReturn(businessDummy);
+        assertEquals(businessDummy, dummy4j.business());
     }
 }

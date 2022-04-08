@@ -7,6 +7,7 @@ import dev.codesoapbox.dummy4j.definitions.providers.files.yaml.YamlFileDefiniti
 import dev.codesoapbox.dummy4j.dummies.*;
 import dev.codesoapbox.dummy4j.dummies.address.AddressDummy;
 import dev.codesoapbox.dummy4j.dummies.color.ColorDummy;
+import dev.codesoapbox.dummy4j.dummies.business.BusinessDummy;
 import dev.codesoapbox.dummy4j.dummies.finance.FinanceDummy;
 import dev.codesoapbox.dummy4j.dummies.identifier.IdentifierDummy;
 import dev.codesoapbox.dummy4j.dummies.internet.InternetDummy;
@@ -356,5 +357,14 @@ public class Dummy4j {
      */
     public FinanceDummy finance() {
         return dummies.finance();
+    }
+
+    /**
+     * Provides methods for generating values related to business and commerce
+     *
+     * @since SNAPSHOT
+     */
+    public BusinessDummy business() {
+        return dummies.business();
     }
 }

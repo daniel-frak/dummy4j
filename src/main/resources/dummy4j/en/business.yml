@@ -1,0 +1,66 @@
+en:
+  business:
+    product_name_prefix:
+      textile: [
+        "Cotton", "Silk", "Linen", "Leather", "Merino Wool", "Batiste", "Chiffon", "Crepe", "Denim", "Lace", "Satin",
+        "Cashmere", "Velvet", "Nylon", "Polyester"
+      ]
+      metal: [
+        "Steel", "Iron", "Bronze", "Copper", "Aluminum"
+      ]
+      furniture: [
+        "Wooden", "Plastic", "Granite", "Rubber", "Marble", "Rattan"
+      ]
+      tech: [
+        "Small", "Ergonomic", "Intelligent", "Lightweight", "Durable", "Energy Saving"
+      ]
+    product_name_suffix:
+      textile: [
+        "Pants", "Jacket", "Socks", "Skirt", "Dress", "Tank top", "Shirt", "T-shirt", "Gloves", "Coat",
+        "Vest", "Scarf", "Trousers", "Suit", "Nightgown"
+      ]
+      tool: [
+        "Hammer", "Saw", "Handsaw", "Lineman’s Pliers", "Screwdriver", "Wrench", "Mallet", "Cordless Drill",
+        "Corkscrew", "Plunger"
+      ]
+      furniture: [
+        "Table", "Chair", "Cupboard", "Bench", "Stool", "Chest of Drawers", "Wardrobe", "Desk", "Bookcase", "Lamp"
+      ]
+      tech: [
+        "Monitor", "Light Bulb", "Keyboard", "Mouse", "Dishwasher", "Oven", "Washing Machine", "Printer", "Freezer",
+        "Fridge", "Deep Fryer", "Espresso Machine", "Microwave oven", "Pressure Cooker", "Toaster", "Kitchen Stove",
+        "Kettle", "Vacuum Cleaner"
+      ]
+    product_name_textile: [
+      "#{business.product_name_prefix.textile} #{business.product_name_suffix.textile}"
+    ]
+    product_name_tool: [
+      "#{business.product_name_prefix.metal} #{business.product_name_suffix.tool}"
+    ]
+    product_name_furniture: [
+      "#{business.product_name_prefix.furniture} #{business.product_name_suffix.furniture}"
+    ]
+    product_name_tech: [
+      "#{business.product_name_prefix.tech} #{business.product_name_suffix.tech}"
+    ]
+    product_name: [
+      "#{business.product_name_textile}",
+      "#{business.product_name_tool}",
+      "#{business.product_name_furniture}",
+      "#{business.product_name_tech}"
+    ]
+    department_name: [
+      "Beauty", "Books", "Clothing", "Cosmetics", "Electronics", "Furniture", "Gardening", "Grocery", "Hardware",
+      "Health", "Home Appliances", "Sport", "Stationery", "Toiletries", "Toys"
+    ]
+    company_name_suffix: [
+      "Co.", "Corp.", "Inc.", "LLC", "Ltd.", "PBC"
+    ]
+    company_name: [
+      "#{name.last_name} & #{name.last_name} #{business.company_name_suffix}",
+      "#{name.last_name} #{business.company_name_suffix}"
+    ]
+    company_type: [
+      "General Partnership", "Government Agency", "Holding Company", "Limited Partnership", "Nonprofit", "Self-Employed",
+      "Sole Proprietorship", "State-Owned Enterprise", "Subsidiary Company", "Trust"
+    ]
