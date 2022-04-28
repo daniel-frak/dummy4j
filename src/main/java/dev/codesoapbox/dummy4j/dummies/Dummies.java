@@ -3,6 +3,7 @@ package dev.codesoapbox.dummy4j.dummies;
 import dev.codesoapbox.dummy4j.Dummy4j;
 import dev.codesoapbox.dummy4j.dummies.address.AddressDummy;
 import dev.codesoapbox.dummy4j.dummies.color.ColorDummy;
+import dev.codesoapbox.dummy4j.dummies.business.BusinessDummy;
 import dev.codesoapbox.dummy4j.dummies.finance.FinanceBuilderFactory;
 import dev.codesoapbox.dummy4j.dummies.finance.FinanceDummy;
 import dev.codesoapbox.dummy4j.dummies.identifier.IdentifierDummy;
@@ -29,6 +30,7 @@ public class Dummies {
     private final NatoPhoneticAlphabetDummy natoPhoneticAlphabet;
     private final InternetDummy internet;
     private final FinanceDummy finance;
+    private final BusinessDummy business;
 
     public Dummies(Dummy4j dummy4j) {
         name = new NameDummy(dummy4j);
@@ -47,6 +49,7 @@ public class Dummies {
         natoPhoneticAlphabet = new NatoPhoneticAlphabetDummy(dummy4j);
         internet = new InternetDummy(dummy4j);
         finance = new FinanceDummy(dummy4j, FinanceBuilderFactory.newInstance(dummy4j));
+        business = new BusinessDummy(dummy4j);
     }
 
     public NameDummy name() {
@@ -144,5 +147,12 @@ public class Dummies {
      */
     public FinanceDummy finance() {
         return finance;
+    }
+
+    /**
+     * @since SNAPSHOT
+     */
+    public BusinessDummy business() {
+        return business;
     }
 }

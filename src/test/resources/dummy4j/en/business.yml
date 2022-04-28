@@ -1,0 +1,55 @@
+en:
+  business:
+    product_name_prefix:
+      textile: [
+        "Cotton"
+      ]
+      metal: [
+        "Steel"
+      ]
+      furniture: [
+        "Wooden"
+      ]
+      tech: [
+        "Small"
+      ]
+    product_name_suffix:
+      textile: [
+        "Pants"
+      ]
+      tool: [
+        "Hammer"
+      ]
+      furniture: [
+        "Table"
+      ]
+      tech: [
+        "Monitor"
+      ]
+    product_name_textile: [
+      "#{business.product_name_prefix.textile} #{business.product_name_suffix.textile}"
+    ]
+    product_name_tool: [
+      "#{business.product_name_prefix.metal} #{business.product_name_suffix.tool}"
+    ]
+    product_name_furniture: [
+      "#{business.product_name_prefix.furniture} #{business.product_name_suffix.furniture}"
+    ]
+    product_name_tech: [
+      "#{business.product_name_prefix.tech} #{business.product_name_suffix.tech}"
+    ]
+    product_name: [
+      "#{business.product_name_textile}"
+    ]
+    department_name: [
+      "Beauty"
+    ]
+    company_name_suffix: [
+      "Co."
+    ]
+    company_name: [
+      "#{name.last_name} & #{name.last_name} #{business.company_name_suffix}"
+    ]
+    company_type: [
+      "General Partnership"
+    ]
