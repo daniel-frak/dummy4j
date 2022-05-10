@@ -18,6 +18,12 @@ jobs:
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Action"
+      - name: Import GPG key
+        id: import_gpg
+        uses: crazy-max/ghaction-import-gpg@v2
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
       - name: Set POM version to release version
         run: mvn versions:set -DnewVersion=${GITHUB_REF##*/}
       - name: Replace 'since SNAPSHOT' occurrences with 'since ${{ github.ref_name }}'
@@ -29,12 +35,6 @@ jobs:
         run: |
           git add pom.xml ./\*.java ./\*.md
           git commit -m "Set version to $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)"
-      - name: Import GPG key
-        id: import_gpg
-        uses: crazy-max/ghaction-import-gpg@v2
-        env:
-          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-          PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
       - name: Publish package
         run: mvn -B deploy -P release-sign-artifacts
         env:
