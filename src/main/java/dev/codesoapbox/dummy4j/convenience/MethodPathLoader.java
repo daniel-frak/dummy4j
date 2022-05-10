@@ -66,11 +66,8 @@ class MethodPathLoader {
 
     @SuppressWarnings("unchecked")
     private static List<String> mapEntryToStrings(Map.Entry<String, Object> mapEntry, String prefix) {
-        if (mapEntry.getValue() instanceof Map) {
-            Map<String, Object> value = (Map<String, Object>) mapEntry.getValue();
-            return mapMapToStrings(value, prefix, mapEntry.getKey());
-        }
-        return singletonList(prefix + mapEntry.getKey() + SEPARATOR + mapEntry.getValue());
+        Map<String, Object> value = (Map<String, Object>) mapEntry.getValue();
+        return mapMapToStrings(value, prefix, mapEntry.getKey());
     }
 
     private static List<String> mapMapToStrings(Map<String, Object> map, String prefix, String key) {
