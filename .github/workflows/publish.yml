@@ -20,9 +20,14 @@ jobs:
           git config --local user.name "GitHub Action"
       - name: Set POM version to release version
         run: mvn versions:set -DnewVersion=${GITHUB_REF##*/}
+      - name: Replace 'since SNAPSHOT' occurrences with 'since ${{ github.ref_name }}'
+        uses: mingjun97/file-regex-replace@v1
+        with:
+          regex: '(?<!`@)since SNAPSHOT(?!`)'
+          replacement: 'since ${{ github.ref_name }}'
       - name: Commit changes
         run: |
-          git add pom.xml
+          git add pom.xml ./\*.java ./\*.md
           git commit -m "Set version to $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)"
       - name: Import GPG key
         id: import_gpg
@@ -45,4 +50,4 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          ref: refs/heads/${{ github.head_ref }}
+          branch: ${{ github.ref }}
