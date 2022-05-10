@@ -1,6 +1,7 @@
 package dev.codesoapbox.dummy4j;
 
 import dev.codesoapbox.dummy4j.annotations.Experimental;
+import dev.codesoapbox.dummy4j.convenience.ConvenienceMethods;
 import dev.codesoapbox.dummy4j.definitions.DefaultUniqueValues;
 import dev.codesoapbox.dummy4j.definitions.UniqueValues;
 import dev.codesoapbox.dummy4j.definitions.providers.files.yaml.YamlFileDefinitionProvider;
@@ -62,7 +63,7 @@ public class Dummy4j {
                 new ConvenienceMethods(randomService));
     }
 
-    protected Dummy4j(ExpressionResolver expressionResolver, RandomService randomService,
+    Dummy4j(ExpressionResolver expressionResolver, RandomService randomService,
                       Function<? super Dummy4j, Dummies> dummiesFactory, UniqueValues uniqueValues,
                       ConvenienceMethods convenienceMethods) {
         this.randomService = randomService;
@@ -221,6 +222,17 @@ public class Dummy4j {
      */
     public <T extends Enum<?>> T nextEnum(Class<T> clazz) {
         return convenienceMethods.nextEnum(clazz);
+    }
+
+    /**
+     * Finds all methods containing a search string in their name.
+     * Helpful when a specific method is needed but its placement is unknown.
+     *
+     * @param value a string to search for
+     * @return a message containing all found methods containing the search string
+     */
+    public String find(String value) {
+        return convenienceMethods.find(value);
     }
 
     /**

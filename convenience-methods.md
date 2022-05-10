@@ -10,6 +10,31 @@ nav_order: 3
 * TOC
 {:toc}
 
+# Find method *(since SNAPSHOT)*
+
+If you need a particular method but aren't sure where to find it, you can use the `find(...)` method
+to quickly locate it:
+
+```java
+String message = dummy4j.find("name");
+```
+
+The above code will return a message like this, listing all methods containing the given search
+string:
+
+```
+[...]
+Dummy4j.color().name()
+Dummy4j.color().primaryName()
+Dummy4j.finance().creditCard().getOwnerName()
+[...]
+Dummy4j.finance().currencyName()
+Dummy4j.internet().username()
+Dummy4j.name()
+Dummy4j.name().firstName()
+[...]
+```
+
 # Chance method *(since 0.5.0)*
 
 You might want to randomize which fields should be filled and which should be left empty in an object.

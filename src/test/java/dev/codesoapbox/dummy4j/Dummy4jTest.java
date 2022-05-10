@@ -1,5 +1,6 @@
 package dev.codesoapbox.dummy4j;
 
+import dev.codesoapbox.dummy4j.convenience.ConvenienceMethods;
 import dev.codesoapbox.dummy4j.definitions.UniqueValues;
 import dev.codesoapbox.dummy4j.dummies.*;
 import dev.codesoapbox.dummy4j.dummies.address.AddressDummy;
@@ -95,10 +96,21 @@ class Dummy4jTest {
     }
 
     @Test
+    void shouldFind() {
+        String testValue = "testValue";
+        String expectedResult = "testResult";
+        when(convenienceMethods.find(testValue))
+                .thenReturn(expectedResult);
+
+        assertEquals(expectedResult, dummy4j.find(testValue));
+    }
+
+    @Test
     void shouldGetNameDummy() {
         NameDummy nameDummy = mock(NameDummy.class);
         when(dummies.name())
                 .thenReturn(nameDummy);
+
         assertEquals(nameDummy, dummy4j.name());
     }
 
@@ -154,11 +166,11 @@ class Dummy4jTest {
 
     @Test
     void shouldGetRandomEnumValue() {
-        ConvenienceMethodsTest.TestEnum expectedEnum = ConvenienceMethodsTest.TestEnum.THREE;
-        when(convenienceMethods.nextEnum(ConvenienceMethodsTest.TestEnum.class))
+        TestEnum expectedEnum = TestEnum.THREE;
+        when(convenienceMethods.nextEnum(TestEnum.class))
                 .thenReturn(expectedEnum);
 
-        assertEquals(expectedEnum, dummy4j.nextEnum(ConvenienceMethodsTest.TestEnum.class));
+        assertEquals(expectedEnum, dummy4j.nextEnum(TestEnum.class));
     }
 
     @Test
