@@ -170,6 +170,7 @@ public class ConvenienceMethods {
      *
      * @param value a string to search for
      * @return a message containing all found methods containing the search string
+     * @since SNAPSHOT
      */
     public String find(String value) {
         return methodFinder.find(value);
