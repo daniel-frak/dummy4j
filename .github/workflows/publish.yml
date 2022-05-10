@@ -24,29 +24,46 @@ jobs:
         env:
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
           PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-      - name: Set POM version to release version
+      - name: Set POM version to ${{ github.ref_name }}
         run: mvn versions:set -DnewVersion=${GITHUB_REF##*/}
       - name: Replace 'since SNAPSHOT' occurrences with 'since ${{ github.ref_name }}'
         uses: mingjun97/file-regex-replace@v1
         with:
           regex: '(?<!`@)since SNAPSHOT(?!`)'
           replacement: 'since ${{ github.ref_name }}'
-      - name: Commit changes
+      - name: Commit changes before publishing
+        # Don't fail if nothing to commit
         run: |
           git add pom.xml ./\*.java ./\*.md
-          git commit -m "Set version to $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)"
+          set +e
+          git commit -m "build: Set version to $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)"
+          set -e
       - name: Publish package
         run: mvn -B deploy -P release-sign-artifacts
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
-      - name: Increment version
+      - name: Increment version after publishing
         run: mvn versions:set -DnextSnapshot
-      - name: Pull and commit changes
+      - name: Commit changes after publishing (version increment)
         run: |
           git add pom.xml
           git commit -m "Increment version to $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)"
-      - name: Push changes
+      - name: Push changes after publishing (version increment)
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+      - name: Update dependency version in README.md and index.md to ${{ github.ref_name }}
+        uses: mingjun97/file-regex-replace@v1
+        with:
+          regex: '(?<=<artifactId>dummy4j<\/artifactId>\s\s\s<version>).+(?=<\/version>)'
+          replacement: '${{ github.ref_name }}'
+      - name: Commit changes after publishing (documentation update)
+        run: |
+          git add README.md index.md
+          git commit -m "build: Update dependency version in README.md and index.md to ${{ github.ref_name }}"
+      - name: Push changes after publishing (documentation update)
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
