@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.*;
 
+import static java.util.Collections.emptyMap;
 import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
 
@@ -47,7 +48,7 @@ class MethodPathLoader {
         if(isNotNativeJavaClass(method)) {
             return getMethodsForClass(method.getReturnType(), previousClasses);
         }
-        return null;
+        return emptyMap();
     }
 
     private static boolean isNotNativeJavaClass(Method method) {
