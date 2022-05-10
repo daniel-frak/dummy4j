@@ -94,7 +94,7 @@ While you can easily add your own dummy data definitions, the following are avai
 * [Nato Phonetic Alphabet](https://javadoc.io/doc/dev.codesoapbox/dummy4j/latest/dev/codesoapbox/dummy4j/dummies/NatoPhoneticAlphabetDummy.html) *(since 0.4.0)*
 * [Internet](https://javadoc.io/doc/dev.codesoapbox/dummy4j/latest/dev/codesoapbox/dummy4j/dummies/internet/InternetDummy.html) *(since 0.5.0)*
 * [Finance](https://javadoc.io/doc/dev.codesoapbox/dummy4j/latest/dev/codesoapbox/dummy4j/dummies/finance/FinanceDummy.html) *(since 0.6.0)*
-* [Business]() *(since SNAPSHOT)*
+* [Business]() *(since 0.10.0)*
 
 ## Usage examples:
 

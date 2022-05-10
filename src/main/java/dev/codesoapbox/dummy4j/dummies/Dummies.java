@@ -150,7 +150,7 @@ public class Dummies {
     }
 
     /**
-     * @since SNAPSHOT
+     * @since 0.10.0
      */
     public BusinessDummy business() {
         return business;

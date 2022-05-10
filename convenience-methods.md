@@ -10,7 +10,7 @@ nav_order: 3
 * TOC
 {:toc}
 
-# Find method *(since SNAPSHOT)*
+# Find method *(since 0.10.0)*
 
 If you need a particular method but aren't sure where to find it, you can use the `find(...)` method
 to quickly locate it:

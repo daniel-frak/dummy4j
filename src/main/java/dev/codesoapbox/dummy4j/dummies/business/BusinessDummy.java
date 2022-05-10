@@ -5,7 +5,7 @@ import dev.codesoapbox.dummy4j.Dummy4j;
 /**
  * Provides methods for generating values related to business and commerce
  *
- * @since SNAPSHOT
+ * @since 0.10.0
  */
 public class BusinessDummy {
 

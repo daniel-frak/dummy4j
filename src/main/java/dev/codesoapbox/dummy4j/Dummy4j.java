@@ -230,7 +230,7 @@ public class Dummy4j {
      *
      * @param value a string to search for
      * @return a message containing all found methods containing the search string
-     * @since SNAPSHOT
+     * @since 0.10.0
      */
     public String find(String value) {
         return convenienceMethods.find(value);
@@ -375,7 +375,7 @@ public class Dummy4j {
     /**
      * Provides methods for generating values related to business and commerce
      *
-     * @since SNAPSHOT
+     * @since 0.10.0
      */
     public BusinessDummy business() {
         return dummies.business();
