@@ -48,7 +48,7 @@ jobs:
       - name: Commit changes after publishing (version increment)
         run: |
           git add pom.xml
-          git commit -m "Increment version to $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)"
+          git commit -m "build: Increment version to $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)"
       - name: Push changes after publishing (version increment)
         uses: ad-m/github-push-action@master
         with:
@@ -62,7 +62,7 @@ jobs:
       - name: Commit changes after publishing (documentation update)
         run: |
           git add README.md index.md
-          git commit -m "build: Update dependency version in README.md and index.md to ${{ github.ref_name }}"
+          git commit -m "docs: Update dependency version in README.md and index.md to ${{ github.ref_name }}"
       - name: Push changes after publishing (documentation update)
         uses: ad-m/github-push-action@master
         with:
