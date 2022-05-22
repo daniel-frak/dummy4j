@@ -1,0 +1,61 @@
+name: Fix failed publish
+on:
+  workflow_dispatch:
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Maven Central Repository
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+          server-id: ossrh
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+      - name: Setup Git user
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Action"
+      - name: Set POM version to 0.11.0
+        run: mvn versions:set -DnewVersion=0.11.0
+      - name: Replace 'since SNAPSHOT' occurrences with 'since 0.11.0'
+        uses: mingjun97/file-regex-replace@v1
+        with:
+          regex: '(?<!`@)since SNAPSHOT(?!`)'
+          replacement: 'since 0.11.0'
+      - name: Commit changes before publishing
+        # Don't fail if nothing to commit
+        run: |
+          git add pom.xml ./\*.java ./\*.md
+          set +e
+          git commit -m "build: Set version to $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)"
+          set -e
+      - name: Increment version after publishing
+        run: mvn versions:set -DnextSnapshot
+      - name: Commit changes after publishing (version increment)
+        run: |
+          git add pom.xml
+          git commit -m "build: Increment version to $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)"
+      - name: Synchronize tags before pushing
+        # https://stackoverflow.com/a/39534896
+        run: git pull origin ${{ github.ref }} --tags -f
+      - name: Push changes after publishing (version increment)
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+      - name: Update dependency version in README.md and index.md to 0.11.0
+        uses: mingjun97/file-regex-replace@v1
+        with:
+          regex: '(?<=<artifactId>dummy4j<\/artifactId>\s\s\s<version>).+(?=<\/version>)'
+          replacement: '0.11.0'
+      - name: Commit changes after publishing (documentation update)
+        run: |
+          git add README.md index.md
+          git commit -m "docs: Update dependency version in README.md and index.md to 0.11.0"
+      - name: Push changes after publishing (documentation update)
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
