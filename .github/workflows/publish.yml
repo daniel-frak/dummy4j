@@ -49,6 +49,9 @@ jobs:
         run: |
           git add pom.xml
           git commit -m "build: Increment version to $(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)"
+      - name: Synchronize tags before pushing
+        # https://stackoverflow.com/a/39534896
+        run: git pull --tags -f
       - name: Push changes after publishing (version increment)
         uses: ad-m/github-push-action@master
         with:
