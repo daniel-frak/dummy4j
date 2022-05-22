@@ -1,6 +1,5 @@
 package dev.codesoapbox.dummy4j;
 
-import com.google.common.collect.Maps;
 import dev.codesoapbox.dummy4j.definitions.LocalizedDummyDefinitions;
 import dev.codesoapbox.dummy4j.definitions.providers.DefinitionProvider;
 import dev.codesoapbox.dummy4j.exceptions.MissingLocaleDefinitionsException;
@@ -12,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
@@ -40,7 +40,8 @@ public final class DefaultExpressionResolver implements ExpressionResolver {
         }
         this.locales = locales;
         this.randomService = randomService;
-        this.localizedDefinitions = Maps.uniqueIndex(definitionProvider.get(), LocalizedDummyDefinitions::getLocale);
+        this.localizedDefinitions = definitionProvider.get().stream()
+                .collect(Collectors.toMap(LocalizedDummyDefinitions::getLocale, d -> d));
 
         locales.forEach(locale -> {
             if (!localizedDefinitions.containsKey(locale)) {

@@ -2,7 +2,7 @@ package dev.codesoapbox.dummy4j.definitions.providers.files.yaml;
 
 import dev.codesoapbox.dummy4j.definitions.providers.files.ResourceStreamProvider;
 import org.reflections.Reflections;
-import org.reflections.scanners.ResourcesScanner;
+import org.reflections.scanners.Scanners;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 import org.yaml.snakeyaml.Yaml;
@@ -43,7 +43,8 @@ class YamlFileLoader {
     }
 
     static YamlFileLoader standard() {
-        Reflections reflections = new Reflections(new ConfigurationBuilder().setScanners(new ResourcesScanner())
+        Reflections reflections = new Reflections(new ConfigurationBuilder()
+                .setScanners(Scanners.Resources)
                 .setUrls(ClasspathHelper.forJavaClassPath())
                 .addUrls(ClasspathHelper.forClassLoader()));
         return new YamlFileLoader(new Yaml(), reflections, new ResourceStreamProvider());
