@@ -136,7 +136,7 @@ public class PriceBuilder {
         if (currencyFromDefinitions) {
             return dummy4j.expressionResolver().resolve(FinanceDummy.CURRENCY_CODE_KEY);
         }
-        return Optional.ofNullable(dummy4j.of(currencies))
+        return Optional.ofNullable(dummy4j.oneOf(currencies))
                 .orElse("");
     }
 

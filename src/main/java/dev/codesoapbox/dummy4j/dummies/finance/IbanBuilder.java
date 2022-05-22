@@ -81,7 +81,7 @@ public class IbanBuilder {
      * Generates a random IBAN
      */
     public String build() {
-        BankAccountCountry country = Optional.ofNullable(dummy4j.of(countries))
+        BankAccountCountry country = Optional.ofNullable(dummy4j.oneOf(countries))
                 .orElseGet(() -> dummy4j.nextEnum(BankAccountCountry.class));
         String account = dummy4j.finance().bankAccountNumber(country);
         String countryCode = country.getCode();

@@ -80,7 +80,7 @@ public class CreditCardBuilder {
      * Generates a random credit card
      */
     public CreditCard build() {
-        CreditCardProvider provider = Optional.ofNullable(dummy4j.of(providers))
+        CreditCardProvider provider = Optional.ofNullable(dummy4j.oneOf(providers))
                 .orElseGet(() -> dummy4j.nextEnum(CreditCardProvider.class));
         String number = numberBuilder.withProvider(provider).build();
         String ownerName = dummy4j.name().firstName() + " " + dummy4j.name().lastName();

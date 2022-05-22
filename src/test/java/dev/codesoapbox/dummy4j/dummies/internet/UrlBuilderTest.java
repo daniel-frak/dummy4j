@@ -65,7 +65,7 @@ class UrlBuilderTest {
 
     private void mockDefaultProtocol() {
         List<UrlProtocol> possibleProtocols = singletonList(UrlProtocol.HTTPS);
-        when(dummy4j.of(possibleProtocols))
+        when(dummy4j.oneOf(possibleProtocols))
                 .thenReturn(UrlProtocol.HTTPS);
     }
 
@@ -443,7 +443,7 @@ class UrlBuilderTest {
     void shouldReturnUrlForAllProtocolTypes() {
         mockDomain();
         for (UrlProtocol protocol : UrlProtocol.values()) {
-            when(dummy4j.of(singletonList(protocol)))
+            when(dummy4j.oneOf(singletonList(protocol)))
                     .thenReturn(protocol);
             URL url = builder.withProtocol(protocol).build();
 
@@ -466,7 +466,7 @@ class UrlBuilderTest {
     void shouldReturnUrlWithRandomProtocolChosenFromGivenList() {
         mockDomain();
         List<UrlProtocol> possibleProtocols = asList(UrlProtocol.HTTPS, UrlProtocol.FTP);
-        when(dummy4j.of(possibleProtocols))
+        when(dummy4j.oneOf(possibleProtocols))
                 .thenReturn(UrlProtocol.FTP);
 
         URL actual = builder.withRandomProtocol(UrlProtocol.HTTPS, UrlProtocol.FTP).build();

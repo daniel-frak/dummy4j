@@ -45,7 +45,7 @@ class InternetDummyTest {
     @Test
     void shouldReturnDefaultUrl() {
         mockSimpleUrl();
-        when(dummy4j.of(singletonList(UrlProtocol.HTTPS)))
+        when(dummy4j.oneOf(singletonList(UrlProtocol.HTTPS)))
                 .thenReturn(UrlProtocol.HTTPS);
 
         URL actual = internetDummy.url();
@@ -56,7 +56,7 @@ class InternetDummyTest {
     @Test
     void shouldBuildSimpleUrl() {
         mockSimpleUrl();
-        when(dummy4j.of(singletonList(UrlProtocol.HTTPS)))
+        when(dummy4j.oneOf(singletonList(UrlProtocol.HTTPS)))
                 .thenReturn(UrlProtocol.HTTPS);
 
         URL actual = internetDummy.urlBuilder().build();

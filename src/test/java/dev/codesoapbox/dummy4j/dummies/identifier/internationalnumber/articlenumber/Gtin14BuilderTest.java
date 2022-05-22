@@ -62,7 +62,7 @@ class Gtin14BuilderTest {
 
     @Test
     void shouldBuildGtin() {
-        when(dummy4j.of((List<Object>) null))
+        when(dummy4j.oneOf((List<Object>) null))
                 .thenReturn(null);
         when(dummy4j.nextEnum(Gs1PrefixRange.class))
                 .thenReturn(testPrefixRange);
@@ -74,7 +74,7 @@ class Gtin14BuilderTest {
 
     @Test
     void shouldBuildGtinWithRandomGs1PrefixRange() {
-        when(dummy4j.of(new ArrayList<Gs1PrefixRange>()))
+        when(dummy4j.oneOf(new ArrayList<Gs1PrefixRange>()))
                 .thenReturn(null);
         when(dummy4j.nextEnum(Gs1PrefixRange.class))
                 .thenReturn(testPrefixRange);
@@ -88,7 +88,7 @@ class Gtin14BuilderTest {
 
     @Test
     void shouldBuildGtinWithRandomGs1PrefixRangeFromGivenList() {
-        when(dummy4j.of(Arrays.asList(testPrefixRange, Gs1PrefixRange.USA)))
+        when(dummy4j.oneOf(Arrays.asList(testPrefixRange, Gs1PrefixRange.USA)))
                 .thenReturn(testPrefixRange);
 
         String actual = builder
@@ -100,7 +100,7 @@ class Gtin14BuilderTest {
 
     @Test
     void shouldBuildGtinWithGivenGs1PrefixRange() {
-        when(dummy4j.of(singletonList(testPrefixRange)))
+        when(dummy4j.oneOf(singletonList(testPrefixRange)))
                 .thenReturn(testPrefixRange);
 
         String actual = builder
@@ -112,7 +112,7 @@ class Gtin14BuilderTest {
 
     @Test
     void shouldBuildGtinWithApplicationId() {
-        when(dummy4j.of(singletonList(testPrefixRange)))
+        when(dummy4j.oneOf(singletonList(testPrefixRange)))
                 .thenReturn(testPrefixRange);
 
         String actual = builder
@@ -125,7 +125,7 @@ class Gtin14BuilderTest {
 
     @Test
     void shouldBuildGtinWithoutApplicationId() {
-        when(dummy4j.of(singletonList(testPrefixRange)))
+        when(dummy4j.oneOf(singletonList(testPrefixRange)))
                 .thenReturn(testPrefixRange);
 
         String actual = builder

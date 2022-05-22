@@ -209,7 +209,7 @@ public final class UrlBuilder {
      * @see URL
      */
     public URL build() {
-        UrlProtocol protocol = Optional.ofNullable(dummy4j.of(possibleProtocols))
+        UrlProtocol protocol = Optional.ofNullable(dummy4j.oneOf(possibleProtocols))
                 .orElseGet(() -> dummy4j.nextEnum(UrlProtocol.class));
         UrlHost host = getUrlHost();
         String filePathAndQueryParams = getFilePath();

@@ -142,7 +142,7 @@ class CreditCardBuilderTest {
     void shouldReturnCreditCardForProvider() {
         Address address = getAddress();
         mockCreditCardData(address, 5);
-        when(dummy4j.of(singletonList(CreditCardProvider.AMERICAN_EXPRESS)))
+        when(dummy4j.oneOf(singletonList(CreditCardProvider.AMERICAN_EXPRESS)))
                 .thenReturn(CreditCardProvider.AMERICAN_EXPRESS);
         mockNumber();
 
@@ -157,7 +157,7 @@ class CreditCardBuilderTest {
     void shouldReturnCreditCardForRandomProvider() {
         Address address = getAddress();
         mockCreditCardData(address, 5);
-        when(dummy4j.of(emptyList()))
+        when(dummy4j.oneOf(emptyList()))
                 .thenReturn(null);
         when(dummy4j.nextEnum(CreditCardProvider.class))
                 .thenReturn(CreditCardProvider.VISA);
@@ -177,7 +177,7 @@ class CreditCardBuilderTest {
     void shouldReturnCreditCardForProviderChosenFromProvidedArguments() {
         Address address = getAddress();
         mockCreditCardData(address, 5);
-        when(dummy4j.of(asList(CreditCardProvider.AMERICAN_EXPRESS, CreditCardProvider.VISA)))
+        when(dummy4j.oneOf(asList(CreditCardProvider.AMERICAN_EXPRESS, CreditCardProvider.VISA)))
                 .thenReturn(CreditCardProvider.VISA);
         when(numberBuilder.withProvider(CreditCardProvider.VISA)).
                 thenReturn(numberBuilder);

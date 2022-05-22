@@ -362,7 +362,7 @@ public class IsbnBuilder {
         IsbnType type = resolveType();
         String prefix = resolvePrefix(type);
         String group = resolveRegistrationGroup();
-        String publication = dummy4j.of(publications);
+        String publication = dummy4j.oneOf(publications);
         String registrant = resolveRegistrant(group.length(), publication);
 
         if (publication == null) {
@@ -376,7 +376,7 @@ public class IsbnBuilder {
     }
 
     private IsbnType resolveType() {
-        return Optional.ofNullable(dummy4j.of(types))
+        return Optional.ofNullable(dummy4j.oneOf(types))
                 .orElse(dummy4j.nextEnum(IsbnType.class));
     }
 
@@ -385,7 +385,7 @@ public class IsbnBuilder {
             return "";
         }
 
-        return Optional.ofNullable(dummy4j.of(prefixes))
+        return Optional.ofNullable(dummy4j.oneOf(prefixes))
                 .orElseGet(this::resolvePrefixDefinition);
     }
 
@@ -401,19 +401,19 @@ public class IsbnBuilder {
     }
 
     private String resolveRegistrationGroup() {
-        return Optional.ofNullable(dummy4j.of(registrationGroups))
+        return Optional.ofNullable(dummy4j.oneOf(registrationGroups))
                 .orElseGet(this::generateRegistrationGroup);
     }
 
     private String generateRegistrationGroup() {
-        IsbnRegistrationGroupRange range = dummy4j.of(REGISTRATION_GROUP_RANGES);
+        IsbnRegistrationGroupRange range = dummy4j.oneOf(REGISTRATION_GROUP_RANGES);
         int group = dummy4j.number().nextInt(range.getMin(), range.getMax());
 
         return String.valueOf(group);
     }
 
     private String resolveRegistrant(int registrationGroupLength, String publication) {
-        return Optional.ofNullable(dummy4j.of(registrants))
+        return Optional.ofNullable(dummy4j.oneOf(registrants))
                 .orElseGet(() -> generateRegistrant(registrationGroupLength, publication));
     }
 
@@ -443,7 +443,7 @@ public class IsbnBuilder {
     }
 
     private String resolveSeparator() {
-        return Optional.ofNullable(dummy4j.of(separators))
+        return Optional.ofNullable(dummy4j.oneOf(separators))
                 .orElseGet(() -> dummy4j.expressionResolver().resolve(ISBN_SEPARATOR_KEY));
     }
 

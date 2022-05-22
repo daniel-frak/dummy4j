@@ -86,7 +86,7 @@ public class Gs1Dash128Factory {
      */
     public String createCode() {
         int howManyParts = dummy4j.number().nextInt(2, 3);
-        List<Supplier<String>> selected = dummy4j.unique().of(() -> dummy4j.of(suppliers),
+        List<Supplier<String>> selected = dummy4j.unique().of(() -> dummy4j.oneOf(suppliers),
                 supplier -> dummy4j.listOf(howManyParts, supplier));
 
         return selected.stream().map(Supplier::get).collect(Collectors.joining());

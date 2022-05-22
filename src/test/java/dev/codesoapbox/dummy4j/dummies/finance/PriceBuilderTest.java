@@ -56,7 +56,7 @@ class PriceBuilderTest {
     @Test
     void shouldBuildPriceWithGivenCurrency() {
         mockNextFloat();
-        when(dummy4j.of(singletonList("USD")))
+        when(dummy4j.oneOf(singletonList("USD")))
                 .thenReturn("USD");
 
         String actual = builder
@@ -92,7 +92,7 @@ class PriceBuilderTest {
     @Test
     void shouldBuildPriceWithCurrencyChosenAtRandomFromProvidedArguments() {
         mockNextFloat();
-        when(dummy4j.of(asList("JPY", "PLN", "USD")))
+        when(dummy4j.oneOf(asList("JPY", "PLN", "USD")))
                 .thenReturn("JPY");
 
         String actual = builder

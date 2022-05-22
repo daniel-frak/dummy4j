@@ -137,19 +137,19 @@ public class IsmnBuilder {
     }
 
     private String resolveRegistrant() {
-        return Optional.ofNullable(dummy4j.of(registrants))
+        return Optional.ofNullable(dummy4j.oneOf(registrants))
                 .orElseGet(this::generateRegistrant);
     }
 
     private String generateRegistrant() {
-        IsmnRegistrantRange range = dummy4j.of(REGISTRANT_RANGES);
+        IsmnRegistrantRange range = dummy4j.oneOf(REGISTRANT_RANGES);
         Integer registrant = dummy4j.number().nextInt(range.getMin(), range.getMax());
 
         return Padding.leftPad(String.valueOf(registrant), 3, '0');
     }
 
     private String resolveSeparator() {
-        return Optional.ofNullable(dummy4j.of(separators))
+        return Optional.ofNullable(dummy4j.oneOf(separators))
                 .orElseGet(() -> dummy4j.expressionResolver().resolve(ISMN_SEPARATOR_KEY));
     }
 }

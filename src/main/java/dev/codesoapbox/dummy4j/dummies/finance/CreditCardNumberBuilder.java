@@ -97,7 +97,7 @@ public class CreditCardNumberBuilder {
     }
 
     private String getNumberWithIIN() {
-        CreditCardProvider provider = Optional.ofNullable(dummy4j.of(providers))
+        CreditCardProvider provider = Optional.ofNullable(dummy4j.oneOf(providers))
                 .orElseGet(() -> dummy4j.nextEnum(CreditCardProvider.class));
         String resolvedDefinition = dummy4j.expressionResolver().resolve(getProviderKey(provider));
 
@@ -113,7 +113,7 @@ public class CreditCardNumberBuilder {
     }
 
     private String getIIN(CreditCardProvider provider) {
-        IINRange range = dummy4j.of(provider.getIinRanges());
+        IINRange range = dummy4j.oneOf(provider.getIinRanges());
 
         return String.valueOf(dummy4j.number().nextInt(range.getMin(), range.getMax()));
     }

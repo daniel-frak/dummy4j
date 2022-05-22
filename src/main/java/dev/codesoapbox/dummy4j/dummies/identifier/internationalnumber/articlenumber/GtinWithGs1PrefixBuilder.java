@@ -74,7 +74,7 @@ abstract class GtinWithGs1PrefixBuilder<T extends GtinWithGs1PrefixBuilder<T>> {
     }
 
     String getGs1Prefix() {
-        Gs1PrefixRange range = Optional.ofNullable(dummy4j.of(ranges))
+        Gs1PrefixRange range = Optional.ofNullable(dummy4j.oneOf(ranges))
                 .orElseGet(() -> dummy4j.nextEnum(Gs1PrefixRange.class));
 
         if (range.isSingleValue()) {

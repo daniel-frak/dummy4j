@@ -51,11 +51,11 @@ it will be `null`.
 The `of(...)` methods return a random element from a given array, collection or an array of suppliers.
 
 ```java
-String elementFromArray = dummy.of(new String[]{ "one", "two", "three" });
+String elementFromArray = dummy.oneOf(new String[]{ "one", "two", "three" });
 
-String elementFromCollection = dummy.of(Arrays.asList("one", "two", "three"));
+String elementFromCollection = dummy.oneOf(Arrays.asList("one", "two", "three"));
 
-String nameOrCity = dummy.of(() -> dummy.name().fullName(), () -> dummy.address().city());
+String nameOrCity = dummy.oneOf(() -> dummy.name().fullName(), () -> dummy.address().city());
 ```
 
 # Globally unique values *(experimental) (since 0.1.2)*
@@ -77,13 +77,14 @@ The uniqueness is guaranteed for the entire lifetime of a Dummy4j instance.
 
 # Collections of locally unique values *(experimental)* (since 0.7.0)
 
-It is possible to generate locally unique values by wrapping a call with the `dummy.unique().of(...)` method:
+It is possible to generate collections of locally unique values by wrapping a call with the `dummy.unique().of(...)`
+method:
 ```java
-List<String> names = dummy.unique().of(() -> dummy.name().fullName(), name -> dummy.listOf(10, name));
-System.out.println(names);
+List<String> tenUniqueNames = dummy.unique().of(() -> dummy.name().fullName(), name -> dummy.listOf(10, name));
+System.out.println(tenUniqueNames);
 ```
 
-The above will print 10 names, all of which will be unique within their list.
+The above will print 10 names, all of which will be unique within the list.
 
 *Note that this is an experimental feature and its API may be subject to change.*
 

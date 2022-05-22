@@ -76,7 +76,7 @@ class IsbnBuilderTest {
     }
 
     private void mockFirstElementFromAnyList() {
-        when(dummy4j.of(anyList()))
+        when(dummy4j.oneOf(anyList()))
                 .thenAnswer(inv -> ((List<?>) inv.getArgument(0)).get(0));
     }
 
@@ -138,7 +138,7 @@ class IsbnBuilderTest {
         mockSeparator();
         mockNumberService();
         mockCheckDigitForModTenFormula(PREFIX + GROUP + "11");
-        when(dummy4j.of(emptyList()))
+        when(dummy4j.oneOf(emptyList()))
                 .thenReturn(null);
         mockRegistrationGroupRange();
         when(numberService.digits(anyInt()))
@@ -172,7 +172,7 @@ class IsbnBuilderTest {
 
     private void mockRegistrationGroupRange() {
         IsbnRegistrationGroupRange groupRange = IsbnBuilder.REGISTRATION_GROUP_RANGES.get(0);
-        when(dummy4j.of(IsbnBuilder.REGISTRATION_GROUP_RANGES))
+        when(dummy4j.oneOf(IsbnBuilder.REGISTRATION_GROUP_RANGES))
                 .thenReturn(groupRange);
         when(numberService.nextInt(groupRange.getMin(), groupRange.getMax()))
                 .thenReturn(GROUP);
@@ -227,7 +227,7 @@ class IsbnBuilderTest {
     }
 
     private void mockNullableParts() {
-        when(dummy4j.of((List<Object>) null))
+        when(dummy4j.oneOf((List<Object>) null))
                 .thenReturn(null);
     }
 

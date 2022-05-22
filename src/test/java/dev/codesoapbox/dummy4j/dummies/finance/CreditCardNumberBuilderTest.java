@@ -58,7 +58,7 @@ class CreditCardNumberBuilderTest {
     }
 
     private void mockCreditCardProvider() {
-        when(dummy4j.of(emptyList()))
+        when(dummy4j.oneOf(emptyList()))
                 .thenReturn(null);
         when(dummy4j.nextEnum(CreditCardProvider.class))
                 .thenReturn(CreditCardProvider.AMERICAN_EXPRESS);
@@ -77,7 +77,7 @@ class CreditCardNumberBuilderTest {
 
     private void mockIIN() {
         mockNumberService();
-        when(dummy4j.of(CreditCardProvider.AMERICAN_EXPRESS.getIinRanges()))
+        when(dummy4j.oneOf(CreditCardProvider.AMERICAN_EXPRESS.getIinRanges()))
                 .thenReturn(IINRange.from(IIN_MIN, IIN_MAX));
         when(numberService.nextInt(IIN_MIN, IIN_MAX))
                 .thenReturn(IIN_MIN);
@@ -96,7 +96,7 @@ class CreditCardNumberBuilderTest {
     @Test
     void shouldGenerateCreditCardNumberWithProvider() {
         mockCreditCardNumber();
-        when(dummy4j.of(singletonList(CreditCardProvider.AMERICAN_EXPRESS)))
+        when(dummy4j.oneOf(singletonList(CreditCardProvider.AMERICAN_EXPRESS)))
                 .thenReturn(CreditCardProvider.AMERICAN_EXPRESS);
 
         String actual = builder
@@ -109,7 +109,7 @@ class CreditCardNumberBuilderTest {
     @Test
     void shouldGenerateCreditCardNumberWithProviderChosenFromGivenArguments() {
         mockCreditCardNumber();
-        when(dummy4j.of(asList(CreditCardProvider.AMERICAN_EXPRESS, CreditCardProvider.VISA)))
+        when(dummy4j.oneOf(asList(CreditCardProvider.AMERICAN_EXPRESS, CreditCardProvider.VISA)))
                 .thenReturn(CreditCardProvider.AMERICAN_EXPRESS);
 
         String actual = builder
@@ -171,7 +171,7 @@ class CreditCardNumberBuilderTest {
         mockNumberService();
         mockExpressionResolver();
         mockIINRange();
-        when(dummy4j.of(singletonList(CreditCardProvider.MASTER_CARD)))
+        when(dummy4j.oneOf(singletonList(CreditCardProvider.MASTER_CARD)))
                 .thenReturn(CreditCardProvider.MASTER_CARD);
         when(expressionResolver.resolve(CreditCardNumberBuilder.PARTIAL_CREDIT_CARD_KEY + "mastercard}"))
                 .thenReturn("0012 3456 7890 123");
@@ -186,7 +186,7 @@ class CreditCardNumberBuilderTest {
     }
 
     private void mockIINRange() {
-        when(dummy4j.of(CreditCardProvider.MASTER_CARD.getIinRanges()))
+        when(dummy4j.oneOf(CreditCardProvider.MASTER_CARD.getIinRanges()))
                 .thenReturn(IINRange.from(222100, 272099));
         when(numberService.nextInt(222100, 272099))
                 .thenReturn(272099);

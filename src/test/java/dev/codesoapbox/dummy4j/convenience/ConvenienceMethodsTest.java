@@ -69,14 +69,14 @@ class ConvenienceMethodsTest {
         when(random.nextInt(2))
                 .thenReturn(2);
 
-        assertEquals("three", convenienceMethods.of(array));
+        assertEquals("three", convenienceMethods.oneOf(array));
     }
 
     @Test
     void shouldReturnFirstElementFromOneElementArray() {
         String[] array = {"one"};
 
-        assertEquals("one", convenienceMethods.of(array));
+        assertEquals("one", convenienceMethods.oneOf(array));
         verify(random, never()).nextInt(0);
     }
 
@@ -84,7 +84,7 @@ class ConvenienceMethodsTest {
     void shouldReturnNullForEmptyArray() {
         String[] array = {};
 
-        assertNull(convenienceMethods.of(array));
+        assertNull(convenienceMethods.oneOf(array));
         verify(random, never()).nextInt(Mockito.anyInt());
     }
 
@@ -95,14 +95,14 @@ class ConvenienceMethodsTest {
         when(random.nextInt(2))
                 .thenReturn(2);
 
-        assertEquals("three", convenienceMethods.of(list));
+        assertEquals("three", convenienceMethods.oneOf(list));
     }
 
     @Test
     void shouldReturnFirstElementFromOneElementList() {
         List<String> list = singletonList("one");
 
-        assertEquals("one", convenienceMethods.of(list));
+        assertEquals("one", convenienceMethods.oneOf(list));
         verify(random, never()).nextInt(0);
     }
 
@@ -110,13 +110,13 @@ class ConvenienceMethodsTest {
     void shouldReturnNullForEmptyList() {
         List<String> list = emptyList();
 
-        assertNull(convenienceMethods.of(list));
+        assertNull(convenienceMethods.oneOf(list));
         verify(random, never()).nextInt(Mockito.anyInt());
     }
 
     @Test
     void shouldReturnNullIfListIsNull() {
-        assertNull(convenienceMethods.of((List<?>) null));
+        assertNull(convenienceMethods.oneOf((List<?>) null));
         verify(random, never()).nextInt(Mockito.anyInt());
     }
 
@@ -127,14 +127,14 @@ class ConvenienceMethodsTest {
         when(random.nextInt(2))
                 .thenReturn(2);
 
-        assertEquals("three", convenienceMethods.of(set));
+        assertEquals("three", convenienceMethods.oneOf(set));
     }
 
     @Test
     void shouldReturnFirstElementFromOneElementSet() {
         Set<String> set = new HashSet<>(singletonList("one"));
 
-        assertEquals("one", convenienceMethods.of(set));
+        assertEquals("one", convenienceMethods.oneOf(set));
         verify(random, never()).nextInt(0);
     }
 
@@ -142,13 +142,13 @@ class ConvenienceMethodsTest {
     void shouldReturnNullForEmptySet() {
         Set<String> set = emptySet();
 
-        assertNull(convenienceMethods.of(set));
+        assertNull(convenienceMethods.oneOf(set));
         verify(random, never()).nextInt(Mockito.anyInt());
     }
 
     @Test
     void shouldReturnNullIfSetIsNull() {
-        assertNull(convenienceMethods.of((Set<?>) null));
+        assertNull(convenienceMethods.oneOf((Set<?>) null));
         verify(random, never()).nextInt(Mockito.anyInt());
     }
 
@@ -157,14 +157,14 @@ class ConvenienceMethodsTest {
         when(random.nextInt(2))
                 .thenReturn(1);
 
-        int result = convenienceMethods.of(() -> 1, () -> 2, () -> 3);
+        int result = convenienceMethods.oneOf(() -> 1, () -> 2, () -> 3);
 
         assertEquals(2, result);
     }
 
     @Test
     void shouldReturnFirstElementFromOneElementSupplierArray() {
-        int result = convenienceMethods.of(() -> 1);
+        int result = convenienceMethods.oneOf(() -> 1);
 
         assertEquals(1, result);
         verify(random, never()).nextInt(0, 0);
@@ -175,7 +175,7 @@ class ConvenienceMethodsTest {
         @SuppressWarnings("unchecked")
         Supplier<Object>[] suppliersArray = new Supplier[]{};
 
-        Object result = convenienceMethods.of(suppliersArray);
+        Object result = convenienceMethods.oneOf(suppliersArray);
 
         assertNull(result);
         verify(random, never()).nextInt(Mockito.anyInt());
@@ -185,13 +185,13 @@ class ConvenienceMethodsTest {
     void shouldReturnNullIfSupplierArrayIsNull() {
         Supplier<Object>[] suppliersArray = null;
 
-        assertNull(convenienceMethods.of(suppliersArray));
+        assertNull(convenienceMethods.oneOf(suppliersArray));
         verify(random, never()).nextInt(Mockito.anyInt());
     }
 
     @Test
     void shouldReturnNullIfSupplierArrayMissing() {
-        assertNull(convenienceMethods.of());
+        assertNull(convenienceMethods.oneOf());
         verify(random, never()).nextInt(Mockito.anyInt());
     }
 

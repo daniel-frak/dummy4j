@@ -67,7 +67,7 @@ public class ConvenienceMethods {
      * @return a random element from the array or NULL if the array is empty
      */
     @SafeVarargs
-    public final <T> T of(T... array) {
+    public final <T> T oneOf(T... array) {
         if (array.length == 0) {
             return null;
         } else if (array.length == 1) {
@@ -83,7 +83,7 @@ public class ConvenienceMethods {
      * @param <T>  the type of object to return
      * @return a random element from the list or NULL if the list is NULL or empty
      */
-    public <T> T of(List<T> list) {
+    public <T> T oneOf(List<T> list) {
         if (list == null || list.isEmpty()) {
             return null;
         } else if (list.size() == 1) {
@@ -100,7 +100,7 @@ public class ConvenienceMethods {
      * @return a random element from the set or NULL if the set is NULL or empty
      */
     @SuppressWarnings("unchecked")
-    public <T> T of(Set<T> set) {
+    public <T> T oneOf(Set<T> set) {
         if (set == null || set.isEmpty()) {
             return null;
         } else if (set.size() == 1) {
@@ -117,7 +117,7 @@ public class ConvenienceMethods {
      * @return a value from a random supplier or NULL if an empty array or NULL was given as an argument
      */
     @SafeVarargs
-    public final <T> T of(Supplier<T>... suppliers) {
+    public final <T> T oneOf(Supplier<T>... suppliers) {
         if (suppliers == null || suppliers.length == 0) {
             return null;
         } else if (suppliers.length == 1) {

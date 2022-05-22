@@ -148,8 +148,8 @@ public class Dummy4j {
      * @since 0.5.0
      */
     @SafeVarargs
-    public final <T> T of(T... array) {
-        return convenienceMethods.of(array);
+    public final <T> T oneOf(T... array) {
+        return convenienceMethods.oneOf(array);
     }
 
     /**
@@ -160,8 +160,8 @@ public class Dummy4j {
      * @return a random element
      * @since 0.5.0
      */
-    public <T> T of(List<T> list) {
-        return convenienceMethods.of(list);
+    public <T> T oneOf(List<T> list) {
+        return convenienceMethods.oneOf(list);
     }
 
     /**
@@ -172,8 +172,8 @@ public class Dummy4j {
      * @return a random element
      * @since 0.5.0
      */
-    public <T> T of(Set<T> set) {
-        return convenienceMethods.of(set);
+    public <T> T oneOf(Set<T> set) {
+        return convenienceMethods.oneOf(set);
     }
 
     /**
@@ -185,8 +185,8 @@ public class Dummy4j {
      * @since 0.5.0
      */
     @SafeVarargs
-    public final <T> T of(Supplier<T>... suppliers) {
-        return convenienceMethods.of(suppliers);
+    public final <T> T oneOf(Supplier<T>... suppliers) {
+        return convenienceMethods.oneOf(suppliers);
     }
 
     /**

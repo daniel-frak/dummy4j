@@ -60,7 +60,7 @@ class IsmnBuilderTest {
     }
 
     private void mockFirstElementFromAnyList() {
-        when(dummy4j.of(anyList()))
+        when(dummy4j.oneOf(anyList()))
                 .thenAnswer(inv -> ((List<?>) inv.getArgument(0)).get(0));
     }
 
@@ -92,7 +92,7 @@ class IsmnBuilderTest {
         mockExpressionResolver();
         mockSeparator();
         mockItem();
-        when(dummy4j.of(emptyList()))
+        when(dummy4j.oneOf(emptyList()))
                 .thenReturn(null);
         when(modTenFormula.generateCheckDigit("9790003222"))
                 .thenReturn(9);
@@ -107,7 +107,7 @@ class IsmnBuilderTest {
 
     private void mockRegistrantRange() {
         IsmnRegistrantRange registrantRange = IsmnBuilder.REGISTRANT_RANGES.get(0);
-        when(dummy4j.of(IsmnBuilder.REGISTRANT_RANGES))
+        when(dummy4j.oneOf(IsmnBuilder.REGISTRANT_RANGES))
                 .thenReturn(registrantRange);
         when(numberService.nextInt(registrantRange.getMin(), registrantRange.getMax()))
                 .thenReturn(3);
@@ -161,7 +161,7 @@ class IsmnBuilderTest {
     }
 
     private void mockNullableParts() {
-        when(dummy4j.of((List<Object>) null))
+        when(dummy4j.oneOf((List<Object>) null))
                 .thenReturn(null);
     }
 }

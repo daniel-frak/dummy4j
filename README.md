@@ -130,13 +130,13 @@ List<String> fiveNames = dummy.listOf(5, () -> dummy.name().fullName());
 
 Set<String> fourCities = dummy.setOf(4, () -> dummy.address().city());
 
-String nameOrCity = dummy.of(() -> dummy.name().fullName(), () -> dummy.address().city());
+String nameOrCity = dummy.oneOf(() -> dummy.name().fullName(), () -> dummy.address().city());
 
-String elementFromArray = dummy.of(new String[]{ "one", "two", "three" });
+String elementFromArray = dummy.oneOf(new String[]{ "one", "two", "three" });
 
-String elementFromVarArgs = dummy.of("one", "two", "three");
+String elementFromVarArgs = dummy.oneOf("one", "two", "three");
 
-String elementFromCollection = dummy.of(Arrays.asList("one", "two", "three"));
+String elementFromCollection = dummy.oneOf(Arrays.asList("one", "two", "three"));
 
 dummy.unique().within(() -> dummy.name().fullName(), name -> {
     // These names will only be unique within the context of this consumer

@@ -128,32 +128,32 @@ class Dummy4jTest {
 
     @Test
     void shouldReturnRandomElementFromArray() {
-        assertEquals("1", new Dummy4j().of("1"));
+        assertEquals("1", new Dummy4j().oneOf("1"));
     }
 
     @Test
     void shouldReturnRandomElementFromList() {
         List<String> list = asList("1", "2");
         String expected = "test";
-        when(convenienceMethods.of(list))
+        when(convenienceMethods.oneOf(list))
                 .thenReturn(expected);
 
-        assertEquals(expected, dummy4j.of(list));
+        assertEquals(expected, dummy4j.oneOf(list));
     }
 
     @Test
     void shouldReturnRandomElementFromSet() {
         Set<String> set = new HashSet<>(asList("1", "2"));
         String expected = "test";
-        when(convenienceMethods.of(set))
+        when(convenienceMethods.oneOf(set))
                 .thenReturn(expected);
 
-        assertEquals(expected, dummy4j.of(set));
+        assertEquals(expected, dummy4j.oneOf(set));
     }
 
     @Test
     void shouldSupplyFromRandomSupplier() {
-        assertEquals("1", new Dummy4j().of(() -> "1"));
+        assertEquals("1", new Dummy4j().oneOf(() -> "1"));
     }
 
     @Test
