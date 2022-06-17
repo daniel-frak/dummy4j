@@ -13,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.logging.*;
 
 import static java.util.Arrays.*;
 import static java.util.Collections.emptyList;
@@ -275,5 +276,31 @@ class DefaultExpressionResolverTest {
             result.add(expressionResolver.resolve("#{shared}"));
         }
         assertEquals(expected, result);
+    }
+
+    @Test
+    void shouldLogWhenFailingToResolvePath() {
+        TestLogging.TestLogHandler handler = TestLogging.mockLogging(Level.FINE);
+
+        expressionResolver.resolve("#{unresolvable}");
+
+        handler.assertContains("Could not resolve path: unresolvable in any locale");
+    }
+
+    @Test
+    void shouldLogWhenFailingToResolveMultiLocalePath() {
+        TestLogging.TestLogHandler handler = TestLogging.mockLogging(Level.FINE);
+
+        expressionResolver.resolve("#{{unresolvable}}");
+
+        handler.assertContains("Could not resolve multi-locale path: unresolvable in any locale");
+    }
+
+    @Test
+    void shouldLogWhenFailingToResolvePathWithinContextOfLocale() {
+        TestLogging.TestLogHandler handler = TestLogging.mockLogging(Level.FINE);
+        expressionResolver.resolve("#{something.deep}-#{something.notexisting}");
+
+        handler.assertContains("Could not resolve path: something.notexisting for locale: en");
     }
 }

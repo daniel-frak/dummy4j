@@ -1,5 +1,6 @@
 package dev.codesoapbox.dummy4j.definitions.providers.files.yaml;
 
+import dev.codesoapbox.dummy4j.TestLogging;
 import dev.codesoapbox.dummy4j.definitions.providers.files.ResourceStreamProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.logging.Level;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -46,6 +48,7 @@ class YamlFileLoaderTest {
 
     @Test
     void shouldLoadYamlFilesFromGivenPaths() {
+        TestLogging.TestLogHandler handler = TestLogging.mockLogging(Level.FINE);
         String resource1 = "dummy4j/resource1.yml";
         String resource2 = "dummy4j/deep/resource2.yml";
         String resource3 = "other/resource3.yml";
@@ -70,6 +73,8 @@ class YamlFileLoaderTest {
         assertEquals(2, result.size());
         assertTrue(loadedResources.contains(resource1));
         assertTrue(loadedResources.contains(resource2));
+        handler.assertContains("Loading definitions from files: [dummy4j/deep/resource2.yml, dummy4j/resource1.yml," +
+                " other/resource3.yml]");
     }
 
     private String getInputStreamAsString(InvocationOnMock inv) {
