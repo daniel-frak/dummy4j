@@ -29,6 +29,24 @@ class Dummy4jBuilderTest {
     }
 
     @Test
+    void assigningNullLocaleShouldSetEmptyLocale() {
+        Dummy4jBuilder dummy4jBuilder = new Dummy4jBuilder()
+                .locale(null, null);
+
+        assertTrue(dummy4jBuilder.locale.isEmpty());
+        assertNotNull(dummy4jBuilder.locale);
+    }
+
+    @Test
+    void assigningNullPathsShouldSetEmptyPath() {
+        Dummy4jBuilder dummy4jBuilder = new Dummy4jBuilder()
+                .paths(null, null);
+
+        assertTrue(dummy4jBuilder.paths.isEmpty());
+        assertNotNull(dummy4jBuilder.paths);
+    }
+
+    @Test
     void shouldBuildWithGivenAndExistingLocaleAndPaths() {
         Dummy4j fromList = new Dummy4jBuilder()
                 .paths(singletonList("dummy4j"))
@@ -139,22 +157,6 @@ class Dummy4jBuilderTest {
         assertAll(
                 () -> assertNotNull(fromList),
                 () -> assertNotNull(fromVarArgs)
-        );
-    }
-
-    @Test
-    void shouldThrowExceptionWhenSomeOfTheProvidedLocaleAreNull() {
-        Dummy4jBuilder fromList = new Dummy4jBuilder()
-                .paths(singletonList("dummy4j"))
-                .locale(asList("en", null));
-
-        Dummy4jBuilder fromVarArgs = new Dummy4jBuilder()
-                .paths("dummy4j")
-                .locale("en", null);
-
-        assertAll(
-                () -> assertThrows(MissingLocaleDefinitionsException.class, fromList::build),
-                () -> assertThrows(MissingLocaleDefinitionsException.class, fromVarArgs::build)
         );
     }
 

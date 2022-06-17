@@ -1,9 +1,10 @@
 package dev.codesoapbox.dummy4j;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
-import static java.util.Arrays.asList;
-import static java.util.Collections.emptyList;
+import static java.util.stream.Collectors.toList;
 
 /**
  * An abstract dummy builder which can optionally be extended to build classes extending Dummy4j.
@@ -41,11 +42,9 @@ public abstract class AbstractDummy4jBuilder<T extends AbstractDummy4jBuilder<T,
     }
 
     private List<String> varArgsToList(String... elements) {
-        if (elements.length == 1 && elements[0] == null) {
-            return emptyList();
-        }
-
-        return asList(elements);
+        return Arrays.stream(elements)
+                .filter(Objects::nonNull)
+                .collect(toList());
     }
 
     public T paths(List<String> paths) {
