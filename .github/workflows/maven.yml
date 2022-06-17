@@ -6,6 +6,7 @@ on:
     branches: [ "*", "**" ]
   pull_request:
     branches: [ master ]
+    types: [opened]
 
 jobs:
   build:
@@ -37,3 +38,11 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         SONAR_TOKEN: "dfc3a63c86e79fe71dd4dccbd583f36089fd5371"
       run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -P code-coverage -P sonar-cloud --file pom.xml
+    - name: Mutation test
+      run: mvn clean test-compile -Ppitest-config -Ppitest-pr -DoriginBranch=${GITHUB_REF#refs/heads/}
+    - name: Archive mutation coverage results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: code-coverage-report
+        path: target/pit-reports
