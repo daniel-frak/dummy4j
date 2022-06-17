@@ -29,6 +29,7 @@
 
     <scm>
         <url>https://github.com/daniel-frak/dummy4j</url>
+        <connection>scm:git:https://github.com/daniel-frak/dummy4j.git</connection>
     </scm>
 
     <distributionManagement>
@@ -92,6 +93,21 @@
 
     <build>
         <plugins>
+            <!-- https://mvnrepository.com/artifact/org.pitest/pitest-maven -->
+            <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <version>1.8.0</version>
+                <dependencies>
+                    <!-- https://mvnrepository.com/artifact/org.pitest/pitest-junit5-plugin -->
+                    <dependency>
+                        <groupId>org.pitest</groupId>
+                        <artifactId>pitest-junit5-plugin</artifactId>
+                        <version>0.16</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -224,6 +240,57 @@
                 <sonar.organization>codesoapbox</sonar.organization>
                 <sonar.host.url>https://sonarcloud.io</sonar.host.url>
             </properties>
+        </profile>
+
+        <profile>
+            <id>pitest-config</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.pitest</groupId>
+                        <artifactId>pitest-maven</artifactId>
+                        <configuration>
+                            <failWhenNoMutations>false</failWhenNoMutations>
+                            <timestampedReports>false</timestampedReports>
+                            <mutators>STRONGER</mutators>
+                            <threads>4</threads>
+                            <testStrengthThreshold>100</testStrengthThreshold>
+                            <withHistory>true</withHistory>
+                            <avoidCallsTo>
+                                <avoidCallsTo>java.util.logging</avoidCallsTo>
+                                <avoidCallsTo>org.apache.log4j</avoidCallsTo>
+                                <avoidCallsTo>org.slf4j</avoidCallsTo>
+                                <avoidCallsTo>org.apache.commons.logging</avoidCallsTo>
+                            </avoidCallsTo>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>pitest-pr</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.pitest</groupId>
+                        <artifactId>pitest-maven</artifactId>
+                        <executions>
+                            <execution>
+                                <id>pitest</id>
+                                <phase>test-compile</phase>
+                                <goals>
+                                    <goal>scmMutationCoverage</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <destinationBranch>origin/master</destinationBranch>
+                            <include>ADDED,MODIFIED</include>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
 
         <!-- GPG Signature on release -->

@@ -66,13 +66,37 @@ further increasing its value.
 Finally, using Test-Driven Development is greatly encouraged. It is a practice which not only results in better code, 
 but also produces 100% test coverage "for free".
 
+Test what you can through unit tests. What can't be tested using unit tests, test via supplementary integration tests.
+Make sure your test cases are reasonable, readable and maintainable. Don't forget about edge cases!
+
+## Mutation tests
+
 It must be said, of course, that a high coverage value does not indicate the quality of the tests.
 The tests themselves must also be well-written and thought-out.
 Coverage is, then, only a tool to find the obvious issue - code not covered by tests is guaranteed not to have good
-tests.
+tests. This is why mutation testing is used in this project to evaluate the quality of the tests.
 
-Test what you can through unit tests. What can't be tested using unit tests, test via supplementary integration tests.
-Make sure your test cases are reasonable, readable and maintainable. Don't forget about edge cases!
+You can run mutation tests locally in several ways. The most robust, but most time-consuming way to do it is running it
+for the entire project:
+```shell
+mvn clean test-compile org.pitest:pitest-maven:mutationCoverage -Ppitest-config
+```
+
+The following will mutation test only classes within `the.package.i.changed`:
+```shell
+mvn clean test-compile org.pitest:pitest-maven:mutationCoverage -Ppitest-config -DtargetClasses="the.package.i.changed.*"
+```
+
+The following will mutation test only committed changes (excluding uncommitted changes and anything
+already on the `master` branch):
+```shell
+mvn clean test-compile -Ppitest-config -Ppitest-pr -DoriginBranch=$(git rev-parse --abbrev-ref HEAD)
+```
+
+The mutation coverage report will be available under `./target/pit-reports/index.html`.
+
+These reports are also created during the Pull Request pipeline and are available as build artifacts.
+If your build fails during the `Mutation test` stage, make sure to look at the provided report. 
 
 ## Javadoc
 
