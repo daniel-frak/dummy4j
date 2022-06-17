@@ -256,12 +256,6 @@
                             <threads>4</threads>
                             <testStrengthThreshold>100</testStrengthThreshold>
                             <withHistory>true</withHistory>
-                            <avoidCallsTo>
-                                <avoidCallsTo>java.util.logging</avoidCallsTo>
-                                <avoidCallsTo>org.apache.log4j</avoidCallsTo>
-                                <avoidCallsTo>org.slf4j</avoidCallsTo>
-                                <avoidCallsTo>org.apache.commons.logging</avoidCallsTo>
-                            </avoidCallsTo>
                         </configuration>
                     </plugin>
                 </plugins>
