@@ -7,18 +7,22 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.stream.Stream;
 
-import static java.util.Arrays.*;
+import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Named.named;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -32,6 +36,20 @@ class DefaultExpressionResolverTest {
     private RandomService randomService;
 
     private DefaultExpressionResolver expressionResolver;
+
+    static Stream<Arguments> failingResolveData() {
+        return Stream.of(
+                Arguments.of(named("path",
+                                "#{unresolvable}"),
+                        "Could not resolve path: unresolvable in any locale"),
+                Arguments.of(named("multi-locale path",
+                                "#{{unresolvable}}"),
+                        "Could not resolve multi-locale path: unresolvable in any locale"),
+                Arguments.of(named("path within context of locale",
+                                "#{something.deep}-#{something.notexisting}"),
+                        "Could not resolve path: something.notexisting for locale: en")
+        );
+    }
 
     @BeforeEach
     void setUp() {
@@ -232,7 +250,7 @@ class DefaultExpressionResolverTest {
         AtomicInteger counter = new AtomicInteger();
         doAnswer(inv -> {
             int value = counter.getAndIncrement();
-            if(value < (int) inv.getArgument(0)) {
+            if (value < (int) inv.getArgument(0)) {
                 return value;
             }
             return inv.getArgument(0);
@@ -278,29 +296,13 @@ class DefaultExpressionResolverTest {
         assertEquals(expected, result);
     }
 
-    @Test
-    void shouldLogWhenFailingToResolvePath() {
+    @ParameterizedTest(name = "{0}")
+    @MethodSource("failingResolveData")
+    void shouldLogWhenFailingToResolve(String expression, String message) {
         TestLogging.TestLogHandler handler = TestLogging.mockLogging(Level.FINE);
 
-        expressionResolver.resolve("#{unresolvable}");
+        expressionResolver.resolve(expression);
 
-        handler.assertContains("Could not resolve path: unresolvable in any locale");
-    }
-
-    @Test
-    void shouldLogWhenFailingToResolveMultiLocalePath() {
-        TestLogging.TestLogHandler handler = TestLogging.mockLogging(Level.FINE);
-
-        expressionResolver.resolve("#{{unresolvable}}");
-
-        handler.assertContains("Could not resolve multi-locale path: unresolvable in any locale");
-    }
-
-    @Test
-    void shouldLogWhenFailingToResolvePathWithinContextOfLocale() {
-        TestLogging.TestLogHandler handler = TestLogging.mockLogging(Level.FINE);
-        expressionResolver.resolve("#{something.deep}-#{something.notexisting}");
-
-        handler.assertContains("Could not resolve path: something.notexisting for locale: en");
+        handler.assertContains(message);
     }
 }
