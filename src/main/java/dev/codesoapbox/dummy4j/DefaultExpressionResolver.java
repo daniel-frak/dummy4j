@@ -107,7 +107,7 @@ public final class DefaultExpressionResolver implements ExpressionResolver {
         if (!result.isEmpty()) {
             return getRandom(result);
         }
-        LOG.log(Level.FINE, "Could not resolve multi-locale path: " + path + " in any locale");
+        LOG.log(Level.FINE, "Could not resolve multi-locale path: {} in any locale", path);
 
         return ResolvedValue.of("", "");
     }
@@ -147,9 +147,9 @@ public final class DefaultExpressionResolver implements ExpressionResolver {
             }
         }
         if (!"".equals(originalLocale)) {
-            LOG.log(Level.FINE, "Could not resolve path: " + path + " for locale: " + originalLocale);
+            LOG.log(Level.FINE, "Could not resolve path: {} for locale: {}", new Object[]{path, originalLocale});
         } else {
-            LOG.log(Level.FINE, "Could not resolve path: " + path + " in any locale");
+            LOG.log(Level.FINE, "Could not resolve path: {} in any locale", path);
         }
 
         return ResolvedValue.of("", "");

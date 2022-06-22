@@ -59,7 +59,7 @@ class YamlFileLoader {
     List<Map<String, Object>> loadYamlFiles(List<String> paths) {
         Set<String> resources = reflections.getResources(FILE_PATTERN);
 
-        LOG.log(Level.FINE, "Loading definitions from files: " + resources);
+        LOG.log(Level.FINE, "Loading definitions from files: {}", resources);
 
         return resources.stream()
                 .map(this::removeResourcePrefixes)

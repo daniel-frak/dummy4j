@@ -1,5 +1,7 @@
 package dev.codesoapbox.dummy4j;
 
+import org.slf4j.helpers.MessageFormatter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.*;
@@ -27,11 +29,7 @@ public class TestLogging {
 
         @Override
         public void publish(LogRecord record) {
-            logs.add(record.getMessage());
-        }
-
-        public List<String> getLogs() {
-            return logs;
+            logs.add(MessageFormatter.arrayFormat(record.getMessage(), record.getParameters()).getMessage());
         }
 
         public void assertContains(String message) {
